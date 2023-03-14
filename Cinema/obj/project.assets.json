@@ -8,24 +8,26 @@
     "net6.0": []
   },
   "packageFolders": {
-    "C:\\Users\\jyczh\\.nuget\\packages\\": {}
+    "C:\\Users\\KruKY\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Users\\jyczh\\Documents\\GitHub\\Cinema\\Cinema\\Project.csproj",
+      "projectUniqueName": "C:\\Users\\KruKY\\OneDrive - Hogeschool Rotterdam\\ProjectB\\Template version 2\\ThreeLayerTemplate\\Project\\Project.csproj",
       "projectName": "Project",
-      "projectPath": "D:\\Users\\jyczh\\Documents\\GitHub\\Cinema\\Cinema\\Project.csproj",
-      "packagesPath": "C:\\Users\\jyczh\\.nuget\\packages\\",
-      "outputPath": "D:\\Users\\jyczh\\Documents\\GitHub\\Cinema\\Cinema\\obj\\",
+      "projectPath": "C:\\Users\\KruKY\\OneDrive - Hogeschool Rotterdam\\ProjectB\\Template version 2\\ThreeLayerTemplate\\Project\\Project.csproj",
+      "packagesPath": "C:\\Users\\KruKY\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\KruKY\\OneDrive - Hogeschool Rotterdam\\ProjectB\\Template version 2\\ThreeLayerTemplate\\Project\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\jyczh\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\KruKY\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net6.0"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -59,7 +61,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.405\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.102\\RuntimeIdentifierGraph.json"
       }
     }
   }
