@@ -1,0 +1,8 @@
+[
+	{
+		"id": 1,
+		"maxSeats": 20,
+		"roomNumber": 1,
+		"maxPeople": 20
+	}
+]

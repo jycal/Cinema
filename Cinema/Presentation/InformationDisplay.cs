@@ -1,6 +1,6 @@
 public class InformationDisplay
 {
-    string overview = @"
+    public static string overview = @"
 ============================================
 |                CINEMA INFO               |
 ============================================
