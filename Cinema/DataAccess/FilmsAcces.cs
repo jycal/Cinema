@@ -4,7 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 
 
+
 using System.Text.Json;
+using System.IO;
 
 static class FilmsAccess
 {
@@ -14,7 +16,7 @@ static class FilmsAccess
     public static List<FilmModel> LoadAll()
     {
         string json = File.ReadAllText(path);
-        return JsonSerializer.Deserialize<List<FilmModel>>(json);
+        return JsonSerializer.Deserialize<List<FilmModel>>(json)!;
     }
 
 
