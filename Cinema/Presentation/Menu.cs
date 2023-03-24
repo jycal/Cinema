@@ -25,6 +25,7 @@ static class Menu
         }
         else if (input == "3")
         {
+            FilmManagerMenu.MovieOverview();
             FilmManagerMenu.Start();
         }
         else
