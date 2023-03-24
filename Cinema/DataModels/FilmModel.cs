@@ -22,7 +22,7 @@ class FilmModel
     [JsonPropertyName("genre")]
     public List<string> Genre { get; set; }
 
-    public FilmModel(int id, string title, string password, string fullName, string description, int duration, List<string> genre)
+    public FilmModel(int id, string title, string description, int duration, List<string> genre)
     {
         Id = id;
         Title = title;

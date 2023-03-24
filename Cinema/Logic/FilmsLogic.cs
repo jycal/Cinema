@@ -38,16 +38,23 @@ class FilmsLogic
 
     }
 
-    public void DeleteFilm(FilmModel film)
+    public void DeleteFilm(string title)
     {
         //Find if there is already an model with the same id
-        int index = _films.FindIndex(s => s.Id == film.Id);
+        var film = _films.Find(r => r.Title == title);
+        int index = _films.FindIndex(s => s.Id == film!.Id);
 
         if (index != -1)
         {
             //update existing model
             // _films[index] = film;
             _films.RemoveAt(index);
+            FilmsAccess.WriteAll(_films);
+        }
+        else
+        {
+            Console.WriteLine($"film not found");
+
         }
 
     }
