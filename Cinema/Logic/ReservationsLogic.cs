@@ -18,7 +18,6 @@ class ReservationsLogic
         _reservations = ReservationAccess.LoadAll();
     }
 
-
     public void UpdateList(ReservationModel film)
     {
         // create id
@@ -42,7 +41,7 @@ class ReservationsLogic
 
     }
 
-    public void DeleteFilm(string fullName)
+    public void DeleteReservation(string fullName)
     {
         //Find if there is already an model with the same id
         var reservation = _reservations.Find(r => r.FullName == fullName);
@@ -62,6 +61,38 @@ class ReservationsLogic
 
         }
 
+    }
+
+    public static void ReservationOverview()
+    {
+        var ReservationsFromJson = ReservationAccess.LoadAll();
+        foreach (ReservationModel reservation in ReservationsFromJson)
+        {
+            foreach (var item in reservation.Seats)
+            {
+                int ID = reservation.Id;
+                string Movie = reservation.Movie;
+                string FullName = reservation.FullName;
+                string Email = reservation.Email;
+                int TicketAmount = reservation.TicketAmount;
+                int Seats = item;
+                int TotalAmount = reservation.TotalAmount;
+                Console.ForegroundColor = ConsoleColor.Magenta;
+                string Overview = $@"
+============================================
+|            CURRENT Reservation OVERVIEW        |
+============================================
+| Movie: {Movie}|
+| Full Name: {FullName}|
+| Email: {Email}|
+| Ticket Amount: {TicketAmount}|
+| Seats: {Seats}|
+| Total Money Amount: {TotalAmount}|
+============================================";
+                Console.WriteLine(Overview);
+                Console.ResetColor();
+            }
+        }
     }
 
     public ReservationModel GetById(int id)
