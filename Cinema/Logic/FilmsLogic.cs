@@ -21,6 +21,10 @@ class FilmsLogic
 
     public void UpdateList(FilmModel film)
     {
+        // create id
+        // System.Console.WriteLine(film.Id);
+        film.Id = _films.Count > 0 ? _films.Max(x => x.Id) + 1 : 1;
+        // System.Console.WriteLine(film.Id);
         //Find if there is already an model with the same id
         int index = _films.FindIndex(s => s.Id == film.Id);
 
@@ -49,6 +53,7 @@ class FilmsLogic
             //update existing model
             // _films[index] = film;
             _films.RemoveAt(index);
+            _films.ForEach((x) => { if (x.Id > film.Id) x.Id = x.Id - 1; });
             FilmsAccess.WriteAll(_films);
         }
         else

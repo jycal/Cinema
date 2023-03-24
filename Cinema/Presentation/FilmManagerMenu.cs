@@ -6,7 +6,13 @@ using System.Threading.Tasks;
 static class FilmManagerMenu
 {
     static private FilmsLogic filmsLogic = new FilmsLogic();
-    static private int _id;
+    // private static int _id = 1;
+
+
+    // static void generateId()
+    // {
+    //     _id++;
+    // }
 
 
     public static void Start()
@@ -19,6 +25,7 @@ static class FilmManagerMenu
         {
             Console.WriteLine("enter title");
             string title = Console.ReadLine()!;
+            // string title = "ds";
             Console.WriteLine("enter description");
             string description = Console.ReadLine()!;
             Console.WriteLine("enter duration");
@@ -26,8 +33,7 @@ static class FilmManagerMenu
             Console.WriteLine("enter genres");
             string genre = Console.ReadLine()!;
             List<string> genres = genre.Split(',').ToList();
-            _id++;
-            FilmModel model = new FilmModel(_id, title, description, duration, genres);
+            FilmModel model = new FilmModel(0, title, description, duration, genres);
             filmsLogic.UpdateList(model);
 
         }
