@@ -36,7 +36,6 @@ class RoomsLogic
             _rooms.Add(room);
         }
         RoomAccess.WriteAll(_rooms);
-
     }
 
     public RoomModel GetById(int id)

@@ -15,6 +15,7 @@ static class EnterRoom
             Console.WriteLine($"This room has {room.MaxSeats} seats");
 
             Display(room);
+            Reserve(room);
             //Write some code to go back to the menu
             //Menu.Start();
         }
@@ -46,5 +47,22 @@ static class EnterRoom
             Console.Write($"{i + 1,5}{(reservedSeats.ElementAt(i) ? " X" : " O")}|");
         }
         Console.WriteLine(lineSep);
+    }
+
+    public static void Reserve(RoomModel room)
+    {
+        int choice = int.Parse(Console.ReadLine()!) - 1;
+        if (choice <= room.MaxSeats)
+        {
+            if (room.Seats[choice])
+            {
+                Console.WriteLine("Seat is already resverded. Pick again.");
+            }
+            else
+            {
+                room.Seats[choice] = true;
+                roomsLogic.UpdateList(room);
+            }
+        }
     }
 }

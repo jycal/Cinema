@@ -6,7 +6,7 @@
     "maxPeople": 20,
     "seats": [
       false,
-      false,
+      true,
       false,
       false,
       false,
