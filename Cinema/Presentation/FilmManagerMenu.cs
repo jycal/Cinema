@@ -63,32 +63,5 @@ static class FilmManagerMenu
         //     Console.WriteLine("No account found with that email and password");
         // }
     }
-    public static void MovieOverview()
-    {
-        var MoviesFromJson = FilmsAccess.LoadAll();
-        foreach (FilmModel item in MoviesFromJson)
-        {
-            foreach (var genre in item.Genre)
-            {
-                int ID = item.Id;
-                string Title = item.Title;
-                string Description = item.Description;
-                int Duration = item.Duration;
-                string Genre = genre;
-                Console.ForegroundColor = ConsoleColor.Magenta;
-                string Overview = $@"
-============================================
-|            CURRENT MOVIE OVERVIEW        |
-============================================
-| Title: {Title}|
-| Description: {Description}|
-| Duration: {Duration}|
-| Genre: {Genre}|
-============================================";
-Console.WriteLine(Overview);
-Console.ResetColor();
-            }
-        }
-    }
-    }
+}
 

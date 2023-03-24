@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 
 class FilmsLogic
@@ -78,4 +79,123 @@ class FilmsLogic
     //     CurrentFilm = _films.Find(i => i.EmailAddress == email && i.Password == password);
     //     return CurrentFilm;
     // }
+
+    public static void MovieOverview()
+    {
+        var MoviesFromJson = FilmsAccess.LoadAll();
+        foreach (FilmModel item in MoviesFromJson)
+        {
+            foreach (var genre in item.Genre)
+            {
+                int ID = item.Id;
+                string Title = item.Title;
+                string Description = item.Description;
+                int Duration = item.Duration;
+                string Genre = genre;
+                Console.ForegroundColor = ConsoleColor.Magenta;
+                string Overview = $@"
+============================================
+|            CURRENT MOVIE OVERVIEW        |
+============================================
+| Title: {Title}|
+| Description: {Description}|
+| Duration: {Duration}|
+| Genre: {Genre}|
+============================================";
+Console.WriteLine(Overview);
+Console.ResetColor();
+            }
+        }
+    }
+
+    public static void SearchByTitle(string filter)
+    {
+        var MoviesFromJson = FilmsAccess.LoadAll();
+        foreach (FilmModel item in MoviesFromJson)
+        {
+            foreach (var genre in item.Genre)
+            {
+                if (item.Title == filter)
+                {
+                int ID = item.Id;
+                string Title = item.Title;
+                string Description = item.Description;
+                int Duration = item.Duration;
+                string Genre = genre;
+                Console.ForegroundColor = ConsoleColor.Magenta;
+                string Overview = $@"
+============================================
+|            CURRENT MOVIE OVERVIEW        |
+============================================
+| Title: {Title}|
+| Description: {Description}|
+| Duration: {Duration}|
+| Genre: {Genre}|
+============================================";
+Console.WriteLine(Overview);
+Console.ResetColor();
+                }
+            }
+        }
+    }
+    public static void SearchByGenre(string filter)
+    {
+        var MoviesFromJson = FilmsAccess.LoadAll();
+        foreach (FilmModel item in MoviesFromJson)
+        {
+            foreach (var genre in item.Genre)
+            {
+                if (filter == genre)
+                {
+                int ID = item.Id;
+                string Title = item.Title;
+                string Description = item.Description;
+                int Duration = item.Duration;
+                string Genre = genre;
+                Console.ForegroundColor = ConsoleColor.Magenta;
+                string Overview = $@"
+============================================
+|            CURRENT MOVIE OVERVIEW        |
+============================================
+| Title: {Title}|
+| Description: {Description}|
+| Duration: {Duration}|
+| Genre: {Genre}|
+============================================";
+Console.WriteLine(Overview);
+Console.ResetColor();
+                }
+            }
+        }
+    }
+
+    public static void MovieSortedByABCTitle()
+    {
+        var MoviesFromJson = FilmsAccess.LoadAll();
+        var descListOb = MoviesFromJson.OrderBy(x => x.Title);
+        // Console.WriteLine(descListOb);
+        foreach (FilmModel item in descListOb)
+        {
+            foreach (var genre in item.Genre)
+            {
+                int ID = item.Id;
+                string Title = item.Title;
+                string Description = item.Description;
+                int Duration = item.Duration;
+                string Genre = genre;
+                Console.ForegroundColor = ConsoleColor.Magenta;
+                string Overview = $@"
+============================================
+|            CURRENT MOVIE OVERVIEW        |
+============================================
+| Title: {Title}|
+| Description: {Description}|
+| Duration: {Duration}|
+| Genre: {Genre}|
+============================================";
+Console.WriteLine(Overview);
+Console.ResetColor();
+            }
+        }
+    }
 }
