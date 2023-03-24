@@ -1,8 +1,30 @@
 [
-	{
-		"id": 1,
-		"maxSeats": 20,
-		"roomNumber": 1,
-		"maxPeople": 20
-	}
+  {
+    "id": 1,
+    "maxSeats": 20,
+    "roomNumber": 1,
+    "maxPeople": 20,
+    "seats": [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      true,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ]
+  }
 ]

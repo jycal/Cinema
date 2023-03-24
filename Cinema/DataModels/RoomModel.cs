@@ -18,13 +18,15 @@ class RoomModel
     [JsonPropertyName("maxPeople")]
     public int MaxPeople { get; set; }
 
+    [JsonPropertyName("seats")]
+    public List<bool> Seats { get; set; }
 
-    public RoomModel(int id, int maxSeats, int roomNumber, int maxPeople)
+    public RoomModel(int id, int maxSeats, int roomNumber, int maxPeople, List<bool> seats)
     {
         Id = id;
         MaxSeats = maxSeats;
         RoomNumber = roomNumber;
         MaxPeople = maxPeople;
-
+        Seats = seats;
     }
 }
