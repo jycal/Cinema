@@ -41,17 +41,17 @@ class RoomsLogic
 
     public RoomModel GetById(int id)
     {
-        return _rooms.Find(i => i.Id == id);
+        return _rooms.Find(i => i.Id == id)!;
     }
 
-    public RoomModel CheckEnter(int roomNumber)
+    public RoomModel CheckEnter(int? roomNumber)
     {
-        if (roomNumber == null)
+        if (roomNumber == null!)
         {
-            return null;
+            return null!;
         }
         CurrentRoom = _rooms.Find(i => i.RoomNumber == roomNumber);
-        return CurrentRoom;
+        return CurrentRoom!;
     }
 }
 

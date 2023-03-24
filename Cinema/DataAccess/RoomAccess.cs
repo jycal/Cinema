@@ -10,7 +10,7 @@ static class RoomAccess
     public static List<RoomModel> LoadAll()
     {
         string json = File.ReadAllText(path);
-        return JsonSerializer.Deserialize<List<RoomModel>>(json);
+        return JsonSerializer.Deserialize<List<RoomModel>>(json)!;
     }
 
 

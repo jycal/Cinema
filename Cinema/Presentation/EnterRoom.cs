@@ -7,7 +7,7 @@ static class EnterRoom
     {
         Console.WriteLine("Welcome to the movie rooms page");
         Console.WriteLine("Please enter the room number");
-        int number = int.Parse(Console.ReadLine());
+        int number = int.Parse(Console.ReadLine()!);
         RoomModel room = roomsLogic.CheckEnter(number);
         if (room != null)
         {

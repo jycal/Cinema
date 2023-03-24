@@ -10,7 +10,7 @@ static class Menu
         Console.WriteLine("Enter 2 to view cinema info");
         Console.WriteLine("Enter 3 to do something else in the future");
 
-        string input = Console.ReadLine();
+        string input = Console.ReadLine()!;
         if (input == "1")
         {
             UserLogin.Start();
