@@ -49,6 +49,7 @@ static class Menu
             {
                 // Hier moet de connecttie komen naar de movieoverview
                 // FilmManagerMenu.MovieOverview();
+                FilmManagerMenu.Start();
             }
             else if (input == "5")
             {
@@ -66,6 +67,7 @@ static class Menu
             {
                 // Hier moet de connecttie komen naar de movieoverview
                 // FilmManagerMenu.MovieOverview();
+                FilmManagerMenu.Start();
             }
             else if (input == "2")
             {
