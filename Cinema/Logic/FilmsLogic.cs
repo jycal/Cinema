@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Text.Json;
 
 
 class FilmsLogic
@@ -102,8 +101,8 @@ class FilmsLogic
 | Duration: {Duration}|
 | Genre: {Genre}|
 ============================================";
-                Console.WriteLine(Overview);
-                Console.ResetColor();
+Console.WriteLine(Overview);
+Console.ResetColor();
             }
         }
     }
@@ -117,13 +116,13 @@ class FilmsLogic
             {
                 if (item.Title == filter)
                 {
-                    int ID = item.Id;
-                    string Title = item.Title;
-                    string Description = item.Description;
-                    int Duration = item.Duration;
-                    string Genre = genre;
-                    Console.ForegroundColor = ConsoleColor.Magenta;
-                    string Overview = $@"
+                int ID = item.Id;
+                string Title = item.Title;
+                string Description = item.Description;
+                int Duration = item.Duration;
+                string Genre = genre;
+                Console.ForegroundColor = ConsoleColor.Magenta;
+                string Overview = $@"
 ============================================
 |            CURRENT MOVIE OVERVIEW        |
 ============================================
@@ -132,8 +131,8 @@ class FilmsLogic
 | Duration: {Duration}|
 | Genre: {Genre}|
 ============================================";
-                    Console.WriteLine(Overview);
-                    Console.ResetColor();
+Console.WriteLine(Overview);
+Console.ResetColor();
                 }
             }
         }
@@ -147,13 +146,13 @@ class FilmsLogic
             {
                 if (filter == genre)
                 {
-                    int ID = item.Id;
-                    string Title = item.Title;
-                    string Description = item.Description;
-                    int Duration = item.Duration;
-                    string Genre = genre;
-                    Console.ForegroundColor = ConsoleColor.Magenta;
-                    string Overview = $@"
+                int ID = item.Id;
+                string Title = item.Title;
+                string Description = item.Description;
+                int Duration = item.Duration;
+                string Genre = genre;
+                Console.ForegroundColor = ConsoleColor.Magenta;
+                string Overview = $@"
 ============================================
 |            CURRENT MOVIE OVERVIEW        |
 ============================================
@@ -162,8 +161,8 @@ class FilmsLogic
 | Duration: {Duration}|
 | Genre: {Genre}|
 ============================================";
-                    Console.WriteLine(Overview);
-                    Console.ResetColor();
+Console.WriteLine(Overview);
+Console.ResetColor();
                 }
             }
         }
@@ -193,8 +192,8 @@ class FilmsLogic
 | Duration: {Duration}|
 | Genre: {Genre}|
 ============================================";
-                Console.WriteLine(Overview);
-                Console.ResetColor();
+Console.WriteLine(Overview);
+Console.ResetColor();
             }
         }
     }
