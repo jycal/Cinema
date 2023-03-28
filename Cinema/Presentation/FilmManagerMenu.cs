@@ -29,24 +29,28 @@ static class FilmManagerMenu
         if (answer == "1")
         {
             FilmsLogic.MovieOverview();
+            PickMovie();
         }
         else if (answer == "2")
         {
             FilmsLogic.MovieSortedByABCTitle();
+            PickMovie();
         }
         else if (answer == "3")
         {
             Console.WriteLine("enter title to search");
             string title = Console.ReadLine()!;
             FilmsLogic.SearchByTitle(title);
+            PickMovie();
         }
         else if (answer == "4")
         {
             Console.WriteLine("enter genre to search");
             string genre = Console.ReadLine()!;
             FilmsLogic.SearchByGenre(genre);
+            PickMovie();
         }
-        
+
         else if (answer == "5")
         {
             Console.WriteLine("enter title");
@@ -88,6 +92,14 @@ static class FilmManagerMenu
         // {
         //     Console.WriteLine("No account found with that email and password");
         // }
+    }
+
+    public static void PickMovie()
+    {
+        Console.WriteLine("Pick a movie by name:");
+        string choice = Console.ReadLine()!;
+        FilmsLogic.SearchByTitle(choice);
+        EnterRoom.Start();
     }
 }
 

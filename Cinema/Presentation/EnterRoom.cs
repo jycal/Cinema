@@ -6,7 +6,7 @@ static class EnterRoom
     public static void Start()
     {
         Console.WriteLine("Welcome to the movie rooms page");
-        Console.WriteLine("Please enter the room number");
+        Console.WriteLine("Please enter the room number (1)");
         int number = int.Parse(Console.ReadLine()!);
         RoomModel room = roomsLogic.CheckEnter(number);
         if (room != null)
@@ -62,6 +62,7 @@ static class EnterRoom
             {
                 room.Seats[choice] = true;
                 roomsLogic.UpdateList(room);
+                Console.WriteLine("Reservation succeeded");
             }
         }
     }
