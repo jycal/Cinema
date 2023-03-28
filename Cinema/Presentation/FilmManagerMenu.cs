@@ -18,10 +18,36 @@ static class FilmManagerMenu
     public static void Start()
     {
         Console.WriteLine("Welcome to the login page");
-        Console.WriteLine($"[1] Add new Movie\n[2] Delete Movie");
-        Console.WriteLine("Please enter your email address");
+        Console.WriteLine("[1] View Movies");
+        Console.WriteLine("[2] View Sorted Movies");
+        Console.WriteLine("[3] Search by Title");
+        Console.WriteLine("[4] Search by Genre");
+        Console.WriteLine("[5] Add new Movie");
+        Console.WriteLine("[6] Delete Movie");
+        // Console.WriteLine("Please enter your email address");
         string answer = Console.ReadLine()!;
         if (answer == "1")
+        {
+            FilmsLogic.MovieOverview();
+        }
+        else if (answer == "2")
+        {
+            FilmsLogic.MovieSortedByABCTitle();
+        }
+        else if (answer == "3")
+        {
+            Console.WriteLine("enter title to search");
+            string title = Console.ReadLine()!;
+            FilmsLogic.SearchByTitle(title);
+        }
+        else if (answer == "4")
+        {
+            Console.WriteLine("enter genre to search");
+            string genre = Console.ReadLine()!;
+            FilmsLogic.SearchByGenre(genre);
+        }
+        
+        else if (answer == "5")
         {
             Console.WriteLine("enter title");
             string title = Console.ReadLine()!;
@@ -37,7 +63,7 @@ static class FilmManagerMenu
             filmsLogic.UpdateList(model);
 
         }
-        else if (answer == "2")
+        else if (answer == "6")
         {
             Console.WriteLine("enter title to delete");
             string title = Console.ReadLine()!;
