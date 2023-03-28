@@ -96,13 +96,13 @@ class FilmsLogic
 ============================================
 |            CURRENT MOVIE OVERVIEW        |
 ============================================
-| Title: {Title}|
-| Description: {Description}|
-| Duration: {Duration}|
-| Genre: {Genre}|
+Title: {Title}
+Description: {Description}
+Duration: {Duration}
+Genre: {Genre}
 ============================================";
-Console.WriteLine(Overview);
-Console.ResetColor();
+                Console.WriteLine(Overview);
+                Console.ResetColor();
             }
         }
     }
@@ -116,23 +116,23 @@ Console.ResetColor();
             {
                 if (item.Title == filter)
                 {
-                int ID = item.Id;
-                string Title = item.Title;
-                string Description = item.Description;
-                int Duration = item.Duration;
-                string Genre = genre;
-                Console.ForegroundColor = ConsoleColor.Magenta;
-                string Overview = $@"
+                    int ID = item.Id;
+                    string Title = item.Title;
+                    string Description = item.Description;
+                    int Duration = item.Duration;
+                    string Genre = genre;
+                    Console.ForegroundColor = ConsoleColor.Magenta;
+                    string Overview = $@"
 ============================================
 |            CURRENT MOVIE OVERVIEW        |
 ============================================
-| Title: {Title}|
-| Description: {Description}|
-| Duration: {Duration}|
-| Genre: {Genre}|
+Title: {Title}
+Description: {Description}
+Duration: {Duration}
+Genre: {Genre}
 ============================================";
-Console.WriteLine(Overview);
-Console.ResetColor();
+                    Console.WriteLine(Overview);
+                    Console.ResetColor();
                 }
             }
         }
@@ -146,23 +146,23 @@ Console.ResetColor();
             {
                 if (filter == genre)
                 {
-                int ID = item.Id;
-                string Title = item.Title;
-                string Description = item.Description;
-                int Duration = item.Duration;
-                string Genre = genre;
-                Console.ForegroundColor = ConsoleColor.Magenta;
-                string Overview = $@"
+                    int ID = item.Id;
+                    string Title = item.Title;
+                    string Description = item.Description;
+                    int Duration = item.Duration;
+                    string Genre = genre;
+                    Console.ForegroundColor = ConsoleColor.Magenta;
+                    string Overview = $@"
 ============================================
 |            CURRENT MOVIE OVERVIEW        |
 ============================================
-| Title: {Title}|
-| Description: {Description}|
-| Duration: {Duration}|
-| Genre: {Genre}|
+Title: {Title}
+Description: {Description}
+Duration: {Duration}
+Genre: {Genre}
 ============================================";
-Console.WriteLine(Overview);
-Console.ResetColor();
+                    Console.WriteLine(Overview);
+                    Console.ResetColor();
                 }
             }
         }
@@ -192,8 +192,8 @@ Console.ResetColor();
 | Duration: {Duration}|
 | Genre: {Genre}|
 ============================================";
-Console.WriteLine(Overview);
-Console.ResetColor();
+                Console.WriteLine(Overview);
+                Console.ResetColor();
             }
         }
     }
