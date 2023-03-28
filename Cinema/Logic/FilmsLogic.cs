@@ -84,26 +84,27 @@ class FilmsLogic
         var MoviesFromJson = FilmsAccess.LoadAll();
         foreach (FilmModel item in MoviesFromJson)
         {
+            string Genres = " ";
+            int ID = item.Id;
+            string Title = item.Title;
+            string Description = item.Description;
+            int Duration = item.Duration;
             foreach (var genre in item.Genre)
             {
-                int ID = item.Id;
-                string Title = item.Title;
-                string Description = item.Description;
-                int Duration = item.Duration;
-                string Genre = genre;
-                Console.ForegroundColor = ConsoleColor.Magenta;
-                string Overview = $@"
+                Genres += genre + ", ";
+            }
+            Console.ForegroundColor = ConsoleColor.Magenta;
+            string Overview = $@"
 ============================================
 |            CURRENT MOVIE OVERVIEW        |
 ============================================
 Title: {Title}
 Description: {Description}
 Duration: {Duration}
-Genre: {Genre}
+Genre: {Genres}
 ============================================";
-                Console.WriteLine(Overview);
-                Console.ResetColor();
-            }
+            Console.WriteLine(Overview);
+            Console.ResetColor();
         }
     }
 
