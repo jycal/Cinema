@@ -1,3 +1,4 @@
+using System.IO;
 static class EnterRoom
 {
     static private RoomsLogic roomsLogic = new RoomsLogic();
@@ -6,7 +7,7 @@ static class EnterRoom
     public static void Start()
     {
         Console.WriteLine("Welcome to the movie rooms page");
-        Console.WriteLine("Please enter the room number");
+        Console.WriteLine("Please enter the room number (1)\n");
         int number = int.Parse(Console.ReadLine()!);
         RoomModel room = roomsLogic.CheckEnter(number);
         if (room != null)
@@ -32,35 +33,79 @@ static class EnterRoom
         // 6-10:  6  7  8  9  10
         // 11-15: 11 12 13 14 15
         // 16-20: 16 17 18 19 20
-        List<bool> reservedSeats = room.Seats;
+        List<int> reservedSeats = room.Seats;
         int amountOfSeats = room.MaxSeats;
-        string lineSep = "\n-------------------------------------------------";
-        Console.WriteLine("O: Unreserved seat, X: Reserved seat");
-        for (int i = 0; i < amountOfSeats; i++)
+        string lineSep = "\n---------------------------------------------------------------------------------------------------------------------------------------";
+        Console.ForegroundColor = ConsoleColor.Yellow;
+        Console.WriteLine("■: Unreserved seat");
+        Console.ForegroundColor = ConsoleColor.DarkGray;
+        Console.WriteLine("■: Reserved seat");
+        Console.ForegroundColor = ConsoleColor.White;
+        Console.WriteLine("                                                            Screen");
+        double row = 1;
+        double plus;
+        // if movie is in the big room increment with 0.05 (20 seats per row)
+        if (room.Id == 3)
         {
-            if (i % 5 == 0)
-            {
-                Console.WriteLine(lineSep);
-                string rowHeader = $"|{"Seats",5}: |";
-                Console.Write(rowHeader);
-            }
-            Console.Write($"{i + 1,5}{(reservedSeats.ElementAt(i) ? " X" : " O")}|");
+            plus = 0.05;
         }
-        Console.WriteLine(lineSep);
-    }
-
-    public static void Reserve(RoomModel room)
-    {
-        int choice = int.Parse(Console.ReadLine()!) - 1;
-        if (choice <= room.MaxSeats)
+        // else 15 seats per row
+        else { plus = 0.0666666667; }
+        for (int i = 0; i <= amountOfSeats; i++)
         {
-            if (room.Seats[choice])
+            // increment rows
+            row += plus;
+            string rows = row.ToString("0");
+            if (i % 15 == 0)
             {
-                Console.WriteLine("Seat is already resverded. Pick again.");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine(lineSep);
+                string rowHeader = $"|{"Row: " + rows,16}: |";
+                Console.Write(rowHeader);
+
+                if (i == 0)
+                {
+                    continue;
+                }
+            }
+
+            // check if chair in list
+            if (reservedSeats.Contains(i))
+            {
+                // reserved seat = gray
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                var reservedSeat = "■";
+                Console.Write($"{i,5} {reservedSeat}");
             }
             else
             {
-                room.Seats[choice] = true;
+                // unreserved seat = yellow
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                var unreservedSeat = "■";
+                Console.Write($"{i,5} {unreservedSeat}");
+            }
+        }
+        Console.ForegroundColor = ConsoleColor.White;
+        Console.WriteLine(lineSep);
+    }
+
+
+    public static void Reserve(RoomModel room)
+    {
+        int choice = int.Parse(Console.ReadLine()!);
+        if (choice <= room.MaxSeats)
+        {
+            if (room.Seats.Contains(choice) && choice != 0)
+            {
+                Console.WriteLine("Seat is already reserved. Pick again.");
+            }
+            else if (choice == 0)
+            {
+                Console.WriteLine("error");
+            }
+            else
+            {
+                room.Seats.Add(choice);
                 roomsLogic.UpdateList(room);
             }
         }
