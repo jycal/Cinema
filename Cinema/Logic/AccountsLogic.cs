@@ -13,6 +13,7 @@ class AccountsLogic
     //This can be used to get the current logged in account from anywhere in the program
     //private set, so this can only be set by the class itself
     static public AccountModel? CurrentAccount { get; private set; }
+    static public AccountModel? CurrentPassword { get; private set; }
 
     public AccountsLogic()
     {
@@ -46,9 +47,41 @@ class AccountsLogic
 
     public AccountModel CheckLogin(string email, string password)
     {
+        int chances = 3;
         if (email == null || password == null)
         {
-            return null!;
+            Console.WriteLine("Wrong password! Please try again...");
+            if (chances == 3)
+            {
+                Console.WriteLine("You have 3 chances left!");
+                var Password = Console.ReadLine();
+                CurrentPassword = _accounts.Find(i => i.Password == password);
+                if (CurrentPassword!.Password != Password)
+                {
+                    chances -= 1;
+                }
+
+            }
+            else if (chances == 2)
+            {
+                Console.WriteLine("You have 2 chances left! Think!");
+                var Password = Console.ReadLine();
+                CurrentPassword = _accounts.Find(i => i.Password == password);
+                if (CurrentPassword!.Password != Password)
+                {
+                    chances -= 1;
+                }
+            }
+            else if (chances == 1)
+            {
+                Console.WriteLine("You have 1 chance left! Use it well!!");
+                var Password = Console.ReadLine();
+                CurrentPassword = _accounts.Find(i => i.Password == password);
+                if (CurrentPassword!.Password != Password)
+                {
+                    chances -= 1;
+                }
+            }
         }
         CurrentAccount = _accounts.Find(i => i.EmailAddress == email && i.Password == password);
         return CurrentAccount!;
