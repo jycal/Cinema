@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 class ReservationsLogic
 {
-    private static List<ReservationModel>? _reservations;
+    private List<ReservationModel>? _reservations;
 
     //Static properties are shared across all instances of the class
     //This can be used to get the current logged in account from anywhere in the program
@@ -18,7 +18,7 @@ class ReservationsLogic
         _reservations = ReservationAccess.LoadAll();
     }
 
-    public static void UpdateList(ReservationModel film)
+    public void UpdateList(ReservationModel film)
     {
         // create id
         // System.Console.WriteLine(film.Id);
@@ -41,7 +41,7 @@ class ReservationsLogic
 
     }
 
-    public static void DeleteReservation(string email)
+    public void DeleteReservation(string email)
     {
         //Find if there is already an model with the same id
         var reservation = _reservations!.Find(r => r.Email == email);
@@ -95,7 +95,7 @@ class ReservationsLogic
         }
     }
 
-    public static ReservationModel GetByEmail(string email)
+    public ReservationModel GetByEmail(string email)
     {
         return _reservations!.Find(i => i.Email == email)!;
     }

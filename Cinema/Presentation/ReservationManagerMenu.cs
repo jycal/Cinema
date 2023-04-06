@@ -8,6 +8,7 @@ public class ReservationManagerMenu
 {
     public static void Start()
     {
+        ReservationsLogic res = new ReservationsLogic();
         Console.WriteLine("Enter 1 to view reservation info");
         Console.WriteLine("Enter 2 to look for specific reservation");
         Console.WriteLine("Enter 3 to delete reservation");
@@ -23,18 +24,39 @@ public class ReservationManagerMenu
             case "2":
                 System.Console.WriteLine("enter email adress");
                 string email = Console.ReadLine()!;
-                ReservationsLogic.GetByEmail(email);
+                var reservation = res.GetByEmail(email);
+
+
+                foreach (var item in reservation.Seats)
+                {
+                    Console.ForegroundColor = ConsoleColor.Magenta;
+                    int Seats = item;
+                    string Overview = $@"
+============================================
+|            CURRENT Reservation OVERVIEW        |
+============================================
+| Movie: {reservation.Movie}|
+| Full Name: {reservation.FullName}|
+| Email: {reservation.Email}|
+| Ticket Amount: {reservation.TicketAmount}|
+| Seats: {Seats}|
+| Total Money Amount: {reservation.TotalAmount}|
+============================================";
+                    Console.WriteLine(Overview);
+
+                }
+                Console.ResetColor();
                 break;
             case "3":
                 System.Console.WriteLine("enter email adress");
                 string email2 = Console.ReadLine()!;
-                ReservationsLogic.DeleteReservation(email2);
+                res.DeleteReservation(email2);
                 break;
             case "4":
                 Console.WriteLine("enter current email adress");
                 // ask old email
                 string email4 = Console.ReadLine()!;
-                ReservationModel oldReservation = ReservationsLogic.GetByEmail(email4);
+                ReservationModel oldReservation = res.GetByEmail(email4);
                 int id = oldReservation.Id;
                 // make changes to rservation
                 Console.WriteLine("enter full name");
@@ -55,7 +77,7 @@ public class ReservationManagerMenu
                 Console.WriteLine("enter total amount ");
                 int totalAmount = Convert.ToInt32(Console.ReadLine())!;
                 ReservationModel newReservation = new ReservationModel(id, fullName, email3, movie, ticketAmount, seats, totalAmount);
-                ReservationsLogic.UpdateList(newReservation);
+                res.UpdateList(newReservation);
                 break;
 
         }

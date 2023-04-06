@@ -1,10 +1,26 @@
 [
-    {
-        "id": 1,
-        "fullName": "Jack Black",
-        "email": "jack@black.com",
-        "movie": "Lorem Ipsum",
-        "ticketAmount": 2,
-        "totalAmount": 2
-    }
+  {
+    "id": 1,
+    "fullName": "Jack Black",
+    "email": "jack@black.com",
+    "movie": "Lorem Ipsum",
+    "ticketAmount": 2,
+    "seats": [
+      3,
+      4
+    ],
+    "totalAmount": 2
+  },
+  {
+    "id": 2,
+    "fullName": "jacky",
+    "email": "jack@black.com",
+    "movie": "lorens",
+    "ticketAmount": 2,
+    "seats": [
+      3,
+      4
+    ],
+    "totalAmount": 14
+  }
 ]
