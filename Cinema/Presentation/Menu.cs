@@ -13,6 +13,7 @@ static class Menu
         Console.WriteLine("Enter 1 to login");
         Console.WriteLine("Enter 2 to view cinema info");
         Console.WriteLine("Enter 3 to add/delete film");
+        Console.WriteLine("Enter 4 delete reservs ahsashahshahashshsa");
 
         string input = Console.ReadLine();
         if (input == "1")
@@ -26,6 +27,10 @@ static class Menu
         else if (input == "3")
         {
             FilmManagerMenu.Start();
+        }
+        else if (input == "4")
+        {
+            ReservationManagerMenu.Start();
         }
         else
         {

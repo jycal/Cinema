@@ -1,3 +1,10 @@
 [
-    {}
+    {
+        "id": 1,
+        "fullName": "Jack Black",
+        "email": "jack@black.com",
+        "movie": "Lorem Ipsum",
+        "ticketAmount": 2,
+        "totalAmount": 2
+    }
 ]
