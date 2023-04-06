@@ -1,23 +1,30 @@
-﻿[
-	{
-		"id": 1,
-		"type": 1,
-		"emailAddress": "n@b.c",
-		"password": "xyz",
-		"fullName": "Nikola Tesla"
-	},
-	{
-		"id": 2,
-		"type": 2,
-		"emailAddress": "t@b.c",
-		"password": "xyz",
-		"fullName": "Thomas Edison"
-	},
-	{
-		"id": 3,
-		"type": 3,
-		"emailAddress": "g@b.c",
-		"password": "xyz",
-		"fullName": "George Washington"
-	}
+[
+  {
+    "id": 1,
+    "type": 1,
+    "emailAddress": "n@b.c",
+    "password": "xyz",
+    "fullName": "Nikola Tesla"
+  },
+  {
+    "id": 2,
+    "type": 2,
+    "emailAddress": "t@b.c",
+    "password": "xyz",
+    "fullName": "Thomas Edison"
+  },
+  {
+    "id": 3,
+    "type": 3,
+    "emailAddress": "g@b.c",
+    "password": "xyz",
+    "fullName": "George Washington"
+  },
+  {
+    "id": 0,
+    "type": 1,
+    "emailAddress": "bob@bob.com",
+    "password": "xyz",
+    "fullName": "Bob Com"
+  }
 ]

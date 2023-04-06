@@ -6,6 +6,11 @@ using System.Threading.Tasks;
 
 class FilmsLogic
 {
+    private static string CurrentMovieOverview = @"============================================
+|                                          |
+|          CURRENT MOVIE OVERVIEW          |
+|                                          |
+============================================";
     private List<FilmModel> _films;
 
     //Static properties are shared across all instances of the class
@@ -87,21 +92,51 @@ class FilmsLogic
     {
         var MoviesFromJson = FilmsAccess.LoadAll();
         Console.ForegroundColor = ConsoleColor.Magenta;
-        Console.WriteLine(@"============================================
-|                                          |
-|          CURRENT MOVIE OVERVIEW          |
-|                                          |
-============================================");
+        Console.WriteLine(CurrentMovieOverview);
         foreach (FilmModel item in MoviesFromJson)
         {
+            int ID = item.Id;
+            string Title = item.Title;
+            string Description = item.Description;
+            int Duration = item.Duration;
+            string Genre = "";
             foreach (var genre in item.Genre)
+            {
+                Genre += $"{genre} ";
+            }
+            string Overview = $@"
+  ID: {ID}
+  Title: {Title}
+  Description: {Description}
+  Duration: {Duration}
+  Genre: {Genre}
+
+============================================";
+            Console.WriteLine(Overview);
+        }
+        Console.ResetColor();
+    }
+
+    public static void SearchByTitle(string filter)
+    {
+        var MoviesFromJson = FilmsAccess.LoadAll();
+        Console.ForegroundColor = ConsoleColor.Magenta;
+        Console.WriteLine(CurrentMovieOverview);
+        foreach (FilmModel item in MoviesFromJson)
+        {
+            if (item.Title == filter)
             {
                 int ID = item.Id;
                 string Title = item.Title;
                 string Description = item.Description;
                 int Duration = item.Duration;
-                string Genre = genre;
+                string Genre = "";
+                foreach (var genre in item.Genre)
+                {
+                    Genre += $"{genre} ";
+                }
                 string Overview = $@"
+  ID: {ID}
   Title: {Title}
   Description: {Description}
   Duration: {Duration}
@@ -113,61 +148,32 @@ class FilmsLogic
         }
         Console.ResetColor();
     }
-
-    public static void SearchByTitle(string filter)
-    {
-        var MoviesFromJson = FilmsAccess.LoadAll();
-        Console.ForegroundColor = ConsoleColor.Magenta;
-        Console.WriteLine(@"============================================
-|                                          |
-|          CURRENT MOVIE OVERVIEW          |
-|                                          |
-============================================");
-        foreach (FilmModel item in MoviesFromJson)
-        {
-            foreach (var genre in item.Genre)
-            {
-                if (item.Title == filter)
-                {
-                    int ID = item.Id;
-                    string Title = item.Title;
-                    string Description = item.Description;
-                    int Duration = item.Duration;
-                    string Genre = genre;
-                    string Overview = $@"
-  Title: {Title}
-  Description: {Description}
-  Duration: {Duration}
-  Genre: {Genre}
-
-============================================";
-                    Console.WriteLine(Overview);
-                }
-            }
-        }
-        Console.ResetColor();
-    }
     public static void SearchByGenre(string filter)
     {
         var MoviesFromJson = FilmsAccess.LoadAll();
         Console.ForegroundColor = ConsoleColor.Magenta;
-        Console.WriteLine(@"============================================
-|                                          |
-|          CURRENT MOVIE OVERVIEW          |
-|                                          |
-============================================");
+        Console.WriteLine(CurrentMovieOverview);
         foreach (FilmModel item in MoviesFromJson)
         {
             foreach (var genre in item.Genre)
             {
-                if (filter == genre)
+                if (genre != filter)
+                {
+                    continue;
+                }
+                else
                 {
                     int ID = item.Id;
                     string Title = item.Title;
                     string Description = item.Description;
                     int Duration = item.Duration;
-                    string Genre = genre;
+                    string Genre = "";
+                    foreach (var genre2 in item.Genre)
+                    {
+                        Genre += $"{genre2} ";
+                    }
                     string Overview = $@"
+  ID: {ID}
   Title: {Title}
   Description: {Description}
   Duration: {Duration}
@@ -185,31 +191,29 @@ class FilmsLogic
     {
         var MoviesFromJson = FilmsAccess.LoadAll();
         Console.ForegroundColor = ConsoleColor.Magenta;
-        Console.WriteLine(@"============================================
-|                                          |
-|          CURRENT MOVIE OVERVIEW          |
-|                                          |
-============================================");
+        Console.WriteLine(CurrentMovieOverview);
         var descListOb = MoviesFromJson.OrderBy(x => x.Title);
         // Console.WriteLine(descListOb);
         foreach (FilmModel item in descListOb)
         {
+            int ID = item.Id;
+            string Title = item.Title;
+            string Description = item.Description;
+            int Duration = item.Duration;
+            string Genre = "";
             foreach (var genre in item.Genre)
             {
-                int ID = item.Id;
-                string Title = item.Title;
-                string Description = item.Description;
-                int Duration = item.Duration;
-                string Genre = genre;
-                string Overview = $@"
+                Genre += $"{genre} ";
+            }
+            string Overview = $@"
+  ID: {ID}
   Title: {Title}
   Description: {Description}
   Duration: {Duration}
   Genre: {Genre}
 
 ============================================";
-                Console.WriteLine(Overview);
-            }
+            Console.WriteLine(Overview);
         }
         Console.ResetColor();
     }

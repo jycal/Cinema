@@ -52,7 +52,7 @@ public class Menu
         }
         else if (input == "4")
         {
-            AdvancedAcces();
+            AdvancedAccess();
         }
         else if (input == "5")
         {
@@ -122,6 +122,22 @@ public class Menu
         Console.WriteLine("Please enter your phone number");
         string phoneNumber = Console.ReadLine()!;
         Console.Clear();
+
+        int id = 0;
+        while (true)
+        {
+            AccountModel account_T = _accountsLogic.GetById(id);
+            if (account_T is AccountModel)
+            {
+                id += 1;
+            }
+            else
+            {
+                break;
+            }
+        }
+        AccountModel account = new AccountModel(id, 1, email, password, firstName);
+        _accountsLogic.UpdateList(account);
         PreLogin();
     }
 
@@ -141,11 +157,11 @@ public class Menu
     }
 
     // Login as employee or manager
-    public void AdvancedAcces()
+    public void AdvancedAccess()
     {
         Console.WriteLine("====================================");
         Console.WriteLine("|                                  |");
-        Console.WriteLine("|          Advanced acces          |");
+        Console.WriteLine("|         Advanced access          |");
         Console.WriteLine("|                                  |");
         Console.WriteLine("====================================");
         Console.WriteLine();
@@ -167,7 +183,7 @@ public class Menu
         else
         {
             Console.WriteLine("Invalid input");
-            AdvancedAcces();
+            AdvancedAccess();
         }
     }
 
@@ -475,6 +491,7 @@ public class Menu
             }
         }
         FilmModel film = new FilmModel(id, title, description, duration, genres);
+        _filmsLogic.UpdateList(film);
         MovieMenu();
     }
     public void DeleteMovie()
