@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 class ReservationsLogic
 {
-    private List<ReservationModel> _reservations;
+    private static List<ReservationModel>? _reservations;
 
     //Static properties are shared across all instances of the class
     //This can be used to get the current logged in account from anywhere in the program
@@ -18,11 +18,11 @@ class ReservationsLogic
         _reservations = ReservationAccess.LoadAll();
     }
 
-    public void UpdateList(ReservationModel film)
+    public static void UpdateList(ReservationModel film)
     {
         // create id
         // System.Console.WriteLine(film.Id);
-        film.Id = _reservations.Count > 0 ? _reservations.Max(x => x.Id) + 1 : 1;
+        film.Id = _reservations!.Count > 0 ? _reservations.Max(x => x.Id) + 1 : 1;
         // System.Console.WriteLine(film.Id);
         //Find if there is already an model with the same id
         int index = _reservations.FindIndex(s => s.Id == film.Id);
@@ -41,10 +41,10 @@ class ReservationsLogic
 
     }
 
-    public void DeleteReservation(string fullName)
+    public static void DeleteReservation(string email)
     {
         //Find if there is already an model with the same id
-        var reservation = _reservations.Find(r => r.FullName == fullName);
+        var reservation = _reservations!.Find(r => r.Email == email);
         int index = _reservations.FindIndex(s => s.Id == reservation!.Id);
 
         if (index != -1)
@@ -95,8 +95,10 @@ class ReservationsLogic
         }
     }
 
-    public ReservationModel GetById(int id)
+    public static ReservationModel GetByEmail(string email)
     {
-        return _reservations.Find(i => i.Id == id)!;
+        return _reservations!.Find(i => i.Email == email)!;
     }
+
+
 }
