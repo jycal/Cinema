@@ -42,10 +42,14 @@ class FilmsLogic
 
     }
 
-    public void DeleteFilm(string title)
+    public bool DeleteFilm(string title)
     {
         //Find if there is already an model with the same id
         var film = _films.Find(r => r.Title == title);
+        if (film == null)
+        {
+            return false;
+        }
         int index = _films.FindIndex(s => s.Id == film!.Id);
 
         if (index != -1)
@@ -53,13 +57,13 @@ class FilmsLogic
             //update existing model
             // _films[index] = film;
             _films.RemoveAt(index);
-            _films.ForEach((x) => { if (x.Id > film.Id) x.Id = x.Id - 1; });
+            _films.ForEach((x) => { if (x.Id > film!.Id) x.Id = x.Id - 1; });
             FilmsAccess.WriteAll(_films);
+            return true;
         }
         else
         {
-            Console.WriteLine($"film not found");
-
+            return false;
         }
 
     }
@@ -82,35 +86,43 @@ class FilmsLogic
     public static void MovieOverview()
     {
         var MoviesFromJson = FilmsAccess.LoadAll();
+        Console.ForegroundColor = ConsoleColor.Magenta;
+        Console.WriteLine(@"============================================
+|                                          |
+|          CURRENT MOVIE OVERVIEW          |
+|                                          |
+============================================");
         foreach (FilmModel item in MoviesFromJson)
         {
-            string Genres = " ";
-            int ID = item.Id;
-            string Title = item.Title;
-            string Description = item.Description;
-            int Duration = item.Duration;
             foreach (var genre in item.Genre)
             {
-                Genres += genre + ", ";
-            }
-            Console.ForegroundColor = ConsoleColor.Magenta;
-            string Overview = $@"
-============================================
-|            CURRENT MOVIE OVERVIEW        |
-============================================
-Title: {Title}
-Description: {Description}
-Duration: {Duration}
-Genre: {Genres}
+                int ID = item.Id;
+                string Title = item.Title;
+                string Description = item.Description;
+                int Duration = item.Duration;
+                string Genre = genre;
+                string Overview = $@"
+  Title: {Title}
+  Description: {Description}
+  Duration: {Duration}
+  Genre: {Genre}
+
 ============================================";
-            Console.WriteLine(Overview);
-            Console.ResetColor();
+                Console.WriteLine(Overview);
+            }
         }
+        Console.ResetColor();
     }
 
     public static void SearchByTitle(string filter)
     {
         var MoviesFromJson = FilmsAccess.LoadAll();
+        Console.ForegroundColor = ConsoleColor.Magenta;
+        Console.WriteLine(@"============================================
+|                                          |
+|          CURRENT MOVIE OVERVIEW          |
+|                                          |
+============================================");
         foreach (FilmModel item in MoviesFromJson)
         {
             foreach (var genre in item.Genre)
@@ -122,25 +134,28 @@ Genre: {Genres}
                     string Description = item.Description;
                     int Duration = item.Duration;
                     string Genre = genre;
-                    Console.ForegroundColor = ConsoleColor.Magenta;
                     string Overview = $@"
-============================================
-|            CURRENT MOVIE OVERVIEW        |
-============================================
-Title: {Title}
-Description: {Description}
-Duration: {Duration}
-Genre: {Genre}
+  Title: {Title}
+  Description: {Description}
+  Duration: {Duration}
+  Genre: {Genre}
+
 ============================================";
                     Console.WriteLine(Overview);
-                    Console.ResetColor();
                 }
             }
         }
+        Console.ResetColor();
     }
     public static void SearchByGenre(string filter)
     {
         var MoviesFromJson = FilmsAccess.LoadAll();
+        Console.ForegroundColor = ConsoleColor.Magenta;
+        Console.WriteLine(@"============================================
+|                                          |
+|          CURRENT MOVIE OVERVIEW          |
+|                                          |
+============================================");
         foreach (FilmModel item in MoviesFromJson)
         {
             foreach (var genre in item.Genre)
@@ -152,26 +167,29 @@ Genre: {Genre}
                     string Description = item.Description;
                     int Duration = item.Duration;
                     string Genre = genre;
-                    Console.ForegroundColor = ConsoleColor.Magenta;
                     string Overview = $@"
-============================================
-|            CURRENT MOVIE OVERVIEW        |
-============================================
-Title: {Title}
-Description: {Description}
-Duration: {Duration}
-Genre: {Genre}
+  Title: {Title}
+  Description: {Description}
+  Duration: {Duration}
+  Genre: {Genre}
+
 ============================================";
                     Console.WriteLine(Overview);
-                    Console.ResetColor();
                 }
             }
         }
+        Console.ResetColor();
     }
 
     public static void MovieSortedByABCTitle()
     {
         var MoviesFromJson = FilmsAccess.LoadAll();
+        Console.ForegroundColor = ConsoleColor.Magenta;
+        Console.WriteLine(@"============================================
+|                                          |
+|          CURRENT MOVIE OVERVIEW          |
+|                                          |
+============================================");
         var descListOb = MoviesFromJson.OrderBy(x => x.Title);
         // Console.WriteLine(descListOb);
         foreach (FilmModel item in descListOb)
@@ -183,19 +201,16 @@ Genre: {Genre}
                 string Description = item.Description;
                 int Duration = item.Duration;
                 string Genre = genre;
-                Console.ForegroundColor = ConsoleColor.Magenta;
                 string Overview = $@"
-============================================
-|            CURRENT MOVIE OVERVIEW        |
-============================================
-| Title: {Title}|
-| Description: {Description}|
-| Duration: {Duration}|
-| Genre: {Genre}|
+  Title: {Title}
+  Description: {Description}
+  Duration: {Duration}
+  Genre: {Genre}
+
 ============================================";
                 Console.WriteLine(Overview);
-                Console.ResetColor();
             }
         }
+        Console.ResetColor();
     }
 }

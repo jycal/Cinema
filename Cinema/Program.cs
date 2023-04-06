@@ -1,3 +1,8 @@
-﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Welcome to this amazing program");
-Menu.Start();
+﻿public class Program
+{
+    public static void Main()
+    {
+        Menu menu = new Menu();
+        menu.Start();
+    }
+}

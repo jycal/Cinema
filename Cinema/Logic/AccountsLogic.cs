@@ -44,17 +44,13 @@ class AccountsLogic
         return _accounts.Find(i => i.Id == id)!;
     }
 
-    public AccountModel CheckLogin(string email, string password)
+    public AccountModel CheckLogin(int type, string email, string password)
     {
         if (email == null || password == null)
         {
             return null!;
         }
-        CurrentAccount = _accounts.Find(i => i.EmailAddress == email && i.Password == password);
+        CurrentAccount = _accounts.Find(i => i.EmailAddress == email && i.Password == password && i.Type == type);
         return CurrentAccount!;
     }
 }
-
-
-
-

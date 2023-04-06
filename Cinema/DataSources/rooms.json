@@ -5,7 +5,7 @@
     "roomNumber": 1,
     "maxPeople": 20,
     "seats": [
-      false,
+      true,
       true,
       true,
       false,
