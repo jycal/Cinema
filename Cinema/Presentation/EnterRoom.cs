@@ -34,6 +34,7 @@ static class EnterRoom
         // 11-15: 11 12 13 14 15
         // 16-20: 16 17 18 19 20
         List<int> reservedSeats = room.Seats;
+        List<int> vipSeats = room.VipSeats;
         int amountOfSeats = room.MaxSeats;
         string lineSep = "\n---------------------------------------------------------------------------------------------------------------------------------------";
         Console.ForegroundColor = ConsoleColor.Yellow;
@@ -53,11 +54,7 @@ static class EnterRoom
         else { plus = 0.0666666667; }
         for (int i = 0; i <= amountOfSeats; i++)
         {
-
-            // i++;
-
             // increment rows
-
             row += plus;
             string rows = row.ToString("0");
             if (i % 15 == 0)
@@ -80,15 +77,31 @@ static class EnterRoom
                 // reserved seat = gray
                 Console.ForegroundColor = ConsoleColor.DarkGray;
                 var reservedSeat = "■";
-                Console.Write($"{i,5} {reservedSeat}");
+                if (vipSeats.Contains(i))
+                {
+
+                    char vipSeat = '♥';
+                    Console.Write($"{i,5} {vipSeat}");
+                }
+                else
+                { Console.Write($"{i,5} {reservedSeat}"); }
             }
             else
             {
                 // unreserved seat = yellow
                 Console.ForegroundColor = ConsoleColor.Yellow;
                 var unreservedSeat = "■";
-                Console.Write($"{i,5} {unreservedSeat}");
+                if (vipSeats.Contains(i))
+                {
+                    // vip seat = rood
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    char vipSeat = '♥';
+                    Console.Write($"{i,5} {vipSeat}");
+                }
+                else
+                { Console.Write($"{i,5} {unreservedSeat}"); }
             }
+
         }
         Console.ForegroundColor = ConsoleColor.White;
         Console.WriteLine(lineSep);
@@ -110,6 +123,7 @@ static class EnterRoom
             }
             else
             {
+                System.Console.WriteLine("Reservation succeeded");
                 room.Seats.Add(choice);
                 roomsLogic.UpdateList(room);
             }
