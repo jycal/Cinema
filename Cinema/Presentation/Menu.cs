@@ -29,7 +29,7 @@ static class Menu
             Console.Write("Enter your choice: ");
         }
 
-        string input = Console.ReadLine();
+        string input = Console.ReadLine()!;
 
         if (!isLoggedIn)
         {

@@ -53,7 +53,7 @@ class FilmsLogic
             //update existing model
             // _films[index] = film;
             _films.RemoveAt(index);
-            _films.ForEach((x) => { if (x.Id > film.Id) x.Id = x.Id - 1; });
+            _films.ForEach((x) => { if (x.Id > film!.Id) x.Id = x.Id - 1; });
             FilmsAccess.WriteAll(_films);
         }
         else
