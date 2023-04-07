@@ -41,58 +41,68 @@ class ReservationsLogic
 
     }
 
-    public void DeleteReservation(string fullName)
+    public bool DeleteReservation(int id)
     {
         //Find if there is already an model with the same id
-        var reservation = _reservations.Find(r => r.FullName == fullName);
-        int index = _reservations.FindIndex(s => s.Id == reservation!.Id);
-
-        if (index != -1)
+        int? index = _reservations.FindIndex(s => s.Id == id);
+        if (index == null)
         {
-            //update existing model
-            // _films[index] = film;
-            _reservations.RemoveAt(index);
-            _reservations.ForEach((x) => { if (x.Id > reservation!.Id) x.Id = x.Id - 1; });
-            ReservationAccess.WriteAll(_reservations);
+            return false;
         }
         else
         {
-            Console.WriteLine($"reservation not found");
-
+            if (index != -1)
+            {
+                //update existing model
+                _reservations.RemoveAt(index.Value);
+                ReservationAccess.WriteAll(_reservations);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
-
     }
 
     public static void ReservationOverview()
     {
         var ReservationsFromJson = ReservationAccess.LoadAll();
+        Console.ForegroundColor = ConsoleColor.Magenta;
+        Console.WriteLine(@"============================================
+|                                          |
+|          CURRENT RESERVATIONS            |
+|                                          |
+============================================");
         foreach (ReservationModel reservation in ReservationsFromJson)
         {
-            foreach (var item in reservation.Seats)
-            {
-                int ID = reservation.Id;
-                string Movie = reservation.Movie;
-                string FullName = reservation.FullName;
-                string Email = reservation.Email;
-                int TicketAmount = reservation.TicketAmount;
-                int Seats = item;
-                int TotalAmount = reservation.TotalAmount;
-                Console.ForegroundColor = ConsoleColor.Magenta;
-                string Overview = $@"
-============================================
-|            CURRENT Reservation OVERVIEW        |
-============================================
-| Movie: {Movie}|
-| Full Name: {FullName}|
-| Email: {Email}|
-| Ticket Amount: {TicketAmount}|
-| Seats: {Seats}|
-| Total Money Amount: {TotalAmount}|
-============================================";
-                Console.WriteLine(Overview);
-                Console.ResetColor();
-            }
+            DisplayTicket(reservation);
         }
+        Console.ResetColor();
+    }
+
+    public static void DisplayTicket(ReservationModel ticket)
+    {
+        Console.ForegroundColor = ConsoleColor.Magenta;
+        int ID = ticket.Id;
+        string Movie = ticket.Movie;
+        string FullName = ticket.FullName;
+        string Email = ticket.Email;
+        int TicketAmount = ticket.TicketAmount;
+        string Seats = String.Join(", ", ticket.Seats);
+        int TotalAmount = ticket.TotalAmount;
+        string Overview = $@"
+  ID: {ID}
+  Movie: {Movie}
+  Full Name: {FullName}
+  Email: {Email}
+  Ticket Amount: {TicketAmount}
+  Seats: {Seats}
+  Total Money Amount: {TotalAmount}
+
+=================================================";
+        Console.WriteLine(Overview);
+        Console.ResetColor();
     }
 
     public ReservationModel GetById(int id)

@@ -30,5 +30,13 @@
     "password": "xyz",
     "fullName": "Bob Com",
 	"ticketList": []
+  },
+  {
+	"id": 4,
+	"type": 1,
+	"emailAddress": "jack@black.com",
+	"password": "xyz",
+	"fullName": "Jack Black",
+	"ticketList": [1, 2]
   }
 ]

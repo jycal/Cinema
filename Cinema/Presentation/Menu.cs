@@ -1,6 +1,7 @@
 public class Menu
 {
     private AccountsLogic _accountsLogic = new AccountsLogic();
+    private ReservationsLogic _reservationsLogic = new ReservationsLogic();
     private AccountModel _account = null!;
     private FilmsLogic _filmsLogic = new FilmsLogic();
 
@@ -221,9 +222,17 @@ public class Menu
         Console.WriteLine("Please select an option:");
         Console.WriteLine("1. Movie menu");
         Console.WriteLine("2. Catering menu");
-        Console.WriteLine("3. Account menu");
-        Console.WriteLine("4. Cinema information");
-        Console.WriteLine("5. Exit program");
+        if (_account != null)
+        {
+            Console.WriteLine("3. Account menu");
+            Console.WriteLine("4. Cinema information");
+            Console.WriteLine("5. Exit program");
+        }
+        else
+        {
+            Console.WriteLine("3. Cinema information");
+            Console.WriteLine("4. Exit program");
+        }
         Console.WriteLine();
         Console.Write("Enter your choice: ");
         string input = Console.ReadLine()!;
@@ -237,17 +246,25 @@ public class Menu
             // CateringMenu();
             throw new Exception("Catering menu not implemented yet");
         }
-        else if (input == "3")
+        else if (input == "3" && _account != null)
         {
-            // AccountMenu();
-            throw new Exception("Account menu not implemented yet");
+            AccountMenu();
         }
-        else if (input == "4")
+        else if (input == "3" && _account == null)
         {
             CinemaInfo();
             MainMenu();
         }
-        else if (input == "5")
+        else if (input == "4" && _account != null)
+        {
+            // AccountMenu();
+            throw new Exception("Account menu not implemented yet");
+        }
+        else if (input == "4" && _account == null)
+        {
+            Environment.Exit(0);
+        }
+        else if (input == "5" && _account != null)
         {
             Environment.Exit(0);
         }
@@ -532,5 +549,167 @@ public class Menu
         Console.ReadKey();
         Console.Clear();
         MovieMenu();
+    }
+
+    // Acount Menu
+    public void AccountMenu()
+    {
+        Console.WriteLine("====================================");
+        Console.WriteLine("|                                  |");
+        Console.WriteLine("|           Account menu           |");
+        Console.WriteLine("|                                  |");
+        Console.WriteLine("====================================");
+        Console.WriteLine();
+        Console.WriteLine("Please select an option:");
+        Console.WriteLine("1. View account information");
+        Console.WriteLine("2. View tickets");
+        Console.WriteLine("3. Go back to main menu");
+        Console.WriteLine();
+        Console.Write("Enter your choice: ");
+        string input = Console.ReadLine()!;
+        Console.Clear();
+        if (input == "1")
+        {
+            throw new Exception("View account information not implemented yet");
+        }
+        else if (input == "2")
+        {
+            if (_account.Type == 1)
+            {
+                Console.ForegroundColor = ConsoleColor.Magenta;
+                Console.WriteLine(@"==================================================
+|                                                |
+|                 Ticket Overview                |
+|                                                |
+==================================================");
+                List<int> ticketList = _account.TicketList;
+                foreach (int ID in ticketList)
+                {
+                    ReservationModel ticket = _reservationsLogic.GetById(ID);
+                    ReservationsLogic.DisplayTicket(ticket);
+                }
+                Console.WriteLine();
+                Console.WriteLine("Press any key to continue...");
+                Console.ReadKey();
+                Console.Clear();
+            }
+            else if (_account.Type == 2 || _account.Type == 3)
+            {
+                TicketMenu();
+            }
+        }
+        else if (input == "3")
+        {
+            MainMenu();
+        }
+        else
+        {
+            Console.WriteLine("Invalid input");
+            AccountMenu();
+        }
+    }
+    public void TicketMenu()
+    {
+        Console.WriteLine("====================================");
+        Console.WriteLine("|                                  |");
+        Console.WriteLine("|            Ticket menu           |");
+        Console.WriteLine("|                                  |");
+        Console.WriteLine("====================================");
+        Console.WriteLine();
+        Console.WriteLine("Please select an option:");
+        Console.WriteLine("1. View all tickets");
+        Console.WriteLine("2. View ticket by ID");
+        Console.WriteLine("3. Delete ticket by ID");
+        Console.WriteLine("4. Go back to account menu");
+        Console.WriteLine();
+        Console.Write("Enter your choice: ");
+        string input = Console.ReadLine()!;
+        Console.Clear();
+        if (input == "1")
+        {
+            ReservationsLogic.ReservationOverview();
+            Console.WriteLine();
+            Console.WriteLine("Press any key to continue...");
+            Console.ReadKey();
+            Console.Clear();
+            TicketMenu();
+        }
+        else if (input == "2")
+        {
+            Console.Write("Enter the ID of the ticket: ");
+            int id = Convert.ToInt32(Console.ReadLine()!);
+            Console.Clear();
+            ReservationModel ticket = _reservationsLogic.GetById(id);
+            if (ticket is ReservationModel)
+            {
+                Console.ForegroundColor = ConsoleColor.Magenta;
+                Console.WriteLine(@"==================================================
+|                                                |
+|                 Ticket Overview                |
+|                                                |
+==================================================");
+                ReservationsLogic.DisplayTicket(ticket);
+                Console.WriteLine();
+                Console.WriteLine("Press any key to continue...");
+                Console.ReadKey();
+                Console.Clear();
+            }
+            else
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("====================================");
+                Console.WriteLine("|                                  |");
+                Console.WriteLine("|         Ticket not found         |");
+                Console.WriteLine("|                                  |");
+                Console.WriteLine("====================================");
+                Console.ResetColor();
+                Console.WriteLine();
+                Console.WriteLine("Press any key to continue...");
+                Console.ReadKey();
+                Console.Clear();
+            }
+            TicketMenu();
+        }
+        else if (input == "3")
+        {
+            Console.Write("Enter the ID of the ticket: ");
+            int id = Convert.ToInt32(Console.ReadLine()!);
+            Console.Clear();
+            bool check = _reservationsLogic.DeleteReservation(id);
+            if (check == true)
+            {
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("====================================");
+                Console.WriteLine("|                                  |");
+                Console.WriteLine("|         Ticket deleted           |");
+                Console.WriteLine("|                                  |");
+                Console.WriteLine("====================================");
+                Console.ResetColor();
+            }
+            else
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("====================================");
+                Console.WriteLine("|                                  |");
+                Console.WriteLine("|         Ticket not found         |");
+                Console.WriteLine("|                                  |");
+                Console.WriteLine("====================================");
+                Console.ResetColor();
+            }
+            Console.WriteLine();
+            Console.WriteLine("Press any key to continue...");
+            Console.ReadKey();
+            Console.Clear();
+            TicketMenu();
+        }
+        else if (input == "4")
+        {
+            AccountMenu();
+        }
+        else
+        {
+            Console.WriteLine("Invalid input");
+            TicketMenu();
+        }
     }
 }
