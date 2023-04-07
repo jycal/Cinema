@@ -7,7 +7,7 @@ using System.Text.Json;
 //This class is not static so later on we can use inheritance and interfaces
 class AccountsLogic
 {
-    private List<AccountModel> _accounts;
+    public static List<AccountModel>? _accounts;
 
     //Static properties are shared across all instances of the class
     //This can be used to get the current logged in account from anywhere in the program
@@ -47,41 +47,9 @@ class AccountsLogic
 
     public AccountModel CheckLogin(string email, string password)
     {
-        int chances = 3;
         if (email == null || password == null)
         {
-            Console.WriteLine("Wrong password! Please try again...");
-            if (chances == 3)
-            {
-                Console.WriteLine("You have 3 chances left!");
-                var Password = Console.ReadLine();
-                CurrentPassword = _accounts.Find(i => i.Password == password);
-                if (CurrentPassword!.Password != Password)
-                {
-                    chances -= 1;
-                }
-
-            }
-            else if (chances == 2)
-            {
-                Console.WriteLine("You have 2 chances left! Think!");
-                var Password = Console.ReadLine();
-                CurrentPassword = _accounts.Find(i => i.Password == password);
-                if (CurrentPassword!.Password != Password)
-                {
-                    chances -= 1;
-                }
-            }
-            else if (chances == 1)
-            {
-                Console.WriteLine("You have 1 chance left! Use it well!!");
-                var Password = Console.ReadLine();
-                CurrentPassword = _accounts.Find(i => i.Password == password);
-                if (CurrentPassword!.Password != Password)
-                {
-                    chances -= 1;
-                }
-            }
+            return null!;
         }
         CurrentAccount = _accounts.Find(i => i.EmailAddress == email && i.Password == password);
         return CurrentAccount!;
