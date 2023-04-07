@@ -23,17 +23,18 @@ static class UserLogin
             string email = Console.ReadLine()!;
             Console.WriteLine("Please enter your password");
             string password = Console.ReadLine()!;
-            dynamic obj = JsonConvert.DeserializeObject("accounts.json")!;
-            string currentPassoword = obj.UserLogin.password;
-            while (password != currentPassoword)
+            var correctEmail = accountsLogic.GetByMail(email);
+            if (correctEmail.Password != password)
             {
                 Console.WriteLine("Wrong password! Please try again...");
                 string Password = Console.ReadLine()!;
-                if (Password == currentPassoword)
-                {
-                    Console.WriteLine("Right password!! You did it!");
-                    continue;
-                }
+                password = Password;
+            }
+            if (password == correctEmail.Password)
+            {
+                Console.WriteLine("Right password!! You did it!");
+                email = email;
+                password = password;
             }
             AccountModel acc = accountsLogic.CheckLogin(email, password);
             if (acc != null)

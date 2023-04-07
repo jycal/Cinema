@@ -45,6 +45,11 @@ class AccountsLogic
         return _accounts!.Find(i => i.Id == id)!;
     }
 
+    public AccountModel GetByMail(string email)
+    {
+        return _accounts!.Find(i => i.EmailAddress == email)!;
+    }
+
     public AccountModel CheckLogin(string email, string password)
     {
         if (email == null || password == null)
