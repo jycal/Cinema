@@ -4,27 +4,31 @@
     "type": 1,
     "emailAddress": "n@b.c",
     "password": "xyz",
-    "fullName": "Nikola Tesla"
+    "fullName": "Nikola Tesla",
+	"ticketList": []
   },
   {
     "id": 2,
     "type": 2,
     "emailAddress": "t@b.c",
     "password": "xyz",
-    "fullName": "Thomas Edison"
+    "fullName": "Thomas Edison",
+	"ticketList": []
   },
   {
     "id": 3,
     "type": 3,
     "emailAddress": "g@b.c",
     "password": "xyz",
-    "fullName": "George Washington"
+    "fullName": "George Washington",
+	"ticketList": []
   },
   {
     "id": 0,
     "type": 1,
     "emailAddress": "bob@bob.com",
     "password": "xyz",
-    "fullName": "Bob Com"
+    "fullName": "Bob Com",
+	"ticketList": []
   }
 ]

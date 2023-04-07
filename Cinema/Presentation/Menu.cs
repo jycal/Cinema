@@ -136,7 +136,8 @@ public class Menu
                 break;
             }
         }
-        AccountModel account = new AccountModel(id, 1, email, password, firstName);
+        List<int> tickets = new List<int>();
+        AccountModel account = new AccountModel(id, 1, email, password, firstName, tickets);
         _accountsLogic.UpdateList(account);
         PreLogin();
     }

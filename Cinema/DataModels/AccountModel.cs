@@ -21,7 +21,7 @@ class AccountModel
     [JsonPropertyName("ticketList")]
     public List<int> TicketList { get; set; }
 
-    public AccountModel(int id, string emailAddress, string password, string fullName, List<int> ticketList)
+    public AccountModel(int id, int type, string emailAddress, string password, string fullName, List<int> ticketList)
     {
         Id = id;
         Type = type;
