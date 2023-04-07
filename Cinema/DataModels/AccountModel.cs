@@ -17,14 +17,17 @@ class AccountModel
 
     [JsonPropertyName("fullName")]
     public string FullName { get; set; }
+    
+    [JsonPropertyName("ticketList")]
+    public List<int> TicketList { get; set; }
 
-    public AccountModel(int id, int type, string emailAddress, string password, string fullName)
+    public AccountModel(int id, string emailAddress, string password, string fullName, List<int> ticketList)
     {
         Id = id;
         Type = type;
         EmailAddress = emailAddress;
         Password = password;
         FullName = fullName;
+        TicketList = ticketList;
     }
-
 }
