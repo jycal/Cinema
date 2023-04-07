@@ -53,20 +53,25 @@ static class EnterRoom
         else { plus = 0.0666666667; }
         for (int i = 0; i <= amountOfSeats; i++)
         {
+
+            // i++;
+
             // increment rows
+
             row += plus;
             string rows = row.ToString("0");
             if (i % 15 == 0)
             {
                 Console.ForegroundColor = ConsoleColor.White;
                 Console.WriteLine(lineSep);
-                string rowHeader = $"|{"Row: " + rows,16}: |";
+                string rowHeader = $"|{"Row: " + rows,15}: |";
                 Console.Write(rowHeader);
+                // if (i == 0)
+                // {
+                //     continue;
+                // }
 
-                if (i == 0)
-                {
-                    continue;
-                }
+
             }
 
             // check if chair in list

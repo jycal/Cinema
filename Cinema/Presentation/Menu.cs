@@ -49,6 +49,7 @@ static class Menu
             {
                 // Hier moet de connecttie komen naar de movieoverview
                 // FilmManagerMenu.MovieOverview();
+                EnterRoom.Start();
             }
             else if (input == "5")
             {
@@ -66,6 +67,7 @@ static class Menu
             {
                 // Hier moet de connecttie komen naar de movieoverview
                 // FilmManagerMenu.MovieOverview();
+
             }
             else if (input == "2")
             {
@@ -79,6 +81,7 @@ static class Menu
             {
                 isLoggedIn = false;
                 Console.WriteLine("You have been logged out.");
+
             }
             else
             {
