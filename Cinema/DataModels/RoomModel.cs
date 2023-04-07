@@ -24,7 +24,10 @@ class RoomModel
     [JsonPropertyName("vipSeats")]
     public List<int> VipSeats { get; set; }
 
-    public RoomModel(int id, int maxSeats, int roomNumber, int maxPeople, List<int> seats, List<int> vipSeats)
+    [JsonPropertyName("disabledSeats")]
+    public List<int> DisabledSeats { get; set; }
+
+    public RoomModel(int id, int maxSeats, int roomNumber, int maxPeople, List<int> seats, List<int> vipSeats, List<int> disabledSeats)
     {
         Id = id;
         MaxSeats = maxSeats;
@@ -32,5 +35,6 @@ class RoomModel
         MaxPeople = maxPeople;
         Seats = seats;
         VipSeats = vipSeats;
+        DisabledSeats = disabledSeats;
     }
 }

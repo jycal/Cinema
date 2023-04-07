@@ -35,12 +35,17 @@ static class EnterRoom
         // 16-20: 16 17 18 19 20
         List<int> reservedSeats = room.Seats;
         List<int> vipSeats = room.VipSeats;
+        List<int> disabledSeats = room.DisabledSeats;
         int amountOfSeats = room.MaxSeats;
         string lineSep = "\n---------------------------------------------------------------------------------------------------------------------------------------";
         Console.ForegroundColor = ConsoleColor.Yellow;
         Console.WriteLine("■: Unreserved seat");
         Console.ForegroundColor = ConsoleColor.DarkGray;
         Console.WriteLine("■: Reserved seat");
+        Console.ForegroundColor = ConsoleColor.Red;
+        Console.WriteLine("♥: VIP seat");
+        Console.ForegroundColor = ConsoleColor.Green;
+        Console.WriteLine("▲: Disability seat");
         Console.ForegroundColor = ConsoleColor.White;
         Console.WriteLine("                                                            Screen");
         double row = 1;
@@ -79,9 +84,15 @@ static class EnterRoom
                 var reservedSeat = "■";
                 if (vipSeats.Contains(i))
                 {
-
                     char vipSeat = '♥';
                     Console.Write($"{i,5} {vipSeat}");
+                }
+                else if (disabledSeats.Contains(i))
+                {
+                    // disability seats = green
+                    char disabilitySeat = '▲';
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.Write($"{i,5} {disabilitySeat}");
                 }
                 else
                 { Console.Write($"{i,5} {reservedSeat}"); }

@@ -21,6 +21,10 @@
     "vipSeats": [
       40,
       50
+    ],
+    "disabledSeats": [
+      1,
+      3
     ]
   },
   {
@@ -35,7 +39,8 @@
       8,
       1
     ],
-    "vipSeats": []
+    "vipSeats": [],
+    "disabledSeats": []
   },
   {
     "id": 3,
@@ -49,6 +54,7 @@
       8,
       1
     ],
-    "vipSeats": []
+    "vipSeats": [],
+    "disabledSeats": []
   }
 ]
