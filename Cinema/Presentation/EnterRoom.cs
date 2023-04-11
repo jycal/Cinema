@@ -121,6 +121,7 @@ static class EnterRoom
 
     public static void Reserve(RoomModel room)
     {
+        Console.WriteLine("Seat(s):");
         int choice = int.Parse(Console.ReadLine()!);
         if (choice <= room.MaxSeats)
         {
@@ -134,7 +135,19 @@ static class EnterRoom
             }
             else
             {
-                System.Console.WriteLine("Reservation succeeded");
+                Console.WriteLine("\n--------------------------------");
+                Console.WriteLine("         PAYMENT OPTIONS         ");
+                Console.WriteLine("--------------------------------");
+                Console.WriteLine("1. Paypal");
+                Console.WriteLine("2. Ideal");
+                Console.WriteLine("--------------------------------");
+                Console.Write("Enter your choice of payment: ");
+                string? answer = Console.ReadLine();
+                Console.Clear();
+                Payment.PaymentWithPayPal(answer);
+                Payment.PaymentWithIdeal(answer);
+
+                System.Console.WriteLine("Your reservation has been confirmed and is now guaranteed.");
                 room.Seats.Add(choice);
                 roomsLogic.UpdateList(room);
             }
