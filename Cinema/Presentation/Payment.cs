@@ -2,10 +2,9 @@ public static class Payment
 {
     public static void PaymentWithPayPal(string answer)
     {
-
         if (answer == "Paypal" || answer == "1")
         {
-            string bank1 = "";
+            string bank;
             bool isValid = false;
             do
             {
@@ -13,12 +12,10 @@ public static class Payment
                 Console.WriteLine("         PAYPAL PAYMENT         ");
                 Console.WriteLine("--------------------------------");
                 Console.WriteLine("Please enter your bank number (4 digits): ");
-                string? bank = Console.ReadLine();
-                bank1 += bank;
+                bank = Console.ReadLine();
 
                 if (bank!.Length == 4)
                 {
-
                     if (int.TryParse(bank, out int bankNumber))
                     {
                         isValid = true;
@@ -29,6 +26,7 @@ public static class Payment
                         Console.ForegroundColor = ConsoleColor.Red;
                         Console.WriteLine("Bank number must only consist of numbers.");
                         Console.ResetColor();
+                        isValid = false;
                     }
                 }
                 else
@@ -36,18 +34,18 @@ public static class Payment
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("Bank number must contain 4 numbers.");
                     Console.ResetColor();
+                    isValid = false;
                 }
 
-            } while (bank1.Length != 4 && isValid == false);
+            } while (bank!.Length != 4 || isValid == false);
         }
     }
 
     public static void PaymentWithIdeal(string answer)
     {
-
         if (answer == "Ideal" || answer == "2")
         {
-            string bank1 = "";
+            string bank;
             bool isValid = false;
             do
             {
@@ -55,8 +53,8 @@ public static class Payment
                 Console.WriteLine("          IDEAL PAYMENT         ");
                 Console.WriteLine("--------------------------------");
                 Console.WriteLine("Please enter your bank number (format: NL00):\n");
-                string? bank = Console.ReadLine();
-                bank1 += bank;
+                bank = Console.ReadLine();
+
                 if (bank!.Length == 4)
                 {
                     foreach (char c in bank)
@@ -70,13 +68,11 @@ public static class Payment
                                 break;
 
                             default:
-
                                 Console.ForegroundColor = ConsoleColor.Red;
                                 Console.WriteLine("Input has the wrong format. Please use format (NL00)");
                                 Console.ResetColor();
                                 isValid = false;
                                 break;
-
                         }
                     }
                     if (isValid == true)
@@ -89,9 +85,10 @@ public static class Payment
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("Bank number must contain 4 characters.");
                     Console.ResetColor();
+                    isValid = false;
                 }
 
-            } while (bank1.Length != 4 && isValid == false);
+            } while (bank!.Length != 4 || isValid == false);
         }
     }
 
