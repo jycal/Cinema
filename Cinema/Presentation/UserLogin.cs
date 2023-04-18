@@ -35,14 +35,15 @@ static class UserLogin
                 email = email;
                 password = password;
             }
-            AccountModel acc = accountsLogic.CheckLogin(email, password);
+            AccountModel acc = accountsLogic.CheckLogin(1, email, password);
             if (acc != null)
             {
                 Console.WriteLine("\nWelcome back " + acc.FullName);
                 Console.WriteLine("Your email number is " + acc.EmailAddress);
                 loginSuccessful = true;
                 isLoggedIn = true;
-                Menu.Start();
+                Menu menu = new();
+                menu.MainMenu();
             }
             else
             {

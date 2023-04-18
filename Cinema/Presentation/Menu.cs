@@ -79,31 +79,51 @@ public class Menu
         Console.WriteLine("|                                  |");
         Console.WriteLine("====================================");
         Console.WriteLine();
-        Console.WriteLine("Please enter your email address");
-        string email = Console.ReadLine()!;
-        Console.WriteLine("Please enter your password");
-        string password = Console.ReadLine()!;
-        Console.Clear();
-
-        AccountModel aL = _accountsLogic.CheckLogin(type, email, password);
-        _account = aL;
-        if (aL != null)
+        bool loginSuccessful = false;
+        while (!loginSuccessful)
         {
-            Console.WriteLine("You have been logged in");
-            Console.WriteLine("Press any key to continue...");
-            Console.ReadKey();
-            Console.Clear();
-            MainMenu();
+            Console.WriteLine("Please enter your email address");
+            string email = Console.ReadLine()!;
+            Console.WriteLine("Please enter your password");
+            string password = Console.ReadLine()!;
+            var correctEmail = _accountsLogic.GetByMail(email);
+            if (correctEmail == null)
+            {
+                Console.WriteLine("Email not found! Please try again...");
+                continue;
+            }
+            else if (correctEmail.Password != password)
+            {
+                Console.WriteLine("Wrong password! Please try again...");
+                Console.Write("Password: ");
+                string Password = Console.ReadLine()!;
+                password = Password;
+            }
+            if (password == correctEmail.Password)
+            {
+                Console.WriteLine();
+                Console.WriteLine("Right password!! You did it!");
+                email = email;
+                password = password;
+            }
+            AccountModel acc = _accountsLogic.CheckLogin(type, email, password);
+            if (acc != null)
+            {
+                _account = acc;
+                Console.WriteLine("\nWelcome back " + acc.FullName);
+                Console.WriteLine("Your email is " + acc.EmailAddress);
+                loginSuccessful = true;
+                Menu menu = new();
+                Console.WriteLine("Press any key to continue...");
+                Console.ReadKey();
+                menu.MainMenu();
+            }
+            else
+            {
+                Console.WriteLine("No account found with that email and password");
+                Console.WriteLine("Please try again.\n");
+            }
         }
-        else
-        {
-            Console.WriteLine("Invalid credentials");
-            Console.WriteLine("Press any key to continue...");
-            Console.ReadKey();
-            Console.Clear();
-            PreLogin();
-        }
-
     }
     public void MemberRegister()
     {
