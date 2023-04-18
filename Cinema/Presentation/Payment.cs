@@ -37,7 +37,7 @@ public static class Payment
                     isValid = false;
                 }
 
-            } while (bank!.Length != 4 || isValid == false);
+            } while (bank!.Length != 4 && isValid == false);
         }
     }
 
@@ -57,29 +57,27 @@ public static class Payment
 
                 if (bank!.Length == 4)
                 {
-                    foreach (char c in bank)
+                    // foreach (char c in bank)
+                    // {
+                    //     switch (c)
+                    if (bank[0] == 'N' && bank[1] == 'L' && char.IsDigit(bank[2]) && char.IsDigit(bank[3]))
                     {
-                        switch (c)
-                        {
-                            case 'N':
-                            case 'L':
-                            case char when char.IsDigit(c):
-                                isValid = true;
-                                break;
 
-                            default:
-                                Console.ForegroundColor = ConsoleColor.Red;
-                                Console.WriteLine("Input has the wrong format. Please use format (NL00)");
-                                Console.ResetColor();
-                                isValid = false;
-                                break;
-                        }
+                        isValid = true;
                     }
-                    if (isValid == true)
+                    else
                     {
-                        SendConfirmationMessage("iDeal");
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("Input has the wrong format. Please use format (NL00)");
+                        Console.ResetColor();
+                        isValid = false;
                     }
                 }
+                if (isValid == true)
+                {
+                    SendConfirmationMessage("iDeal");
+                }
+
                 else
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
@@ -99,5 +97,6 @@ public static class Payment
         Console.WriteLine($"\nPayment with {paymentMethod} was successful. Confirmation message sent to member.");
         Console.ResetColor();
     }
-
 }
+
+
