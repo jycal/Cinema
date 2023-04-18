@@ -3,7 +3,7 @@ public static class Payment
     public static void PaymentWithPayPal(string answer)
     {
 
-        if (answer == "Paypal")
+        if (answer == "Paypal" || answer == "1")
         {
             string bank1 = "";
             bool isValid = false;
@@ -45,7 +45,7 @@ public static class Payment
     public static void PaymentWithIdeal(string answer)
     {
 
-        if (answer == "Ideal")
+        if (answer == "Ideal" || answer == "2")
         {
             string bank1 = "";
             bool isValid = false;
