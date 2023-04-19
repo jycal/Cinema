@@ -12,7 +12,7 @@ public static class Payment
                 Console.WriteLine("         PAYPAL PAYMENT         ");
                 Console.WriteLine("--------------------------------");
                 Console.WriteLine("Please enter your bank number (4 digits): ");
-                bank = Console.ReadLine();
+                bank = Console.ReadLine()!;
 
                 if (bank!.Length == 4)
                 {
@@ -53,7 +53,7 @@ public static class Payment
                 Console.WriteLine("          IDEAL PAYMENT         ");
                 Console.WriteLine("--------------------------------");
                 Console.WriteLine("Please enter your bank number (format: NL00):\n");
-                bank = Console.ReadLine();
+                bank = Console.ReadLine()!;
 
                 if (bank!.Length == 4)
                 {

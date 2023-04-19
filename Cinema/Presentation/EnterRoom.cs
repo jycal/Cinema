@@ -178,7 +178,7 @@ static class EnterRoom
                 row++;
             }
 
-        // check if chair in list
+            // check if chair in list
             if (reservedSeats.Contains(i))
             {
                 // reserved seat = gray
@@ -255,8 +255,8 @@ static class EnterRoom
                 Console.Write("Enter your choice of payment: ");
                 string? answer = Console.ReadLine();
                 Console.Clear();
-                Payment.PaymentWithPayPal(answer);
-                Payment.PaymentWithIdeal(answer);
+                Payment.PaymentWithPayPal(answer!);
+                Payment.PaymentWithIdeal(answer!);
 
                 System.Console.WriteLine("Your reservation has been confirmed and is now guaranteed.");
                 room.Seats.Add(choice);
