@@ -223,7 +223,7 @@ static class EnterRoom
 
     public static void Reserve(RoomModel room, int id)
     {
-        Console.WriteLine("Seat(s):");
+        Console.WriteLine("Please enter the seat number:");
         int choice = int.Parse(Console.ReadLine()!);
         if (choice <= room.MaxSeats)
         {
