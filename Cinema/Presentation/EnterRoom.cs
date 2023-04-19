@@ -265,8 +265,9 @@ static class EnterRoom
                 {
                     FilmModel film = _filmsLogic.GetById(id);
                     string title = film.Title;
-                    List<int> ticketList = new(1);
-                    ReservationModel reservation = new(1, _account.FullName, _account.EmailAddress, title, 1, ticketList, 1);
+                    List<int> seatList = new();
+                    seatList.Add(choice);
+                    ReservationModel reservation = new(1, _account.FullName, _account.EmailAddress, title, 1, seatList, 1);
                     _reservationsLogic.UpdateList(reservation);
                 }
                 Console.WriteLine("Reservation succeeded");

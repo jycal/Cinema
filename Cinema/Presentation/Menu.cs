@@ -239,11 +239,19 @@ public static class Menu
         Console.WriteLine("Please select an option:");
         Console.WriteLine("1. Movie menu");
         Console.WriteLine("2. Catering menu");
-        if (_account.Type == 3 || _account.Type == 2)
+        if (_account != null)
         {
-            Console.WriteLine("3. Advanced Ticket menu");
-            Console.WriteLine("4. Cinema information");
-            Console.WriteLine("5. Exit program");
+            if (_account.Type == 3 || _account.Type == 2)
+            {
+                Console.WriteLine("3. Advanced Ticket menu");
+                Console.WriteLine("4. Cinema information");
+                Console.WriteLine("5. Exit program");
+            }
+            else
+            {
+                Console.WriteLine("3. Cinema information");
+                Console.WriteLine("4. Exit program");
+            }
         }
         else
         {
@@ -254,43 +262,95 @@ public static class Menu
         Console.Write("Enter your choice: ");
         string input = Console.ReadLine()!;
         Console.Clear();
-        if (input == "1")
+        if (_account != null)
         {
-            MovieMenu();
-        }
-        else if (input == "2")
-        {
-            Catering.ShowInfo();
-            MainMenu();
-        }
-        else if (input == "3" && _account.Type == 3 || _account.Type == 2)
-        {
-            // AdvancedTicketMenu();
-            ReservationManagerMenu.Start();
-            MainMenu();
-        }
-        else if (input == "3" && _account.Type != 2 || _account.Type != 3)
-        {
-            CinemaInfo();
-            MainMenu();
-        }
-        else if (input == "4" && _account.Type == 3 || _account.Type == 2)
-        {
-            CinemaInfo();
-            MainMenu();
-        }
-        else if (input == "4" && _account.Type == 1)
-        {
-            Environment.Exit(0);
-        }
-        else if (input == "5")
-        {
-            Environment.Exit(0);
+            if (_account.Type == 3 || _account.Type == 2)
+            {
+                if (input == "1")
+                {
+                    MovieMenu();
+                }
+                else if (input == "2")
+                {
+                    Catering.ShowInfo();
+                    MainMenu();
+                }
+                else if (input == "3")
+                {
+                    ReservationManagerMenu.Start();
+                    MainMenu();
+                }
+                else if (input == "4")
+                {
+                    CinemaInfo();
+                    MainMenu();
+                }
+                else if (input == "5")
+                {
+                    Environment.Exit(0);
+                }
+                else
+                {
+                    Console.WriteLine("Invalid input");
+                    MainMenu();
+                }
+            }
+            else
+            {
+                if (input == "1")
+                {
+                    MovieMenu();
+                }
+                else if (input == "2")
+                {
+                    Catering.ShowInfo();
+                    Console.WriteLine();
+                    Console.WriteLine("Press any key to continue...");
+                    Console.ReadKey();
+                    Console.Clear();
+                    MainMenu();
+                }
+                else if (input == "3")
+                {
+                    CinemaInfo();
+                    MainMenu();
+                }
+                else if (input == "4")
+                {
+                    Environment.Exit(0);
+                }
+                else
+                {
+                    Console.WriteLine("Invalid input");
+                    MainMenu();
+                }
+            }
         }
         else
         {
-            Console.WriteLine("Invalid input");
-            MainMenu();
+            if (input == "1")
+            {
+                MovieMenu();
+            }
+            else if (input == "2")
+            {
+                Catering.ShowInfo();
+                MainMenu();
+            }
+            else if (input == "3")
+            {
+                CinemaInfo();
+                MainMenu();
+            }
+            else if (input == "4")
+            {
+                Environment.Exit(0);
+            }
+            else
+            {
+                Console.WriteLine("Invalid input");
+                MainMenu();
+            }
         }
     }
 
@@ -421,6 +481,7 @@ public static class Menu
         else if (input == "3")
         {
             EnterRoom.Start(_account);
+            ViewAllMovies();
         }
         else if (input == "4")
         {
