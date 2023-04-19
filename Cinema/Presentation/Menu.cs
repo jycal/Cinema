@@ -165,7 +165,7 @@ public static class Menu
     {
         Console.WriteLine("====================================");
         Console.WriteLine("|                                  |");
-        Console.WriteLine("|      Continueing as a guest      |");
+        Console.WriteLine("|      Continuing as a guest       |");
         Console.WriteLine("|                                  |");
         Console.WriteLine("====================================");
         Console.WriteLine();
@@ -261,6 +261,7 @@ public static class Menu
         else if (input == "2")
         {
             Catering.ShowInfo();
+            MainMenu();
         }
         else if (input == "3" && _account.Type == 3 || _account.Type == 2)
         {
