@@ -93,7 +93,7 @@ public static class Payment
     {
         // Code to send confirmation message to member
         Console.ForegroundColor = ConsoleColor.Green;
-        Console.WriteLine($"\nPayment with {paymentMethod} was successful. Confirmation message sent to member.");
+        Console.WriteLine($"\nPayment with {paymentMethod} was successful. Confirmation message sent.");
         Console.ResetColor();
     }
 
