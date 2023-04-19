@@ -1,11 +1,11 @@
-public class Menu
+public static class Menu
 {
-    private AccountsLogic _accountsLogic = new AccountsLogic();
-    private AccountModel _account = null!;
-    private FilmsLogic _filmsLogic = new FilmsLogic();
+    private static AccountsLogic _accountsLogic = new AccountsLogic();
+    private static AccountModel _account = null!;
+    private static FilmsLogic _filmsLogic = new FilmsLogic();
 
     // Intro screen
-    public void Start()
+    public static void Start()
     {
         Console.WriteLine("====================================");
         Console.WriteLine("|                                  |");
@@ -18,7 +18,7 @@ public class Menu
         Console.Clear();
         PreLogin();
     }
-    public void PreLogin()
+    public static void PreLogin()
     {
         Console.WriteLine("====================================");
         Console.WriteLine("|                                  |");
@@ -71,7 +71,7 @@ public class Menu
     }
 
     // Login and register method
-    public void Login(int type)
+    public static void Login(int type)
     {
         Console.WriteLine("====================================");
         Console.WriteLine("|                                  |");
@@ -113,10 +113,9 @@ public class Menu
                 Console.WriteLine("\nWelcome back " + acc.FullName);
                 Console.WriteLine("Your email is " + acc.EmailAddress);
                 loginSuccessful = true;
-                Menu menu = new();
                 Console.WriteLine("Press any key to continue...");
                 Console.ReadKey();
-                menu.MainMenu();
+                Menu.MainMenu();
             }
             else
             {
@@ -125,7 +124,7 @@ public class Menu
             }
         }
     }
-    public void MemberRegister()
+    public static void MemberRegister()
     {
         Console.WriteLine("====================================");
         Console.WriteLine("|                                  |");
@@ -163,7 +162,7 @@ public class Menu
     }
 
     // Guest screen
-    public void Guest()
+    public static void Guest()
     {
         Console.WriteLine("====================================");
         Console.WriteLine("|                                  |");
@@ -178,7 +177,7 @@ public class Menu
     }
 
     // Login as employee or manager
-    public void AdvancedAccess()
+    public static void AdvancedAccess()
     {
         Console.WriteLine("====================================");
         Console.WriteLine("|                                  |");
@@ -209,7 +208,7 @@ public class Menu
     }
 
     // Cinema information
-    public void CinemaInfo()
+    public static void CinemaInfo()
     {
         Console.WriteLine("============================================");
         Console.WriteLine("|                                          |");
@@ -230,7 +229,7 @@ public class Menu
     }
 
     // Main menu
-    public void MainMenu()
+    public static void MainMenu()
     {
         Console.WriteLine("====================================");
         Console.WriteLine("|                                  |");
@@ -241,9 +240,17 @@ public class Menu
         Console.WriteLine("Please select an option:");
         Console.WriteLine("1. Movie menu");
         Console.WriteLine("2. Catering menu");
-        Console.WriteLine("3. Account menu");
-        Console.WriteLine("4. Cinema information");
-        Console.WriteLine("5. Exit program");
+        if (_account.Type == 3 || _account.Type == 2)
+        {
+            Console.WriteLine("3. Advanced Ticket menu");
+            Console.WriteLine("4. Cinema information");
+            Console.WriteLine("5. Exit program");
+        }
+        else
+        {
+            Console.WriteLine("3. Cinema information");
+            Console.WriteLine("4. Exit program");
+        }
         Console.WriteLine();
         Console.Write("Enter your choice: ");
         string input = Console.ReadLine()!;
@@ -257,15 +264,25 @@ public class Menu
             // CateringMenu();
             throw new Exception("Catering menu not implemented yet");
         }
-        else if (input == "3")
+        else if (input == "3" && _account.Type == 3 || _account.Type == 2)
         {
-            // AccountMenu();
-            throw new Exception("Account menu not implemented yet");
+            // AdvancedTicketMenu();
+            ReservationManagerMenu.Start();
+            MainMenu();
         }
-        else if (input == "4")
+        else if (input == "3" && _account.Type != 2 || _account.Type != 3)
         {
             CinemaInfo();
             MainMenu();
+        }
+        else if (input == "4" && _account.Type == 3 || _account.Type == 2)
+        {
+            CinemaInfo();
+            MainMenu();
+        }
+        else if (input == "4" && _account.Type == 1)
+        {
+            Environment.Exit(0);
         }
         else if (input == "5")
         {
@@ -279,7 +296,7 @@ public class Menu
     }
 
     // Movie Menu
-    public void MovieMenu()
+    public static void MovieMenu()
     {
         Console.WriteLine("====================================");
         Console.WriteLine("|                                  |");
@@ -367,7 +384,7 @@ public class Menu
             }
         }
     }
-    public void ViewAllMovies()
+    public static void ViewAllMovies()
     {
         Console.WriteLine("====================================");
         Console.WriteLine("|                                  |");
@@ -404,7 +421,7 @@ public class Menu
         }
         else if (input == "3")
         {
-            throw new Exception("Order ticket not implemented yet");
+            EnterRoom.Start(_account);
         }
         else if (input == "4")
         {
@@ -416,7 +433,7 @@ public class Menu
             ViewAllMovies();
         }
     }
-    public void SearchMovie()
+    public static void SearchMovie()
     {
         Console.WriteLine("====================================");
         Console.WriteLine("|                                  |");
@@ -478,7 +495,7 @@ public class Menu
             SearchMovie();
         }
     }
-    public void AddMovie()
+    public static void AddMovie()
     {
         Console.WriteLine("====================================");
         Console.WriteLine("|                                  |");
@@ -515,7 +532,7 @@ public class Menu
         _filmsLogic.UpdateList(film);
         MovieMenu();
     }
-    public void DeleteMovie()
+    public static void DeleteMovie()
     {
         Console.WriteLine("====================================");
         Console.WriteLine("|                                  |");

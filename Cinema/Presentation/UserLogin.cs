@@ -42,8 +42,7 @@ static class UserLogin
                 Console.WriteLine("Your email number is " + acc.EmailAddress);
                 loginSuccessful = true;
                 isLoggedIn = true;
-                Menu menu = new();
-                menu.MainMenu();
+                Menu.MainMenu();
             }
             else
             {

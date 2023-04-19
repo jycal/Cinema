@@ -1,21 +1,38 @@
 static class EnterRoom
 {
-    static private RoomsLogic roomsLogic = new();
-
-    public static void Start()
+    static private RoomsLogic _roomsLogic = new();
+    static private FilmsLogic _filmsLogic = new();
+    static private ReservationsLogic _reservationsLogic = new();
+    static private AccountModel _account = null!;
+    public static void Start(AccountModel account)
     {
+        _account = account;
         Console.WriteLine("Welcome to the movie rooms page");
-        Console.WriteLine("Please enter the room number (1)\n");
+        Console.WriteLine("Please enter the movie id\n");
+        int id = int.Parse(Console.ReadLine()!);
+        FilmModel film = _filmsLogic.GetById(id);
+        if (film == null)
+        {
+            Console.WriteLine("No film found with that id");
+            Console.WriteLine("Please try again.\n");
+            //Write some code to go back to the menu
+            Console.WriteLine("Press any key to go back to the menu");
+            Console.ReadKey();
+            Console.Clear();
+            Menu.MainMenu();
+            return;
+        }
+        Console.WriteLine("Please enter the room number\n");
 
         int number = int.Parse(Console.ReadLine()!);
-        RoomModel room = roomsLogic.CheckEnter(number);
+        RoomModel room = _roomsLogic.CheckEnter(number);
         if (room != null)
         {
             Console.WriteLine("Welcome to room " + room.RoomNumber);
             Console.WriteLine($"This room has {room.MaxSeats} seats");
 
             Display(room);
-            Reserve(room);
+            Reserve(room, id);
             //Write some code to go back to the menu
             //Menu.Start();
         }
@@ -204,7 +221,7 @@ static class EnterRoom
     }
 
 
-    public static void Reserve(RoomModel room)
+    public static void Reserve(RoomModel room, int id)
     {
         Console.WriteLine("Seat(s):");
         int choice = int.Parse(Console.ReadLine()!);
@@ -220,6 +237,15 @@ static class EnterRoom
             }
             else
             {
+                if (_account == null)
+                {
+                    // guest
+                    Console.Write("Enter email: ");
+                    string email = Console.ReadLine()!;
+                    Console.WriteLine("Press enter to continue...");
+                    Console.ReadLine();
+                    Console.Clear();
+                }
                 Console.WriteLine("\n--------------------------------");
                 Console.WriteLine("         PAYMENT OPTIONS         ");
                 Console.WriteLine("--------------------------------");
@@ -234,7 +260,15 @@ static class EnterRoom
 
                 System.Console.WriteLine("Your reservation has been confirmed and is now guaranteed.");
                 room.Seats.Add(choice);
-                roomsLogic.UpdateList(room);
+                _roomsLogic.UpdateList(room);
+                if (_account != null)
+                {
+                    FilmModel film = _filmsLogic.GetById(id);
+                    string title = film.Title;
+                    List<int> ticketList = new(1);
+                    ReservationModel reservation = new(1, _account.FullName, _account.EmailAddress, title, 1, ticketList, 1);
+                    _reservationsLogic.UpdateList(reservation);
+                }
                 Console.WriteLine("Reservation succeeded");
             }
         }
