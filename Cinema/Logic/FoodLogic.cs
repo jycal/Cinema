@@ -1,11 +1,52 @@
-public class Food
-{
-    public string Name;
-    public int Cost;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Text.Json;
 
-    public Food(string name, int cost)
+
+//This class is not static so later on we can use inheritance and interfaces
+class FoodsLogic
+{
+    public List<FoodModel>? _foods;
+
+    //Static properties are shared across all instances of the class
+    //This can be used to get the current logged in account from anywhere in the program
+    //private set, so this can only be set by the class itself
+    static public FoodModel? CurrentName { get; private set; }
+    static public FoodModel? CurrentCost { get; private set; }
+
+    public FoodsLogic()
     {
-        this.Name = name;
-        this.Cost = cost;
+        _foods = FoodAccess.LoadAll();
     }
+
+
+    public void UpdateList(FoodModel acc)
+    {
+        //Find if there is already an model with the same id
+        int index = _foods!.FindIndex(s => s.Name == acc.Name);
+
+        if (index != -1)
+        {
+            //update existing model
+            _foods[index] = acc;
+        }
+        else
+        {
+            //add new model
+            _foods.Add(acc);
+        }
+        FoodAccess.WriteAll(_foods);
+    }
+
+    public FoodModel GetByName(string name)
+    {
+        return _foods!.Find(i => i.Name == name)!;
+    }
+
+    public FoodModel GetByPrice(double price)
+    {
+        return _foods!.Find(i => i.Cost == price)!;
+    }
+
 }

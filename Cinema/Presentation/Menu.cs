@@ -31,10 +31,9 @@ public static class Menu
         Console.WriteLine("2. Register as member");
         Console.WriteLine("3. Continue as guest");
         Console.WriteLine("4. Continue with advanced acces");
-        Console.WriteLine();
         Console.WriteLine("5. Cinema information");
-        Console.WriteLine();
         Console.WriteLine("6. Exit program");
+        Console.WriteLine();
         Console.Write("Enter your choice: ");
         string input = Console.ReadLine()!;
         Console.Clear();
@@ -261,8 +260,7 @@ public static class Menu
         }
         else if (input == "2")
         {
-            // CateringMenu();
-            throw new Exception("Catering menu not implemented yet");
+            Catering.ShowInfo();
         }
         else if (input == "3" && _account.Type == 3 || _account.Type == 2)
         {
