@@ -5,7 +5,7 @@
     "emailAddress": "n@b.c",
     "password": "xyz",
     "fullName": "Nikola Tesla",
-	"ticketList": []
+    "ticketList": []
   },
   {
     "id": 2,
@@ -13,7 +13,7 @@
     "emailAddress": "t@b.c",
     "password": "xyz",
     "fullName": "Thomas Edison",
-	"ticketList": []
+    "ticketList": []
   },
   {
     "id": 3,
@@ -21,7 +21,7 @@
     "emailAddress": "g@b.c",
     "password": "xyz",
     "fullName": "George Washington",
-	"ticketList": []
+    "ticketList": []
   },
   {
     "id": 0,
@@ -29,6 +29,6 @@
     "emailAddress": "bob@bob.com",
     "password": "xyz",
     "fullName": "Bob Com",
-	"ticketList": []
+    "ticketList": []
   }
 ]

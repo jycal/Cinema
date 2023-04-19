@@ -32,7 +32,11 @@ public class ReservationManagerMenu
                     System.Console.WriteLine("enter email adress");
                     string email = Console.ReadLine()!;
                     var reservation = res.GetByEmail(email);
-
+                    if (reservation == null)
+                    {
+                        Console.WriteLine("Email not found");
+                        continue;
+                    }
 
                     foreach (var item in reservation.Seats)
                     {
@@ -73,6 +77,11 @@ public class ReservationManagerMenu
                     // ask old email
                     string email4 = Console.ReadLine()!;
                     ReservationModel oldReservation = res.GetByEmail(email4);
+                    if (oldReservation == null)
+                    {
+                        Console.WriteLine("Email not found");
+                        continue;
+                    }
                     int id = oldReservation.Id;
                     // make changes to rservation
                     Console.WriteLine("enter full name");
