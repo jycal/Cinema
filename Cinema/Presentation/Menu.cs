@@ -445,7 +445,7 @@ public static class Menu
     }
     public static void ViewAllMovies()
     {
-        ReservationsLogic reservation = new ReservationsLogic();
+        GuestLogic logic = new GuestLogic();
 
         Console.WriteLine("====================================");
         Console.WriteLine("|                                  |");
@@ -490,7 +490,9 @@ public static class Menu
         {
             Console.WriteLine("What is your email?");
             string? email = Console.ReadLine();
-            reservation.DeleteReservation(email);
+            logic.DeleteReservation(email);
+            Console.WriteLine("Reservation has been cancelled.");
+            MainMenu();
         }
         else if (input == "5")
         {

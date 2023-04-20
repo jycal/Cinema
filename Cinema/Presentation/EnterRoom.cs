@@ -245,6 +245,11 @@ static class EnterRoom
                     Console.WriteLine("Press enter to continue...");
                     Console.ReadLine();
                     Console.Clear();
+                    List<int> seatList = new();
+                    seatList.Add(choice);
+                    GuestModel guest = new(1, email, seatList);
+                    GuestLogic logic = new();
+                    logic.UpdateList(guest);
                 }
                 Console.WriteLine("\n--------------------------------");
                 Console.WriteLine("         PAYMENT OPTIONS         ");
