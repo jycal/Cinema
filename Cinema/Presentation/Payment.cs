@@ -11,9 +11,13 @@ public static class Payment
                 Console.WriteLine("\n--------------------------------");
                 Console.WriteLine("         PAYPAL PAYMENT         ");
                 Console.WriteLine("--------------------------------");
-                Console.WriteLine("Please enter your bank number (4 digits): ");
+                Console.WriteLine("To go through with the payment, please enter 4 digits of your bank number:");
+                Console.WriteLine("To return to the main menu, enter '0'.");
                 bank = Console.ReadLine()!;
-
+                if (bank! == "0")
+                {
+                    Menu.MainMenu();
+                }
                 if (bank!.Length == 4)
                 {
                     if (int.TryParse(bank, out int bankNumber))

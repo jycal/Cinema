@@ -445,6 +445,8 @@ public static class Menu
     }
     public static void ViewAllMovies()
     {
+        ReservationsLogic reservation = new ReservationsLogic();
+
         Console.WriteLine("====================================");
         Console.WriteLine("|                                  |");
         Console.WriteLine("|          View all movies         |");
@@ -455,7 +457,8 @@ public static class Menu
         Console.WriteLine("1. View all movies");
         Console.WriteLine("2. View all movies sorted by title");
         Console.WriteLine("3. Order ticket");
-        Console.WriteLine("4. Go back to movie menu");
+        Console.WriteLine("4. Cancel reservation");
+        Console.WriteLine("5. Go back to movie menu");
         Console.WriteLine();
         Console.Write("Enter your choice: ");
         string input = Console.ReadLine()!;
@@ -484,6 +487,12 @@ public static class Menu
             ViewAllMovies();
         }
         else if (input == "4")
+        {
+            Console.WriteLine("What is your email?");
+            string? email = Console.ReadLine();
+            reservation.DeleteReservation(email);
+        }
+        else if (input == "5")
         {
             MovieMenu();
         }
