@@ -79,16 +79,16 @@ class ReservationsLogic
                 int TotalAmount = reservation.TotalAmount;
                 Console.ForegroundColor = ConsoleColor.Magenta;
                 string Overview = $@"
-============================================
+==================================================
 |            CURRENT Reservation OVERVIEW        |
-============================================
-| Movie: {Movie}|
-| Full Name: {FullName}|
-| Email: {Email}|
-| Ticket Amount: {TicketAmount}|
-| Seats: {Seats}|
-| Total Money Amount: {TotalAmount}|
-============================================";
+==================================================
+  Movie: {Movie}
+  Full Name: {FullName}
+  Email: {Email}
+  Ticket Amount: {TicketAmount}
+  Seats: {Seats}
+  Total Money Amount: {TotalAmount}
+==================================================";
                 Console.WriteLine(Overview);
                 Console.ResetColor();
             }
