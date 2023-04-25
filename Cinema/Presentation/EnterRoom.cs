@@ -140,6 +140,7 @@ static class EnterRoom
         List<int> reservedSeats = room.Seats;
         List<int> vipSeats = room.VipSeats;
         List<int> disabledSeats = room.DisabledSeats;
+        List<int> comfortSeats = room.ComfortSeats;
         int amountOfSeats = room.MaxSeats;
         string lineSep = "\n---------------------------------------------------------------------------------------------------------------------------------------";
         Console.ForegroundColor = ConsoleColor.Yellow;
@@ -148,10 +149,12 @@ static class EnterRoom
         Console.WriteLine("■: Reserved seat");
         Console.ForegroundColor = ConsoleColor.Red;
         Console.WriteLine("♥: VIP seat");
-        Console.ForegroundColor = ConsoleColor.Green;
+        Console.ForegroundColor = ConsoleColor.DarkRed;
+        Console.WriteLine("♥: Comfort seat");
+        Console.ForegroundColor = ConsoleColor.Blue;
         Console.WriteLine("▲: Disability seat");
         Console.ForegroundColor = ConsoleColor.White;
-        Console.WriteLine("                                                            Screen");
+        Console.WriteLine("                                                                Screen");
 
         double row = 1;
         // double plus;
@@ -189,11 +192,16 @@ static class EnterRoom
                     char vipSeat = '♥';
                     Console.Write($"{i,5} {vipSeat}");
                 }
+                else if (comfortSeats.Contains(i))
+                {
+                    char comfortSeat = '♥';
+                    // Console.ForegroundColor = ConsoleColor.DarkYellow;
+                    Console.Write($"{i,5} {comfortSeat}");
+                }
                 else if (disabledSeats.Contains(i))
                 {
                     // disability seats = green
                     char disabilitySeat = '▲';
-                    Console.ForegroundColor = ConsoleColor.Green;
                     Console.Write($"{i,5} {disabilitySeat}");
                 }
                 else
@@ -210,6 +218,19 @@ static class EnterRoom
                     Console.ForegroundColor = ConsoleColor.Red;
                     char vipSeat = '♥';
                     Console.Write($"{i,5} {vipSeat}");
+                }
+                else if (comfortSeats.Contains(i))
+                {
+                    char comfortSeat = '♥';
+                    Console.ForegroundColor = ConsoleColor.DarkRed;
+                    Console.Write($"{i,5} {comfortSeat}");
+                }
+                else if (disabledSeats.Contains(i))
+                {
+                    // disability seats = green
+                    char disabilitySeat = '▲';
+                    Console.ForegroundColor = ConsoleColor.Blue;
+                    Console.Write($"{i,5} {disabilitySeat}");
                 }
                 else
                 { Console.Write($"{i,5} {unreservedSeat}"); }
