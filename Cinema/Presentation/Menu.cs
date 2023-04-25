@@ -114,6 +114,7 @@ public static class Menu
                 loginSuccessful = true;
                 Console.WriteLine("Press any key to continue...");
                 Console.ReadKey();
+                Console.Clear();
                 Menu.MainMenu();
             }
             else
@@ -490,9 +491,9 @@ public static class Menu
         {
             Console.WriteLine("What is your email?");
             string? email = Console.ReadLine();
-            logic.DeleteReservation(email);
+            logic.DeleteReservation(email!);
             Console.WriteLine("Reservation has been cancelled.");
-            MainMenu();
+            ViewAllMovies();
         }
         else if (input == "5")
         {
@@ -580,7 +581,7 @@ public static class Menu
         string description = Console.ReadLine()!;
         Console.Write("Enter the duration of the movie: ");
         int duration = Convert.ToInt32(Console.ReadLine()!);
-        Console.Write("Enter the genre genre of the movie: ");
+        Console.Write("Enter the genre of the movie: ");
         List<string> genres = new List<string>();
         string genre = Console.ReadLine()!;
         genres.Add(genre);

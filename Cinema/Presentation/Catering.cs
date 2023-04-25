@@ -9,9 +9,15 @@ public static class Catering
 ============================================
 |                   MENU                   |
 ============================================
-{food.Name} x {food.Cost}
+
+  {food.Name} x {food.Cost}
+
 ============================================";
             Console.WriteLine(Overview);
+            Console.WriteLine();
+            Console.WriteLine("Press any key to continue...");
+            Console.ReadKey();
+            Console.Clear();
             Console.ResetColor();
         }
     }
