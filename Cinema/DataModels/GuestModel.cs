@@ -10,6 +10,9 @@ class GuestModel
     [JsonPropertyName("id")]
     public int Id { get; set; }
 
+    [JsonPropertyName("reservationCode")]
+    public string ReservationCode { get; set; }
+
     [JsonPropertyName("fullName")]
     public string FullName { get; set; }
 
@@ -30,9 +33,10 @@ class GuestModel
     [JsonPropertyName("totalAmount")]
     public int TotalAmount { get; set; }
 
-    public GuestModel(int id, string fullName, string email, string movie, int ticketAmount, int ticketTotal, List<int> seats, int totalAmount)
+    public GuestModel(int id, string reservationCode, string fullName, string email, string movie, int ticketAmount, int ticketTotal, List<int> seats, int totalAmount)
     {
         Id = id;
+        ReservationCode = reservationCode;
         FullName = fullName;
         Email = email;
         Movie = movie;

@@ -1,6 +1,7 @@
 [
   {
     "id": 1,
+    "reservationCode": "H504JPI",
     "fullName": "megan",
     "email": "meganpieters3@gmail.com",
     "movie": "Creed III",
@@ -11,5 +12,70 @@
       95
     ],
     "totalAmount": 1
+  },
+  {
+    "id": 2,
+    "reservationCode": "H504JPI",
+    "fullName": "megan p",
+    "email": "meganpieters3@gmail.com",
+    "movie": "65",
+    "ticketAmount": 1,
+    "ticketTotal": 10,
+    "seats": [
+      77
+    ],
+    "totalAmount": 10
+  },
+  {
+    "id": 3,
+    "reservationCode": "AAR9HUA",
+    "fullName": "megan pieters",
+    "email": "meganpieters3@gmail.com",
+    "movie": "Scream VI",
+    "ticketAmount": 1,
+    "ticketTotal": 10,
+    "seats": [
+      92
+    ],
+    "totalAmount": 10
+  },
+  {
+    "id": 4,
+    "reservationCode": "91ZCYG1",
+    "fullName": "megan",
+    "email": "meganpieters3@gmail.com",
+    "movie": "Ant-Man and the Wasp: Quantumania",
+    "ticketAmount": 1,
+    "ticketTotal": 10,
+    "seats": [
+      111
+    ],
+    "totalAmount": 10
+  },
+  {
+    "id": 5,
+    "reservationCode": "4564GO4",
+    "fullName": "megan",
+    "email": "meganpieters3@gmail.com",
+    "movie": "Missing",
+    "ticketAmount": 1,
+    "ticketTotal": 10,
+    "seats": [
+      20
+    ],
+    "totalAmount": 10
+  },
+  {
+    "id": 6,
+    "reservationCode": "9R9YYR1",
+    "fullName": "maye p",
+    "email": "meganpieters3@gmail.com",
+    "movie": "Missing",
+    "ticketAmount": 1,
+    "ticketTotal": 10,
+    "seats": [
+      19
+    ],
+    "totalAmount": 10
   }
 ]

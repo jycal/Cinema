@@ -10,14 +10,18 @@ using MimeKit;
 public class MailConformation
 {
     static private ReservationsLogic _reservationsLogic = new();
+
+    static private GuestLogic _guestLogic = new();
     static private ReservationModel? reservation;
 
     static private string? EmailReciever;
 
-    public MailConformation(string emailReciever)
+    public MailConformation(string emailReciever, bool account)
     {
         EmailReciever = emailReciever;
-        reservation = _reservationsLogic.GetByEmail(EmailReciever);
+        if (account == true)
+        { reservation = _reservationsLogic._reservations!.Last(); }
+        else { reservation = _guestLogic._guests!.Last(); }
     }
     public void SendMailConformation()
     {
@@ -27,7 +31,7 @@ public class MailConformation
         email.From.Add(new MailboxAddress("Starlight Cinema", "cinemastarlightinfo@gmail.com"));
         email.To.Add(new MailboxAddress("Receiver Name", EmailReciever));
 
-        email.Subject = $"Order conformation {reservation!.Movie} - Reference: {reservation.Id}";
+        email.Subject = $"Order conformation {reservation!.Movie} - Reference: {reservation.ReservationCode}";
         // string Body = System.IO.File.ReadAllText(HttpContext.Current.Server.MapPath("~/test.html"));
         email.Body = new TextPart(MimeKit.Text.TextFormat.Html)
         {
@@ -71,7 +75,9 @@ public class MailConformation
         body = body.Replace("ticketTotal", Convert.ToString(reservation!.TicketTotal));
         body = body.Replace("totalAmount", Convert.ToString(reservation!.TotalAmount));
         body = body.Replace("firstName", Convert.ToString(reservation!.FullName));
+        body = body.Replace("reservationCode", reservation!.ReservationCode);
         body = body.Replace("customerId", Convert.ToString(reservation!.Id));
+
         return body;
 
     }

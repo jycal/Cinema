@@ -289,11 +289,13 @@ static class EnterRoom
                     FilmModel film = _filmsLogic.GetById(id);
                     string title = film.Title;
                     // guest naar json sturen
-                    GuestModel guest = new(1, fullName, email, title, 1, 10, seatList, 10);
+                    string reservationCode = ReservationCodeMaker();
+                    ReservationModel guest = new(1, reservationCode, fullName, email, title, 1, 10, seatList, 10);
                     GuestLogic logic = new();
                     logic.UpdateList(guest);
                     // mail verzenden
-                    MailConformation mailConformation = new MailConformation(email);
+                    bool account = false;
+                    MailConformation mailConformation = new MailConformation(email, account);
                     mailConformation.SendMailConformation();
                 }
 
@@ -319,10 +321,11 @@ static class EnterRoom
                     string title = film.Title;
                     List<int> seatList = new();
                     seatList.Add(choice);
-                    ReservationModel reservation = new(1, _account.FullName, _account.EmailAddress, title, 1, 10, seatList, 1);
+                    string reservationCode = ReservationCodeMaker();
+                    ReservationModel reservation = new(1, reservationCode, _account.FullName, _account.EmailAddress, title, 1, 10, seatList, 1);
                     _reservationsLogic.UpdateList(reservation);
-
-                    MailConformation mailConformation = new MailConformation(_account.EmailAddress);
+                    bool account = true;
+                    MailConformation mailConformation = new MailConformation(_account.EmailAddress, account);
                     mailConformation.SendMailConformation();
                 }
                 Console.ForegroundColor = ConsoleColor.Green;
@@ -330,5 +333,14 @@ static class EnterRoom
                 Console.ForegroundColor = ConsoleColor.White;
             }
         }
+    }
+
+    public static string ReservationCodeMaker()
+    {
+        Random random = new Random();
+        const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        int length = 7;
+        return new string(Enumerable.Repeat(chars, length)
+            .Select(s => s[random.Next(s.Length)]).ToArray());
     }
 }
