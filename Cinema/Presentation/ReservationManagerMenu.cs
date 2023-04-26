@@ -15,7 +15,8 @@ public class ReservationManagerMenu
             Console.WriteLine("Enter 2 to look for specific reservation");
             Console.WriteLine("Enter 3 to delete reservation");
             // Console.WriteLine("Enter 4 to change reservation");
-            Console.WriteLine("Enter 4 to go back to main menu");
+            Console.WriteLine("Enter 4 to change food prices");
+            Console.WriteLine("Enter 5 to go back to main menu");
 
             string choice = Console.ReadLine()!;
 
@@ -110,6 +111,10 @@ public class ReservationManagerMenu
                 //     Console.Clear();
                 //     break;
                 case "4":
+                    FoodsLogic foods = new FoodsLogic();
+                    foods.ChangePrice();
+                    break;
+                case "5":
                     Console.WriteLine("Going back to main menu");
                     Console.WriteLine("");
                     Console.WriteLine("Press any key to continue...");

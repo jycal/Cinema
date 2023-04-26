@@ -8,6 +8,7 @@ using System.Text.Json;
 class FoodsLogic
 {
     public List<FoodModel>? _foods;
+    private static AccountModel _account = null!;
 
     //Static properties are shared across all instances of the class
     //This can be used to get the current logged in account from anywhere in the program
@@ -47,6 +48,39 @@ class FoodsLogic
     public FoodModel GetByPrice(double price)
     {
         return _foods!.Find(i => i.Cost == price)!;
+    }
+
+    public void ChangePrice()
+    {
+            System.Console.WriteLine("Do you want to change the food prices? (Y/N)");
+            string firstanswer = Console.ReadLine()!;
+            if (firstanswer.ToUpper() == "Y")
+            {
+                System.Console.WriteLine("Which food price do you want to change?");
+                string secondanswer = Console.ReadLine()!;
+                foreach (FoodModel item in _foods)
+                {
+                    if (item.Name == secondanswer)
+                    {
+                        System.Console.WriteLine("Enter new price:");
+                        double thirdanswer = Convert.ToDouble(Console.ReadLine())!;
+                        foreach (var items in _foods)
+                        {
+                            items.Cost = thirdanswer;
+                        }
+                        // int index = _foods!.FindIndex(s => s.Name == secondanswer);
+                        // if (index != -1)
+                        // {
+                        //     //update existing model
+                        //     _foods[index].Cost = thirdanswer;
+                        // }
+                    }
+                }
+            }
+            if (firstanswer.ToUpper() == "N")
+            {
+                System.Console.WriteLine("No changes will be made.....");
+            }
     }
 
 }

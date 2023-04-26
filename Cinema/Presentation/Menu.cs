@@ -1,3 +1,5 @@
+using System.Security;
+
 public static class Menu
 {
     private static AccountsLogic _accountsLogic = new AccountsLogic();
@@ -7,11 +9,14 @@ public static class Menu
     // Intro screen
     public static void Start()
     {
-        Console.WriteLine("====================================");
-        Console.WriteLine("|                                  |");
-        Console.WriteLine("|   Welcome to Star Light Cinema   |");
-        Console.WriteLine("|                                  |");
-        Console.WriteLine("====================================");
+        Console.ForegroundColor = ConsoleColor.Green;
+        Console.Write(@"
+ ____  ____  __   ____  __    __  ___  _  _  ____     ___  __  __ _  ____  _  _   __
+/ ___)(_  _)/ _\ (  _ \(  )  (  )/ __)/ )( \(_  _)   / __)(  )(  ( \(  __)( \/ ) / _\
+\___ \  )( /    \ )   // (_/\ )(( (_ \) __ (  )(    ( (__  )( /    / ) _) / \/ \/    \
+(____/ (__)\_/\_/(__\_)\____/(__)\___/\_)(_/ (__)    \___)(__)\_)__)(____)\_)(_/\_/\_/
+");
+Console.ResetColor();
         Console.WriteLine();
         Console.WriteLine("Press any key to continue...");
         Console.ReadKey();
@@ -93,7 +98,9 @@ public static class Menu
             }
             else if (correctEmail.Password != password)
             {
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Wrong password! Please try again...");
+                Console.ResetColor();
                 Console.Write("Password: ");
                 string Password = Console.ReadLine()!;
                 password = Password;
@@ -101,7 +108,9 @@ public static class Menu
             if (password == correctEmail.Password)
             {
                 Console.WriteLine();
+                Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine("Right password!! You did it!");
+                Console.ResetColor();
                 email = email;
                 password = password;
             }
@@ -126,22 +135,73 @@ public static class Menu
     }
     public static void MemberRegister()
     {
+        Console.ForegroundColor = ConsoleColor.Yellow;
         Console.WriteLine("====================================");
         Console.WriteLine("|                                  |");
         Console.WriteLine("|   Welcome to the register page   |");
         Console.WriteLine("|                                  |");
         Console.WriteLine("====================================");
+        Console.ResetColor();
         Console.WriteLine();
-        Console.WriteLine("Please enter your email address");
+        Console.WriteLine("Email address: ");
+        Console.ForegroundColor = ConsoleColor.Yellow;
+        Console.WriteLine("-----------------------------");
+        Console.WriteLine("|  Email must contain a @   |");
+        Console.WriteLine("-----------------------------");
+        Console.ResetColor();
         string email = Console.ReadLine()!;
+        int EmailAttempts = 0;
+        while (_accountsLogic.EmailFormatCheck(email) == false && EmailAttempts < 3)
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("Wrong format! Please enter Email in the correct format...");
+            Console.ResetColor();
+            Console.Write("Email address: ");
+            string Email = Console.ReadLine()!;
+            email = Email;
+            EmailAttempts += 1;
+        }
+        if (EmailAttempts > 3)
+        {
+            Console.Clear();
+        }
         Console.WriteLine("Please enter your password");
-        string password = Console.ReadLine()!;
+        Console.ForegroundColor = ConsoleColor.Yellow;
+        Console.WriteLine("------------------------------------------------------------------------------------------");
+        Console.WriteLine(@"|  Must contain at least one special character(%!@#$%^&*()?/>.<,:;'\|}]{[_~`+=-         |");
+        Console.WriteLine("|   Must be longer than 6 characters                                                     |");
+        Console.WriteLine("|   Must contain at least one number                                                     |");
+        Console.WriteLine("|   One upper case                                                                       |");
+        Console.WriteLine("|   Atleast one lower case                                                               |");
+        Console.WriteLine("------------------------------------------------------------------------------------------");
+        Console.ResetColor();
+        SecureString pass = _accountsLogic.HashedPass();
+        string password = new System.Net.NetworkCredential(string.Empty, pass).Password;
+        int PasswordAttempts = 0;
+        while (_accountsLogic.PasswordFormatCheck(password) == false && PasswordAttempts < 3)
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("Wrong format! Please enter Password in the correct format...");
+            Console.ResetColor();
+            SecureString passs = _accountsLogic.HashedPass();
+            string Password = new System.Net.NetworkCredential(string.Empty, pass).Password;
+            password = Password;
+            PasswordAttempts += 1;
+        }
+        if (PasswordAttempts > 3)
+        {
+            Console.Clear();
+        }
+        Console.WriteLine();
         Console.WriteLine("Please enter your fullname");
         string firstName = Console.ReadLine()!;
         Console.WriteLine("Please enter your phone number");
         string phoneNumber = Console.ReadLine()!;
-        Console.Clear();
-
+        Console.ForegroundColor = ConsoleColor.Yellow;
+        Console.WriteLine($"Congratulations!!\nYour account has been made!\nEnjoy your time at Starlight Cinema ✰⍟✰\n");
+        Console.ResetColor();
+        System.Console.WriteLine();
+        System.Console.WriteLine();
         int id = 0;
         while (true)
         {
@@ -158,6 +218,7 @@ public static class Menu
         List<int> tickets = new List<int>();
         AccountModel account = new AccountModel(id, 1, email, password, firstName, tickets);
         _accountsLogic.UpdateList(account);
+        // Console.Clear();
         PreLogin();
     }
 
