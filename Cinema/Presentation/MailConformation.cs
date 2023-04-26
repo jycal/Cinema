@@ -9,19 +9,21 @@ using MimeKit;
 
 public class MailConformation
 {
-    static private ReservationsLogic _reservationsLogic = new();
+    static private ReservationsLogic? _reservationsLogic;
 
-    static private GuestLogic _guestLogic = new();
+    static private GuestLogic? _guestLogic;
     static private ReservationModel? reservation;
 
     static private string? EmailReciever;
 
     public MailConformation(string emailReciever, bool account)
     {
+        _guestLogic = new GuestLogic();
+        _reservationsLogic = new ReservationsLogic();
         EmailReciever = emailReciever;
         if (account == true)
-        { reservation = _reservationsLogic._reservations!.Last(); }
-        else { reservation = _guestLogic._guests!.Last(); }
+        { reservation = _reservationsLogic!._reservations!.Last(); }
+        else { reservation = _guestLogic!._guests!.Last(); }
     }
     public void SendMailConformation()
     {
@@ -78,12 +80,15 @@ public class MailConformation
         body = body.Replace("reservationCode", reservation!.ReservationCode);
         body = body.Replace("customerId", Convert.ToString(reservation!.Id));
         body = body.Replace("{Image}", Convert.ToString(image));
+        body = body.Replace("currentDate", Convert.ToString(DateTime.Today.ToString("MM/dd/yyyy")));
+        body = body.Replace("roomNumber", Convert.ToString(reservation.RoomNumber));
         return body;
 
     }
 
     public static string GetPicture(string movietitle)
     {
+        // dit gaat later met dict gwn 
         string image = "";
         switch (movietitle)
         {

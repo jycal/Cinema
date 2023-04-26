@@ -290,7 +290,7 @@ static class EnterRoom
                     string title = film.Title;
                     // guest naar json sturen
                     string reservationCode = ReservationCodeMaker();
-                    ReservationModel guest = new(1, reservationCode, fullName, email, title, 1, 10, seatList, 10);
+                    ReservationModel guest = new(1, reservationCode, fullName, email, title, 1, 10, room.Id, seatList, 10);
                     GuestLogic logic = new();
                     logic.UpdateList(guest);
                     // mail verzenden
@@ -322,7 +322,7 @@ static class EnterRoom
                     List<int> seatList = new();
                     seatList.Add(choice);
                     string reservationCode = ReservationCodeMaker();
-                    ReservationModel reservation = new(1, reservationCode, _account.FullName, _account.EmailAddress, title, 1, 10, seatList, 1);
+                    ReservationModel reservation = new(1, reservationCode, _account.FullName, _account.EmailAddress, title, 1, 10, room.Id, seatList, 1);
                     _reservationsLogic.UpdateList(reservation);
                     bool account = true;
                     MailConformation mailConformation = new MailConformation(_account.EmailAddress, account);

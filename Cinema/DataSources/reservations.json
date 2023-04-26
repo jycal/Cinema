@@ -1,11 +1,13 @@
 [
   {
     "id": 1,
+    "reservationCode": null,
     "fullName": "Jack Black",
     "email": "jack@black.com",
     "movie": "Lorem Ipsum",
     "ticketAmount": 2,
     "ticketTotal": 10,
+    "roomNumber": 0,
     "seats": [
       3,
       4
@@ -14,11 +16,13 @@
   },
   {
     "id": 2,
+    "reservationCode": null,
     "fullName": "jacky",
     "email": "jack@black.com",
     "movie": "lorens",
     "ticketAmount": 2,
     "ticketTotal": 10,
+    "roomNumber": 0,
     "seats": [
       3,
       4
@@ -27,11 +31,13 @@
   },
   {
     "id": 5,
+    "reservationCode": null,
     "fullName": "Nikola Tesla",
     "email": "n@b.c",
     "movie": "The Super Mario Bros. Movie (OV)",
     "ticketAmount": 1,
     "ticketTotal": 10,
+    "roomNumber": 0,
     "seats": [
       109
     ],
@@ -39,11 +45,13 @@
   },
   {
     "id": 6,
+    "reservationCode": null,
     "fullName": "megan",
     "email": "meganpieters3@gmail.com",
     "movie": "Creed III",
     "ticketAmount": 1,
     "ticketTotal": 10,
+    "roomNumber": 0,
     "seats": [
       93
     ],
@@ -51,13 +59,71 @@
   },
   {
     "id": 7,
+    "reservationCode": null,
     "fullName": "megan",
     "email": "meganpieters3@gmail.com",
     "movie": "Scream VI",
     "ticketAmount": 1,
     "ticketTotal": 10,
+    "roomNumber": 0,
     "seats": [
       3
+    ],
+    "totalAmount": 1
+  },
+  {
+    "id": 8,
+    "reservationCode": "3W21S12",
+    "fullName": "megan",
+    "email": "meganpieters3@gmail.com",
+    "movie": "Dungeons \u0026 Dragons: Honor Among Thieves",
+    "ticketAmount": 1,
+    "ticketTotal": 10,
+    "roomNumber": 3,
+    "seats": [
+      410
+    ],
+    "totalAmount": 1
+  },
+  {
+    "id": 9,
+    "reservationCode": "LTG82W8",
+    "fullName": "megan",
+    "email": "meganpieters3@gmail.com",
+    "movie": "Mummies(NL)",
+    "ticketAmount": 1,
+    "ticketTotal": 10,
+    "roomNumber": 2,
+    "seats": [
+      22
+    ],
+    "totalAmount": 1
+  },
+  {
+    "id": 10,
+    "reservationCode": "E40RCTX",
+    "fullName": "megan",
+    "email": "meganpieters3@gmail.com",
+    "movie": "Dungeons \u0026 Dragons: Honor Among Thieves",
+    "ticketAmount": 1,
+    "ticketTotal": 10,
+    "roomNumber": 2,
+    "seats": [
+      26
+    ],
+    "totalAmount": 1
+  },
+  {
+    "id": 11,
+    "reservationCode": "ZEJV3M6",
+    "fullName": "megan",
+    "email": "meganpieters3@gmail.com",
+    "movie": "Scream VI",
+    "ticketAmount": 1,
+    "ticketTotal": 10,
+    "roomNumber": 3,
+    "seats": [
+      33
     ],
     "totalAmount": 1
   }
