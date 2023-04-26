@@ -258,46 +258,89 @@ static class EnterRoom
             }
             else
             {
+
                 if (_account == null)
                 {
-                    // guest
+                    // gegevens vragen
                     Console.Write("Enter email: ");
                     string email = Console.ReadLine()!;
+                    Console.Write("Enter full name: ");
+                    string fullName = Console.ReadLine()!;
+                    // payment 
                     Console.WriteLine("Press enter to continue...");
                     Console.ReadLine();
                     Console.Clear();
+                    Console.WriteLine("\n--------------------------------");
+                    Console.WriteLine("         PAYMENT OPTIONS         ");
+                    Console.WriteLine("--------------------------------");
+                    Console.WriteLine("1. Paypal");
+                    Console.WriteLine("2. Ideal");
+                    Console.WriteLine("--------------------------------");
+                    Console.Write("Enter your choice of payment: ");
+                    string? answer2 = Console.ReadLine();
+                    Console.Clear();
+                    Payment.PaymentWithPayPal(answer2!);
+                    Payment.PaymentWithIdeal(answer2!);
+                    room.Seats.Add(choice);
+                    _roomsLogic.UpdateList(room);
+                    // info naar guest json sturen
                     List<int> seatList = new();
                     seatList.Add(choice);
-                    GuestModel guest = new(1, email, seatList);
+                    FilmModel film = _filmsLogic.GetById(id);
+                    string title = film.Title;
+                    // guest naar json sturen
+                    string reservationCode = ReservationCodeMaker();
+                    ReservationModel guest = new(1, reservationCode, fullName, email, title, 1, 10, room.Id, seatList, 10);
                     GuestLogic logic = new();
                     logic.UpdateList(guest);
+                    // mail verzenden
+                    bool account = false;
+                    MailConformation mailConformation = new MailConformation(email, account);
+                    mailConformation.SendMailConformation();
                 }
-                Console.WriteLine("\n--------------------------------");
-                Console.WriteLine("         PAYMENT OPTIONS         ");
-                Console.WriteLine("--------------------------------");
-                Console.WriteLine("1. Paypal");
-                Console.WriteLine("2. Ideal");
-                Console.WriteLine("--------------------------------");
-                Console.Write("Enter your choice of payment: ");
-                string? answer = Console.ReadLine();
-                Console.Clear();
-                Payment.PaymentWithPayPal(answer!);
-                Payment.PaymentWithIdeal(answer!);
 
-                System.Console.WriteLine("Your reservation has been confirmed and is now guaranteed.");
-                room.Seats.Add(choice);
-                _roomsLogic.UpdateList(room);
-                if (_account != null)
+                else if (_account != null)
                 {
+                    Console.WriteLine("\n--------------------------------");
+                    Console.WriteLine("         PAYMENT OPTIONS         ");
+                    Console.WriteLine("--------------------------------");
+                    Console.WriteLine("1. Paypal");
+                    Console.WriteLine("2. Ideal");
+                    Console.WriteLine("--------------------------------");
+                    Console.Write("Enter your choice of payment: ");
+                    string? answer = Console.ReadLine();
+                    Console.Clear();
+                    Payment.PaymentWithPayPal(answer!);
+                    Payment.PaymentWithIdeal(answer!);
+
+
+                    room.Seats.Add(choice);
+                    _roomsLogic.UpdateList(room);
+                    // film moet nog aan room gekoppeld worden dus nu title handmatig
                     FilmModel film = _filmsLogic.GetById(id);
                     string title = film.Title;
                     List<int> seatList = new();
                     seatList.Add(choice);
-                    ReservationModel reservation = new(1, _account.FullName, _account.EmailAddress, title, 1, seatList, 1);
+                    string reservationCode = ReservationCodeMaker();
+                    ReservationModel reservation = new(1, reservationCode, _account.FullName, _account.EmailAddress, title, 1, 10, room.Id, seatList, 1);
                     _reservationsLogic.UpdateList(reservation);
+                    bool account = true;
+                    MailConformation mailConformation = new MailConformation(_account.EmailAddress, account);
+                    mailConformation.SendMailConformation();
                 }
-                Console.WriteLine("Reservation succeeded");
+                Console.ForegroundColor = ConsoleColor.Green;
+                System.Console.WriteLine("Your reservation has been confirmed and is now guaranteed.");
+                Console.ForegroundColor = ConsoleColor.White;
             }
         }
+    }
+
+    public static string ReservationCodeMaker()
+    {
+        Random random = new Random();
+        const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        int length = 7;
+        return new string(Enumerable.Repeat(chars, length)
+            .Select(s => s[random.Next(s.Length)]).ToArray());
     }
 }

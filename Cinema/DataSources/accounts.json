@@ -30,5 +30,13 @@
     "password": "xyz",
     "fullName": "Bob Com",
     "ticketList": []
+  },
+  {
+    "id": 4,
+    "type": 1,
+    "emailAddress": "meganpieters3@gmail.com",
+    "password": "may",
+    "fullName": "megan",
+    "ticketList": []
   }
 ]

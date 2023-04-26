@@ -10,14 +10,14 @@ static class GuestAccess
     static string path = System.IO.Path.GetFullPath(System.IO.Path.Combine(Environment.CurrentDirectory, @"DataSources/Guest.json"));
 
 
-    public static List<GuestModel> LoadAll()
+    public static List<ReservationModel> LoadAll()
     {
         string json = File.ReadAllText(path);
-        return JsonSerializer.Deserialize<List<GuestModel>>(json)!;
+        return JsonSerializer.Deserialize<List<ReservationModel>>(json)!;
     }
 
 
-    public static void WriteAll(List<GuestModel> emails)
+    public static void WriteAll(List<ReservationModel> emails)
     {
         var options = new JsonSerializerOptions { WriteIndented = true };
         string json = JsonSerializer.Serialize(emails, options);

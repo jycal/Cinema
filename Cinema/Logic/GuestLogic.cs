@@ -6,19 +6,19 @@ using System.Threading.Tasks;
 
 class GuestLogic
 {
-    private List<GuestModel>? _guests;
+    public List<ReservationModel>? _guests;
 
     //Static properties are shared across all instances of the class
     //This can be used to get the current logged in account from anywhere in the program
     //private set, so this can only be set by the class itself
-    static public GuestModel? CurrentReservation { get; private set; }
+    static public ReservationModel? CurrentReservation { get; private set; }
 
     public GuestLogic()
     {
         _guests = GuestAccess.LoadAll();
     }
 
-    public void UpdateList(GuestModel guest)
+    public void UpdateList(ReservationModel guest)
     {
         // create id
         // System.Console.WriteLine(film.Id);
@@ -63,7 +63,7 @@ class GuestLogic
 
     }
 
-    public GuestModel GetByEmail(string email)
+    public ReservationModel GetByEmail(string email)
     {
         return _guests!.Find(i => i.Email == email)!;
     }
