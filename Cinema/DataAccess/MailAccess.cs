@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 public static class MailAccess
 {
-    static string path = System.IO.Path.GetFullPath(System.IO.Path.Combine(Environment.CurrentDirectory, @"DataSources/test.html"));
+    static string path = System.IO.Path.GetFullPath(System.IO.Path.Combine(Environment.CurrentDirectory, @"DataSources/mail.html"));
 
 
     public static string LoadAll()

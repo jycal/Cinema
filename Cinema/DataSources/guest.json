@@ -77,5 +77,135 @@
       19
     ],
     "totalAmount": 10
+  },
+  {
+    "id": 7,
+    "reservationCode": "5K91RKA",
+    "fullName": "megan p",
+    "email": "meganpieters3@gmail.com",
+    "movie": "Magic Mike\u0027s Last Dance",
+    "ticketAmount": 1,
+    "ticketTotal": 10,
+    "seats": [
+      1
+    ],
+    "totalAmount": 10
+  },
+  {
+    "id": 8,
+    "reservationCode": "OVLNQ28",
+    "fullName": "megan p",
+    "email": "meganpieters3@gmail.com",
+    "movie": "The Super Mario Bros. Movie (OV)",
+    "ticketAmount": 1,
+    "ticketTotal": 10,
+    "seats": [
+      3
+    ],
+    "totalAmount": 10
+  },
+  {
+    "id": 9,
+    "reservationCode": "6OMI6M3",
+    "fullName": "kelly boy",
+    "email": "jyczhangnl@gmail.com",
+    "movie": "The Super Mario Bros. Movie (OV)",
+    "ticketAmount": 1,
+    "ticketTotal": 10,
+    "seats": [
+      33
+    ],
+    "totalAmount": 10
+  },
+  {
+    "id": 10,
+    "reservationCode": "15UJWB7",
+    "fullName": "julina mercera",
+    "email": "PizzaIsLikeBae@gmail.com",
+    "movie": "All Inclusive",
+    "ticketAmount": 1,
+    "ticketTotal": 10,
+    "seats": [
+      78
+    ],
+    "totalAmount": 10
+  },
+  {
+    "id": 11,
+    "reservationCode": "BAEG8TS",
+    "fullName": "aryan slay",
+    "email": "AryanJD2005@gmail.com",
+    "movie": "The Super Mario Bros. Movie (OV)",
+    "ticketAmount": 1,
+    "ticketTotal": 10,
+    "seats": [
+      22
+    ],
+    "totalAmount": 10
+  },
+  {
+    "id": 12,
+    "reservationCode": "WGITWK8",
+    "fullName": "thomas pieters",
+    "email": "t.molendijk@outlook.com",
+    "movie": "The Super Mario Bros. Movie (OV)",
+    "ticketAmount": 1,
+    "ticketTotal": 10,
+    "seats": [
+      34
+    ],
+    "totalAmount": 10
+  },
+  {
+    "id": 13,
+    "reservationCode": "5PZ6DAQ",
+    "fullName": "michael pieters",
+    "email": "m.pieters7@upcmail.nl",
+    "movie": "The Super Mario Bros. Movie (OV)",
+    "ticketAmount": 1,
+    "ticketTotal": 10,
+    "seats": [
+      80
+    ],
+    "totalAmount": 10
+  },
+  {
+    "id": 14,
+    "reservationCode": "5RJGA9D",
+    "fullName": "michael pieters",
+    "email": "m.pieters7@upcmail.nl",
+    "movie": "Shazam! Fury of the Gods",
+    "ticketAmount": 1,
+    "ticketTotal": 10,
+    "seats": [
+      48
+    ],
+    "totalAmount": 10
+  },
+  {
+    "id": 15,
+    "reservationCode": "ZHYNI24",
+    "fullName": "may p",
+    "email": "meganpieters3@gmail.com",
+    "movie": "Ant-Man and the Wasp: Quantumania",
+    "ticketAmount": 1,
+    "ticketTotal": 10,
+    "seats": [
+      47
+    ],
+    "totalAmount": 10
+  },
+  {
+    "id": 16,
+    "reservationCode": "O669Y6Q",
+    "fullName": "may p",
+    "email": "meganpieters3@gmail.com",
+    "movie": "Ant-Man and the Wasp: Quantumania",
+    "ticketAmount": 1,
+    "ticketTotal": 10,
+    "seats": [
+      108
+    ],
+    "totalAmount": 10
   }
 ]
