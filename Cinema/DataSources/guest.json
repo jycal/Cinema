@@ -1,1 +1,15 @@
-[]
+[
+  {
+    "id": 1,
+    "fullName": "megan",
+    "email": "meganpieters3@gmail.com",
+    "movie": "Creed III",
+    "ticketAmount": 1,
+    "ticketTotal": 10,
+    "seats": [
+      93,
+      95
+    ],
+    "totalAmount": 1
+  }
+]

@@ -5,6 +5,7 @@
     "email": "jack@black.com",
     "movie": "Lorem Ipsum",
     "ticketAmount": 2,
+    "ticketTotal": 10,
     "seats": [
       3,
       4
@@ -17,6 +18,7 @@
     "email": "jack@black.com",
     "movie": "lorens",
     "ticketAmount": 2,
+    "ticketTotal": 10,
     "seats": [
       3,
       4
@@ -29,8 +31,33 @@
     "email": "n@b.c",
     "movie": "The Super Mario Bros. Movie (OV)",
     "ticketAmount": 1,
+    "ticketTotal": 10,
     "seats": [
       109
+    ],
+    "totalAmount": 1
+  },
+  {
+    "id": 6,
+    "fullName": "megan",
+    "email": "meganpieters3@gmail.com",
+    "movie": "Creed III",
+    "ticketAmount": 1,
+    "ticketTotal": 10,
+    "seats": [
+      93
+    ],
+    "totalAmount": 1
+  },
+  {
+    "id": 7,
+    "fullName": "megan",
+    "email": "meganpieters3@gmail.com",
+    "movie": "Scream VI",
+    "ticketAmount": 1,
+    "ticketTotal": 10,
+    "seats": [
+      3
     ],
     "totalAmount": 1
   }
