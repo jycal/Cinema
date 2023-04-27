@@ -80,7 +80,7 @@ public class MailConformation
         body = body.Replace("reservationCode", reservation!.ReservationCode);
         body = body.Replace("customerId", Convert.ToString(reservation!.Id));
         body = body.Replace("{Image}", Convert.ToString(image));
-        body = body.Replace("currentDate", Convert.ToString(DateTime.Today.ToString("MM/dd/yyyy")));
+        body = body.Replace("currentDate", DateTime.Today.ToString("dd/MM/yyyy"));
         body = body.Replace("roomNumber", Convert.ToString(reservation.RoomNumber));
         return body;
 
@@ -88,55 +88,11 @@ public class MailConformation
 
     public static string GetPicture(string movietitle)
     {
-        // dit gaat later met dict gwn 
-        string image = "";
-        switch (movietitle)
-        {
-            case "Magic Mike's Last Dance":
-                image = "https://21818cdde6.imgdist.com/public/users/Integrators/BeeProAgency/981647_966306/Magic-Mike-s-Last-Dance_ps_1_jpg_sd-high_Copyright-2022-Warner-Bros-Entertainment-Inc-All-Rights-Reserved-Photo-Credit-Claudette-Barius.webp";
-                break;
-            case "Cocaine Bear":
-                image = "https://21818cdde6.imgdist.com/public/_thumbs/Integrators/BeeProAgency/981647_966306/cocaine_1.jpg_thumb.png?hash=1682510761536";
-                break;
-            case "Avatar: The Way of Water":
-                image = "https://21818cdde6.imgdist.com/public/_thumbs/Integrators/BeeProAgency/981647_966306/Afbeelding2vat.jpg_thumb.png?hash=1682510761536";
-                break;
-            case "Ant-Man and the Wasp: Quantumania":
-                image = "https://21818cdde6.imgdist.com/public/_thumbs/Integrators/BeeProAgency/981647_966306/ant.jpg_thumb.png?hash=1682510761536";
-                break;
-            case "Dungeons & Dragons: Honor Among Thieves":
-                image = "https://21818cdde6.imgdist.com/public/_thumbs/Integrators/BeeProAgency/981647_966306/dd.jpg_thumb.png?hash=1682510761536";
-                break;
-            case "Mummies(NL)":
-                image = "https://21818cdde6.imgdist.com/public/_thumbs/Integrators/BeeProAgency/981647_966306/mum.jpg_thumb.png?hash=1682510761536";
-                break;
-            case "Scream VI":
-                image = "https://21818cdde6.imgdist.com/public/_thumbs/Integrators/BeeProAgency/981647_966306/scream.jpg_thumb.png?hash=1682510761536";
-                break;
-            case "All Inclusive":
-                image = "https://21818cdde6.imgdist.com/public/_thumbs/Integrators/BeeProAgency/981647_966306/all%20inv.jpg_thumb.png?hash=1682510761536";
-                break;
-            case "The Super Mario Bros. Movie (OV)":
-                image = "https://21818cdde6.imgdist.com/public/_thumbs/Integrators/BeeProAgency/981647_966306/suoerrr.jpg_thumb.png?hash=1682510761536";
-                break;
-            case "Creed III":
-                image = "https://21818cdde6.imgdist.com/public/_thumbs/Integrators/BeeProAgency/981647_966306/creed.jpg_thumb.png?hash=1682510761536";
-                break;
-            case "Shazam! Fury of the Gods":
-                image = "https://21818cdde6.imgdist.com/public/_thumbs/Integrators/BeeProAgency/981647_966306/shazam.jpg_thumb.png?hash=1682510761536";
-                break;
-            case "65":
-                image = "https://21818cdde6.imgdist.com/public/_thumbs/Integrators/BeeProAgency/981647_966306/65.jpg_thumb.png?hash=1682510761536";
-                break;
-            case "John Wick 4":
-                image = "https://21818cdde6.imgdist.com/public/_thumbs/Integrators/BeeProAgency/981647_966306/john%20wick.webp_thumb.png?hash=1682510761536";
-                break;
-        }
-        return image;
+        //     
+        FilmsLogic filmLogic = new();
+        FilmModel film = filmLogic.GetByName(movietitle);
+        return film.ImageURL;
     }
-
-
-
 }
 
 

@@ -585,6 +585,9 @@ public static class Menu
         List<string> genres = new List<string>();
         string genre = Console.ReadLine()!;
         genres.Add(genre);
+        // image add
+        Console.Write("Enter the image url: ");
+        string imageURL = Console.ReadLine()!;
         Console.Clear();
 
         int id = 0;
@@ -600,7 +603,7 @@ public static class Menu
                 break;
             }
         }
-        FilmModel film = new FilmModel(id, title, description, duration, genres);
+        FilmModel film = new FilmModel(id, title, description, duration, genres, imageURL);
         _filmsLogic.UpdateList(film);
         MovieMenu();
     }

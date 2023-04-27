@@ -78,6 +78,11 @@ class FilmsLogic
         return _films.Find(i => i.Id == id)!;
     }
 
+    public FilmModel GetByName(string name)
+    {
+        return _films.Find(i => i.Title == name)!;
+    }
+
     // public AccountModel CheckLogin(string email, string password)
     // {
     //     if (email == null || password == null)
