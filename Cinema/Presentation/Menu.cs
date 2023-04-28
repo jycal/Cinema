@@ -6,7 +6,7 @@ public static class Menu
 
     private static ReservationsLogic _reservationLogic = new();
 
-    private static GuestLogic _guestLogic = new GuestLogic();
+    private static GuestLogic guest = new();
 
     // Intro screen
     public static void Start()
@@ -450,7 +450,7 @@ public static class Menu
     }
     public static void ViewAllMovies()
     {
-
+        GuestLogic logic = new GuestLogic();
 
         Console.WriteLine("====================================");
         Console.WriteLine("|                                  |");
@@ -498,12 +498,18 @@ public static class Menu
             if (_account != null)
             {
                 _reservationLogic.DeleteReservation(reservationCode!);
-                Console.WriteLine("Reservation has been cancelled.");
+
             }
-            else
+            else if (_account == null)
             {
-                _guestLogic.DeleteReservation(reservationCode!);
+                guest.DeleteReservation(reservationCode!);
+                // Console.Clear();
+
             }
+            System.Console.WriteLine();
+            Console.WriteLine("Press any key to continue...");
+            Console.ReadKey();
+            Console.Clear();
             ViewAllMovies();
         }
         else if (input == "5")

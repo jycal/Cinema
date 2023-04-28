@@ -43,26 +43,30 @@ class ReservationsLogic
 
     public void DeleteReservation(string reservationCode)
     {
-        //Find if there is already an model with the same id
-        var reservation = _reservations!.Find(r => r.ReservationCode == reservationCode);
-        int index = _reservations.FindIndex(s => s.Id == reservation!.Id);
+        var check = GetByCode(reservationCode!);
+        if (check != null)
+        {//Find if there is already an model with the same id
+            var reservation = _reservations!.Find(r => r.ReservationCode == reservationCode);
+            int index = _reservations.FindIndex(s => s.Id == reservation!.Id);
 
-        if (index != -1)
-        {
-            //update existing model
-            // _films[index] = film;
-            _reservations.RemoveAt(index);
-            _reservations.ForEach((x) => { if (x.Id > reservation!.Id) x.Id = x.Id - 1; });
-            ReservationAccess.WriteAll(_reservations);
+            if (index != -1)
+            {
+                //update existing model
+                // _films[index] = film;
+                _reservations.RemoveAt(index);
+                _reservations.ForEach((x) => { if (x.Id > reservation!.Id) x.Id = x.Id - 1; });
+                ReservationAccess.WriteAll(_reservations);
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine($"\nReservation deleted\n");
+                Console.ForegroundColor = ConsoleColor.White;
+            }
         }
         else
         {
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine($"Reservation not found");
+            Console.WriteLine($"\nReservation not found\n");
             Console.ForegroundColor = ConsoleColor.White;
-
         }
-
     }
 
     public static void ReservationOverview()
@@ -100,6 +104,11 @@ class ReservationsLogic
     public ReservationModel GetByEmail(string email)
     {
         return _reservations!.Find(i => i.Email == email)!;
+    }
+
+    public ReservationModel GetByCode(string reservationCode)
+    {
+        return _reservations!.Find(i => i.ReservationCode == reservationCode)!;
     }
 
 
