@@ -115,20 +115,6 @@
   },
   {
     "id": 11,
-    "reservationCode": "ZEJV3M6",
-    "fullName": "megan",
-    "email": "meganpieters3@gmail.com",
-    "movie": "Scream VI",
-    "ticketAmount": 1,
-    "ticketTotal": 10,
-    "roomNumber": 3,
-    "seats": [
-      33
-    ],
-    "totalAmount": 1
-  },
-  {
-    "id": 12,
     "reservationCode": "GASRYD2",
     "fullName": "megan",
     "email": "meganpieters3@gmail.com",
@@ -142,7 +128,7 @@
     "totalAmount": 1
   },
   {
-    "id": 13,
+    "id": 12,
     "reservationCode": "SD8LIRW",
     "fullName": "megan",
     "email": "meganpieters3@gmail.com",
@@ -156,7 +142,7 @@
     "totalAmount": 1
   },
   {
-    "id": 14,
+    "id": 13,
     "reservationCode": "0S9XO0L",
     "fullName": "megan",
     "email": "meganpieters3@gmail.com",

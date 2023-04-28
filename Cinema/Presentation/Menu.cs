@@ -4,6 +4,10 @@ public static class Menu
     private static AccountModel _account = null!;
     private static FilmsLogic _filmsLogic = new FilmsLogic();
 
+    private static ReservationsLogic _reservationLogic = new();
+
+    private static GuestLogic _guestLogic = new GuestLogic();
+
     // Intro screen
     public static void Start()
     {
@@ -446,7 +450,7 @@ public static class Menu
     }
     public static void ViewAllMovies()
     {
-        GuestLogic logic = new GuestLogic();
+
 
         Console.WriteLine("====================================");
         Console.WriteLine("|                                  |");
@@ -489,10 +493,17 @@ public static class Menu
         }
         else if (input == "4")
         {
-            Console.WriteLine("What is your email?");
-            string? email = Console.ReadLine();
-            logic.DeleteReservation(email!);
-            Console.WriteLine("Reservation has been cancelled.");
+            Console.WriteLine("What is your reservation code?");
+            string? reservationCode = Console.ReadLine();
+            if (_account != null)
+            {
+                _reservationLogic.DeleteReservation(reservationCode!);
+                Console.WriteLine("Reservation has been cancelled.");
+            }
+            else
+            {
+                _guestLogic.DeleteReservation(reservationCode!);
+            }
             ViewAllMovies();
         }
         else if (input == "5")

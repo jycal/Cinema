@@ -41,10 +41,10 @@ class GuestLogic
 
     }
 
-    public void DeleteReservation(string email)
+    public void DeleteReservation(string reservationCode)
     {
         //Find if there is already an model with the same id
-        var reservation = _guests!.Find(r => r.Email == email);
+        var reservation = _guests!.Find(r => r.ReservationCode == reservationCode);
         int index = _guests.FindIndex(s => s.Id == reservation!.Id);
 
         if (index != -1)
@@ -57,8 +57,9 @@ class GuestLogic
         }
         else
         {
+            Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine($"Reservation not found");
-
+            Console.ForegroundColor = ConsoleColor.White;
         }
 
     }
