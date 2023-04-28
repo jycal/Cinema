@@ -76,7 +76,7 @@ class ReservationsLogic
                 string Email = reservation.Email;
                 int TicketAmount = reservation.TicketAmount;
                 int Seats = item;
-                int TotalAmount = reservation.TotalAmount;
+                double TotalAmount = reservation.TotalAmount;
                 Console.ForegroundColor = ConsoleColor.Magenta;
                 string Overview = $@"
 ==================================================

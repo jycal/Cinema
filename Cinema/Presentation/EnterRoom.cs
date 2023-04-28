@@ -288,9 +288,12 @@ static class EnterRoom
                     seatList.Add(choice);
                     FilmModel film = _filmsLogic.GetById(id);
                     string title = film.Title;
+                    // prchase test
+                    TicketLogic purchaseLogic = new();
+                    double ticketTotal = purchaseLogic.TicketPurchase(room, seatList);
                     // guest naar json sturen
                     string reservationCode = ReservationCodeMaker();
-                    ReservationModel guest = new(1, reservationCode, fullName, email, title, 1, 10, room.Id, seatList, 10);
+                    ReservationModel guest = new(1, reservationCode, fullName, email, title, 1, ticketTotal, room.Id, seatList, 10);
                     GuestLogic logic = new();
                     logic.UpdateList(guest);
                     // mail verzenden

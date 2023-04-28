@@ -16,6 +16,7 @@ public class ReservationManagerMenu
             Console.WriteLine("Enter 3 to delete reservation");
             // Console.WriteLine("Enter 4 to change reservation");
             Console.WriteLine("Enter 4 to go back to main menu");
+            Console.WriteLine("Enter 5 to change seat price");
 
             string choice = Console.ReadLine()!;
 
@@ -116,6 +117,14 @@ public class ReservationManagerMenu
                     Console.ReadKey();
                     Console.Clear();
                     return;
+                case "5":
+                    TicketLogic pl = new();
+                    System.Console.WriteLine("1. normal\n2. comfort\n3. vip");
+                    string choice1 = Console.ReadLine()!;
+                    System.Console.WriteLine("enter new price");
+                    double choice2 = Convert.ToDouble(Console.ReadLine()!);
+                    pl.ChangeSeatPrice(choice1, choice2);
+                    break;
             }
         }
     }
