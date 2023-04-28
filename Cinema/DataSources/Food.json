@@ -1,78 +1,78 @@
 [
-    {
-      "Name": "Popcorn Small",
-      "Cost": 3.75
-    },
-    {
-      "Name": "Popcorn Medium",
-      "Cost": 4.75
-    },
-    {
-      "Name": "Popcorn Large",
-      "Cost": 5.90
-    },
-    {
-      "Name": "Nacho's Chico (inclusief 1 dip)",
-      "Cost": 4.99
-    },
-    {
-      "Name": "Nacho's Grande (inclusief 2 dips)",
-      "Cost": 7.25
-    },
-    {
-      "Name": "Swirl's ijs",
-      "Cost": 5.99
-    },
-    {
-      "Name": "Mini Sushi Box",
-      "Cost": 7.99
-    },
-    {
-      "Name": "Coco Cola",
-      "Cost": 3.50
-    },
-    {
-      "Name": "Coco Cola Light",
-      "Cost": 3.50
-    },
-    {
-      "Name": "Coco Cola Zero",
-      "Cost": 3.50
-    },
-    {
-      "Name": "Spa Blauw",
-      "Cost": 3.50
-    },
-    {
-      "Name": "Spa Rood",
-      "Cost": 3.50
-    },
-    {
-      "Name": "Fanta",
-      "Cost": 3.50
-    },
-    {
-      "Name": "Sprite",
-      "Cost": 3.50
-    },
-    {
-      "Name": "Fanta Cassis",
-      "Cost": 3.50
-    },
-    {
-      "Name": "Heineken 0,5L",
-      "Cost": 4.50
-    },
-    {
-      "Name": "Soju Lycee (1 fles)",
-      "Cost": 12.99
-    },
-    {
-      "Name": "Soju Raspberry (1 fles)",
-      "Cost": 12.99
-    },
-    {
-      "Name": "Soju Pineapple (1 fles)",
-      "Cost": 12.99
-    }
-  ]
+  {
+    "Name": "Popcorn Small",
+    "Cost": 3.75
+  },
+  {
+    "Name": "Popcorn Medium",
+    "Cost": 4.75
+  },
+  {
+    "Name": "Popcorn Large",
+    "Cost": 5.95
+  },
+  {
+    "Name": "Nachos Chico (inclusief 1 dip)",
+    "Cost": 4.99
+  },
+  {
+    "Name": "Nachos Grande (inclusief 2 dips)",
+    "Cost": 7.25
+  },
+  {
+    "Name": "Swirls ijs",
+    "Cost": 5.99
+  },
+  {
+    "Name": "Mini Sushi Box",
+    "Cost": 7.99
+  },
+  {
+    "Name": "Coco Cola",
+    "Cost": 3.50
+  },
+  {
+    "Name": "Coco Cola Light",
+    "Cost": 3.50
+  },
+  {
+    "Name": "Coco Cola Zero",
+    "Cost": 3.50
+  },
+  {
+    "Name": "Spa Blauw",
+    "Cost": 3.50
+  },
+  {
+    "Name": "Spa Rood",
+    "Cost": 3.50
+  },
+  {
+    "Name": "Fanta",
+    "Cost": 3.50
+  },
+  {
+    "Name": "Sprite",
+    "Cost": 3.50
+  },
+  {
+    "Name": "Fanta Cassis",
+    "Cost": 3.50
+  },
+  {
+    "Name": "Heineken 0,5L",
+    "Cost": 4.50
+  },
+  {
+    "Name": "Soju Lycee (1 fles)",
+    "Cost": 12.99
+  },
+  {
+    "Name": "Soju Raspberry (1 fles)",
+    "Cost": 12.99
+  },
+  {
+    "Name": "Soju Pineapple (1 fles)",
+    "Cost": 12.99
+  }
+]

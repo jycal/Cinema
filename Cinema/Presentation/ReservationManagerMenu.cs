@@ -11,12 +11,19 @@ public class ReservationManagerMenu
         while (true)
         {
             ReservationsLogic res = new ReservationsLogic();
-            Console.WriteLine("Enter 1 to view reservation info");
-            Console.WriteLine("Enter 2 to look for specific reservation");
-            Console.WriteLine("Enter 3 to delete reservation");
+            Console.WriteLine("===================================");
+            Console.WriteLine("|                                 |");
+            Console.WriteLine("|           Manager Menu          |");
+            Console.WriteLine("|                                 |");
+            Console.WriteLine("===================================");
+            Console.WriteLine();
+            Console.WriteLine("1. View reservation info");
+            Console.WriteLine("2. Look for specific reservation");
+            Console.WriteLine("3. Delete reservation");
             // Console.WriteLine("Enter 4 to change reservation");
-            Console.WriteLine("Enter 4 to change food prices");
-            Console.WriteLine("Enter 5 to go back to main menu");
+            Console.WriteLine("4. Change food prices");
+            Console.WriteLine("5. Look up movie (not done yet)");
+            Console.WriteLine("6. Back to main menu");
 
             string choice = Console.ReadLine()!;
 
@@ -114,7 +121,11 @@ public class ReservationManagerMenu
                     FoodsLogic foods = new FoodsLogic();
                     foods.ChangePrice();
                     break;
-                case "5":
+                // case "5":
+                //     FilmsLogic films = new FilmsLogic();
+                //     films.Task();
+                //     break;
+                case "6":
                     Console.WriteLine("Going back to main menu");
                     Console.WriteLine("");
                     Console.WriteLine("Press any key to continue...");
