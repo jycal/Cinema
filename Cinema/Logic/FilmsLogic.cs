@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 class FilmsLogic
 {
-    private static string CurrentMovieOverview = @"============================================
+    private string CurrentMovieOverview = @"============================================
 |                                          |
-|          CURRENT MOVIE OVERVIEW          |
+|                 Movies                   |
 |                                          |
 ============================================";
     private List<FilmModel> _films;
@@ -93,7 +93,7 @@ class FilmsLogic
     //     return CurrentFilm;
     // }
 
-    public static void MovieOverview()
+    public void MovieOverview()
     {
         var MoviesFromJson = FilmsAccess.LoadAll();
         Console.ForegroundColor = ConsoleColor.Magenta;
@@ -122,7 +122,7 @@ class FilmsLogic
         Console.ResetColor();
     }
 
-    public static void SearchByTitle(string filter)
+    public void SearchByTitle(string filter)
     {
         var MoviesFromJson = FilmsAccess.LoadAll();
         Console.ForegroundColor = ConsoleColor.Magenta;
@@ -152,8 +152,11 @@ class FilmsLogic
             }
         }
         Console.ResetColor();
+        Console.WriteLine();
+        Console.WriteLine("Press any key to continue...");
+        Console.ReadKey(true);
     }
-    public static void SearchByGenre(string filter)
+    public void SearchByGenre(string filter)
     {
         var MoviesFromJson = FilmsAccess.LoadAll();
         Console.ForegroundColor = ConsoleColor.Magenta;
@@ -192,7 +195,7 @@ class FilmsLogic
         Console.ResetColor();
     }
 
-    public static void MovieSortedByABCTitle()
+    public void MovieSortedByABCTitle()
     {
         var MoviesFromJson = FilmsAccess.LoadAll();
         Console.ForegroundColor = ConsoleColor.Magenta;

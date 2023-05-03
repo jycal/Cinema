@@ -455,5 +455,5 @@ $RECYCLE.BIN/
 ## obj and bin
 **/bin/*
 **/obj/*
-Cinema/obj/Debug/net6.0/Project.assets.cache
-Cinema/obj/Debug/net6.0/Project.GeneratedMSBuildEditorConfig.editorconfig
+obj/Debug/net6.0/Project.assets.cache
+obj/Debug/net6.0/Project.GeneratedMSBuildEditorConfig.editorconfig
