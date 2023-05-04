@@ -34,7 +34,7 @@ Welcome to Starlight Cinema. What would you like to do?
         {
             case 0:
                 Login();
-                RunMenusMenu();
+                RunMainMenu();
                 break;
             case 1:
                 Register();
@@ -113,18 +113,20 @@ Welcome to Starlight Cinema. What would you like to do?
                     Console.WriteLine("Press any key to continue...");
                     Console.ReadKey(true);
                     Console.Clear();
+                    RunMenusMenu();
                     break;
                 }
             }
             else
             {
                 tries--;
+                Console.WriteLine("Wrong password or email! Please try again...");
             }
-            Console.WriteLine("0 tries left. Please try again later...");
-            Console.WriteLine("Press any key to continue...");
-            Console.ReadKey(true);
-            Console.Clear();
         }
+        Console.WriteLine("0 tries left. Please try again later...");
+        Console.WriteLine("Press any key to continue...");
+        Console.ReadKey(true);
+        Console.Clear();
     }
 
     private void Register()
