@@ -165,7 +165,7 @@ Welcome to Starlight Cinema. What would you like to do?
         Console.WriteLine("Please enter your password:");
         Console.ForegroundColor = ConsoleColor.Yellow;
         Console.WriteLine("------------------------------------------------------------------------------------------");
-        Console.WriteLine(@"|  Must contain at least one special character(%!@#$%^&*()?/>.<,:;'\|}]{[_~`+=-         |");
+        Console.WriteLine(@"|   Must contain at least one special character(%!@#$%^&*()?/>.<,:;'\|}]{[_~`+=-         |");
         Console.WriteLine("|   Must be longer than 6 characters                                                     |");
         Console.WriteLine("|   Must contain at least one number                                                     |");
         Console.WriteLine("|   One upper case                                                                       |");
