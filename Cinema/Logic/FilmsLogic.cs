@@ -10,9 +10,9 @@ using Newtonsoft.Json;
 
 class FilmsLogic
 {
-    private static string CurrentMovieOverview = @"============================================
+    private string CurrentMovieOverview = @"============================================
 |                                          |
-|          CURRENT MOVIE OVERVIEW          |
+|                 Movies                   |
 |                                          |
 ============================================";
     private List<FilmModel> _films;
@@ -52,10 +52,10 @@ class FilmsLogic
 
     }
 
-    public bool DeleteFilm(string title)
+    public bool DeleteFilm(int id)
     {
         //Find if there is already an model with the same id
-        var film = _films.Find(r => r.Title == title);
+        var film = _films.Find(r => r.Id == id);
         if (film == null)
         {
             return false;
@@ -83,6 +83,11 @@ class FilmsLogic
         return _films.Find(i => i.Id == id)!;
     }
 
+    public FilmModel GetByName(string name)
+    {
+        return _films.Find(i => i.Title == name)!;
+    }
+
     // public AccountModel CheckLogin(string email, string password)
     // {
     //     if (email == null || password == null)
@@ -93,7 +98,7 @@ class FilmsLogic
     //     return CurrentFilm;
     // }
 
-    public static void MovieOverview()
+    public void MovieOverview()
     {
         var MoviesFromJson = FilmsAccess.LoadAll();
         Console.ForegroundColor = ConsoleColor.Magenta;
@@ -122,7 +127,7 @@ class FilmsLogic
         Console.ResetColor();
     }
 
-    public static void SearchByTitle(string filter)
+    public void SearchByTitle(string filter)
     {
         var MoviesFromJson = FilmsAccess.LoadAll();
         Console.ForegroundColor = ConsoleColor.Magenta;
@@ -152,8 +157,11 @@ class FilmsLogic
             }
         }
         Console.ResetColor();
+        Console.WriteLine();
+        Console.WriteLine("Press any key to continue...");
+        Console.ReadKey(true);
     }
-    public static void SearchByGenre(string filter)
+    public void SearchByGenre(string filter)
     {
         var MoviesFromJson = FilmsAccess.LoadAll();
         Console.ForegroundColor = ConsoleColor.Magenta;
@@ -192,7 +200,7 @@ class FilmsLogic
         Console.ResetColor();
     }
 
-    public static void MovieSortedByABCTitle()
+    public void MovieSortedByABCTitle()
     {
         var MoviesFromJson = FilmsAccess.LoadAll();
         Console.ForegroundColor = ConsoleColor.Magenta;

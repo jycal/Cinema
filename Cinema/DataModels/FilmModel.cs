@@ -22,12 +22,16 @@ class FilmModel
     [JsonPropertyName("genre")]
     public List<string> Genre { get; set; }
 
-    public FilmModel(int id, string title, string description, int duration, List<string> genre)
+    [JsonPropertyName("imageURL")]
+    public string ImageURL { get; set; }
+
+    public FilmModel(int id, string title, string description, int duration, List<string> genre, string imageURL)
     {
         Id = id;
         Title = title;
         Description = description;
         Duration = duration;
         Genre = genre;
+        ImageURL = imageURL;
     }
 }

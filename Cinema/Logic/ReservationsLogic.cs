@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 class ReservationsLogic
 {
-    private List<ReservationModel>? _reservations;
+    public List<ReservationModel>? _reservations;
 
     //Static properties are shared across all instances of the class
     //This can be used to get the current logged in account from anywhere in the program
@@ -41,10 +41,10 @@ class ReservationsLogic
 
     }
 
-    public void DeleteReservation(string email)
+    public void DeleteReservation(int id)
     {
         //Find if there is already an model with the same id
-        var reservation = _reservations!.Find(r => r.Email == email);
+        var reservation = _reservations!.Find(r => r.Id == id);
         int index = _reservations.FindIndex(s => s.Id == reservation!.Id);
 
         if (index != -1)
@@ -66,8 +66,15 @@ class ReservationsLogic
     public static void ReservationOverview()
     {
         var ReservationsFromJson = ReservationAccess.LoadAll();
+        Console.ForegroundColor = ConsoleColor.Magenta;
+        Console.WriteLine(@"==================================================
+|                                                 |
+|                  Reservations                   |
+|                                                 |
+==================================================");
         foreach (ReservationModel reservation in ReservationsFromJson)
         {
+
             foreach (var item in reservation.Seats)
             {
                 int ID = reservation.Id;
@@ -76,18 +83,17 @@ class ReservationsLogic
                 string Email = reservation.Email;
                 int TicketAmount = reservation.TicketAmount;
                 int Seats = item;
-                int TotalAmount = reservation.TotalAmount;
-                Console.ForegroundColor = ConsoleColor.Magenta;
+                double TotalAmount = reservation.TotalAmount;
                 string Overview = $@"
-==================================================
-|            CURRENT Reservation OVERVIEW        |
-==================================================
+
+  ID: {ID}
   Movie: {Movie}
   Full Name: {FullName}
   Email: {Email}
   Ticket Amount: {TicketAmount}
   Seats: {Seats}
   Total Money Amount: {TotalAmount}
+
 ==================================================";
                 Console.WriteLine(Overview);
                 Console.ResetColor();
@@ -100,5 +106,8 @@ class ReservationsLogic
         return _reservations!.Find(i => i.Email == email)!;
     }
 
-
+    public ReservationModel GetById(int id)
+    {
+        return _reservations!.Find(i => i.Id == id)!;
+    }
 }

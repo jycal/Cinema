@@ -16,7 +16,7 @@ public static class Catering
             Console.WriteLine(Overview);
             Console.WriteLine();
             Console.WriteLine("Press any key to continue...");
-            Console.ReadKey();
+            Console.ReadKey(true);
             Console.Clear();
             Console.ResetColor();
         }

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 
 using System.Text.Json.Serialization;
-class RoomModel
+public class RoomModel
 {
     [JsonPropertyName("id")]
     public int Id { get; set; }
@@ -27,7 +27,10 @@ class RoomModel
     [JsonPropertyName("disabledSeats")]
     public List<int> DisabledSeats { get; set; }
 
-    public RoomModel(int id, int maxSeats, int roomNumber, int maxPeople, List<int> seats, List<int> vipSeats, List<int> disabledSeats)
+    [JsonPropertyName("comfortSeats")]
+    public List<int> ComfortSeats { get; set; }
+
+    public RoomModel(int id, int maxSeats, int roomNumber, int maxPeople, List<int> seats, List<int> vipSeats, List<int> disabledSeats, List<int> comfortSeats)
     {
         Id = id;
         MaxSeats = maxSeats;
@@ -36,5 +39,6 @@ class RoomModel
         Seats = seats;
         VipSeats = vipSeats;
         DisabledSeats = disabledSeats;
+        ComfortSeats = comfortSeats;
     }
 }

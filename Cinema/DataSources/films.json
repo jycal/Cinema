@@ -2,13 +2,14 @@
   {
     "id": 0,
     "title": "John Wick 4",
-    "description": "John Wick (Keanu Reeves) takes on his most deadly opponents yet in the fourth installment of the John Wick franchise. The price on John Wick's head is getting higher and higher, and his fight against the international assassin guild The High Table is developing into a global battle. To regain his freedom, he must face a new enemy with powerful alliances around the world and forces that turn old friends into enemies.",
+    "description": "John Wick (Keanu Reeves) takes on his most deadly opponents yet in the fourth installment of the John Wick franchise. The price on John Wick\u0027s head is getting higher and higher, and his fight against the international assassin guild The High Table is developing into a global battle. To regain his freedom, he must face a new enemy with powerful alliances around the world and forces that turn old friends into enemies.",
     "duration": 169,
     "genre": [
       "Action",
       "Crime",
       "Thriller"
-    ]
+    ],
+    "imageURL": "https://21818cdde6.imgdist.com/public/_thumbs/Integrators/BeeProAgency/981647_966306/john%20wick.webp_thumb.png?hash=1682510761536"
   },
   {
     "id": 1,
@@ -19,7 +20,8 @@
       "Action",
       "Science Fiction",
       "Thriller"
-    ]
+    ],
+    "imageURL": "https://21818cdde6.imgdist.com/public/_thumbs/Integrators/BeeProAgency/981647_966306/65.jpg_thumb.png?hash=1682510761536"
   },
   {
     "id": 2,
@@ -30,37 +32,41 @@
       "Action",
       "Adventure",
       "Comedy"
-    ]
+    ],
+    "imageURL": "https://21818cdde6.imgdist.com/public/_thumbs/Integrators/BeeProAgency/981647_966306/shazam.jpg_thumb.png?hash=1682510761536"
   },
   {
     "id": 3,
     "title": "Creed III",
-    "description": "Metro Goldwyn Mayer Pictures arrives with Creed III, making Michael B. Jordan's directorial debut and returning in the role of Adonis Creed in the third film of the hit franchise.",
+    "description": "Metro Goldwyn Mayer Pictures arrives with Creed III, making Michael B. Jordan\u0027s directorial debut and returning in the role of Adonis Creed in the third film of the hit franchise.",
     "duration": 117,
     "genre": [
       "Drama",
       "Sport"
-    ]
+    ],
+    "imageURL": "https://21818cdde6.imgdist.com/public/_thumbs/Integrators/BeeProAgency/981647_966306/creed.jpg_thumb.png?hash=1682510761536"
   },
   {
     "id": 4,
     "title": "The Super Mario Bros. Movie (OV)",
-    "description": "Illumination and Nintendo, two world-renowned names in the entertainment industry, are joining forces for the first time for THE SUPER MARIO BROS. MOVIE, a new theatrical film about one of pop culture's most famous plumbers.",
+    "description": "Illumination and Nintendo, two world-renowned names in the entertainment industry, are joining forces for the first time for THE SUPER MARIO BROS. MOVIE, a new theatrical film about one of pop culture\u0027s most famous plumbers.",
     "duration": 93,
     "genre": [
       "Animation",
       "Adventure",
       "Comedy"
-    ]
+    ],
+    "imageURL": "https://21818cdde6.imgdist.com/public/_thumbs/Integrators/BeeProAgency/981647_966306/suoerrr.jpg_thumb.png?hash=1682510761536"
   },
   {
     "id": 5,
     "title": "All Inclusive",
-    "description": "In this comedy, the relationship between Jacco (Tibor Lukács) and Sylvie (Jennifer Hoffman) is severely tested when Sylvie announces she wants to take a break during a vacation to a resort.",
+    "description": "In this comedy, the relationship between Jacco (Tibor Luk\u00E1cs) and Sylvie (Jennifer Hoffman) is severely tested when Sylvie announces she wants to take a break during a vacation to a resort.",
     "duration": 115,
     "genre": [
       "Comedy"
-    ]
+    ],
+    "imageURL": "https://21818cdde6.imgdist.com/public/_thumbs/Integrators/BeeProAgency/981647_966306/all%20inv.jpg_thumb.png?hash=1682510761536"
   },
   {
     "id": 6,
@@ -70,7 +76,8 @@
     "genre": [
       "Horror",
       "Thriller"
-    ]
+    ],
+    "imageURL": "https://21818cdde6.imgdist.com/public/_thumbs/Integrators/BeeProAgency/981647_966306/scream.jpg_thumb.png?hash=1682510761536"
   },
   {
     "id": 7,
@@ -81,18 +88,20 @@
       "Animation",
       "Comedy",
       "Kinderfilm"
-    ]
+    ],
+    "imageURL": "https://21818cdde6.imgdist.com/public/_thumbs/Integrators/BeeProAgency/981647_966306/mum.jpg_thumb.png?hash=1682510761536"
   },
   {
     "id": 8,
-    "title": "Dungeons & Dragons: Honor Among Thieves",
+    "title": "Dungeons \u0026 Dragons: Honor Among Thieves",
     "description": "A charming thief and a gang of adventurers embark on a spectacular heist to steal a lost relic. But when they antagonize the wrong people, everything gets gigantically out of hand.",
     "duration": 134,
     "genre": [
       "Action",
       "Adventure",
       "Fantasy"
-    ]
+    ],
+    "imageURL": "https://21818cdde6.imgdist.com/public/_thumbs/Integrators/BeeProAgency/981647_966306/dd.jpg_thumb.png?hash=1682510761536"
   },
   {
     "id": 9,
@@ -103,7 +112,8 @@
       "Action",
       "Adventure",
       "Comedy"
-    ]
+    ],
+    "imageURL": "https://21818cdde6.imgdist.com/public/_thumbs/Integrators/BeeProAgency/981647_966306/ant.jpg_thumb.png?hash=1682510761536"
   },
   {
     "id": 10,
@@ -114,7 +124,8 @@
       "Action",
       "Adventure",
       "Fantasy"
-    ]
+    ],
+    "imageURL": "https://21818cdde6.imgdist.com/public/_thumbs/Integrators/BeeProAgency/981647_966306/Afbeelding2vat.jpg_thumb.png?hash=1682510761536"
   },
   {
     "id": 11,
@@ -123,36 +134,18 @@
     "duration": 95,
     "genre": [
       "Thriller"
-    ]
+    ],
+    "imageURL": "https://21818cdde6.imgdist.com/public/_thumbs/Integrators/BeeProAgency/981647_966306/cocaine_1.jpg_thumb.png?hash=1682510761536"
   },
   {
     "id": 12,
-    "title": "What's Love Got to Do with It?",
-    "description": "Thirtysomethings and childhood friends Zoe (Lily James) and Kazim (Shazad Latif) run into each other again after a long time. Intrigued by Kazim's choice of a traditional, arranged wedding, Zoe proposes to capture the lead-up to his wedding in a documentary.",
-    "duration": 109,
-    "genre": [
-      "Romatic",
-      "Comedy"
-    ]
-  },
-  {
-    "id": 13,
-    "title": "Missing",
-    "description": "Missing is a chilling mystery from the makers of Searching that leaves you, the viewer, wondering how well you actually know your loved ones. When her mother (Nia Long) disappears during a vacation in Colombia with her new boyfriend, June (Storm Reid) sets out to find answers.",
-    "duration": 111,
-    "genre": [
-      "Drama",
-      "Thriller"
-    ]
-  },
-  {
-    "id": 14,
-    "title": "Magic Mike's Last Dance",
-    "description": "Magic Mike Lane (Channing Tatum) returns to the stage after a long time after a failed business deal leaves him broke and working as a bartender in Florida. For a hopefully final splurge, Mike goes to London with a wealthy socialite (Salma Hayek) who makes him an offer he can't refuse....",
+    "title": "Magic Mike\u0027s Last Dance",
+    "description": "Magic Mike Lane (Channing Tatum) returns to the stage after a long time after a failed business deal leaves him broke and working as a bartender in Florida. For a hopefully final splurge, Mike goes to London with a wealthy socialite (Salma Hayek) who makes him an offer he can\u0027t refuse....",
     "duration": 112,
     "genre": [
       "Comedy",
       "Romance"
-    ]
+    ],
+    "imageURL": "https://21818cdde6.imgdist.com/public/_thumbs/Integrators/BeeProAgency/981647_966306/Magic-Mike-s-Last-Dance_ps_1_jpg_sd-high_Copyright-2022-Warner-Bros-Entertainment-Inc-All-Rights-Reserved-Photo-Credit-Claudette-Barius.webp_thumb.png?hash=1682510761536"
   }
 ]

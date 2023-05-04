@@ -24,6 +24,7 @@ public class ReservationManagerMenu
             Console.WriteLine("4. Change food prices");
             Console.WriteLine("5. Look up movie (not done yet)");
             Console.WriteLine("6. Back to main menu");
+            Console.WriteLine("Enter 7 to change seat price");
 
             string choice = Console.ReadLine()!;
 
@@ -71,14 +72,14 @@ public class ReservationManagerMenu
                     Console.Clear();
                     break;
                 case "3":
-                    System.Console.WriteLine("enter email adress");
-                    string email2 = Console.ReadLine()!;
-                    res.DeleteReservation(email2);
-                    Console.WriteLine("Reservation deleted");
-                    Console.WriteLine("");
-                    Console.WriteLine("Press any key to continue...");
-                    Console.ReadKey();
-                    Console.Clear();
+                    // System.Console.WriteLine("enter email adress");
+                    // string email2 = Console.ReadLine()!;
+                    // res.DeleteReservation(email2);
+                    // Console.WriteLine("Reservation deleted");
+                    // Console.WriteLine("");
+                    // Console.WriteLine("Press any key to continue...");
+                    // Console.ReadKey();
+                    // Console.Clear();
                     break;
                 // case "4":
                 //     Console.WriteLine("enter current email adress");
@@ -132,6 +133,14 @@ public class ReservationManagerMenu
                     Console.ReadKey();
                     Console.Clear();
                     return;
+                case "7":
+                    TicketLogic pl = new();
+                    System.Console.WriteLine("1. normal\n2. comfort\n3. vip");
+                    string choice1 = Console.ReadLine()!;
+                    System.Console.WriteLine("enter new price");
+                    double choice2 = Convert.ToDouble(Console.ReadLine()!);
+                    pl.ChangeSeatPrice(choice1, choice2);
+                    break;
             }
         }
     }
