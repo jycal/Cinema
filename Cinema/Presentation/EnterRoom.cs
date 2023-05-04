@@ -4,6 +4,8 @@ static class EnterRoom
     static private FilmsLogic _filmsLogic = new();
     static private ReservationsLogic _reservationsLogic = new();
     static private AccountModel _account = null!;
+    static private AccountsLogic _accountsLogic = new();
+
     public static void Start(AccountModel account)
     {
         _account = account;
@@ -323,11 +325,16 @@ static class EnterRoom
                     List<int> seatList = new();
                     seatList.Add(choice);
                     string reservationCode = ReservationCodeMaker();
-                    ReservationModel reservation = new(1, reservationCode, _account.FullName, _account.EmailAddress, title, 1, 10, room.Id, seatList, 1);
+
+                    int temp_id = film.Id = _reservationsLogic._reservations!.Count > 0 ? _reservationsLogic._reservations.Max(x => x.Id) + 1 : 1;
+
+                    ReservationModel reservation = new(temp_id, reservationCode, _account.FullName, _account.EmailAddress, title, 1, 10, room.Id, seatList, 1);
                     _reservationsLogic.UpdateList(reservation);
                     bool account = true;
                     MailConformation mailConformation = new MailConformation(_account.EmailAddress, account);
                     mailConformation.SendMailConformation();
+                    _account.TicketList.Add(temp_id);
+                    _accountsLogic.UpdateList(_account);
                 }
                 Console.ForegroundColor = ConsoleColor.Green;
                 System.Console.WriteLine("Your reservation has been confirmed and is now guaranteed.");

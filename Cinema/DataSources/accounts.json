@@ -38,5 +38,15 @@
     "password": "may",
     "fullName": "megan",
     "ticketList": []
+  },
+  {
+    "id": 5,
+    "type": 1,
+    "emailAddress": "jyczhangnl@gmail.com",
+    "password": "xyz",
+    "fullName": "xyz",
+    "ticketList": [
+      16
+    ]
   }
 ]
