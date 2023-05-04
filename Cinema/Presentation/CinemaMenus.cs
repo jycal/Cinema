@@ -6,6 +6,7 @@ public class CinemaMenus
     private AccountModel _account = null!;
 
     // instantiated when needed
+    private GuestLogic _guestLogic = new GuestLogic();
     private FilmsLogic _filmsLogic = null!;
     private FoodsLogic _foodsLogic = null!;
     private ReservationsLogic _reservationsLogic = null!;
@@ -455,24 +456,51 @@ View movies and order tickets.
 
     private void RunTicketMenu()
     {
-        // show not implemented
+        if (_reservationsLogic == null)
+        {
+            _reservationsLogic = new ReservationsLogic();
+        }
+
         string prompt = @"============================================
 |                                          |
 |              Ticket Menu                 |
 |                                          |
 ============================================
-Not implemented.
 ";
-        string[] options = { "Go back" };
+        string[] options = { "Cancel ticket", "Go back" };
         Menu ticketMenu = new Menu(prompt, options);
         int selectedIndex = ticketMenu.Run();
 
         switch (selectedIndex)
         {
             case 0:
+                CancelTicket();
+                RunTicketMenu();
+                break;
+            case 1:
                 RunMenusMenu();
                 break;
         }
+    }
+
+    private void CancelTicket()
+    {
+        Console.WriteLine("What is your reservation code?");
+        string? reservationCode = Console.ReadLine();
+        if (_account != null)
+        {
+            _reservationsLogic.DeleteReservationByCode(reservationCode!);
+
+        }
+        else if (_account == null)
+        {
+            _guestLogic.DeleteReservation(reservationCode!);
+            // Console.Clear();
+
+        }
+        Console.WriteLine("Press any key to continue...");
+        Console.ReadKey();
+        Console.Clear();
     }
 
     private void RunAdvancedMenu()
