@@ -2,13 +2,17 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
+using System.Net.Http;
+using System.Net;
+using System.IO;
+using System.Text;
+using Newtonsoft.Json;
 
 class FilmsLogic
 {
-    private static string CurrentMovieOverview = @"============================================
+    private string CurrentMovieOverview = @"============================================
 |                                          |
-|          CURRENT MOVIE OVERVIEW          |
+|                 Movies                   |
 |                                          |
 ============================================";
     private List<FilmModel> _films;
@@ -17,6 +21,7 @@ class FilmsLogic
     //This can be used to get the current logged in account from anywhere in the program
     //private set, so this can only be set by the class itself
     static public FilmModel? CurrentFilm { get; private set; }
+    public string fileOutput = @"C:\Users\vdmil\source\repos\HTTPClient_APP\HTTPClient_APP\output.txt";
 
     public FilmsLogic()
     {
@@ -47,10 +52,10 @@ class FilmsLogic
 
     }
 
-    public bool DeleteFilm(string title)
+    public bool DeleteFilm(int id)
     {
         //Find if there is already an model with the same id
-        var film = _films.Find(r => r.Title == title);
+        var film = _films.Find(r => r.Id == id);
         if (film == null)
         {
             return false;
@@ -93,7 +98,7 @@ class FilmsLogic
     //     return CurrentFilm;
     // }
 
-    public static void MovieOverview()
+    public void MovieOverview()
     {
         var MoviesFromJson = FilmsAccess.LoadAll();
         Console.ForegroundColor = ConsoleColor.Magenta;
@@ -122,7 +127,7 @@ class FilmsLogic
         Console.ResetColor();
     }
 
-    public static void SearchByTitle(string filter)
+    public void SearchByTitle(string filter)
     {
         var MoviesFromJson = FilmsAccess.LoadAll();
         Console.ForegroundColor = ConsoleColor.Magenta;
@@ -152,8 +157,11 @@ class FilmsLogic
             }
         }
         Console.ResetColor();
+        Console.WriteLine();
+        Console.WriteLine("Press any key to continue...");
+        Console.ReadKey(true);
     }
-    public static void SearchByGenre(string filter)
+    public void SearchByGenre(string filter)
     {
         var MoviesFromJson = FilmsAccess.LoadAll();
         Console.ForegroundColor = ConsoleColor.Magenta;
@@ -192,7 +200,7 @@ class FilmsLogic
         Console.ResetColor();
     }
 
-    public static void MovieSortedByABCTitle()
+    public void MovieSortedByABCTitle()
     {
         var MoviesFromJson = FilmsAccess.LoadAll();
         Console.ForegroundColor = ConsoleColor.Magenta;
@@ -222,4 +230,14 @@ class FilmsLogic
         }
         Console.ResetColor();
     }
+
+    // HttpClient is intended to be instantiated once per application, rather than per-use. See Remarks.
+    // public readonly HttpClient client = new HttpClient();
+
+    // public void Task()
+    // {
+    //     WebClient client = new WebClient();
+    //     String downloadedString = client.DownloadString("https://www.imdb.com/title/tt6718170/?ref_=hm_fanfav_tt_i_1_pd_fp1");
+    //     System.Console.WriteLine(downloadedString);
+    // }
 }

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Security;
+using System.Text;
 using System.Text.Json;
 
 
@@ -59,4 +61,63 @@ class AccountsLogic
         CurrentAccount = _accounts!.Find(i => i.EmailAddress == email && i.Password == password && i.Type == type);
         return CurrentAccount!;
     }
+
+    public bool PasswordFormatCheck(string password)
+    {
+        string specialchars = @"%!@#$%^&*()?/>.<,:;'\|}]{[_~`+=-";
+        bool result = false;
+            foreach (char charspecial in specialchars)
+            {
+                foreach (char charpass in password)
+                {
+                    if (password.Length > 6 && password.Contains(charspecial))
+                    {
+                        if (char.IsDigit(charpass) && password.Any(char.IsUpper) && password.Any(char.IsLower))
+                        {
+                            result = true;
+                        }
+                    }
+                }
+            }
+        return result;
+    }
+
+    public bool EmailFormatCheck(string email)
+    {
+        string specialchars = "@";
+        bool result = false;
+            foreach (char charspecial in specialchars)
+            {
+                    if (email.Contains(charspecial))
+                    {
+                        result = true;
+                    }
+            }
+        return result;
+    }
+    public SecureString HashedPass()
+        {
+            Console.Write("Password: ");
+            SecureString pass = new SecureString();
+            ConsoleKeyInfo keyInfo;
+            do
+            {
+                keyInfo = Console.ReadKey(true);
+                if (!char.IsControl(keyInfo.KeyChar))
+                {
+                    pass.AppendChar(keyInfo.KeyChar);
+                    Console.Write("*");
+                }
+                else if(keyInfo.Key == ConsoleKey.Backspace && pass.Length > 0)
+                {
+                    pass.RemoveAt(pass.Length - 1);
+                    Console.Write("\b \b");
+                }
+            }
+            while (keyInfo.Key != ConsoleKey.Enter);
+            {
+                return pass;
+            }
+}
+
 }

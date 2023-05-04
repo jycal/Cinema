@@ -8,7 +8,7 @@ static class EnterRoom
     {
         _account = account;
         Console.WriteLine("Welcome to the movie rooms page");
-        Console.WriteLine("Please enter the movie id\n");
+        Console.Write("Please enter the movie id: ");
         int id = int.Parse(Console.ReadLine()!);
         FilmModel film = _filmsLogic.GetById(id);
         if (film == null)
@@ -16,13 +16,12 @@ static class EnterRoom
             Console.WriteLine("No film found with that id");
             Console.WriteLine("Please try again.\n");
             //Write some code to go back to the menu
-            Console.WriteLine("Press any key to go back to the menu");
-            Console.ReadKey();
+            Console.WriteLine("Press any key to go back to the menu...");
+            Console.ReadKey(true);
             Console.Clear();
-            Menu.MainMenu();
             return;
         }
-        Console.WriteLine("Please enter the room number\n");
+        Console.Write("Please enter the room number: ");
 
         int number = int.Parse(Console.ReadLine()!);
         RoomModel room = _roomsLogic.CheckEnter(number);
@@ -33,8 +32,7 @@ static class EnterRoom
 
             Display(room);
             Reserve(room, id);
-            //Write some code to go back to the menu
-            //Menu.Start();
+            return;
         }
         else
         {
@@ -244,7 +242,7 @@ static class EnterRoom
 
     public static void Reserve(RoomModel room, int id)
     {
-        Console.WriteLine("Please enter the seat number:");
+        Console.Write("Please enter the seat number: ");
         int choice = int.Parse(Console.ReadLine()!);
         if (choice <= room.MaxSeats)
         {
@@ -288,9 +286,12 @@ static class EnterRoom
                     seatList.Add(choice);
                     FilmModel film = _filmsLogic.GetById(id);
                     string title = film.Title;
+                    // prchase test
+                    TicketLogic purchaseLogic = new();
+                    double ticketTotal = purchaseLogic.TicketPurchase(room, seatList);
                     // guest naar json sturen
                     string reservationCode = ReservationCodeMaker();
-                    ReservationModel guest = new(1, reservationCode, fullName, email, title, 1, 10, room.Id, seatList, 10);
+                    ReservationModel guest = new(1, reservationCode, fullName, email, title, 1, ticketTotal, room.Id, seatList, 10);
                     GuestLogic logic = new();
                     logic.UpdateList(guest);
                     // mail verzenden
@@ -331,6 +332,8 @@ static class EnterRoom
                 Console.ForegroundColor = ConsoleColor.Green;
                 System.Console.WriteLine("Your reservation has been confirmed and is now guaranteed.");
                 Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine("Press any key to continue...");
+                Console.ReadKey(true);
             }
         }
     }

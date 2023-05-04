@@ -2,6 +2,7 @@
 {
     public static void Main()
     {
-        Menu.Start();
+        CinemaMenus cinemaMenus = new CinemaMenus();
+        cinemaMenus.Start();
     }
 }
