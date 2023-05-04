@@ -47,10 +47,10 @@ class FilmsLogic
 
     }
 
-    public bool DeleteFilm(string title)
+    public bool DeleteFilm(int id)
     {
         //Find if there is already an model with the same id
-        var film = _films.Find(r => r.Title == title);
+        var film = _films.Find(r => r.Id == id);
         if (film == null)
         {
             return false;

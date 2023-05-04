@@ -140,19 +140,5 @@
       380
     ],
     "totalAmount": 1
-  },
-  {
-    "id": 13,
-    "reservationCode": "0S9XO0L",
-    "fullName": "megan",
-    "email": "meganpieters3@gmail.com",
-    "movie": "Avatar: The Way of Water",
-    "ticketAmount": 1,
-    "ticketTotal": 10,
-    "roomNumber": 3,
-    "seats": [
-      344
-    ],
-    "totalAmount": 1
   }
 ]

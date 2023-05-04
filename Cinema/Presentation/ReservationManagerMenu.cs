@@ -64,14 +64,14 @@ public class ReservationManagerMenu
                     Console.Clear();
                     break;
                 case "3":
-                    System.Console.WriteLine("enter email adress");
-                    string email2 = Console.ReadLine()!;
-                    res.DeleteReservation(email2);
-                    Console.WriteLine("Reservation deleted");
-                    Console.WriteLine("");
-                    Console.WriteLine("Press any key to continue...");
-                    Console.ReadKey();
-                    Console.Clear();
+                    // System.Console.WriteLine("enter email adress");
+                    // string email2 = Console.ReadLine()!;
+                    // res.DeleteReservation(email2);
+                    // Console.WriteLine("Reservation deleted");
+                    // Console.WriteLine("");
+                    // Console.WriteLine("Press any key to continue...");
+                    // Console.ReadKey();
+                    // Console.Clear();
                     break;
                 // case "4":
                 //     Console.WriteLine("enter current email adress");

@@ -113,5 +113,22 @@ public class TicketLogic
         return ticketTotal += SnackTotal;
     }
 
+    public void DisplayAll()
+    {
+        Console.WriteLine(@"============================================
+|                                          |
+|                  Seats                   |
+|                                          |
+============================================");
+
+        foreach (TicketModel item in _tickets!)
+        {
+            Console.WriteLine($@"
+ Name: {item.Name}
+ Cost: {item.Cost}
+
+============================================");
+        }
+    }
 }
 

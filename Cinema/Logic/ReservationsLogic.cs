@@ -41,10 +41,10 @@ class ReservationsLogic
 
     }
 
-    public void DeleteReservation(string email)
+    public void DeleteReservation(int id)
     {
         //Find if there is already an model with the same id
-        var reservation = _reservations!.Find(r => r.Email == email);
+        var reservation = _reservations!.Find(r => r.Id == id);
         int index = _reservations.FindIndex(s => s.Id == reservation!.Id);
 
         if (index != -1)
@@ -85,6 +85,8 @@ class ReservationsLogic
                 int Seats = item;
                 double TotalAmount = reservation.TotalAmount;
                 string Overview = $@"
+
+  ID: {ID}
   Movie: {Movie}
   Full Name: {FullName}
   Email: {Email}
@@ -104,5 +106,8 @@ class ReservationsLogic
         return _reservations!.Find(i => i.Email == email)!;
     }
 
-
+    public ReservationModel GetById(int id)
+    {
+        return _reservations!.Find(i => i.Id == id)!;
+    }
 }

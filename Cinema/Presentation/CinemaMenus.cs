@@ -7,6 +7,7 @@ public class CinemaMenus
     private FilmsLogic _filmsLogic = null!;
     private FoodsLogic _foodsLogic = null!;
     private ReservationsLogic _reservationsLogic = null!;
+    private TicketLogic _ticketLogic = null!;
 
     public void Start()
     {
@@ -444,13 +445,18 @@ Not implemented.
             _reservationsLogic = new ReservationsLogic();
         }
 
+        if (_ticketLogic == null)
+        {
+            _ticketLogic = new TicketLogic();
+        }
+
         string prompt = @"============================================
 |                                          |
 |             Advanced Menu                |
 |                                          |
 ============================================
 ";
-        string[] options = { "View all movies", "Add a movie", "Delete a movie", "View all reservations", "Search a reservation", "Delete a reservation", "Go back" };
+        string[] options = { "View all movies", "Add a movie", "Delete a movie", "View all seats", "Change a seat price", "View all reservations", "Search a reservation", "Delete a reservation", "Go back" };
         Menu advancedMenu = new Menu(prompt, options);
         int selectedIndex = advancedMenu.Run();
 
@@ -474,19 +480,28 @@ Not implemented.
                 RunAdvancedMenu();
                 break;
             case 3:
-                ShowReservations();
+                ShowSeatPrices();
                 RunAdvancedMenu();
                 break;
             case 4:
-                SearchReservation();
+                ShowSeatPrices();
+                SetSeatPrice();
                 RunAdvancedMenu();
                 break;
             case 5:
                 ShowReservations();
-                DeleteReservation();
                 RunAdvancedMenu();
                 break;
             case 6:
+                SearchReservation();
+                RunAdvancedMenu();
+                break;
+            case 7:
+                ShowReservations();
+                DeleteReservation();
+                RunAdvancedMenu();
+                break;
+            case 8:
                 RunMenusMenu();
                 break;
         }
@@ -531,9 +546,19 @@ Not implemented.
 
     private void DeleteMovie()
     {
-        Console.Write("Enter the title of the movie: ");
-        string title = Console.ReadLine()!;
-        bool check = _filmsLogic.DeleteFilm(title);
+        Console.Write("Enter the id of the movie: ");
+        string input = Console.ReadLine()!;
+        if (string.IsNullOrEmpty(input))
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("Movie not found");
+            Console.ResetColor();
+            Console.WriteLine("Press any key to continue...");
+            Console.ReadKey(true);
+            return;
+        }
+        int id = Convert.ToInt32(input);
+        bool check = _filmsLogic.DeleteFilm(id);
         if (check == true)
         {
             Console.ForegroundColor = ConsoleColor.Green;
@@ -548,6 +573,50 @@ Not implemented.
         }
         Console.WriteLine("Press any key to continue...");
         Console.ReadKey(true);
+    }
+
+    private void ShowSeatPrices()
+    {
+        _ticketLogic.DisplayAll();
+        Console.WriteLine();
+        Console.WriteLine("Press any key to continue...");
+        Console.ReadKey(true);
+    }
+
+    private void SetSeatPrice()
+    {
+        Console.WriteLine();
+        Console.Write("Enter the name of the seat: ");
+        string name = Console.ReadLine()!;
+        Console.Write("Enter the new price of the seat: ");
+        string input = Console.ReadLine()!;
+        if (string.IsNullOrEmpty(name) || string.IsNullOrEmpty(input))
+        {
+            Console.WriteLine("Name or price cannot be empty!");
+            Console.WriteLine("Press any key to continue...");
+            Console.ReadKey(true);
+            RunAdvancedMenu();
+        }
+        double price = Convert.ToDouble(input);
+        TicketModel ticket = _ticketLogic.GetByName(name);
+        if (ticket is TicketModel)
+        {
+            ticket.Cost = price;
+            _ticketLogic.UpdateList(ticket);
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("Seat price changed!");
+            Console.ResetColor();
+            Console.WriteLine("Press any key to continue...");
+            Console.ReadKey(true);
+        }
+        else
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("No seat with that name was found!");
+            Console.ResetColor();
+            Console.WriteLine("Press any key to continue...");
+            Console.ReadKey(true);
+        }
     }
 
     private void ShowReservations()
@@ -601,13 +670,23 @@ Not implemented.
 
     private void DeleteReservation()
     {
-        Console.Write("Enter email adress: ");
-        string email = Console.ReadLine()!;
-        var reservation = _reservationsLogic.GetByEmail(email);
+        Console.Write("Enter id: ");
+        string input = Console.ReadLine()!;
+        if (string.IsNullOrEmpty(input))
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("Reservation not found");
+            Console.ResetColor();
+            Console.WriteLine("Press any key to continue...");
+            Console.ReadKey(true);
+            return;
+        }
+        int id = Convert.ToInt32(input);
+        var reservation = _reservationsLogic.GetById(id);
         if (reservation != null)
         {
             Console.ForegroundColor = ConsoleColor.Green;
-            _reservationsLogic.DeleteReservation(email);
+            _reservationsLogic.DeleteReservation(id);
             Console.WriteLine("Reservation deleted");
             Console.ResetColor();
         }
