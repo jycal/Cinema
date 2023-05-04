@@ -328,7 +328,7 @@ static class EnterRoom
 
                     int temp_id = film.Id = _reservationsLogic._reservations!.Count > 0 ? _reservationsLogic._reservations.Max(x => x.Id) + 1 : 1;
 
-                    ReservationModel reservation = new(temp_id, reservationCode, _account.FullName, _account.EmailAddress, title, 1, 10, room.Id, seatList, 1);
+                    ReservationModel reservation = new(temp_id, reservationCode, _account.FullName, _account.EmailAddress, title, 1, 10, room.Id, seatList, 10);
                     _reservationsLogic.UpdateList(reservation);
                     bool account = true;
                     MailConformation mailConformation = new MailConformation(_account.EmailAddress, account);
