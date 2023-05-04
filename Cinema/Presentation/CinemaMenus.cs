@@ -1,3 +1,5 @@
+using System.Security;
+
 public class CinemaMenus
 {
     private AccountsLogic _accountsLogic = new AccountsLogic();
@@ -138,15 +140,65 @@ Welcome to Starlight Cinema. What would you like to do?
 |                                          |
 ============================================
 ");
-        Console.Write("Please enter your email address: ");
+        Console.WriteLine("Email address:");
+        Console.ForegroundColor = ConsoleColor.Yellow;
+        Console.WriteLine("-----------------------------");
+        Console.WriteLine("|  Email must contain a @   |");
+        Console.WriteLine("-----------------------------");
+        Console.ResetColor();
         string email = Console.ReadLine()!;
-        Console.Write("Please enter your password: ");
-        string password = Console.ReadLine()!;
-        Console.Write("Please enter your fullname: ");
+        int EmailAttempts = 0;
+        while (_accountsLogic.EmailFormatCheck(email) == false && EmailAttempts < 3)
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("Wrong format! Please enter Email in the correct format...");
+            Console.ResetColor();
+            Console.Write("Email address: ");
+            string Email = Console.ReadLine()!;
+            email = Email;
+            EmailAttempts += 1;
+        }
+        if (EmailAttempts > 3)
+        {
+            Console.Clear();
+        }
+        Console.WriteLine("Please enter your password:");
+        Console.ForegroundColor = ConsoleColor.Yellow;
+        Console.WriteLine("------------------------------------------------------------------------------------------");
+        Console.WriteLine(@"|  Must contain at least one special character(%!@#$%^&*()?/>.<,:;'\|}]{[_~`+=-         |");
+        Console.WriteLine("|   Must be longer than 6 characters                                                     |");
+        Console.WriteLine("|   Must contain at least one number                                                     |");
+        Console.WriteLine("|   One upper case                                                                       |");
+        Console.WriteLine("|   Atleast one lower case                                                               |");
+        Console.WriteLine("------------------------------------------------------------------------------------------");
+        Console.ResetColor();
+        SecureString pass = _accountsLogic.HashedPass();
+        string password = new System.Net.NetworkCredential(string.Empty, pass).Password;
+        int PasswordAttempts = 0;
+        while (_accountsLogic.PasswordFormatCheck(password) == false && PasswordAttempts < 3)
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("Wrong format! Please enter Password in the correct format...");
+            Console.ResetColor();
+            SecureString passs = _accountsLogic.HashedPass();
+            string Password = new System.Net.NetworkCredential(string.Empty, pass).Password;
+            password = Password;
+            PasswordAttempts += 1;
+        }
+        if (PasswordAttempts > 3)
+        {
+            Console.Clear();
+        }
+        Console.WriteLine();
+        Console.WriteLine("Please enter your fullname");
         string firstName = Console.ReadLine()!;
-        Console.Write("Please enter your phone number: ");
+        Console.WriteLine("Please enter your phone number");
         string phoneNumber = Console.ReadLine()!;
-
+        Console.ForegroundColor = ConsoleColor.Yellow;
+        Console.WriteLine($"Congratulations!!\nYour account has been made!\nEnjoy your time at Starlight Cinema ✰⍟✰\n");
+        Console.ResetColor();
+        System.Console.WriteLine();
+        System.Console.WriteLine();
         int id = 0;
         while (true)
         {
@@ -163,11 +215,6 @@ Welcome to Starlight Cinema. What would you like to do?
         List<int> tickets = new List<int>();
         AccountModel account = new AccountModel(id, 1, email, password, firstName, tickets);
         _accountsLogic.UpdateList(account);
-        Console.WriteLine();
-        Console.WriteLine("You have been registered!");
-        Console.WriteLine("Press any key to continue...");
-        Console.ReadKey(true);
-        Console.Clear();
     }
 
     private void RunMenusMenu()
@@ -379,7 +426,7 @@ View movies and order tickets.
         switch (selectedIndex)
         {
             case 0:
-                Catering.ShowInfo();
+                _foodsLogic.DisplayFoodMenu();
                 RunCateringMenu();
                 break;
             case 1:
@@ -430,35 +477,52 @@ Not implemented.
 
     private void RunAdvancedMenu()
     {
-        if (_filmsLogic == null)
-        {
-            _filmsLogic = new FilmsLogic();
-        }
-
-        if (_accountsLogic == null)
-        {
-            _accountsLogic = new AccountsLogic();
-        }
-
-        if (_reservationsLogic == null)
-        {
-            _reservationsLogic = new ReservationsLogic();
-        }
-
-        if (_ticketLogic == null)
-        {
-            _ticketLogic = new TicketLogic();
-        }
-
         string prompt = @"============================================
 |                                          |
 |             Advanced Menu                |
 |                                          |
 ============================================
 ";
-        string[] options = { "View all movies", "Add a movie", "Delete a movie", "View all seats", "Change a seat price", "View all reservations", "Search a reservation", "Delete a reservation", "Go back" };
+        string[] options = { "Advanced Movie Menu", "Advanced Seat Menu", "Advanced Food Menu", "Advanced Reservation Menu", "Go back" };
         Menu advancedMenu = new Menu(prompt, options);
         int selectedIndex = advancedMenu.Run();
+
+        switch (selectedIndex)
+        {
+            case 0:
+                RunAdvancedMovieMenu();
+                break;
+            case 1:
+                RunAdvancedSeatMenu();
+                break;
+            case 2:
+                RunAdvancedFoodMenu();
+                break;
+            case 3:
+                RunAdvancedReservationMenu();
+                break;
+            case 4:
+                RunMenusMenu();
+                break;
+        }
+    }
+
+    private void RunAdvancedMovieMenu()
+    {
+        if (_filmsLogic == null)
+        {
+            _filmsLogic = new FilmsLogic();
+        }
+
+        string prompt = @"============================================
+|                                          |
+|           Advanced Movie Menu            |
+|                                          |
+============================================
+";
+        string[] options = { "View all movies", "Add a movie", "Delete a movie", "Go back" };
+        Menu advancedMovieMenu = new Menu(prompt, options);
+        int selectedIndex = advancedMovieMenu.Run();
 
         switch (selectedIndex)
         {
@@ -466,43 +530,21 @@ Not implemented.
                 _filmsLogic.MovieOverview();
                 Console.WriteLine("\nPress any key to continue...");
                 Console.ReadKey(true);
-                RunAdvancedMenu();
+                RunAdvancedMovieMenu();
                 break;
             case 1:
                 AddMovie();
-                RunAdvancedMenu();
+                RunAdvancedMovieMenu();
                 break;
             case 2:
                 _filmsLogic.MovieOverview();
                 Console.WriteLine("\nPress any key to continue...");
                 Console.ReadKey(true);
                 DeleteMovie();
-                RunAdvancedMenu();
+                RunAdvancedMovieMenu();
                 break;
             case 3:
-                ShowSeatPrices();
                 RunAdvancedMenu();
-                break;
-            case 4:
-                ShowSeatPrices();
-                SetSeatPrice();
-                RunAdvancedMenu();
-                break;
-            case 5:
-                ShowReservations();
-                RunAdvancedMenu();
-                break;
-            case 6:
-                SearchReservation();
-                RunAdvancedMenu();
-                break;
-            case 7:
-                ShowReservations();
-                DeleteReservation();
-                RunAdvancedMenu();
-                break;
-            case 8:
-                RunMenusMenu();
                 break;
         }
     }
@@ -575,6 +617,40 @@ Not implemented.
         Console.ReadKey(true);
     }
 
+    private void RunAdvancedSeatMenu()
+    {
+        if (_ticketLogic == null)
+        {
+            _ticketLogic = new TicketLogic();
+        }
+
+        string prompt = @"============================================
+|                                          |
+|            Advanced Seat Menu            |
+|                                          |
+============================================
+";
+        string[] options = { "View all seats", "Change a seat price", "Go back" };
+        Menu advancedSeatMenu = new Menu(prompt, options);
+        int selectedIndex = advancedSeatMenu.Run();
+
+        switch (selectedIndex)
+        {
+            case 0:
+                ShowSeatPrices();
+                RunAdvancedSeatMenu();
+                break;
+            case 1:
+                ShowSeatPrices();
+                SetSeatPrice();
+                RunAdvancedSeatMenu();
+                break;
+            case 2:
+                RunAdvancedMenu();
+                break;
+        }
+    }
+
     private void ShowSeatPrices()
     {
         _ticketLogic.DisplayAll();
@@ -616,6 +692,82 @@ Not implemented.
             Console.ResetColor();
             Console.WriteLine("Press any key to continue...");
             Console.ReadKey(true);
+        }
+    }
+
+    private void RunAdvancedFoodMenu()
+    {
+        if (_foodsLogic == null)
+        {
+            _foodsLogic = new FoodsLogic();
+        }
+
+        string prompt = @"============================================
+|                                          |
+|            Advanced Food Menu            |
+|                                          |
+============================================
+";
+        string[] options = { "View all food", "Change a food price", "Go back" };
+        Menu advancedFoodMenu = new Menu(prompt, options);
+        int selectedIndex = advancedFoodMenu.Run();
+
+        switch (selectedIndex)
+        {
+            case 0:
+                _foodsLogic.DisplayFoodMenu();
+                RunAdvancedFoodMenu();
+                break;
+            case 1:
+                _foodsLogic.DisplayFoodMenu();
+                SetFoodPrice();
+                RunAdvancedFoodMenu();
+                break;
+            case 2:
+                RunAdvancedMenu();
+                break;
+        }
+    }
+
+    private void SetFoodPrice()
+    {
+        _foodsLogic.ChangePrice();
+    }
+
+    private void RunAdvancedReservationMenu()
+    {
+        if (_reservationsLogic == null)
+        {
+            _reservationsLogic = new ReservationsLogic();
+        }
+
+        string prompt = @"============================================
+|                                          |
+|         Advanced Reservation Menu        |
+|                                          |
+============================================
+";
+        string[] options = { "View all reservations", "Search a reservation", "Delete a reservation", "Go back" };
+        Menu advancedReservationMenu = new Menu(prompt, options);
+        int selectedIndex = advancedReservationMenu.Run();
+
+        switch (selectedIndex)
+        {
+            case 0:
+                ShowReservations();
+                RunAdvancedReservationMenu();
+                break;
+            case 1:
+                SearchReservation();
+                RunAdvancedReservationMenu();
+                break;
+            case 2:
+                DeleteReservation();
+                RunAdvancedReservationMenu();
+                break;
+            case 3:
+                RunAdvancedMenu();
+                break;
         }
     }
 
