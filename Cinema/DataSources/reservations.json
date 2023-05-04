@@ -48,20 +48,6 @@
     "reservationCode": null,
     "fullName": "megan",
     "email": "meganpieters3@gmail.com",
-    "movie": "Creed III",
-    "ticketAmount": 1,
-    "ticketTotal": 10,
-    "roomNumber": 0,
-    "seats": [
-      93
-    ],
-    "totalAmount": 1
-  },
-  {
-    "id": 7,
-    "reservationCode": null,
-    "fullName": "megan",
-    "email": "meganpieters3@gmail.com",
     "movie": "Scream VI",
     "ticketAmount": 1,
     "ticketTotal": 10,
@@ -72,7 +58,7 @@
     "totalAmount": 1
   },
   {
-    "id": 8,
+    "id": 7,
     "reservationCode": "3W21S12",
     "fullName": "megan",
     "email": "meganpieters3@gmail.com",
@@ -86,7 +72,7 @@
     "totalAmount": 1
   },
   {
-    "id": 9,
+    "id": 8,
     "reservationCode": "LTG82W8",
     "fullName": "megan",
     "email": "meganpieters3@gmail.com",
@@ -100,7 +86,7 @@
     "totalAmount": 1
   },
   {
-    "id": 10,
+    "id": 9,
     "reservationCode": "E40RCTX",
     "fullName": "megan",
     "email": "meganpieters3@gmail.com",
@@ -114,7 +100,7 @@
     "totalAmount": 1
   },
   {
-    "id": 11,
+    "id": 10,
     "reservationCode": "ZEJV3M6",
     "fullName": "megan",
     "email": "meganpieters3@gmail.com",
@@ -128,7 +114,7 @@
     "totalAmount": 1
   },
   {
-    "id": 12,
+    "id": 11,
     "reservationCode": "GASRYD2",
     "fullName": "megan",
     "email": "meganpieters3@gmail.com",
@@ -142,7 +128,7 @@
     "totalAmount": 1
   },
   {
-    "id": 13,
+    "id": 12,
     "reservationCode": "SD8LIRW",
     "fullName": "megan",
     "email": "meganpieters3@gmail.com",
@@ -156,7 +142,7 @@
     "totalAmount": 1
   },
   {
-    "id": 14,
+    "id": 13,
     "reservationCode": "0S9XO0L",
     "fullName": "megan",
     "email": "meganpieters3@gmail.com",

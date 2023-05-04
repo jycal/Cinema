@@ -8,10 +8,7 @@
     "ticketAmount": 1,
     "ticketTotal": 10,
     "roomNumber": 0,
-    "seats": [
-      93,
-      95
-    ],
+    "seats": [93, 95],
     "totalAmount": 1
   },
   {
@@ -23,9 +20,7 @@
     "ticketAmount": 1,
     "ticketTotal": 10,
     "roomNumber": 0,
-    "seats": [
-      77
-    ],
+    "seats": [77],
     "totalAmount": 10
   },
   {
@@ -37,9 +32,7 @@
     "ticketAmount": 1,
     "ticketTotal": 10,
     "roomNumber": 0,
-    "seats": [
-      92
-    ],
+    "seats": [92],
     "totalAmount": 10
   },
   {
@@ -51,9 +44,7 @@
     "ticketAmount": 1,
     "ticketTotal": 10,
     "roomNumber": 0,
-    "seats": [
-      111
-    ],
+    "seats": [111],
     "totalAmount": 10
   },
   {
@@ -65,9 +56,7 @@
     "ticketAmount": 1,
     "ticketTotal": 10,
     "roomNumber": 0,
-    "seats": [
-      20
-    ],
+    "seats": [20],
     "totalAmount": 10
   },
   {
@@ -79,9 +68,7 @@
     "ticketAmount": 1,
     "ticketTotal": 10,
     "roomNumber": 0,
-    "seats": [
-      19
-    ],
+    "seats": [19],
     "totalAmount": 10
   },
   {
@@ -93,9 +80,7 @@
     "ticketAmount": 1,
     "ticketTotal": 10,
     "roomNumber": 0,
-    "seats": [
-      1
-    ],
+    "seats": [1],
     "totalAmount": 10
   },
   {
@@ -107,9 +92,7 @@
     "ticketAmount": 1,
     "ticketTotal": 10,
     "roomNumber": 0,
-    "seats": [
-      3
-    ],
+    "seats": [3],
     "totalAmount": 10
   },
   {
@@ -121,9 +104,7 @@
     "ticketAmount": 1,
     "ticketTotal": 10,
     "roomNumber": 0,
-    "seats": [
-      33
-    ],
+    "seats": [33],
     "totalAmount": 10
   },
   {
@@ -135,9 +116,7 @@
     "ticketAmount": 1,
     "ticketTotal": 10,
     "roomNumber": 0,
-    "seats": [
-      78
-    ],
+    "seats": [78],
     "totalAmount": 10
   },
   {
@@ -149,9 +128,7 @@
     "ticketAmount": 1,
     "ticketTotal": 10,
     "roomNumber": 0,
-    "seats": [
-      22
-    ],
+    "seats": [22],
     "totalAmount": 10
   },
   {
@@ -163,9 +140,7 @@
     "ticketAmount": 1,
     "ticketTotal": 10,
     "roomNumber": 0,
-    "seats": [
-      34
-    ],
+    "seats": [34],
     "totalAmount": 10
   },
   {
@@ -177,9 +152,7 @@
     "ticketAmount": 1,
     "ticketTotal": 10,
     "roomNumber": 0,
-    "seats": [
-      80
-    ],
+    "seats": [80],
     "totalAmount": 10
   },
   {
@@ -191,9 +164,7 @@
     "ticketAmount": 1,
     "ticketTotal": 10,
     "roomNumber": 0,
-    "seats": [
-      48
-    ],
+    "seats": [48],
     "totalAmount": 10
   },
   {
@@ -205,9 +176,7 @@
     "ticketAmount": 1,
     "ticketTotal": 10,
     "roomNumber": 0,
-    "seats": [
-      47
-    ],
+    "seats": [47],
     "totalAmount": 10
   },
   {
@@ -219,9 +188,7 @@
     "ticketAmount": 1,
     "ticketTotal": 10,
     "roomNumber": 0,
-    "seats": [
-      108
-    ],
+    "seats": [108],
     "totalAmount": 10
   },
   {
@@ -233,9 +200,7 @@
     "ticketAmount": 1,
     "ticketTotal": 10,
     "roomNumber": 0,
-    "seats": [
-      69
-    ],
+    "seats": [69],
     "totalAmount": 10
   },
   {
@@ -247,9 +212,7 @@
     "ticketAmount": 1,
     "ticketTotal": 10,
     "roomNumber": 0,
-    "seats": [
-      136
-    ],
+    "seats": [136],
     "totalAmount": 10
   },
   {
@@ -261,9 +224,7 @@
     "ticketAmount": 1,
     "ticketTotal": 10,
     "roomNumber": 0,
-    "seats": [
-      227
-    ],
+    "seats": [227],
     "totalAmount": 10
   },
   {
@@ -275,9 +236,7 @@
     "ticketAmount": 1,
     "ticketTotal": 10,
     "roomNumber": 2,
-    "seats": [
-      199
-    ],
+    "seats": [199],
     "totalAmount": 10
   },
   {
@@ -289,9 +248,7 @@
     "ticketAmount": 1,
     "ticketTotal": 10,
     "roomNumber": 3,
-    "seats": [
-      411
-    ],
+    "seats": [411],
     "totalAmount": 10
   },
   {
@@ -303,9 +260,7 @@
     "ticketAmount": 1,
     "ticketTotal": 10,
     "roomNumber": 3,
-    "seats": [
-      222
-    ],
+    "seats": [222],
     "totalAmount": 10
   },
   {
@@ -317,9 +272,7 @@
     "ticketAmount": 1,
     "ticketTotal": 10,
     "roomNumber": 2,
-    "seats": [
-      222
-    ],
+    "seats": [222],
     "totalAmount": 10
   },
   {
@@ -331,9 +284,7 @@
     "ticketAmount": 1,
     "ticketTotal": 10,
     "roomNumber": 2,
-    "seats": [
-      223
-    ],
+    "seats": [223],
     "totalAmount": 10
   },
   {
@@ -345,9 +296,7 @@
     "ticketAmount": 1,
     "ticketTotal": 17,
     "roomNumber": 1,
-    "seats": [
-      52
-    ],
+    "seats": [52],
     "totalAmount": 10
   },
   {
@@ -359,9 +308,7 @@
     "ticketAmount": 1,
     "ticketTotal": 10,
     "roomNumber": 1,
-    "seats": [
-      73
-    ],
+    "seats": [73],
     "totalAmount": 10
   }
 ]

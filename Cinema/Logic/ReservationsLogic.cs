@@ -66,8 +66,15 @@ class ReservationsLogic
     public static void ReservationOverview()
     {
         var ReservationsFromJson = ReservationAccess.LoadAll();
+        Console.ForegroundColor = ConsoleColor.Magenta;
+        Console.WriteLine(@"==================================================
+|                                                 |
+|                  Reservations                   |
+|                                                 |
+==================================================");
         foreach (ReservationModel reservation in ReservationsFromJson)
         {
+
             foreach (var item in reservation.Seats)
             {
                 int ID = reservation.Id;
@@ -77,17 +84,14 @@ class ReservationsLogic
                 int TicketAmount = reservation.TicketAmount;
                 int Seats = item;
                 double TotalAmount = reservation.TotalAmount;
-                Console.ForegroundColor = ConsoleColor.Magenta;
                 string Overview = $@"
-==================================================
-|            CURRENT Reservation OVERVIEW        |
-==================================================
   Movie: {Movie}
   Full Name: {FullName}
   Email: {Email}
   Ticket Amount: {TicketAmount}
   Seats: {Seats}
   Total Money Amount: {TotalAmount}
+
 ==================================================";
                 Console.WriteLine(Overview);
                 Console.ResetColor();
