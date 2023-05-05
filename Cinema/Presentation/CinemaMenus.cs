@@ -69,17 +69,17 @@ Welcome to Starlight Cinema. What would you like to do?
     private void DisplayContactInfo()
     {
         Console.WriteLine(@"============================================
-|                                          |
-|            Cinema information            |
-|                                          |
-============================================
-|                                          |
-| Phone number:  +31-655-574-244.          |
-| Location:      Wijnhaven 107,            |
-|                3011 WN  in Rotterdam     |
-| Email:         StartLightCinema@STC.com  |
-|                                          |
-============================================
+|                                              |
+|            Cinema information                |
+|                                              |
+================================================
+|                                              |
+| Phone number:  +31-655-574-244.              |
+| Location:      Wijnhaven 107,                |
+|                3011 WN  in Rotterdam         |
+| Email:         CinemaStarlightinfo@gmail.com |
+|                                              |
+================================================
 ");
         Console.WriteLine("Press any key to continue...");
         Console.ReadKey(true);
@@ -487,12 +487,14 @@ View movies and order tickets.
     {
         Console.WriteLine("What is your reservation code?");
         string? reservationCode = Console.ReadLine();
-        if (_account != null)
+        // var guestCheck = _guestLogic.GetByCode(reservationCode!);
+        var accCheck = _reservationsLogic.GetByCode(reservationCode!);
+        if (accCheck != null)
         {
             _reservationsLogic.DeleteReservationByCode(reservationCode!);
 
         }
-        else if (_account == null)
+        else if (accCheck == null)
         {
             _guestLogic.DeleteReservation(reservationCode!);
             // Console.Clear();

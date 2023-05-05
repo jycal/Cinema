@@ -12,15 +12,15 @@
     "Cost": 5.95
   },
   {
-    "Name": "Nachos Chico (inclusief 1 dip)",
+    "Name": "Nachos Chico (including 1 dip)",
     "Cost": 4.99
   },
   {
-    "Name": "Nachos Grande (inclusief 2 dips)",
+    "Name": "Nachos Grande (including 2 dips)",
     "Cost": 7.25
   },
   {
-    "Name": "Swirls ijs",
+    "Name": "Swirls icecream",
     "Cost": 5.99
   },
   {
@@ -64,15 +64,15 @@
     "Cost": 4.5
   },
   {
-    "Name": "Soju Lycee (1 fles)",
+    "Name": "Soju Lycee (1 bottle)",
     "Cost": 11.99
   },
   {
-    "Name": "Soju Raspberry (1 fles)",
+    "Name": "Soju Raspberry (1 bottle)",
     "Cost": 12.99
   },
   {
-    "Name": "Soju Pineapple (1 fles)",
+    "Name": "Soju Pineapple (1 bottle)",
     "Cost": 12.99
   }
 ]

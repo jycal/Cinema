@@ -168,19 +168,5 @@
       497
     ],
     "totalAmount": 1
-  },
-  {
-    "id": 16,
-    "reservationCode": "KR5K6WM",
-    "fullName": "xyz",
-    "email": "jyczhangnl@gmail.com",
-    "movie": "Cocaine Bear",
-    "ticketAmount": 1,
-    "ticketTotal": 10,
-    "roomNumber": 2,
-    "seats": [
-      243
-    ],
-    "totalAmount": 1
   }
 ]

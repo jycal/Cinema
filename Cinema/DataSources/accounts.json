@@ -37,7 +37,9 @@
     "emailAddress": "meganpieters3@gmail.com",
     "password": "may",
     "fullName": "megan",
-    "ticketList": []
+    "ticketList": [
+      17
+    ]
   },
   {
     "id": 5,
@@ -48,5 +50,13 @@
     "ticketList": [
       16
     ]
+  },
+  {
+    "id": 6,
+    "type": 1,
+    "emailAddress": "1031469@hr.nl",
+    "password": "rggr89]",
+    "fullName": "megan pieters",
+    "ticketList": []
   }
 ]
