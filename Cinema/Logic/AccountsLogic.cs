@@ -66,58 +66,105 @@ class AccountsLogic
     {
         string specialchars = @"%!@#$%^&*()?/>.<,:;'\|}]{[_~`+=-";
         bool result = false;
-            foreach (char charspecial in specialchars)
+        foreach (char charspecial in specialchars)
+        {
+            foreach (char charpass in password)
             {
-                foreach (char charpass in password)
+                if (password.Length > 6 && password.Contains(charspecial))
                 {
-                    if (password.Length > 6 && password.Contains(charspecial))
+                    if (char.IsDigit(charpass) && password.Any(char.IsUpper) && password.Any(char.IsLower))
                     {
-                        if (char.IsDigit(charpass) && password.Any(char.IsUpper) && password.Any(char.IsLower))
-                        {
-                            result = true;
-                        }
+                        result = true;
                     }
                 }
             }
+        }
         return result;
+    }
+
+    public void ShowReservations(string email)
+    {
+
+        List<ReservationModel> reservations = new();
+        var ReservationsFromJson = ReservationAccess.LoadAll();
+        foreach (ReservationModel reservation in ReservationsFromJson)
+        {
+            if (reservation.Email == email)
+            {
+                reservations.Add(reservation);
+            }
+        }
+        Console.ForegroundColor = ConsoleColor.Magenta;
+        Console.WriteLine(@"==================================================
+|                                                 |
+|                  Reservations                   |
+|                                                 |
+==================================================");
+        foreach (ReservationModel res in reservations)
+        {
+
+            foreach (var item in res.Seats)
+            {
+                int ID = res.Id;
+                string Movie = res.Movie;
+                string FullName = res.FullName;
+                string Email = res.Email;
+                int TicketAmount = res.TicketAmount;
+                int Seats = item;
+                double TotalAmount = res.TotalAmount;
+                string Overview = $@"
+
+  ID: {ID}
+  Movie: {Movie}
+  Full Name: {FullName}
+  Email: {Email}
+  Ticket Amount: {TicketAmount}
+  Seats: {Seats}
+  Total Money Amount: {TotalAmount}
+
+==================================================";
+                Console.WriteLine(Overview);
+                Console.ResetColor();
+            }
+        }
     }
 
     public bool EmailFormatCheck(string email)
     {
         string specialchars = "@";
         bool result = false;
-            foreach (char charspecial in specialchars)
+        foreach (char charspecial in specialchars)
+        {
+            if (email.Contains(charspecial))
             {
-                    if (email.Contains(charspecial))
-                    {
-                        result = true;
-                    }
+                result = true;
             }
+        }
         return result;
     }
     public SecureString HashedPass()
+    {
+        Console.Write("Password: ");
+        SecureString pass = new SecureString();
+        ConsoleKeyInfo keyInfo;
+        do
         {
-            Console.Write("Password: ");
-            SecureString pass = new SecureString();
-            ConsoleKeyInfo keyInfo;
-            do
+            keyInfo = Console.ReadKey(true);
+            if (!char.IsControl(keyInfo.KeyChar))
             {
-                keyInfo = Console.ReadKey(true);
-                if (!char.IsControl(keyInfo.KeyChar))
-                {
-                    pass.AppendChar(keyInfo.KeyChar);
-                    Console.Write("*");
-                }
-                else if(keyInfo.Key == ConsoleKey.Backspace && pass.Length > 0)
-                {
-                    pass.RemoveAt(pass.Length - 1);
-                    Console.Write("\b \b");
-                }
+                pass.AppendChar(keyInfo.KeyChar);
+                Console.Write("*");
             }
-            while (keyInfo.Key != ConsoleKey.Enter);
+            else if (keyInfo.Key == ConsoleKey.Backspace && pass.Length > 0)
             {
-                return pass;
+                pass.RemoveAt(pass.Length - 1);
+                Console.Write("\b \b");
             }
-}
+        }
+        while (keyInfo.Key != ConsoleKey.Enter);
+        {
+            return pass;
+        }
+    }
 
 }
