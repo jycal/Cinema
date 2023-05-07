@@ -31,8 +31,10 @@ static class EnterRoom
             Console.WriteLine("Welcome to room " + room.RoomNumber);
             Console.WriteLine($"This room has {room.MaxSeats} seats");
 
+            int currentSeat = 0;
+
             Display(room);
-            Reserve(room, id);
+            Reserve(room, id, currentSeat);
             //Write some code to go back to the menu
             //Menu.Start();
         }
@@ -133,119 +135,146 @@ static class EnterRoom
     //     Console.ForegroundColor = ConsoleColor.White;
     //     Console.WriteLine(lineSep);
     // }
-
-
     public static void Display(RoomModel room)
     {
         List<int> reservedSeats = room.Seats;
         List<int> vipSeats = room.VipSeats;
         List<int> disabledSeats = room.DisabledSeats;
-        List<int> comfortSeats = room.ComfortSeats;
         int amountOfSeats = room.MaxSeats;
-        string lineSep = "\n---------------------------------------------------------------------------------------------------------------------------------------";
-        Console.ForegroundColor = ConsoleColor.Yellow;
-        Console.WriteLine("■: Unreserved seat");
-        Console.ForegroundColor = ConsoleColor.DarkGray;
-        Console.WriteLine("■: Reserved seat");
-        Console.ForegroundColor = ConsoleColor.Red;
-        Console.WriteLine("♥: VIP seat");
-        Console.ForegroundColor = ConsoleColor.DarkRed;
-        Console.WriteLine("♥: Comfort seat");
-        Console.ForegroundColor = ConsoleColor.Blue;
-        Console.WriteLine("▲: Disability seat");
-        Console.ForegroundColor = ConsoleColor.White;
-        Console.WriteLine("                                                                Screen");
+        int currentSeat = -1;
 
-        double row = 1;
-        // double plus;
-        // // if movie is in the big room increment with 0.05 (20 seats per row)
-        // if (room.Id == 3)
-        // {
-        //     plus = 0.05;
-        // }
-        // // else 15 seats per row
-        // else { plus = 0.0666666667; }
+        Console.CursorVisible = false;
 
-        for (int i = 1; i <= amountOfSeats; i++)
+        while (true)
         {
-            // increment rows
-            // row += plus;
-            // string rows = row.ToString("0");
+            Console.Clear();
 
-            if (i == 1 || (i - 1) % 15 == 0)
-            {
-                Console.ForegroundColor = ConsoleColor.White;
-                Console.WriteLine(lineSep);
-                string rowHeader = $"|{"Row: " + row,15}: |";
-                Console.Write(rowHeader);
-                row++;
-            }
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine("■: Unreserved seat");
+            Console.ForegroundColor = ConsoleColor.DarkGray;
+            Console.WriteLine("■: Reserved seat");
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("♥: VIP seat");
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("▲: Disability seat");
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine("                                                            Screen");
 
-            // check if chair in list
-            if (reservedSeats.Contains(i))
+            double row = 1;
+            double plus;
+            if (room.Id == 3)
             {
-                // reserved seat = gray
-                Console.ForegroundColor = ConsoleColor.DarkGray;
-                var reservedSeat = "■";
-                if (vipSeats.Contains(i))
-                {
-                    char vipSeat = '♥';
-                    Console.Write($"{i,5} {vipSeat}");
-                }
-                else if (comfortSeats.Contains(i))
-                {
-                    char comfortSeat = '♥';
-                    // Console.ForegroundColor = ConsoleColor.DarkYellow;
-                    Console.Write($"{i,5} {comfortSeat}");
-                }
-                else if (disabledSeats.Contains(i))
-                {
-                    // disability seats = green
-                    char disabilitySeat = '▲';
-                    Console.Write($"{i,5} {disabilitySeat}");
-                }
-                else
-                { Console.Write($"{i,5} {reservedSeat}"); }
+                plus = 0.05;
             }
             else
             {
-                // unreserved seat = yellow
-                Console.ForegroundColor = ConsoleColor.Yellow;
-                var unreservedSeat = "■";
-                if (vipSeats.Contains(i))
+                plus = 0.0666666667;
+            }
+            for (int i = 0; i < amountOfSeats; i++)
+            {
+                row += plus;
+                string rows = row.ToString("0");
+
+                if (i % 15 == 0)
                 {
-                    // vip seat = rood
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    char vipSeat = '♥';
-                    Console.Write($"{i,5} {vipSeat}");
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.WriteLine("\n---------------------------------------------------------------------------------------------------------------------------------------");
+                    string rowHeader = $"|{"Row: " + rows,15}: |";
+                    Console.Write(rowHeader);
                 }
-                else if (comfortSeats.Contains(i))
+
+                if (i == currentSeat)
                 {
-                    char comfortSeat = '♥';
-                    Console.ForegroundColor = ConsoleColor.DarkRed;
-                    Console.Write($"{i,5} {comfortSeat}");
+                    Console.BackgroundColor = ConsoleColor.DarkGray;
                 }
-                else if (disabledSeats.Contains(i))
+
+                if (reservedSeats.Contains(i))
                 {
-                    // disability seats = green
-                    char disabilitySeat = '▲';
-                    Console.ForegroundColor = ConsoleColor.Blue;
-                    Console.Write($"{i,5} {disabilitySeat}");
+                    Console.ForegroundColor = ConsoleColor.DarkGray;
+                    var reservedSeat = "■";
+
+                    if (vipSeats.Contains(i))
+                    {
+                        char vipSeat = '♥';
+                        Console.Write($"{i,5} {vipSeat}");
+                    }
+                    else if (disabledSeats.Contains(i))
+                    {
+                        char disabilitySeat = '▲';
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.Write($"{i,5} {disabilitySeat}");
+                    }
+                    else
+                    {
+                        Console.Write($"{i,5} {reservedSeat}");
+                    }
                 }
                 else
-                { Console.Write($"{i,5} {unreservedSeat}"); }
+                {
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    var unreservedSeat = "■";
+
+                    if (vipSeats.Contains(i))
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        char vipSeat = '♥';
+                        Console.Write($"{i,5} {vipSeat}");
+                    }
+                    else
+                    {
+                        Console.Write($"{i,5} {unreservedSeat}");
+                    }
+                }
+
+                Console.BackgroundColor = ConsoleColor.Black;
             }
 
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine("\n---------------------------------------------------------------------------------------------------------------------------------------");
+
+            Console.WriteLine("Use arrow keys to navigate. Press ENTER to reserve the selected seat.");
+
+            ConsoleKeyInfo keyInfo = Console.ReadKey(true);
+
+            switch (keyInfo.Key)
+            {
+                case ConsoleKey.UpArrow:
+                    if (currentSeat >= 15)
+                    {
+                        currentSeat -= 15;
+                    }
+                    break;
+                case ConsoleKey.DownArrow:
+                    if (currentSeat < amountOfSeats - 15)
+                    {
+                        currentSeat += 15;
+                    }
+                    break;
+                case ConsoleKey.LeftArrow:
+                    if (currentSeat > 0)
+                    {
+                        currentSeat--;
+                    }
+                    break;
+                case ConsoleKey.RightArrow:
+                    if (currentSeat < amountOfSeats - 1)
+                    {
+                        currentSeat++;
+                    }
+                    break;
+                case ConsoleKey.Enter:
+                    if (currentSeat >= 0 && currentSeat < amountOfSeats && !reservedSeats.Contains(currentSeat))
+                    {
+                        room.Seats.Add(currentSeat);
+                        Console.WriteLine("Seat reserved");
+                    }
+                    break;
+            }
         }
-        Console.ForegroundColor = ConsoleColor.White;
-        Console.WriteLine(lineSep);
     }
-
-
-    public static void Reserve(RoomModel room, int id)
+    public static void Reserve(RoomModel room, int id, int currentSeat)
     {
-        Console.WriteLine("Please enter the seat number:");
-        int choice = int.Parse(Console.ReadLine()!);
+        int choice = currentSeat;
         if (choice <= room.MaxSeats)
         {
             if (room.Seats.Contains(choice) && choice != 0)
