@@ -4,9 +4,10 @@ using System.Linq;
 using System.Threading.Tasks;
 
 
-class ReservationsLogic
+public class ReservationsLogic
 {
     public List<ReservationModel>? _reservations;
+    public RevenueLogic _revenueLogic;
 
     //Static properties are shared across all instances of the class
     //This can be used to get the current logged in account from anywhere in the program
@@ -15,6 +16,16 @@ class ReservationsLogic
 
     public ReservationsLogic()
     {
+        if (CinemaMenus._revenueLogic == null)
+        {
+            CinemaMenus._revenueLogic = new RevenueLogic();
+            _revenueLogic = CinemaMenus._revenueLogic;
+        }
+        else
+        {
+            _revenueLogic = CinemaMenus._revenueLogic;
+        }
+
         _reservations = ReservationAccess.LoadAll();
     }
 
@@ -51,6 +62,7 @@ class ReservationsLogic
         {
             //update existing model
             // _films[index] = film;
+            _revenueLogic.RemoveRevenue(reservation!.RevenueId);
             _reservations.RemoveAt(index);
             _reservations.ForEach((x) => { if (x.Id > reservation!.Id) x.Id = x.Id - 1; });
             ReservationAccess.WriteAll(_reservations);
@@ -74,6 +86,7 @@ class ReservationsLogic
             {
                 //update existing model
                 // _films[index] = film;
+                _revenueLogic.RemoveRevenue(reservation!.RevenueId);
                 _reservations.RemoveAt(index);
                 _reservations.ForEach((x) => { if (x.Id > reservation!.Id) x.Id = x.Id - 1; });
                 ReservationAccess.WriteAll(_reservations);

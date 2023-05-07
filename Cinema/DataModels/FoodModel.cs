@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 
-class FoodModel
+public class FoodModel
 {
     [JsonPropertyName("Name")]
     public string Name { get; set; }

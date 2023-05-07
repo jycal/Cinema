@@ -1,10 +1,54 @@
 static class EnterRoom
 {
     static private RoomsLogic _roomsLogic = new();
-    static private FilmsLogic _filmsLogic = new();
-    static private ReservationsLogic _reservationsLogic = new();
+    static private FilmsLogic _filmsLogic;
+    static private ReservationsLogic _reservationsLogic;
+    static private RevenueLogic _revenueLogic;
     static private AccountModel _account = null!;
-    static private AccountsLogic _accountsLogic = new();
+    static private AccountsLogic _accountsLogic;
+
+    static EnterRoom()
+    {
+        if (CinemaMenus._filmsLogic == null)
+        {
+            CinemaMenus._filmsLogic = new FilmsLogic();
+            _filmsLogic = CinemaMenus._filmsLogic;
+        }
+        else
+        {
+            _filmsLogic = CinemaMenus._filmsLogic;
+        }
+
+        if (CinemaMenus._reservationsLogic == null)
+        {
+            CinemaMenus._reservationsLogic = new ReservationsLogic();
+            _reservationsLogic = CinemaMenus._reservationsLogic;
+        }
+        else
+        {
+            _reservationsLogic = CinemaMenus._reservationsLogic;
+        }
+
+        if (CinemaMenus._revenueLogic == null)
+        {
+            CinemaMenus._revenueLogic = new RevenueLogic();
+            _revenueLogic = CinemaMenus._revenueLogic;
+        }
+        else
+        {
+            _revenueLogic = CinemaMenus._revenueLogic;
+        }
+
+        if (CinemaMenus._accountsLogic == null)
+        {
+            CinemaMenus._accountsLogic = new AccountsLogic();
+            _accountsLogic = CinemaMenus._accountsLogic;
+        }
+        else
+        {
+            _accountsLogic = CinemaMenus._accountsLogic;
+        }
+    }
 
     public static void Start(AccountModel account)
     {
@@ -291,9 +335,13 @@ static class EnterRoom
                     // prchase test
                     TicketLogic purchaseLogic = new();
                     double ticketTotal = purchaseLogic.TicketPurchase(room, seatList);
+                    // revenue vastmeten
+                    int temp_rev_id = _revenueLogic._revenueList!.Count > 0 ? _revenueLogic._revenueList.Max(x => x.Id) + 1 : 1;
+                    RevenueModel revenue = new(temp_rev_id, Convert.ToDecimal(ticketTotal));
+                    _revenueLogic.UpdateList(revenue);
                     // guest naar json sturen
                     string reservationCode = ReservationCodeMaker();
-                    ReservationModel guest = new(1, reservationCode, fullName, email, title, 1, ticketTotal, room.Id, seatList, 10);
+                    ReservationModel guest = new(1, reservationCode, fullName, email, title, 1, ticketTotal, room.Id, seatList, 10, temp_rev_id);
                     GuestLogic logic = new();
                     logic.UpdateList(guest);
                     // mail verzenden
@@ -324,11 +372,19 @@ static class EnterRoom
                     string title = film.Title;
                     List<int> seatList = new();
                     seatList.Add(choice);
+                    // prchase test
+                    TicketLogic purchaseLogic = new();
+                    double ticketTotal = purchaseLogic.TicketPurchase(room, seatList);
+                    // revenue vastmeten
+                    int temp_rev_id = _revenueLogic._revenueList!.Count > 0 ? _revenueLogic._revenueList.Max(x => x.Id) + 1 : 1;
+                    RevenueModel revenue = new(temp_rev_id, Convert.ToDecimal(ticketTotal));
+                    _revenueLogic.UpdateList(revenue);
+                    // naar json versturen
                     string reservationCode = ReservationCodeMaker();
 
                     int temp_id = film.Id = _reservationsLogic._reservations!.Count > 0 ? _reservationsLogic._reservations.Max(x => x.Id) + 1 : 1;
 
-                    ReservationModel reservation = new(temp_id, reservationCode, _account.FullName, _account.EmailAddress, title, 1, 10, room.Id, seatList, 10);
+                    ReservationModel reservation = new(temp_id, reservationCode, _account.FullName, _account.EmailAddress, title, 1, ticketTotal, room.Id, seatList, 10, temp_rev_id);
                     _reservationsLogic.UpdateList(reservation);
                     bool account = true;
                     MailConformation mailConformation = new MailConformation(_account.EmailAddress, account);

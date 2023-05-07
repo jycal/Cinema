@@ -1,23 +1,24 @@
 using System.Security;
 
-public class CinemaMenus
+public static class CinemaMenus
 {
-    private AccountsLogic _accountsLogic = new AccountsLogic();
-    private AccountModel _account = null!;
+    public static AccountsLogic _accountsLogic = new AccountsLogic();
+    public static AccountModel _account = null!;
 
     // instantiated when needed
-    private GuestLogic _guestLogic = new GuestLogic();
-    private FilmsLogic _filmsLogic = null!;
-    private FoodsLogic _foodsLogic = null!;
-    private ReservationsLogic _reservationsLogic = null!;
-    private TicketLogic _ticketLogic = null!;
+    public static GuestLogic _guestLogic = new GuestLogic();
+    public static FilmsLogic _filmsLogic = null!;
+    public static FoodsLogic _foodsLogic = null!;
+    public static ReservationsLogic _reservationsLogic = null!;
+    public static RevenueLogic _revenueLogic = null!;
+    public static TicketLogic _ticketLogic = null!;
 
-    public void Start()
+    public static void Start()
     {
         RunMainMenu();
     }
 
-    private void RunMainMenu()
+    private static void RunMainMenu()
     {
         // if logged in logout
         _account = null!;
@@ -57,7 +58,7 @@ Welcome to Starlight Cinema. What would you like to do?
         }
     }
 
-    private void ExitCinema()
+    private static void ExitCinema()
     {
         Console.WriteLine("Thank you for visiting Starlight Cinema. We hope to see you again soon!");
         Console.WriteLine("Press any key to exit...");
@@ -66,7 +67,7 @@ Welcome to Starlight Cinema. What would you like to do?
         Environment.Exit(0);
     }
 
-    private void DisplayContactInfo()
+    private static void DisplayContactInfo()
     {
         Console.WriteLine(@"============================================
 |                                              |
@@ -86,7 +87,7 @@ Welcome to Starlight Cinema. What would you like to do?
         Console.Clear();
     }
 
-    private void Login()
+    private static void Login()
     {
         Console.WriteLine(@"============================================
 |                                          |
@@ -133,7 +134,7 @@ Welcome to Starlight Cinema. What would you like to do?
         Console.Clear();
     }
 
-    private void Register()
+    private static void Register()
     {
         Console.WriteLine(@"============================================
 |                                          |
@@ -196,10 +197,9 @@ Welcome to Starlight Cinema. What would you like to do?
         Console.WriteLine("Please enter your phone number");
         string phoneNumber = Console.ReadLine()!;
         Console.ForegroundColor = ConsoleColor.Yellow;
-        Console.WriteLine($"Congratulations!!\nYour account has been made!\nEnjoy your time at Starlight Cinema ✰⍟✰\n");
+        // ✰⍟✰
+        Console.WriteLine($"Congratulations!!\nYour account has been made!\nEnjoy your time at Starlight Cinema");
         Console.ResetColor();
-        System.Console.WriteLine();
-        System.Console.WriteLine();
         int id = 0;
         while (true)
         {
@@ -216,9 +216,11 @@ Welcome to Starlight Cinema. What would you like to do?
         List<int> tickets = new List<int>();
         AccountModel account = new AccountModel(id, 1, email, password, firstName, tickets);
         _accountsLogic.UpdateList(account);
+        Console.WriteLine("Press any key to continue...");
+        Console.ReadKey(true);
     }
 
-    private void RunMenusMenu()
+    private static void RunMenusMenu()
     {
         string prompt = @"============================================
 |                                          |
@@ -328,7 +330,7 @@ Welcome to Starlight Cinema. What would you like to do?
         }
     }
 
-    private void RunMovieMenu()
+    private static void RunMovieMenu()
     {
         if (_filmsLogic == null)
         {
@@ -370,7 +372,7 @@ View movies and order tickets.
         }
     }
 
-    private void ShowMovies(int type)
+    private static void ShowMovies(int type)
     {
         switch (type)
         {
@@ -397,7 +399,7 @@ View movies and order tickets.
         }
     }
 
-    private void OrderSeats()
+    private static void OrderSeats()
     {
         Console.Write("\nDo you want to order seats? (type yes to confirm): ");
         string answer = Console.ReadLine()!;
@@ -407,7 +409,7 @@ View movies and order tickets.
         }
     }
 
-    private void RunCateringMenu()
+    private static void RunCateringMenu()
     {
         if (_foodsLogic == null)
         {
@@ -454,7 +456,7 @@ View movies and order tickets.
         }
     }
 
-    private void RunTicketMenu()
+    private static void RunTicketMenu()
     {
         if (_reservationsLogic == null)
         {
@@ -483,7 +485,7 @@ View movies and order tickets.
         }
     }
 
-    private void CancelTicket()
+    private static void CancelTicket()
     {
         Console.WriteLine("What is your reservation code?");
         string? reservationCode = Console.ReadLine();
@@ -505,7 +507,7 @@ View movies and order tickets.
         Console.Clear();
     }
 
-    private void RunAdvancedMenu()
+    private static void RunAdvancedMenu()
     {
         string prompt = @"============================================
 |                                          |
@@ -513,7 +515,7 @@ View movies and order tickets.
 |                                          |
 ============================================
 ";
-        string[] options = { "Advanced Movie Menu", "Advanced Seat Menu", "Advanced Food Menu", "Advanced Reservation Menu", "Go back" };
+        string[] options = { "Advanced Movie Menu", "Advanced Seat Menu", "Advanced Food Menu", "Advanced Reservation Menu", "Advanced Revenue Menu", "Go back" };
         Menu advancedMenu = new Menu(prompt, options);
         int selectedIndex = advancedMenu.Run();
 
@@ -532,12 +534,15 @@ View movies and order tickets.
                 RunAdvancedReservationMenu();
                 break;
             case 4:
+                RunAdvancedRevenueMenu();
+                break;
+            case 5:
                 RunMenusMenu();
                 break;
         }
     }
 
-    private void RunAdvancedMovieMenu()
+    private static void RunAdvancedMovieMenu()
     {
         if (_filmsLogic == null)
         {
@@ -579,7 +584,7 @@ View movies and order tickets.
         }
     }
 
-    private void AddMovie()
+    private static void AddMovie()
     {
         Console.Write("Enter the title of the movie: ");
         string title = Console.ReadLine()!;
@@ -616,7 +621,7 @@ View movies and order tickets.
         Console.ReadKey(true);
     }
 
-    private void DeleteMovie()
+    private static void DeleteMovie()
     {
         Console.Write("Enter the id of the movie: ");
         string input = Console.ReadLine()!;
@@ -647,7 +652,7 @@ View movies and order tickets.
         Console.ReadKey(true);
     }
 
-    private void RunAdvancedSeatMenu()
+    private static void RunAdvancedSeatMenu()
     {
         if (_ticketLogic == null)
         {
@@ -681,7 +686,7 @@ View movies and order tickets.
         }
     }
 
-    private void ShowSeatPrices()
+    private static void ShowSeatPrices()
     {
         _ticketLogic.DisplayAll();
         Console.WriteLine();
@@ -689,7 +694,7 @@ View movies and order tickets.
         Console.ReadKey(true);
     }
 
-    private void SetSeatPrice()
+    private static void SetSeatPrice()
     {
         Console.WriteLine();
         Console.Write("Enter the name of the seat: ");
@@ -725,7 +730,7 @@ View movies and order tickets.
         }
     }
 
-    private void RunAdvancedFoodMenu()
+    private static void RunAdvancedFoodMenu()
     {
         if (_foodsLogic == null)
         {
@@ -759,12 +764,12 @@ View movies and order tickets.
         }
     }
 
-    private void SetFoodPrice()
+    private static void SetFoodPrice()
     {
         _foodsLogic.ChangePrice();
     }
 
-    private void RunAdvancedReservationMenu()
+    private static void RunAdvancedReservationMenu()
     {
         if (_reservationsLogic == null)
         {
@@ -801,7 +806,7 @@ View movies and order tickets.
         }
     }
 
-    private void ShowReservations()
+    private static void ShowReservations()
     {
         ReservationsLogic.ReservationOverview();
         Console.WriteLine();
@@ -809,7 +814,7 @@ View movies and order tickets.
         Console.ReadKey(true);
     }
 
-    private void SearchReservation()
+    private static void SearchReservation()
     {
         Console.Write("Enter email adress: ");
         string email = Console.ReadLine()!;
@@ -850,7 +855,7 @@ View movies and order tickets.
         Console.ReadKey(true);
     }
 
-    private void DeleteReservation()
+    private static void DeleteReservation()
     {
         Console.Write("Enter id: ");
         string input = Console.ReadLine()!;
@@ -881,4 +886,43 @@ View movies and order tickets.
         Console.WriteLine("Press any key to continue...");
         Console.ReadKey(true);
     }
+
+    private static void RunAdvancedRevenueMenu()
+    {
+        if (_revenueLogic == null)
+        {
+            _revenueLogic = new RevenueLogic();
+        }
+
+        string prompt = @"============================================
+|                                          |
+|                 Revenue                  |
+|                                          |
+============================================
+";
+        string[] options = { "View revenue", "Go back" };
+        Menu advancedReservationMenu = new Menu(prompt, options);
+        int selectedIndex = advancedReservationMenu.Run();
+
+        switch (selectedIndex)
+        {
+            case 0:
+                ShowRevenue();
+                RunAdvancedRevenueMenu();
+                break;
+            case 1:
+                RunAdvancedMenu();
+                break;
+        }
+    }
+
+    private static void ShowRevenue()
+    {
+        decimal revenue = _revenueLogic.TotalRevenue();
+        Console.WriteLine($"Total revenue: {revenue}");
+        Console.WriteLine();
+        Console.WriteLine("Press any key to continue...");
+        Console.ReadKey(true);
+    }
+
 }

@@ -21,7 +21,10 @@
     "emailAddress": "g@b.c",
     "password": "xyz",
     "fullName": "George Washington",
-    "ticketList": []
+    "ticketList": [
+      1,
+      1
+    ]
   },
   {
     "id": 0,

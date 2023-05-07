@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 
 
-class FilmModel
+public class FilmModel
 {
     [JsonPropertyName("id")]
     public int Id { get; set; }

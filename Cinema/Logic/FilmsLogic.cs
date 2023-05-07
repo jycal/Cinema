@@ -8,7 +8,7 @@ using System.IO;
 using System.Text;
 using Newtonsoft.Json;
 
-class FilmsLogic
+public class FilmsLogic
 {
     private string CurrentMovieOverview = @"============================================
 |                                          |

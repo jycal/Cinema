@@ -1,5 +1,5 @@
 //This class is not static so later on we can use inheritance and interfaces
-class FoodsLogic
+public class FoodsLogic
 {
     public List<FoodModel>? _foods;
     private static AccountModel _account = null!;
