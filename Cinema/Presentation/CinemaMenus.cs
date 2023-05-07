@@ -342,7 +342,7 @@ Welcome to Starlight Cinema. What would you like to do?
 |               Movie Menu                 |
 |                                          |
 ============================================
-View movies and order tickets.
+View movies and order.
 ";
         string[] options = { "Show all movies", "Show movies sorted by title", "Search movies by title", "Search movies by genre", "Go back" };
         Menu movieMenu = new Menu(prompt, options);
@@ -378,34 +378,43 @@ View movies and order tickets.
         {
             case 0:
                 _filmsLogic.MovieOverview();
-                OrderSeats();
+                OrderSeatConfirm();
                 break;
             case 1:
                 _filmsLogic.MovieSortedByABCTitle();
-                OrderSeats();
+                OrderSeatConfirm();
                 break;
             case 2:
                 Console.Write("Please enter the title: ");
                 string title = Console.ReadLine()!;
                 _filmsLogic.SearchByTitle(title);
-                OrderSeats();
+                OrderSeatConfirm();
                 break;
             case 3:
                 Console.Write("Please enter the genre: ");
                 string genre = Console.ReadLine()!;
                 _filmsLogic.SearchByGenre(genre);
-                OrderSeats();
+                OrderSeatConfirm();
                 break;
         }
     }
 
-    private static void OrderSeats()
+    private static void OrderSeatConfirm()
     {
-        Console.Write("\nDo you want to order seats? (type yes to confirm): ");
-        string answer = Console.ReadLine()!;
-        if (answer == "yes")
+        Console.Write("\nDo you want to order seats? (Y/N): ");
+        string answer = Console.ReadLine()!.ToUpper();
+        if (answer == "Y")
         {
             EnterRoom.Start(_account);
+        }
+        else if (answer == "N")
+        {
+            RunMovieMenu();
+        }
+        else
+        {
+            Console.WriteLine("Invalid input!");
+            OrderSeatConfirm();
         }
     }
 
@@ -416,11 +425,17 @@ View movies and order tickets.
             _foodsLogic = new FoodsLogic();
         }
 
+        if (_revenueLogic == null)
+        {
+            _revenueLogic = new RevenueLogic();
+        }
+
         string prompt = @"============================================
 |                                          |
 |              Catering Menu               |
 |                                          |
 ============================================
+View menu and order.
 ";
         string[] options = { "Show current menu", "Search product by name", "Go back" };
         Menu cateringMenu = new Menu(prompt, options);
@@ -430,29 +445,79 @@ View movies and order tickets.
         {
             case 0:
                 _foodsLogic.DisplayFoodMenu();
+                OrderFoodConfirm();
                 RunCateringMenu();
                 break;
             case 1:
-                Console.Write("Please enter the name: ");
-                string name = Console.ReadLine()!;
-                FoodModel food = _foodsLogic.GetByName(name);
-                if (food is FoodModel)
-                {
-                    Console.WriteLine($"{food.Name}: {food.Cost}");
-                    Console.WriteLine("Press any key to continue...");
-                    Console.ReadKey(true);
-                }
-                else
-                {
-                    Console.WriteLine("No food with that name was found!");
-                    Console.WriteLine("Press any key to continue...");
-                    Console.ReadKey(true);
-                }
+                SearchProduct();
+                OrderFoodConfirm();
                 RunCateringMenu();
                 break;
             case 2:
                 RunMenusMenu();
                 break;
+        }
+    }
+
+    private static void SearchProduct()
+    {
+        Console.Write("Please enter the name: ");
+        string name = Console.ReadLine()!;
+        FoodModel food = _foodsLogic.GetByName(name);
+        if (food is FoodModel)
+        {
+            Console.WriteLine($"{food.Name}: {food.Cost}");
+            Console.WriteLine("Press any key to continue...");
+            Console.ReadKey(true);
+        }
+        else
+        {
+            Console.WriteLine("No food with that name was found!");
+            Console.WriteLine("Press any key to continue...");
+            Console.ReadKey(true);
+        }
+    }
+
+    private static void OrderFoodConfirm()
+    {
+        Console.Write("\nDo you want to order food? (Y/N): ");
+        string answer = Console.ReadLine()!.ToUpper();
+        if (answer == "Y")
+        {
+            OrderFood();
+        }
+        else if (answer == "N")
+        {
+            RunCateringMenu();
+        }
+        else
+        {
+            Console.WriteLine("Invalid input!");
+            OrderFoodConfirm();
+        }
+    }
+
+    private static void OrderFood()
+    {
+        Console.Write("Enter name of item: ");
+        string name = Console.ReadLine()!;
+        FoodModel food = _foodsLogic.GetByName(name);
+        if (food is FoodModel)
+        {
+            int temp_id = _revenueLogic._revenueList!.Count > 0 ? _revenueLogic._revenueList.Max(x => x.Id) + 1 : 1;
+            RevenueModel revenue = new RevenueModel(temp_id, Convert.ToDecimal(food.Cost));
+            _revenueLogic.UpdateList(revenue);
+
+            string code = EnterRoom.ReservationCodeMaker();
+            Console.WriteLine($"Your reservation code is: {code}");
+            Console.WriteLine("Press any key to continue...");
+            Console.ReadKey(true);
+        }
+        else
+        {
+            Console.WriteLine("No food with that name was found!");
+            Console.WriteLine("Press any key to continue...");
+            Console.ReadKey(true);
         }
     }
 
