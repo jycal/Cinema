@@ -61,7 +61,7 @@ static class EnterRoom
         int numTickets = int.Parse(Console.ReadLine()!);
 
         List<int> selectedSeats = new List<int>();
-        while (selectedSeats.Count <= numTickets)
+        while (selectedSeats.Count < numTickets)
         {
             Console.Clear();
 
@@ -103,6 +103,9 @@ static class EnterRoom
                 {
                     Console.BackgroundColor = ConsoleColor.DarkGray;
                 }
+
+                if (selectedSeats.Contains(i))
+                { Console.BackgroundColor = ConsoleColor.DarkGreen; }
 
                 if (reservedSeats.Contains(i))
                 {
@@ -182,7 +185,7 @@ static class EnterRoom
                     if (!reservedSeats.Contains(currentSeat))
                     {
                         selectedSeats.Add(currentSeat);
-                        System.Console.WriteLine(selectedSeats);
+                        // System.Console.WriteLine(selectedSeats);
                         if (currentSeat >= 0 && currentSeat < amountOfSeats)
                         {
                             if (selectedSeats.Count == numTickets)
@@ -253,7 +256,7 @@ static class EnterRoom
             string title = film.Title;
             // guest naar json sturen
             string reservationCode = ReservationCodeMaker();
-            ReservationModel guest = new(1, reservationCode, fullName, email, title, 1, 10, room.Id, seatList, 10);
+            ReservationModel guest = new(1, reservationCode, fullName, email, title, seatList.Count, 10, room.Id, seatList, 10);
             GuestLogic logic = new();
             logic.UpdateList(guest);
             // mail verzenden
