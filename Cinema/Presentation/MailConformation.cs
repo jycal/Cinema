@@ -68,11 +68,9 @@ public class MailConformation
         string image = GetPicture(reservation!.Movie);
         string body = MailAccess.LoadAll();
         body = body.Replace("movieName", reservation!.Movie);
-        foreach (var item in reservation.Seats)
-        {
-            int Seats = item;
-            body = body.Replace("seatNumbers", $"{Convert.ToString(Seats)}/");
-        }
+
+        body = body.Replace("seatNumbers", $"{Convert.ToString(string.Join("/", reservation.Seats))}");
+
         body = body.Replace("ticketAmount", Convert.ToString(reservation!.TicketAmount));
         body = body.Replace("ticketTotal", Convert.ToString(reservation!.TicketTotal));
         body = body.Replace("totalAmount", Convert.ToString(reservation!.TotalAmount));
