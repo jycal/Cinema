@@ -91,6 +91,7 @@ static class EnterRoom
         List<int> reservedSeats = room.Seats;
         List<int> vipSeats = room.VipSeats;
         List<int> disabledSeats = room.DisabledSeats;
+        List<int> comfortSeats = room.ComfortSeats;
         int amountOfSeats = room.MaxSeats;
         int currentSeat = -1;
 
@@ -109,7 +110,9 @@ static class EnterRoom
             Console.ForegroundColor = ConsoleColor.DarkGray;
             Console.WriteLine("■: Reserved seat");
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("♥: VIP seat");
+            Console.WriteLine("■: VIP seat");
+            Console.ForegroundColor = ConsoleColor.DarkRed;
+            Console.WriteLine("■: Comfort seat");
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("▲: Disability seat");
             Console.ForegroundColor = ConsoleColor.White;
@@ -152,15 +155,21 @@ static class EnterRoom
 
                     if (vipSeats.Contains(i))
                     {
-                        char vipSeat = '♥';
+                        char vipSeat = '■';
                         Console.Write($"{i,5} {vipSeat}");
                     }
                     else if (disabledSeats.Contains(i))
                     {
                         char disabilitySeat = '▲';
-                        Console.ForegroundColor = ConsoleColor.Green;
                         Console.Write($"{i,5} {disabilitySeat}");
                     }
+                    else if (comfortSeats.Contains(i))
+                    {
+                        char comfortSeat = '■';
+                        // Console.ForegroundColor = ConsoleColor.DarkYellow;
+                        Console.Write($"{i,5} {comfortSeat}");
+                    }
+
                     else
                     {
                         Console.Write($"{i,5} {reservedSeat}");
@@ -174,9 +183,22 @@ static class EnterRoom
                     if (vipSeats.Contains(i))
                     {
                         Console.ForegroundColor = ConsoleColor.Red;
-                        char vipSeat = '♥';
+                        char vipSeat = '■';
                         Console.Write($"{i,5} {vipSeat}");
                     }
+                    else if (comfortSeats.Contains(i))
+                    {
+                        char comfortSeat = '■';
+                        Console.ForegroundColor = ConsoleColor.DarkMagenta;
+                        Console.Write($"{i,5} {comfortSeat}");
+                    }
+                    else if (disabledSeats.Contains(i))
+                    {
+                        char disabilitySeat = '▲';
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.Write($"{i,5} {disabilitySeat}");
+                    }
+
                     else
                     {
                         Console.Write($"{i,5} {unreservedSeat}");
