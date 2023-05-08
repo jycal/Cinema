@@ -1,9 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Text.Json;
-
-
 //This class is not static so later on we can use inheritance and interfaces
 class FoodsLogic
 {
@@ -54,13 +48,12 @@ class FoodsLogic
 
     public double GetTotalPrice(string name)
     {
-        FoodModel item = GetByName(name);
-        TotalAmount += item.Cost;
-        // foreach (FoodModel food in _foods)
-        // {
-        //     food.Cost += TotalAmount;
-        //     return TotalAmount;
-        // }
+        double TotalAmount = 0;
+        foreach (FoodModel food in _foods)
+        {
+            food.Cost += TotalAmount;
+            return TotalAmount;
+        }
         return TotalAmount;
     }
 
@@ -81,7 +74,6 @@ class FoodsLogic
                         FoodModel food = new FoodModel(secondanswer, thirdanswer);
                         UpdateList(food);
                     }
-                    Console.WriteLine("Food item not found. Please check our menu.");
                 }
             }
             if (firstanswer.ToUpper() == "N")
@@ -90,4 +82,23 @@ class FoodsLogic
             }
     }
 
+    public void DisplayFoodMenu()
+    {
+        Console.WriteLine(@"============================================
+|                                           |
+|                   Menu                    |
+|                                           |
+============================================");
+
+        foreach (var food in _foods!)
+        {
+            Console.WriteLine($@"
+ {food.Name}: {food.Cost}
+
+============================================");
+        }
+        Console.WriteLine();
+        Console.WriteLine("Press any key to continue...");
+        Console.ReadKey(true);
+    }
 }

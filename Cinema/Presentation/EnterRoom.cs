@@ -4,11 +4,13 @@ static class EnterRoom
     static private FilmsLogic _filmsLogic = new();
     static private ReservationsLogic _reservationsLogic = new();
     static private AccountModel _account = null!;
+    static private AccountsLogic _accountsLogic = new();
+
     public static void Start(AccountModel account)
     {
         _account = account;
         Console.WriteLine("Welcome to the movie rooms page");
-        Console.WriteLine("Please enter the movie id\n");
+        Console.Write("Please enter the movie id: ");
         int id = int.Parse(Console.ReadLine()!);
         FilmModel film = _filmsLogic.GetById(id);
         if (film == null)
@@ -16,13 +18,12 @@ static class EnterRoom
             Console.WriteLine("No film found with that id");
             Console.WriteLine("Please try again.\n");
             //Write some code to go back to the menu
-            Console.WriteLine("Press any key to go back to the menu");
-            Console.ReadKey();
+            Console.WriteLine("Press any key to go back to the menu...");
+            Console.ReadKey(true);
             Console.Clear();
-            Menu.MainMenu();
             return;
         }
-        Console.WriteLine("Please enter the room number\n");
+        Console.Write("Please enter the room number: ");
 
         int number = int.Parse(Console.ReadLine()!);
         RoomModel room = _roomsLogic.CheckEnter(number);
@@ -33,8 +34,7 @@ static class EnterRoom
 
             Display(room);
             Reserve(room, id);
-            //Write some code to go back to the menu
-            //Menu.Start();
+            return;
         }
         else
         {
@@ -140,6 +140,7 @@ static class EnterRoom
         List<int> reservedSeats = room.Seats;
         List<int> vipSeats = room.VipSeats;
         List<int> disabledSeats = room.DisabledSeats;
+        List<int> comfortSeats = room.ComfortSeats;
         int amountOfSeats = room.MaxSeats;
         string lineSep = "\n---------------------------------------------------------------------------------------------------------------------------------------";
         Console.ForegroundColor = ConsoleColor.Yellow;
@@ -148,10 +149,12 @@ static class EnterRoom
         Console.WriteLine("■: Reserved seat");
         Console.ForegroundColor = ConsoleColor.Red;
         Console.WriteLine("♥: VIP seat");
-        Console.ForegroundColor = ConsoleColor.Green;
+        Console.ForegroundColor = ConsoleColor.DarkRed;
+        Console.WriteLine("♥: Comfort seat");
+        Console.ForegroundColor = ConsoleColor.Blue;
         Console.WriteLine("▲: Disability seat");
         Console.ForegroundColor = ConsoleColor.White;
-        Console.WriteLine("                                                            Screen");
+        Console.WriteLine("                                                                Screen");
 
         double row = 1;
         // double plus;
@@ -189,11 +192,16 @@ static class EnterRoom
                     char vipSeat = '♥';
                     Console.Write($"{i,5} {vipSeat}");
                 }
+                else if (comfortSeats.Contains(i))
+                {
+                    char comfortSeat = '♥';
+                    // Console.ForegroundColor = ConsoleColor.DarkYellow;
+                    Console.Write($"{i,5} {comfortSeat}");
+                }
                 else if (disabledSeats.Contains(i))
                 {
                     // disability seats = green
                     char disabilitySeat = '▲';
-                    Console.ForegroundColor = ConsoleColor.Green;
                     Console.Write($"{i,5} {disabilitySeat}");
                 }
                 else
@@ -211,6 +219,19 @@ static class EnterRoom
                     char vipSeat = '♥';
                     Console.Write($"{i,5} {vipSeat}");
                 }
+                else if (comfortSeats.Contains(i))
+                {
+                    char comfortSeat = '♥';
+                    Console.ForegroundColor = ConsoleColor.DarkRed;
+                    Console.Write($"{i,5} {comfortSeat}");
+                }
+                else if (disabledSeats.Contains(i))
+                {
+                    // disability seats = green
+                    char disabilitySeat = '▲';
+                    Console.ForegroundColor = ConsoleColor.Blue;
+                    Console.Write($"{i,5} {disabilitySeat}");
+                }
                 else
                 { Console.Write($"{i,5} {unreservedSeat}"); }
             }
@@ -223,7 +244,7 @@ static class EnterRoom
 
     public static void Reserve(RoomModel room, int id)
     {
-        Console.WriteLine("Please enter the seat number:");
+        Console.Write("Please enter the seat number: ");
         int choice = int.Parse(Console.ReadLine()!);
         if (choice <= room.MaxSeats)
         {
@@ -237,46 +258,99 @@ static class EnterRoom
             }
             else
             {
+
                 if (_account == null)
                 {
-                    // guest
+                    // gegevens vragen
                     Console.Write("Enter email: ");
                     string email = Console.ReadLine()!;
+                    Console.Write("Enter full name: ");
+                    string fullName = Console.ReadLine()!;
+                    // payment 
                     Console.WriteLine("Press enter to continue...");
                     Console.ReadLine();
                     Console.Clear();
+                    Console.WriteLine("\n--------------------------------");
+                    Console.WriteLine("         PAYMENT OPTIONS         ");
+                    Console.WriteLine("--------------------------------");
+                    Console.WriteLine("1. Paypal");
+                    Console.WriteLine("2. Ideal");
+                    Console.WriteLine("--------------------------------");
+                    Console.Write("Enter your choice of payment: ");
+                    string? answer2 = Console.ReadLine();
+                    Console.Clear();
+                    Payment.PaymentWithPayPal(answer2!);
+                    Payment.PaymentWithIdeal(answer2!);
+                    room.Seats.Add(choice);
+                    _roomsLogic.UpdateList(room);
+                    // info naar guest json sturen
                     List<int> seatList = new();
                     seatList.Add(choice);
-                    GuestModel guest = new(1, email, seatList);
+                    FilmModel film = _filmsLogic.GetById(id);
+                    string title = film.Title;
+                    // prchase test
+                    TicketLogic purchaseLogic = new();
+                    double ticketTotal = purchaseLogic.TicketPurchase(room, seatList);
+                    // guest naar json sturen
+                    string reservationCode = ReservationCodeMaker();
+                    ReservationModel guest = new(1, reservationCode, fullName, email, title, 1, ticketTotal, room.Id, seatList, 10);
                     GuestLogic logic = new();
                     logic.UpdateList(guest);
+                    // mail verzenden
+                    bool account = false;
+                    MailConformation mailConformation = new MailConformation(email, account);
+                    mailConformation.SendMailConformation();
                 }
-                Console.WriteLine("\n--------------------------------");
-                Console.WriteLine("         PAYMENT OPTIONS         ");
-                Console.WriteLine("--------------------------------");
-                Console.WriteLine("1. Paypal");
-                Console.WriteLine("2. Ideal");
-                Console.WriteLine("--------------------------------");
-                Console.Write("Enter your choice of payment: ");
-                string? answer = Console.ReadLine();
-                Console.Clear();
-                Payment.PaymentWithPayPal(answer!);
-                Payment.PaymentWithIdeal(answer!);
 
-                System.Console.WriteLine("Your reservation has been confirmed and is now guaranteed.");
-                room.Seats.Add(choice);
-                _roomsLogic.UpdateList(room);
-                if (_account != null)
+                else if (_account != null)
                 {
+                    Console.WriteLine("\n--------------------------------");
+                    Console.WriteLine("         PAYMENT OPTIONS         ");
+                    Console.WriteLine("--------------------------------");
+                    Console.WriteLine("1. Paypal");
+                    Console.WriteLine("2. Ideal");
+                    Console.WriteLine("--------------------------------");
+                    Console.Write("Enter your choice of payment: ");
+                    string? answer = Console.ReadLine();
+                    Console.Clear();
+                    Payment.PaymentWithPayPal(answer!);
+                    Payment.PaymentWithIdeal(answer!);
+
+
+                    room.Seats.Add(choice);
+                    _roomsLogic.UpdateList(room);
+                    // film moet nog aan room gekoppeld worden dus nu title handmatig
                     FilmModel film = _filmsLogic.GetById(id);
                     string title = film.Title;
                     List<int> seatList = new();
                     seatList.Add(choice);
-                    ReservationModel reservation = new(1, _account.FullName, _account.EmailAddress, title, 1, seatList, 1);
+                    string reservationCode = ReservationCodeMaker();
+
+                    int temp_id = film.Id = _reservationsLogic._reservations!.Count > 0 ? _reservationsLogic._reservations.Max(x => x.Id) + 1 : 1;
+
+                    ReservationModel reservation = new(temp_id, reservationCode, _account.FullName, _account.EmailAddress, title, 1, 10, room.Id, seatList, 10);
                     _reservationsLogic.UpdateList(reservation);
+                    bool account = true;
+                    MailConformation mailConformation = new MailConformation(_account.EmailAddress, account);
+                    mailConformation.SendMailConformation();
+                    _account.TicketList.Add(temp_id);
+                    _accountsLogic.UpdateList(_account);
                 }
-                Console.WriteLine("Reservation succeeded");
+                Console.ForegroundColor = ConsoleColor.Green;
+                System.Console.WriteLine("Your reservation has been confirmed and is now guaranteed.");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine("Press any key to continue...");
+                Console.ReadKey(true);
             }
         }
+    }
+
+    public static string ReservationCodeMaker()
+    {
+        Random random = new Random();
+        const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        int length = 7;
+        return new string(Enumerable.Repeat(chars, length)
+            .Select(s => s[random.Next(s.Length)]).ToArray());
     }
 }

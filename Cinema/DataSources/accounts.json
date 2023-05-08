@@ -34,89 +34,19 @@
   {
     "id": 4,
     "type": 1,
-    "emailAddress": "aryanjd@gmail.com",
-    "password": "Appelboom@3",
-    "fullName": "Aryan",
+    "emailAddress": "meganpieters3@gmail.com",
+    "password": "may",
+    "fullName": "megan",
     "ticketList": []
   },
   {
     "id": 5,
     "type": 1,
-    "emailAddress": "aryanjd@gmail.com",
-    "password": "",
-    "fullName": "Aryan Jadoenath",
-    "ticketList": []
-  },
-  {
-    "id": 6,
-    "type": 1,
-    "emailAddress": "meganpieters3@gmail.com",
-    "password": "MeganPieters@3",
-    "fullName": "Megan Pieters",
-    "ticketList": []
-  },
-  {
-    "id": 7,
-    "type": 1,
-    "emailAddress": "eiueuiie",
-    "password": "E22yssh@jsjs",
-    "fullName": "siisis",
-    "ticketList": []
-  },
-  {
-    "id": 8,
-    "type": 1,
-    "emailAddress": "djdjjdjd",
-    "password": "WIo2@dkdkd",
-    "fullName": "asjksks",
-    "ticketList": []
-  },
-  {
-    "id": 9,
-    "type": 1,
-    "emailAddress": "jhdchjujza",
-    "password": "P2@dp[epeoe",
-    "fullName": "pddpdppdpd",
-    "ticketList": []
-  },
-  {
-    "id": 10,
-    "type": 1,
-    "emailAddress": "kkdkdfsfs",
-    "password": "ssdkasD@222",
-    "fullName": "dfiid",
-    "ticketList": []
-  },
-  {
-    "id": 11,
-    "type": 1,
-    "emailAddress": "orogdjfjvfj",
-    "password": "2@esrtsysA",
-    "fullName": "jwjdjddd",
-    "ticketList": []
-  },
-  {
-    "id": 12,
-    "type": 1,
-    "emailAddress": "dijdjscjsdds",
-    "password": "W@2djdidejidei",
-    "fullName": "okwodkdkdodw",
-    "ticketList": []
-  },
-  {
-    "id": 13,
-    "type": 1,
-    "emailAddress": "idiedajdijs",
-    "password": "F@#3jdjddd",
-    "fullName": "skdkkddk",
-    "ticketList": []
-  },
-  {
-    "id": 14,
-    "type": 1,
-    "emailAddress": "megan@gmail.com",
-    "password": "M2@ganA",
-    "fullName": "Megan Pieters",
-    "ticketList": []
+    "emailAddress": "jyczhangnl@gmail.com",
+    "password": "xyz",
+    "fullName": "xyz",
+    "ticketList": [
+      16
+    ]
   }
 ]

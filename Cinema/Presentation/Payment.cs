@@ -16,7 +16,7 @@ public static class Payment
                 bank = Console.ReadLine()!;
                 if (bank! == "0")
                 {
-                    Menu.MainMenu();
+                    return;
                 }
                 if (bank!.Length == 4)
                 {
