@@ -137,7 +137,7 @@ static class EnterRoom
     //     Console.ForegroundColor = ConsoleColor.White;
     //     Console.WriteLine(lineSep);
     // }
-    public static void Display(RoomModel room)
+  public static void Display(RoomModel room)
     {
 
         List<int> reservedSeats = room.Seats;
@@ -148,7 +148,11 @@ static class EnterRoom
 
         Console.CursorVisible = false;
 
-        while (true)
+        Console.WriteLine("How many tickets would you like to order?");
+        int numTickets = int.Parse(Console.ReadLine());
+
+        List<int> selectedSeats = new List<int>();
+        while (selectedSeats.Count < numTickets)
         {
             Console.Clear();
 
@@ -268,16 +272,37 @@ static class EnterRoom
                 case ConsoleKey.Enter:
                     if (currentSeat >= 0 && currentSeat < amountOfSeats && !reservedSeats.Contains(currentSeat))
                     {
-                        Reserve(room, id, currentSeat);
-                        room.Seats.Add(currentSeat);
+                        if (selectedSeats.Count == numTickets)
+                        {
+                            Console.Clear();
+                            Console.WriteLine($"You have selected the following seats: {string.Join(",", selectedSeats)}");
+
+                            Console.WriteLine("\nPress any key to confirm your reservation.");
+                            Console.ReadKey(true);
+
+                            foreach (var seat in selectedSeats)
+                            {
+                                Reserve(room, id, seat);
+                                room.Seats.Add(seat);
+                            }
+
+                            Console.WriteLine("Reservation successful! Press any key to return to the main menu.");
+                            Console.ReadKey(true);
+
+                            return;
+                        }
+
+                        selectedSeats.Add(currentSeat);
                     }
                     break;
             }
         }
     }
+
     public static void Reserve(RoomModel room, int id, int currentSeat)
     {
         int choice = currentSeat;
+        Console.WriteLine(choice);
         if (choice <= room.MaxSeats)
         {
             if (room.Seats.Contains(choice) && choice != 0)
