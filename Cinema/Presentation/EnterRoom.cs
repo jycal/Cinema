@@ -98,7 +98,6 @@ static class EnterRoom
                     string rowHeader = $"|{"Row: " + rows,15}: |";
                     Console.Write(rowHeader);
                 }
-
                 if (i == currentSeat)
                 {
                     Console.BackgroundColor = ConsoleColor.DarkGray;
@@ -144,8 +143,10 @@ static class EnterRoom
                         Console.Write($"{i,5} {unreservedSeat}");
                     }
                 }
-
-                Console.BackgroundColor = ConsoleColor.Black;
+                if (i == currentSeat)
+                {
+                    Console.BackgroundColor = ConsoleColor.Black;
+                }
             }
 
             Console.ForegroundColor = ConsoleColor.White;
