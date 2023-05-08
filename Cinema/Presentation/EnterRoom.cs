@@ -6,6 +6,8 @@ static class EnterRoom
     static private RevenueLogic _revenueLogic;
     static private AccountModel _account = null!;
     static private AccountsLogic _accountsLogic;
+    static private GuestLogic _guestLogic;
+    static private TicketLogic _ticketLogic;
 
     static EnterRoom()
     {
@@ -47,6 +49,26 @@ static class EnterRoom
         else
         {
             _accountsLogic = CinemaMenus._accountsLogic;
+        }
+
+        if (CinemaMenus._guestLogic == null)
+        {
+            CinemaMenus._guestLogic = new GuestLogic();
+            _guestLogic = CinemaMenus._guestLogic;
+        }
+        else
+        {
+            _guestLogic = CinemaMenus._guestLogic;
+        }
+
+        if (CinemaMenus._ticketLogic == null)
+        {
+            CinemaMenus._ticketLogic = new TicketLogic();
+            _ticketLogic = CinemaMenus._ticketLogic;
+        }
+        else
+        {
+            _ticketLogic = CinemaMenus._ticketLogic;
         }
     }
 
@@ -323,8 +345,7 @@ static class EnterRoom
             // info naar guest json sturen
             string title = film.Title;
             // prchase test
-            TicketLogic purchaseLogic = new();
-            double ticketTotal = purchaseLogic.TicketPurchase(room, seatList);
+            double ticketTotal = _ticketLogic.TicketPurchase(room, seatList);
             // revenue vastmeten
             int temp_rev_id = _revenueLogic._revenueList!.Count > 0 ? _revenueLogic._revenueList.Max(x => x.Id) + 1 : 1;
             RevenueModel revenue = new(temp_rev_id, Convert.ToDecimal(ticketTotal));
@@ -335,8 +356,7 @@ static class EnterRoom
             // guest naar json sturen
             string reservationCode = ReservationCodeMaker();
             ReservationModel guest = new(1, reservationCode, fullName, email, title, seatList.Count, ticketTotal, room.Id, seatList, totalAmount, temp_rev_id);
-            GuestLogic logic = new();
-            logic.UpdateList(guest);
+            _guestLogic.UpdateList(guest);
             // mail verzenden
             bool account = false;
             MailConformation mailConformation = new MailConformation(email, account);
@@ -366,8 +386,7 @@ static class EnterRoom
             string title = film.Title;
 
             // prchase test
-            TicketLogic purchaseLogic = new();
-            double ticketTotal = purchaseLogic.TicketPurchase(room, seatList);
+            double ticketTotal = _ticketLogic.TicketPurchase(room, seatList);
             // revenue vastmeten
             int temp_rev_id = _revenueLogic._revenueList!.Count > 0 ? _revenueLogic._revenueList.Max(x => x.Id) + 1 : 1;
             RevenueModel revenue = new(temp_rev_id, Convert.ToDecimal(ticketTotal));

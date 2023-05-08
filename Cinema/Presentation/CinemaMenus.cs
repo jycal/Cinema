@@ -528,6 +528,16 @@ View menu and order.
             _reservationsLogic = new ReservationsLogic();
         }
 
+        if (_guestLogic == null)
+        {
+            _guestLogic = new GuestLogic();
+        }
+
+        if (_revenueLogic == null)
+        {
+            _revenueLogic = new RevenueLogic();
+        }
+
         string prompt = @"============================================
 |                                          |
 |              Ticket Menu                 |

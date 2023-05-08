@@ -80,10 +80,7 @@ public class GuestLogic
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine($"\nReservation not found\n");
             Console.ForegroundColor = ConsoleColor.White;
-
         }
-
-
     }
 
     public ReservationModel GetByEmail(string email)

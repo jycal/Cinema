@@ -61,5 +61,15 @@
     "password": "rggr89]",
     "fullName": "megan pieters",
     "ticketList": []
+  },
+  {
+    "id": 7,
+    "type": 1,
+    "emailAddress": "bob@com.c",
+    "password": "ABCDef12#",
+    "fullName": "Bob",
+    "ticketList": [
+      1
+    ]
   }
 ]
