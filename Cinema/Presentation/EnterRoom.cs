@@ -4,6 +4,8 @@ static class EnterRoom
     static private FilmsLogic _filmsLogic = new();
     static private ReservationsLogic _reservationsLogic = new();
     static private AccountModel _account = null!;
+    private static int id;
+
     public static void Start(AccountModel account)
     {
         _account = account;
@@ -137,6 +139,7 @@ static class EnterRoom
     // }
     public static void Display(RoomModel room)
     {
+
         List<int> reservedSeats = room.Seats;
         List<int> vipSeats = room.VipSeats;
         List<int> disabledSeats = room.DisabledSeats;
@@ -265,8 +268,8 @@ static class EnterRoom
                 case ConsoleKey.Enter:
                     if (currentSeat >= 0 && currentSeat < amountOfSeats && !reservedSeats.Contains(currentSeat))
                     {
+                        Reserve(room, id, currentSeat);
                         room.Seats.Add(currentSeat);
-                        Console.WriteLine("Seat reserved");
                     }
                     break;
             }
