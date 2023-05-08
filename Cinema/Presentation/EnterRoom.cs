@@ -98,12 +98,10 @@ static class EnterRoom
                     string rowHeader = $"|{"Row: " + rows,15}: |";
                     Console.Write(rowHeader);
                 }
-
                 if (i == currentSeat)
                 {
                     Console.BackgroundColor = ConsoleColor.DarkGray;
                 }
-
                 if (reservedSeats.Contains(i))
                 {
                     Console.ForegroundColor = ConsoleColor.DarkGray;
@@ -141,8 +139,10 @@ static class EnterRoom
                         Console.Write($"{i,5} {unreservedSeat}");
                     }
                 }
-
-                Console.BackgroundColor = ConsoleColor.Black;
+                if (i == currentSeat)
+                {
+                    Console.BackgroundColor = ConsoleColor.Black;
+                }
             }
 
             Console.ForegroundColor = ConsoleColor.White;
@@ -183,6 +183,7 @@ static class EnterRoom
                     {
                         selectedSeats.Add(currentSeat);
                         System.Console.WriteLine(selectedSeats);
+
                         if (currentSeat >= 0 && currentSeat < amountOfSeats)
                         {
                             if (selectedSeats.Count == numTickets)
