@@ -13,5 +13,68 @@
     ],
     "totalAmount": 10,
     "revenueId": 1
+  },
+  {
+    "id": 2,
+    "reservationCode": "02DM6A6",
+    "fullName": "mamama",
+    "email": "meganpieters3@gmail.com",
+    "movie": "Creed III",
+    "ticketAmount": 2,
+    "ticketTotal": 20,
+    "roomNumber": 1,
+    "seats": [
+      16,
+      17
+    ],
+    "totalAmount": 20,
+    "revenueId": 3
+  },
+  {
+    "id": 3,
+    "reservationCode": "X5099S6",
+    "fullName": "mamamam",
+    "email": "meganpieters3@gmail.com",
+    "movie": "Creed III",
+    "ticketAmount": 1,
+    "ticketTotal": 18,
+    "roomNumber": 1,
+    "seats": [
+      54
+    ],
+    "totalAmount": 21.5,
+    "revenueId": 4
+  },
+  {
+    "id": 4,
+    "reservationCode": "DQAPZHA",
+    "fullName": "oaoaoao",
+    "email": "meganpieters3@gmail.com",
+    "movie": "Creed III",
+    "ticketAmount": 2,
+    "ticketTotal": 36,
+    "roomNumber": 1,
+    "seats": [
+      53,
+      54
+    ],
+    "totalAmount": 39.5,
+    "revenueId": 5
+  },
+  {
+    "id": 5,
+    "reservationCode": "UEYBUG1",
+    "fullName": "ooefe",
+    "email": "meganpieters3@gmail.com",
+    "movie": "Creed III",
+    "ticketAmount": 2,
+    "ticketTotal": 20,
+    "roomNumber": 1,
+    "seats": [
+      28,
+      29
+    ],
+    "totalAmount": 23.5,
+    "revenueId": 6
   }
 ]

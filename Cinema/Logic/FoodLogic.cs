@@ -44,14 +44,15 @@ public class FoodsLogic
         return _foods!.Find(i => i.Cost == price)!;
     }
 
-    public double GetTotalPrice()
+    public double GetTotalPrice(List<FoodModel> orderedFoods)
     {
         double TotalAmount = 0;
-        foreach (FoodModel food in _foods!)
+        foreach (FoodModel food in orderedFoods)
         {
-            food.Cost += TotalAmount;
-            return TotalAmount;
+            System.Console.WriteLine(food.Cost);
+            TotalAmount += food.Cost;
         }
+        System.Console.WriteLine(TotalAmount);
         return TotalAmount;
     }
 
@@ -106,4 +107,36 @@ public class FoodsLogic
         Console.WriteLine("Press any key to continue...");
         Console.ReadKey(true);
     }
+
+
+    public double BuyFood()
+    {
+        List<FoodModel> orderedFood = new();
+        System.Console.WriteLine("would you like to buy some food? Y/N");
+        string answer = Console.ReadLine()!;
+        if (answer == "Y")
+        {
+            Console.Clear();
+            DisplayFoodMenu();
+            System.Console.WriteLine("What would you like?");
+            string choice = Console.ReadLine()!;
+            var food = GetByName(choice);
+            // System.Console.WriteLine(food.Cost);
+            // double price = GetTotalPrice(orderedFood);
+            // System.Console.WriteLine(price);
+            return food.Cost;
+
+        }
+        else if (answer == "N")
+        {
+            return 0;
+        }
+        else
+        {
+            System.Console.WriteLine("wrong input");
+            BuyFood();
+        }
+        return 0;
+    }
+
 }
