@@ -9,6 +9,7 @@ public class FoodsLogic
     //private set, so this can only be set by the class itself
     static public FoodModel? CurrentName { get; private set; }
     static public FoodModel? CurrentCost { get; private set; }
+    public double TotalAmount = 0;
 
     public FoodsLogic()
     {
@@ -36,7 +37,8 @@ public class FoodsLogic
 
     public FoodModel GetByName(string name)
     {
-        return _foods!.Find(i => i.Name == name)!;
+        FoodModel foodItem = _foods!.Find(i => i.Name == name)!;
+        return foodItem;
     }
 
     public FoodModel GetByPrice(double price)
@@ -58,34 +60,27 @@ public class FoodsLogic
 
     public void ChangePrice()
     {
-        Console.Write("Do you want to change the food prices? (Y/N): ");
-        string firstanswer = Console.ReadLine()!;
-        if (firstanswer.ToUpper() == "Y")
-        {
-            Console.Write("Which food price do you want to change?: ");
-            string secondanswer = Console.ReadLine()!;
-            foreach (FoodModel item in _foods!.ToList())
+            System.Console.WriteLine("Do you want to change the food prices? (Y/N)");
+            string firstanswer = Console.ReadLine()!;
+            if (firstanswer.ToUpper() == "Y")
             {
-                if (item.Name == secondanswer)
+                System.Console.WriteLine("Which food price do you want to change?");
+                string secondanswer = Console.ReadLine()!;
+                foreach (FoodModel item in _foods.ToList())
                 {
-                    Console.Write("Enter new price: ");
-                    double thirdanswer = Convert.ToDouble(Console.ReadLine())!;
-                    FoodModel food = new FoodModel(secondanswer, thirdanswer);
-                    UpdateList(food);
-                    Console.WriteLine("Price changed");
-                    Console.WriteLine();
-                    Console.WriteLine("Press any key to continue...");
-                    Console.ReadKey(true);
+                    if (item.Name == secondanswer)
+                    {
+                        System.Console.WriteLine("Enter new price:");
+                        double thirdanswer = Convert.ToDouble(Console.ReadLine())!;
+                        FoodModel food = new FoodModel(secondanswer, thirdanswer);
+                        UpdateList(food);
+                    }
                 }
             }
-        }
-        if (firstanswer.ToUpper() == "N")
-        {
-            Console.WriteLine("No changes will be made.....");
-            Console.WriteLine();
-            Console.WriteLine("Press any key to continue...");
-            Console.ReadKey(true);
-        }
+            if (firstanswer.ToUpper() == "N")
+            {
+                System.Console.WriteLine("No changes will be made.....");
+            }
     }
 
     public void DisplayFoodMenu()

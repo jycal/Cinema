@@ -136,12 +136,14 @@ Welcome to Starlight Cinema. What would you like to do?
 
     private static void Register()
     {
+        Console.ForegroundColor = ConsoleColor.Yellow;
         Console.WriteLine(@"============================================
 |                                          |
 |                Register                  |
 |                                          |
 ============================================
 ");
+        Console.ResetColor();
         Console.WriteLine("Email address:");
         Console.ForegroundColor = ConsoleColor.Yellow;
         Console.WriteLine("-----------------------------");
