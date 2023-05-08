@@ -188,9 +188,10 @@ Console.ResetColor();
             password = Password;
             PasswordAttempts += 1;
         }
-        if (PasswordAttempts > 3)
+        if (PasswordAttempts >= 3)
         {
             Console.Clear();
+            PreLogin();
         }
         Console.WriteLine();
         Console.WriteLine("Please enter your fullname");

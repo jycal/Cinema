@@ -15,6 +15,7 @@ class FoodsLogic
     //private set, so this can only be set by the class itself
     static public FoodModel? CurrentName { get; private set; }
     static public FoodModel? CurrentCost { get; private set; }
+    public double TotalAmount = 0;
 
     public FoodsLogic()
     {
@@ -42,7 +43,8 @@ class FoodsLogic
 
     public FoodModel GetByName(string name)
     {
-        return _foods!.Find(i => i.Name == name)!;
+        FoodModel foodItem = _foods!.Find(i => i.Name == name)!;
+        return foodItem;
     }
 
     public FoodModel GetByPrice(double price)
@@ -50,14 +52,15 @@ class FoodsLogic
         return _foods!.Find(i => i.Cost == price)!;
     }
 
-    public double GetTotalPrice()
+    public double GetTotalPrice(string name)
     {
-        double TotalAmount = 0;
-        foreach (FoodModel food in _foods)
-        {
-            food.Cost += TotalAmount;
-            return TotalAmount;
-        }
+        FoodModel item = GetByName(name);
+        TotalAmount += item.Cost;
+        // foreach (FoodModel food in _foods)
+        // {
+        //     food.Cost += TotalAmount;
+        //     return TotalAmount;
+        // }
         return TotalAmount;
     }
 
@@ -78,6 +81,7 @@ class FoodsLogic
                         FoodModel food = new FoodModel(secondanswer, thirdanswer);
                         UpdateList(food);
                     }
+                    Console.WriteLine("Food item not found. Please check our menu.");
                 }
             }
             if (firstanswer.ToUpper() == "N")
