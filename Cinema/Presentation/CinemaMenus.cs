@@ -135,12 +135,14 @@ Welcome to Starlight Cinema. What would you like to do?
 
     private void Register()
     {
+        Console.ForegroundColor = ConsoleColor.Yellow;
         Console.WriteLine(@"============================================
 |                                          |
 |                Register                  |
 |                                          |
 ============================================
 ");
+        Console.ResetColor();
         Console.WriteLine("Email address:");
         Console.ForegroundColor = ConsoleColor.Yellow;
         Console.WriteLine("-----------------------------");
@@ -196,10 +198,9 @@ Welcome to Starlight Cinema. What would you like to do?
         Console.WriteLine("Please enter your phone number");
         string phoneNumber = Console.ReadLine()!;
         Console.ForegroundColor = ConsoleColor.Yellow;
-        Console.WriteLine($"Congratulations!!\nYour account has been made!\nEnjoy your time at Starlight Cinema ✰⍟✰\n");
+        // ✰⍟✰
+        Console.WriteLine($"Congratulations!!\nYour account has been made!\nEnjoy your time at Starlight Cinema\n");
         Console.ResetColor();
-        System.Console.WriteLine();
-        System.Console.WriteLine();
         int id = 0;
         while (true)
         {
