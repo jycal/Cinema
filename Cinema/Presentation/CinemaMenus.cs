@@ -447,12 +447,12 @@ View menu and order.
         {
             case 0:
                 _foodsLogic.DisplayFoodMenu();
-                OrderFoodConfirm();
+                // OrderFoodConfirm();
                 RunCateringMenu();
                 break;
             case 1:
                 SearchProduct();
-                OrderFoodConfirm();
+                // OrderFoodConfirm();
                 RunCateringMenu();
                 break;
             case 2:

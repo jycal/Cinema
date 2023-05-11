@@ -76,5 +76,21 @@
     ],
     "totalAmount": 23.5,
     "revenueId": 6
+  },
+  {
+    "id": 6,
+    "reservationCode": "7D8TRLA",
+    "fullName": "megan p",
+    "email": "meganpieters3@gmail.com",
+    "movie": "Cocaine Bear",
+    "ticketAmount": 2,
+    "ticketTotal": 20,
+    "roomNumber": 1,
+    "seats": [
+      117,
+      118
+    ],
+    "totalAmount": 20,
+    "revenueId": 4
   }
 ]
