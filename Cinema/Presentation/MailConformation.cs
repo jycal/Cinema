@@ -68,9 +68,7 @@ public class MailConformation
         string image = GetPicture(reservation!.Movie);
         string body = MailAccess.LoadAll();
         body = body.Replace("movieName", reservation!.Movie);
-
         body = body.Replace("seatNumbers", $"{Convert.ToString(string.Join("/", reservation.Seats))}");
-
         body = body.Replace("ticketAmount", Convert.ToString(reservation!.TicketAmount));
         body = body.Replace("ticketTotal", Convert.ToString(reservation!.TicketTotal));
         body = body.Replace("totalAmount", Convert.ToString(reservation!.TotalAmount));
@@ -80,6 +78,9 @@ public class MailConformation
         body = body.Replace("{Image}", Convert.ToString(image));
         body = body.Replace("currentDate", DateTime.Today.ToString("dd/MM/yyyy"));
         body = body.Replace("roomNumber", Convert.ToString(reservation.RoomNumber));
+        body = body.Replace("singleTicketPrice", Convert.ToString(reservation.TicketTotal / reservation!.TicketAmount));
+        body = body.Replace("snackTotal", Convert.ToString(reservation.TotalAmount - reservation!.TicketTotal));
+
         return body;
 
     }

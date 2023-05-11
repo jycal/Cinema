@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using System.Text.Json.Serialization;
 
 
-class GuestModel
+public class GuestModel
 {
     [JsonPropertyName("id")]
     public int Id { get; set; }
@@ -32,8 +32,10 @@ class GuestModel
     public List<int> Seats { get; set; }
     [JsonPropertyName("totalAmount")]
     public int TotalAmount { get; set; }
+    [JsonPropertyName("revenueId")]
+    public int RevenueId { get; set; }
 
-    public GuestModel(int id, string reservationCode, string fullName, string email, string movie, int ticketAmount, int ticketTotal, List<int> seats, int totalAmount)
+    public GuestModel(int id, string reservationCode, string fullName, string email, string movie, int ticketAmount, int ticketTotal, List<int> seats, int totalAmount, int revenueId)
     {
         Id = id;
         ReservationCode = reservationCode;
@@ -44,5 +46,6 @@ class GuestModel
         TicketTotal = ticketTotal;
         Seats = seats;
         TotalAmount = totalAmount;
+        RevenueId = revenueId;
     }
 }

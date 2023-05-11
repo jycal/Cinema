@@ -5,7 +5,7 @@ using System.Text.Json;
 
 
 //This class is not static so later on we can use inheritance and interfaces
-class RoomsLogic
+public class RoomsLogic
 {
     private List<RoomModel> _rooms;
 
@@ -53,7 +53,3 @@ class RoomsLogic
         return CurrentRoom!;
     }
 }
-
-
-
-

@@ -1,10 +1,76 @@
 static class EnterRoom
 {
     static private RoomsLogic _roomsLogic = new();
-    static private FilmsLogic _filmsLogic = new();
-    static private ReservationsLogic _reservationsLogic = new();
+    static private FilmsLogic _filmsLogic;
+    static private ReservationsLogic _reservationsLogic;
+    static private RevenueLogic _revenueLogic;
     static private AccountModel _account = null!;
-    private static int id;
+    static private AccountsLogic _accountsLogic;
+    static private GuestLogic _guestLogic;
+    static private TicketLogic _ticketLogic;
+
+    static EnterRoom()
+    {
+        if (CinemaMenus._filmsLogic == null)
+        {
+            CinemaMenus._filmsLogic = new FilmsLogic();
+            _filmsLogic = CinemaMenus._filmsLogic;
+        }
+        else
+        {
+            _filmsLogic = CinemaMenus._filmsLogic;
+        }
+
+        if (CinemaMenus._reservationsLogic == null)
+        {
+            CinemaMenus._reservationsLogic = new ReservationsLogic();
+            _reservationsLogic = CinemaMenus._reservationsLogic;
+        }
+        else
+        {
+            _reservationsLogic = CinemaMenus._reservationsLogic;
+        }
+
+        if (CinemaMenus._revenueLogic == null)
+        {
+            CinemaMenus._revenueLogic = new RevenueLogic();
+            _revenueLogic = CinemaMenus._revenueLogic;
+        }
+        else
+        {
+            _revenueLogic = CinemaMenus._revenueLogic;
+        }
+
+        if (CinemaMenus._accountsLogic == null)
+        {
+            CinemaMenus._accountsLogic = new AccountsLogic();
+            _accountsLogic = CinemaMenus._accountsLogic;
+        }
+        else
+        {
+            _accountsLogic = CinemaMenus._accountsLogic;
+        }
+
+        if (CinemaMenus._guestLogic == null)
+        {
+            CinemaMenus._guestLogic = new GuestLogic();
+            _guestLogic = CinemaMenus._guestLogic;
+        }
+        else
+        {
+            _guestLogic = CinemaMenus._guestLogic;
+        }
+
+        if (CinemaMenus._ticketLogic == null)
+        {
+            CinemaMenus._ticketLogic = new TicketLogic();
+            _ticketLogic = CinemaMenus._ticketLogic;
+        }
+        else
+        {
+            _ticketLogic = CinemaMenus._ticketLogic;
+        }
+    }
 
     public static void Start(AccountModel account)
     {
@@ -21,7 +87,7 @@ static class EnterRoom
             Console.WriteLine("Press any key to go back to the menu");
             Console.ReadKey();
             Console.Clear();
-            Menu.MainMenu();
+            CinemaMenus.Start();
             return;
         }
         Console.WriteLine("Please enter the room number\n");
@@ -33,12 +99,7 @@ static class EnterRoom
             Console.WriteLine("Welcome to room " + room.RoomNumber);
             Console.WriteLine($"This room has {room.MaxSeats} seats");
 
-            int currentSeat = 0;
-
-            Display(room);
-            // Reserve(room, id, currentSeat);
-            //Write some code to go back to the menu
-            //Menu.Start();
+            Display(room, film);
         }
         else
         {
@@ -46,12 +107,13 @@ static class EnterRoom
         }
     }
 
-    public static void Display(RoomModel room)
+    public static void Display(RoomModel room, FilmModel films)
     {
 
         List<int> reservedSeats = room.Seats;
         List<int> vipSeats = room.VipSeats;
         List<int> disabledSeats = room.DisabledSeats;
+        List<int> comfortSeats = room.ComfortSeats;
         int amountOfSeats = room.MaxSeats;
         int currentSeat = -1;
 
@@ -70,7 +132,9 @@ static class EnterRoom
             Console.ForegroundColor = ConsoleColor.DarkGray;
             Console.WriteLine("■: Reserved seat");
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("♥: VIP seat");
+            Console.WriteLine("■: VIP seat");
+            Console.ForegroundColor = ConsoleColor.DarkRed;
+            Console.WriteLine("■: Comfort seat");
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("▲: Disability seat");
             Console.ForegroundColor = ConsoleColor.White;
@@ -113,15 +177,21 @@ static class EnterRoom
 
                     if (vipSeats.Contains(i))
                     {
-                        char vipSeat = '♥';
+                        char vipSeat = '■';
                         Console.Write($"{i,5} {vipSeat}");
                     }
                     else if (disabledSeats.Contains(i))
                     {
                         char disabilitySeat = '▲';
-                        Console.ForegroundColor = ConsoleColor.Green;
                         Console.Write($"{i,5} {disabilitySeat}");
                     }
+                    else if (comfortSeats.Contains(i))
+                    {
+                        char comfortSeat = '■';
+                        // Console.ForegroundColor = ConsoleColor.DarkYellow;
+                        Console.Write($"{i,5} {comfortSeat}");
+                    }
+
                     else
                     {
                         Console.Write($"{i,5} {reservedSeat}");
@@ -135,9 +205,22 @@ static class EnterRoom
                     if (vipSeats.Contains(i))
                     {
                         Console.ForegroundColor = ConsoleColor.Red;
-                        char vipSeat = '♥';
+                        char vipSeat = '■';
                         Console.Write($"{i,5} {vipSeat}");
                     }
+                    else if (comfortSeats.Contains(i))
+                    {
+                        char comfortSeat = '■';
+                        Console.ForegroundColor = ConsoleColor.DarkMagenta;
+                        Console.Write($"{i,5} {comfortSeat}");
+                    }
+                    else if (disabledSeats.Contains(i))
+                    {
+                        char disabilitySeat = '▲';
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.Write($"{i,5} {disabilitySeat}");
+                    }
+
                     else
                     {
                         Console.Write($"{i,5} {unreservedSeat}");
@@ -203,7 +286,7 @@ static class EnterRoom
                                 //     room.Seats.Add(seat);
                                 //     _roomsLogic.UpdateList(room);
                                 // }
-                                Reserve(room, id, selectedSeats);
+                                Reserve(room, films, selectedSeats);
                                 foreach (var seat in selectedSeats)
                                 { room.Seats.Add(seat); }
                                 _roomsLogic.UpdateList(room);
@@ -226,15 +309,23 @@ static class EnterRoom
         }
     }
 
-    public static void Reserve(RoomModel room, int id, List<int> seatList)
+
+    public static void Reserve(RoomModel room, FilmModel film, List<int> seatList)
     {
+
         if (_account == null)
         {
+            //foodlogic oproepen
+            FoodsLogic foodLogic = new();
+            double food = foodLogic.BuyFood();
+            System.Console.WriteLine(food);
             // gegevens vragen
+            Console.Clear();
             Console.Write("Enter email: ");
             string email = Console.ReadLine()!;
             Console.Write("Enter full name: ");
             string fullName = Console.ReadLine()!;
+
             // payment 
             Console.WriteLine("Press enter to continue...");
             Console.ReadLine();
@@ -252,14 +343,20 @@ static class EnterRoom
             Payment.PaymentWithIdeal(answer2!);
 
             // info naar guest json sturen
-
-            FilmModel film = _filmsLogic.GetById(id);
             string title = film.Title;
+            // prchase test
+            double ticketTotal = _ticketLogic.TicketPurchase(room, seatList);
+            // revenue vastmeten
+            int temp_rev_id = _revenueLogic._revenueList!.Count > 0 ? _revenueLogic._revenueList.Max(x => x.Id) + 1 : 1;
+            RevenueModel revenue = new(temp_rev_id, Convert.ToDecimal(ticketTotal));
+            _revenueLogic.UpdateList(revenue);
+
+            //total amount krijgen
+            double totalAmount = ticketTotal + food;
             // guest naar json sturen
             string reservationCode = ReservationCodeMaker();
-            ReservationModel guest = new(1, reservationCode, fullName, email, title, seatList.Count, 10, room.Id, seatList, 10);
-            GuestLogic logic = new();
-            logic.UpdateList(guest);
+            ReservationModel guest = new(1, reservationCode, fullName, email, title, seatList.Count, ticketTotal, room.Id, seatList, totalAmount, temp_rev_id);
+            _guestLogic.UpdateList(guest);
             // mail verzenden
             bool account = false;
             MailConformation mailConformation = new MailConformation(email, account);
@@ -268,6 +365,10 @@ static class EnterRoom
 
         else if (_account != null)
         {
+            //foodlogic oproepen
+            FoodsLogic foodLogic = new();
+            double food = foodLogic.BuyFood();
+            System.Console.WriteLine(food);
             Console.WriteLine("\n--------------------------------");
             Console.WriteLine("         PAYMENT OPTIONS         ");
             Console.WriteLine("--------------------------------");
@@ -282,23 +383,34 @@ static class EnterRoom
 
 
             // film moet nog aan room gekoppeld worden dus nu title handmatig
-            FilmModel film = _filmsLogic.GetById(id);
             string title = film.Title;
 
+            // prchase test
+            double ticketTotal = _ticketLogic.TicketPurchase(room, seatList);
+            // revenue vastmeten
+            int temp_rev_id = _revenueLogic._revenueList!.Count > 0 ? _revenueLogic._revenueList.Max(x => x.Id) + 1 : 1;
+            RevenueModel revenue = new(temp_rev_id, Convert.ToDecimal(ticketTotal));
+            _revenueLogic.UpdateList(revenue);
+            // naar json versturen
             string reservationCode = ReservationCodeMaker();
-            ReservationModel reservation = new(1, reservationCode, _account.FullName, _account.EmailAddress, title, 1, 10, room.Id, seatList, 1);
+            //total amount krijgen
+            double totalAmount = ticketTotal + food;
+            int temp_id = film.Id = _reservationsLogic._reservations!.Count > 0 ? _reservationsLogic._reservations.Max(x => x.Id) + 1 : 1;
+
+            ReservationModel reservation = new(temp_id, reservationCode, _account.FullName, _account.EmailAddress, title, seatList.Count, ticketTotal, room.Id, seatList, totalAmount, temp_rev_id);
             _reservationsLogic.UpdateList(reservation);
             bool account = true;
             MailConformation mailConformation = new MailConformation(_account.EmailAddress, account);
             mailConformation.SendMailConformation();
+            _account.TicketList.Add(temp_id);
+            _accountsLogic.UpdateList(_account);
         }
-
         Console.ForegroundColor = ConsoleColor.Green;
         System.Console.WriteLine("Your reservation has been confirmed and is now guaranteed.");
         Console.ForegroundColor = ConsoleColor.White;
-
+        Console.WriteLine("Press any key to continue...");
+        Console.ReadKey(true);
     }
-
 
 
 
@@ -311,95 +423,3 @@ static class EnterRoom
             .Select(s => s[random.Next(s.Length)]).ToArray());
     }
 }
-
-// public static void Display(RoomModel room)
-// {
-//     // example:
-//     // 1-5:   1  2  3  4  5
-//     // 6-10:  6  7  8  9  10
-//     // 11-15: 11 12 13 14 15
-//     // 16-20: 16 17 18 19 20
-//     List<int> reservedSeats = room.Seats;
-//     List<int> vipSeats = room.VipSeats;
-//     List<int> disabledSeats = room.DisabledSeats;
-//     int amountOfSeats = room.MaxSeats;
-//     string lineSep = "\n---------------------------------------------------------------------------------------------------------------------------------------";
-//     Console.ForegroundColor = ConsoleColor.Yellow;
-//     Console.WriteLine("■: Unreserved seat");
-//     Console.ForegroundColor = ConsoleColor.DarkGray;
-//     Console.WriteLine("■: Reserved seat");
-//     Console.ForegroundColor = ConsoleColor.Red;
-//     Console.WriteLine("♥: VIP seat");
-//     Console.ForegroundColor = ConsoleColor.Green;
-//     Console.WriteLine("▲: Disability seat");
-//     Console.ForegroundColor = ConsoleColor.White;
-//     Console.WriteLine("                                                            Screen");
-//     double row = 1;
-//     double plus;
-//     // if movie is in the big room increment with 0.05 (20 seats per row)
-//     if (room.Id == 3)
-//     {
-//         plus = 0.05;
-//     }
-//     // else 15 seats per row
-//     else { plus = 0.0666666667; }
-//     for (int i = 0; i <= amountOfSeats; i++)
-//     {
-//         // increment rows
-//         row += plus;
-//         string rows = row.ToString("0");
-//         if (i % 15 == 0)
-//         {
-//             Console.ForegroundColor = ConsoleColor.White;
-//             Console.WriteLine(lineSep);
-//             string rowHeader = $"|{"Row: " + rows,15}: |";
-//             Console.Write(rowHeader);
-//             // if (i == 0)
-//             // {
-//             //     continue;
-//             // }
-
-
-//         }
-
-//         // check if chair in list
-//         if (reservedSeats.Contains(i))
-//         {
-//             // reserved seat = gray
-//             Console.ForegroundColor = ConsoleColor.DarkGray;
-//             var reservedSeat = "■";
-//             if (vipSeats.Contains(i))
-//             {
-//                 char vipSeat = '♥';
-//                 Console.Write($"{i,5} {vipSeat}");
-//             }
-//             else if (disabledSeats.Contains(i))
-//             {
-//                 // disability seats = green
-//                 char disabilitySeat = '▲';
-//                 Console.ForegroundColor = ConsoleColor.Green;
-//                 Console.Write($"{i,5} {disabilitySeat}");
-//             }
-//             else
-//             { Console.Write($"{i,5} {reservedSeat}"); }
-//         }
-//         else
-//         {
-//             // unreserved seat = yellow
-//             Console.ForegroundColor = ConsoleColor.Yellow;
-//             var unreservedSeat = "■";
-//             if (vipSeats.Contains(i))
-//             {
-//                 // vip seat = rood
-//                 Console.ForegroundColor = ConsoleColor.Red;
-//                 char vipSeat = '♥';
-//                 Console.Write($"{i,5} {vipSeat}");
-//             }
-//             else
-//             { Console.Write($"{i,5} {unreservedSeat}"); }
-//         }
-
-//     }
-//     Console.ForegroundColor = ConsoleColor.White;
-//     Console.WriteLine(lineSep);
-// }

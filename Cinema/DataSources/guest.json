@@ -1,385 +1,96 @@
 [
   {
     "id": 1,
-    "reservationCode": "H504JPI",
-    "fullName": "megan",
-    "email": "meganpieters3@gmail.com",
-    "movie": "Creed III",
+    "reservationCode": "YU56FBO",
+    "fullName": "adsa",
+    "email": "n@b.c",
+    "movie": "Cocaine Bear",
     "ticketAmount": 1,
     "ticketTotal": 10,
-    "roomNumber": 0,
+    "roomNumber": 2,
     "seats": [
-      93,
-      95
+      287
     ],
-    "totalAmount": 1
+    "totalAmount": 10,
+    "revenueId": 1
   },
   {
     "id": 2,
-    "reservationCode": "H504JPI",
-    "fullName": "megan p",
+    "reservationCode": "02DM6A6",
+    "fullName": "mamama",
     "email": "meganpieters3@gmail.com",
-    "movie": "65",
-    "ticketAmount": 1,
-    "ticketTotal": 10,
-    "roomNumber": 0,
+    "movie": "Creed III",
+    "ticketAmount": 2,
+    "ticketTotal": 20,
+    "roomNumber": 1,
     "seats": [
-      77
+      16,
+      17
     ],
-    "totalAmount": 10
+    "totalAmount": 20,
+    "revenueId": 3
   },
   {
     "id": 3,
-    "reservationCode": "AAR9HUA",
-    "fullName": "megan pieters",
+    "reservationCode": "X5099S6",
+    "fullName": "mamamam",
     "email": "meganpieters3@gmail.com",
-    "movie": "Scream VI",
+    "movie": "Creed III",
     "ticketAmount": 1,
-    "ticketTotal": 10,
-    "roomNumber": 0,
+    "ticketTotal": 18,
+    "roomNumber": 1,
     "seats": [
-      92
+      54
     ],
-    "totalAmount": 10
+    "totalAmount": 21.5,
+    "revenueId": 4
   },
   {
     "id": 4,
-    "reservationCode": "91ZCYG1",
-    "fullName": "megan",
+    "reservationCode": "DQAPZHA",
+    "fullName": "oaoaoao",
     "email": "meganpieters3@gmail.com",
-    "movie": "Ant-Man and the Wasp: Quantumania",
-    "ticketAmount": 1,
-    "ticketTotal": 10,
-    "roomNumber": 0,
+    "movie": "Creed III",
+    "ticketAmount": 2,
+    "ticketTotal": 36,
+    "roomNumber": 1,
     "seats": [
-      111
+      53,
+      54
     ],
-    "totalAmount": 10
+    "totalAmount": 39.5,
+    "revenueId": 5
   },
   {
     "id": 5,
-    "reservationCode": "4564GO4",
-    "fullName": "megan",
+    "reservationCode": "UEYBUG1",
+    "fullName": "ooefe",
     "email": "meganpieters3@gmail.com",
-    "movie": "Missing",
-    "ticketAmount": 1,
-    "ticketTotal": 10,
-    "roomNumber": 0,
+    "movie": "Creed III",
+    "ticketAmount": 2,
+    "ticketTotal": 20,
+    "roomNumber": 1,
     "seats": [
-      20
+      28,
+      29
     ],
-    "totalAmount": 10
+    "totalAmount": 23.5,
+    "revenueId": 6
   },
   {
     "id": 6,
-    "reservationCode": "9R9YYR1",
-    "fullName": "maye p",
-    "email": "meganpieters3@gmail.com",
-    "movie": "Missing",
-    "ticketAmount": 1,
-    "ticketTotal": 10,
-    "roomNumber": 0,
-    "seats": [
-      19
-    ],
-    "totalAmount": 10
-  },
-  {
-    "id": 7,
-    "reservationCode": "5K91RKA",
+    "reservationCode": "7D8TRLA",
     "fullName": "megan p",
     "email": "meganpieters3@gmail.com",
-    "movie": "Magic Mike\u0027s Last Dance",
-    "ticketAmount": 1,
-    "ticketTotal": 10,
-    "roomNumber": 0,
-    "seats": [
-      1
-    ],
-    "totalAmount": 10
-  },
-  {
-    "id": 8,
-    "reservationCode": "OVLNQ28",
-    "fullName": "megan p",
-    "email": "meganpieters3@gmail.com",
-    "movie": "The Super Mario Bros. Movie (OV)",
-    "ticketAmount": 1,
-    "ticketTotal": 10,
-    "roomNumber": 0,
-    "seats": [
-      3
-    ],
-    "totalAmount": 10
-  },
-  {
-    "id": 9,
-    "reservationCode": "6OMI6M3",
-    "fullName": "kelly boy",
-    "email": "jyczhangnl@gmail.com",
-    "movie": "The Super Mario Bros. Movie (OV)",
-    "ticketAmount": 1,
-    "ticketTotal": 10,
-    "roomNumber": 0,
-    "seats": [
-      33
-    ],
-    "totalAmount": 10
-  },
-  {
-    "id": 10,
-    "reservationCode": "15UJWB7",
-    "fullName": "julina mercera",
-    "email": "PizzaIsLikeBae@gmail.com",
-    "movie": "All Inclusive",
-    "ticketAmount": 1,
-    "ticketTotal": 10,
-    "roomNumber": 0,
-    "seats": [
-      78
-    ],
-    "totalAmount": 10
-  },
-  {
-    "id": 11,
-    "reservationCode": "BAEG8TS",
-    "fullName": "aryan slay",
-    "email": "AryanJD2005@gmail.com",
-    "movie": "The Super Mario Bros. Movie (OV)",
-    "ticketAmount": 1,
-    "ticketTotal": 10,
-    "roomNumber": 0,
-    "seats": [
-      22
-    ],
-    "totalAmount": 10
-  },
-  {
-    "id": 12,
-    "reservationCode": "WGITWK8",
-    "fullName": "thomas pieters",
-    "email": "t.molendijk@outlook.com",
-    "movie": "The Super Mario Bros. Movie (OV)",
-    "ticketAmount": 1,
-    "ticketTotal": 10,
-    "roomNumber": 0,
-    "seats": [
-      34
-    ],
-    "totalAmount": 10
-  },
-  {
-    "id": 13,
-    "reservationCode": "5PZ6DAQ",
-    "fullName": "michael pieters",
-    "email": "m.pieters7@upcmail.nl",
-    "movie": "The Super Mario Bros. Movie (OV)",
-    "ticketAmount": 1,
-    "ticketTotal": 10,
-    "roomNumber": 0,
-    "seats": [
-      80
-    ],
-    "totalAmount": 10
-  },
-  {
-    "id": 14,
-    "reservationCode": "5RJGA9D",
-    "fullName": "michael pieters",
-    "email": "m.pieters7@upcmail.nl",
-    "movie": "Shazam! Fury of the Gods",
-    "ticketAmount": 1,
-    "ticketTotal": 10,
-    "roomNumber": 0,
-    "seats": [
-      48
-    ],
-    "totalAmount": 10
-  },
-  {
-    "id": 15,
-    "reservationCode": "ZHYNI24",
-    "fullName": "may p",
-    "email": "meganpieters3@gmail.com",
-    "movie": "Ant-Man and the Wasp: Quantumania",
-    "ticketAmount": 1,
-    "ticketTotal": 10,
-    "roomNumber": 0,
-    "seats": [
-      47
-    ],
-    "totalAmount": 10
-  },
-  {
-    "id": 16,
-    "reservationCode": "O669Y6Q",
-    "fullName": "may p",
-    "email": "meganpieters3@gmail.com",
-    "movie": "Ant-Man and the Wasp: Quantumania",
-    "ticketAmount": 1,
-    "ticketTotal": 10,
-    "roomNumber": 0,
-    "seats": [
-      108
-    ],
-    "totalAmount": 10
-  },
-  {
-    "id": 17,
-    "reservationCode": "L2RMJ9C",
-    "fullName": "mauu",
-    "email": "meganpieters3@gmail.com",
-    "movie": "Shazam! Fury of the Gods",
-    "ticketAmount": 1,
-    "ticketTotal": 10,
-    "roomNumber": 0,
-    "seats": [
-      69
-    ],
-    "totalAmount": 10
-  },
-  {
-    "id": 18,
-    "reservationCode": "6LM1B3J",
-    "fullName": "mwww",
-    "email": "meganpieters3@gmail.com",
-    "movie": "All Inclusive",
-    "ticketAmount": 1,
-    "ticketTotal": 10,
-    "roomNumber": 0,
-    "seats": [
-      136
-    ],
-    "totalAmount": 10
-  },
-  {
-    "id": 19,
-    "reservationCode": "D12ZELX",
-    "fullName": "dfrf",
-    "email": "meganpieters3@gmail.com",
-    "movie": "All Inclusive",
-    "ticketAmount": 1,
-    "ticketTotal": 10,
-    "roomNumber": 0,
-    "seats": [
-      227
-    ],
-    "totalAmount": 10
-  },
-  {
-    "id": 20,
-    "reservationCode": "JZ4CVQP",
-    "fullName": "eecie",
-    "email": "meganpieters3@gmail.com",
-    "movie": "All Inclusive",
-    "ticketAmount": 1,
-    "ticketTotal": 10,
-    "roomNumber": 2,
-    "seats": [
-      199
-    ],
-    "totalAmount": 10
-  },
-  {
-    "id": 21,
-    "reservationCode": "0NKFBYK",
-    "fullName": "aaaaaaaaaa",
-    "email": "meganpieters3@gmail.com",
-    "movie": "Scream VI",
-    "ticketAmount": 1,
-    "ticketTotal": 10,
-    "roomNumber": 3,
-    "seats": [
-      411
-    ],
-    "totalAmount": 10
-  },
-  {
-    "id": 22,
-    "reservationCode": "QKSUIXA",
-    "fullName": "meggg",
-    "email": "meganpieters3@gmail.com",
-    "movie": "Avatar: The Way of Water",
-    "ticketAmount": 1,
-    "ticketTotal": 10,
-    "roomNumber": 3,
-    "seats": [
-      222
-    ],
-    "totalAmount": 10
-  },
-  {
-    "id": 23,
-    "reservationCode": "FML2GBF",
-    "fullName": "djejjfje",
-    "email": "meganpieters3@gmail.com",
-    "movie": "test",
-    "ticketAmount": 1,
-    "ticketTotal": 10,
-    "roomNumber": 2,
-    "seats": [
-      222
-    ],
-    "totalAmount": 10
-  },
-  {
-    "id": 24,
-    "reservationCode": "5OS7A4Y",
-    "fullName": "jewfjrg",
-    "email": "meganpieters3@gmail.com",
-    "movie": "Magic Mike\u0027s Last Dance",
-    "ticketAmount": 1,
-    "ticketTotal": 10,
-    "roomNumber": 2,
-    "seats": [
-      223
-    ],
-    "totalAmount": 10
-  },
-  {
-    "id": 25,
-    "reservationCode": "Z5AS9ZP",
-    "fullName": "mm",
-    "email": "meganpieters3@gmail.com",
-    "movie": "John Wick 4",
-    "ticketAmount": 1,
-    "ticketTotal": 10,
+    "movie": "Cocaine Bear",
+    "ticketAmount": 2,
+    "ticketTotal": 20,
     "roomNumber": 1,
     "seats": [
-      134
+      117,
+      118
     ],
-    "totalAmount": 10
-  },
-  {
-    "id": 26,
-    "reservationCode": "C8VQPUF",
-    "fullName": "memrm",
-    "email": "meganpieters3@gmail.com",
-    "movie": "John Wick 4",
-    "ticketAmount": 1,
-    "ticketTotal": 10,
-    "roomNumber": 1,
-    "seats": [
-      11,
-      12,
-      13
-    ],
-    "totalAmount": 10
-  },
-  {
-    "id": 27,
-    "reservationCode": "KCD5BXD",
-    "fullName": "mama",
-    "email": "meganpieters3@gmail.com",
-    "movie": "John Wick 4",
-    "ticketAmount": 1,
-    "ticketTotal": 10,
-    "roomNumber": 1,
-    "seats": [
-      29,
-      28,
-      27
-    ],
-    "totalAmount": 10
+    "totalAmount": 20,
+    "revenueId": 4
   }
 ]

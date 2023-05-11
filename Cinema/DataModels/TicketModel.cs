@@ -1,11 +1,10 @@
-using System.Threading.Tasks;
-using System.Text.Json.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
+using System.Text.Json.Serialization;
 
-
-public class FoodModel
+public class TicketModel
 {
     [JsonPropertyName("Name")]
     public string Name { get; set; }
@@ -13,7 +12,7 @@ public class FoodModel
     [JsonPropertyName("Cost")]
     public double Cost { get; set; }
 
-    public FoodModel(string name, double cost)
+    public TicketModel(string name, double cost)
     {
         Name = name;
         Cost = cost;
