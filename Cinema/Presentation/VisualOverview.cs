@@ -84,7 +84,7 @@ public class VisualOverview
 
     public static void Run()
     {
-        RoomModel room = _roomsLogic.CheckEnter(2);
+        RoomModel room = _roomsLogic.CheckEnter(1);
         FilmModel film = _filmsLogic!.GetById(3);
 
         List<int> selectedSeats = new List<int>();
@@ -164,28 +164,30 @@ public class VisualOverview
                     break;
 
                 case ConsoleKey.Enter:
-                    if (dontPrint.Any(box => box == cursorRow && box == cursorCol))
+                    if (reservedSeats.Contains(cursorRow * roomWidth + cursorCol))
+                    {
+                        // The selected square is in the reserved list, so do nothing.
+                        break;
+                    }
+                    else if (dontPrint.Contains(cursorRow * roomWidth + cursorCol))
                     {
                         // The selected square is in the blueSquares list, so do nothing.
                         break;
                     }
-                    else if (!selectedBoxes.Any(box => box[0] == cursorRow && box[1] == cursorCol))
-                    {
-                        // Select the box at the cursor's position
-                        selectedBoxes.Add(new int[] { cursorRow, cursorCol });
-                        boxesSelected++;
-                        PrintBox();
-                    }
-                    else
+                    else if (selectedBoxes.Any(box => box[0] == cursorRow && box[1] == cursorCol))
                     {
                         // Deselect the box
                         selectedBoxes.Remove(selectedBoxes.First(box => box[0] == cursorRow && box[1] == cursorCol));
                         boxesSelected--;
                         PrintBox();
                     }
-                    break;
-
-                default:
+                    else
+                    {
+                        // Select the box at the cursor's position
+                        selectedBoxes.Add(new int[] { cursorRow, cursorCol });
+                        boxesSelected++;
+                        PrintBox();
+                    }
                     break;
             }
         }
@@ -195,14 +197,11 @@ public class VisualOverview
             Console.CursorVisible = false;
             Console.Clear();
 
-            // Console.Clear();
-
             // Print column numbers
-            Console.Write("  ");
             Console.Write("  ");
             for (int j = 1; j < roomWidth; j++)
             {
-                Console.Write($" {j}");
+                Console.Write($"{j} ");
             }
             Console.WriteLine();
 
@@ -214,62 +213,91 @@ public class VisualOverview
 
                 for (int j = 0; j < roomWidth; j++)
                 {
+                    int seatNumber = i * roomWidth + j;
                     if (i == cursorRow && j == cursorCol)
                     {
-                        Console.ForegroundColor = ConsoleColor.Yellow;
-                        Console.Write("■ ");
-                        Console.ResetColor();
+                        Console.Write("■".Yellow() + " ");
                     }
-                    else if (disabledSeats.Contains(i * roomWidth + j))
+                    else if (reservedSeats.Contains(seatNumber))
                     {
-                        Console.ForegroundColor = ConsoleColor.DarkMagenta;
-                        Console.Write("■ ");
-                        Console.ResetColor();
+                        Console.Write("■".DarkGray() + " ");
                     }
-                    else if (comfortSeats.Contains(i * roomWidth + j))
+                    else if (disabledSeats.Contains(seatNumber))
                     {
-                        Console.ForegroundColor = ConsoleColor.Magenta;
-                        Console.Write("■ ");
-                        Console.ResetColor();
+                        Console.Write("■".DarkMagenta() + " ");
                     }
-                    else if (vipSeats.Contains(i * roomWidth + j))
+                    else if (comfortSeats.Contains(seatNumber))
                     {
-                        Console.ForegroundColor = ConsoleColor.Red;
-                        Console.Write("■ ");
-                        Console.ResetColor();
+                        Console.Write("■".Magenta() + " ");
                     }
-                    else if (dontPrint.Contains(i * roomWidth + j))
+                    else if (vipSeats.Contains(seatNumber))
                     {
-                        Console.ForegroundColor = ConsoleColor.White;
-                        Console.Write("■ ");
-                        Console.ResetColor();
+                        Console.Write("■".Red() + " ");
+                    }
+                    else if (dontPrint.Contains(seatNumber))
+                    {
+                        Console.Write("■".White() + " ");
                     }
                     else if (selectedBoxes.Any(box => box[0] == i && box[1] == j))
                     {
-                        Console.ForegroundColor = ConsoleColor.Green;
-                        Console.Write("■ ");
-                        Console.ResetColor();
+                        Console.Write("■".Green() + " ");
                     }
                     else
                     {
-                        Console.ForegroundColor = ConsoleColor.Blue;
-                        Console.Write("■ ");
-                        Console.ResetColor();
+                        Console.Write("■".Blue() + " ");
                     }
                 }
                 Console.WriteLine();
             }
-
-
-
-            // Print an empty line for spacing
-            Console.WriteLine();
-
         }
+        // Print an empty line for spacing
+        Console.WriteLine();
     }
-    class Box
+}
+class Box
+{
+    public string? Value { get; set; }
+    public bool IsBlue { get; set; }
+}
+
+public static class ConsoleExtensions
+{
+    public static string Yellow(this string str)
     {
-        public string Value { get; set; }
-        public bool IsBlue { get; set; }
+        return $"\u001b[33m{str}\u001b[0m";
+    }
+
+    public static string DarkMagenta(this string str)
+    {
+        return $"\u001b[35m{str}\u001b[0m";
+    }
+
+    public static string Magenta(this string str)
+    {
+        return $"\u001b[35m{str}\u001b[0m";
+    }
+
+    public static string Red(this string str)
+    {
+        return $"\u001b[31m{str}\u001b[0m";
+    }
+
+    public static string Green(this string str)
+    {
+        return $"\u001b[32m{str}\u001b[0m";
+    }
+
+    public static string White(this string str)
+    {
+        return $"\u001b[37m{str}\u001b[0m";
+    }
+
+    public static string Blue(this string str)
+    {
+        return $"\u001b[34m{str}\u001b[0m";
+    }
+    public static string DarkGray(this string str)
+    {
+        return $"\u001b[90m{str}\u001b[0m";
     }
 }
