@@ -92,5 +92,21 @@
     ],
     "totalAmount": 20,
     "revenueId": 4
+  },
+  {
+    "id": 7,
+    "reservationCode": "ZQWL57L",
+    "fullName": "tt",
+    "email": "meganpieters3@gmail.com",
+    "movie": "Creed III",
+    "ticketAmount": 2,
+    "ticketTotal": 20,
+    "roomNumber": 1,
+    "seats": [
+      2,
+      3
+    ],
+    "totalAmount": 23.5,
+    "revenueId": 5
   }
 ]

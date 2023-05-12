@@ -252,6 +252,144 @@ public class VisualOverview
         }
         // Print an empty line for spacing
         Console.WriteLine();
+        Console.WriteLine($"You have selected {boxesSelected} seats:");
+        foreach (int[] seat in selectedBoxes)
+        {
+            Console.WriteLine($"- Row {seat[0]}, Seat {seat[1]}");
+            selectedSeats.Add(seat[1]);
+        }
+        System.Console.WriteLine("Are you sure you want to reserve these seats? Y|N");
+        string answer = Console.ReadLine()!;
+        if (answer.ToUpper() == "Y")
+        {
+            Reserve(room, film, selectedSeats);
+            foreach (var seat in selectedSeats)
+            { room.Seats.Add(seat); }
+            _roomsLogic.UpdateList(room);
+
+            Console.WriteLine("Reservation successful! Press any key to return to the main menu.");
+            Console.ReadKey(true);
+
+            return;
+        }
+        else
+        {
+            System.Console.WriteLine("try again or return to main menu?[1][2]");
+            Run();
+        }
+
+    }
+    public static void Reserve(RoomModel room, FilmModel film, List<int> seatList)
+    {
+
+        if (_account == null)
+        {
+            //foodlogic oproepen
+            FoodsLogic foodLogic = new();
+            double food = foodLogic.BuyFood();
+            System.Console.WriteLine(food);
+            // gegevens vragen
+            Console.Clear();
+            Console.Write("Enter email: ");
+            string email = Console.ReadLine()!;
+            Console.Write("Enter full name: ");
+            string fullName = Console.ReadLine()!;
+
+            // payment 
+            Console.WriteLine("Press enter to continue...");
+            Console.ReadLine();
+            Console.Clear();
+            Console.WriteLine("\n--------------------------------");
+            Console.WriteLine("         PAYMENT OPTIONS         ");
+            Console.WriteLine("--------------------------------");
+            Console.WriteLine("1. Paypal");
+            Console.WriteLine("2. Ideal");
+            Console.WriteLine("--------------------------------");
+            Console.Write("Enter your choice of payment: ");
+            string? answer2 = Console.ReadLine();
+            Console.Clear();
+            Payment.PaymentWithPayPal(answer2!);
+            Payment.PaymentWithIdeal(answer2!);
+
+            // info naar guest json sturen
+            string title = film.Title;
+            // prchase test
+            double ticketTotal = _ticketLogic.TicketPurchase(room, seatList);
+            // revenue vastmeten
+            int temp_rev_id = _revenueLogic._revenueList!.Count > 0 ? _revenueLogic._revenueList.Max(x => x.Id) + 1 : 1;
+            RevenueModel revenue = new(temp_rev_id, Convert.ToDecimal(ticketTotal));
+            _revenueLogic.UpdateList(revenue);
+
+            //total amount krijgen
+            double totalAmount = ticketTotal + food;
+            // guest naar json sturen
+            string reservationCode = ReservationCodeMaker();
+            ReservationModel guest = new(1, reservationCode, fullName, email, title, seatList.Count, ticketTotal, room.Id, seatList, totalAmount, temp_rev_id);
+            _guestLogic.UpdateList(guest);
+            // mail verzenden
+            bool account = false;
+            MailConformation mailConformation = new MailConformation(email, account);
+            mailConformation.SendMailConformation();
+        }
+
+        else if (_account != null)
+        {
+            //foodlogic oproepen
+            FoodsLogic foodLogic = new();
+            double food = foodLogic.BuyFood();
+            System.Console.WriteLine(food);
+            Console.WriteLine("\n--------------------------------");
+            Console.WriteLine("         PAYMENT OPTIONS         ");
+            Console.WriteLine("--------------------------------");
+            Console.WriteLine("1. Paypal");
+            Console.WriteLine("2. Ideal");
+            Console.WriteLine("--------------------------------");
+            Console.Write("Enter your choice of payment: ");
+            string? answer = Console.ReadLine();
+            Console.Clear();
+            Payment.PaymentWithPayPal(answer!);
+            Payment.PaymentWithIdeal(answer!);
+
+
+            // film moet nog aan room gekoppeld worden dus nu title handmatig
+            string title = film.Title;
+
+            // prchase test
+            double ticketTotal = _ticketLogic.TicketPurchase(room, seatList);
+            // revenue vastmeten
+            int temp_rev_id = _revenueLogic._revenueList!.Count > 0 ? _revenueLogic._revenueList.Max(x => x.Id) + 1 : 1;
+            RevenueModel revenue = new(temp_rev_id, Convert.ToDecimal(ticketTotal));
+            _revenueLogic.UpdateList(revenue);
+            // naar json versturen
+            string reservationCode = ReservationCodeMaker();
+            //total amount krijgen
+            double totalAmount = ticketTotal + food;
+            int temp_id = film.Id = _reservationsLogic._reservations!.Count > 0 ? _reservationsLogic._reservations.Max(x => x.Id) + 1 : 1;
+
+            ReservationModel reservation = new(temp_id, reservationCode, _account.FullName, _account.EmailAddress, title, seatList.Count, ticketTotal, room.Id, seatList, totalAmount, temp_rev_id);
+            _reservationsLogic.UpdateList(reservation);
+            bool account = true;
+            MailConformation mailConformation = new MailConformation(_account.EmailAddress, account);
+            mailConformation.SendMailConformation();
+            _account.TicketList.Add(temp_id);
+            _accountsLogic.UpdateList(_account);
+        }
+        Console.ForegroundColor = ConsoleColor.Green;
+        System.Console.WriteLine("Your reservation has been confirmed and is now guaranteed.");
+        Console.ForegroundColor = ConsoleColor.White;
+        Console.WriteLine("Press any key to continue...");
+        Console.ReadKey(true);
+    }
+
+
+
+    public static string ReservationCodeMaker()
+    {
+        Random random = new Random();
+        const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        int length = 7;
+        return new string(Enumerable.Repeat(chars, length)
+            .Select(s => s[random.Next(s.Length)]).ToArray());
     }
 }
 class Box
