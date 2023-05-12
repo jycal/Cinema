@@ -15,7 +15,11 @@ public static class CinemaMenus
 
     public static void Start()
     {
-        RunMainMenu();
+        // RunMainMenu();
+        VisualOverview vis = new VisualOverview();
+        VisualOverview.Run();
+        // AccountModel account = null!;
+        // EnterRoom.Start(account);
     }
 
     private static void RunMainMenu()

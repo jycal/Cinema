@@ -118,6 +118,7 @@ static class EnterRoom
         int currentSeat = -1;
 
         Console.CursorVisible = false;
+        Console.SetBufferSize(400, 400);
 
         Console.WriteLine("How many tickets would you like to order?");
         int numTickets = int.Parse(Console.ReadLine()!);
@@ -167,8 +168,8 @@ static class EnterRoom
                     Console.BackgroundColor = ConsoleColor.DarkGray;
                 }
 
-                if (selectedSeats.Contains(i))
-                { Console.BackgroundColor = ConsoleColor.DarkGreen; }
+
+
 
                 if (reservedSeats.Contains(i))
                 {
@@ -178,23 +179,29 @@ static class EnterRoom
                     if (vipSeats.Contains(i))
                     {
                         char vipSeat = '■';
-                        Console.Write($"{i,5} {vipSeat}");
+                        Console.Write($"   {vipSeat}");
+                    }
+                    else if (selectedSeats.Contains(i))
+                    {
+                        Console.BackgroundColor = ConsoleColor.DarkGreen;
+                        char vipSeat = '■';
+                        Console.Write($"   {vipSeat}");
                     }
                     else if (disabledSeats.Contains(i))
                     {
                         char disabilitySeat = '▲';
-                        Console.Write($"{i,5} {disabilitySeat}");
+                        Console.Write($"  {disabilitySeat}");
                     }
                     else if (comfortSeats.Contains(i))
                     {
                         char comfortSeat = '■';
                         // Console.ForegroundColor = ConsoleColor.DarkYellow;
-                        Console.Write($"{i,5} {comfortSeat}");
+                        Console.Write($"  {comfortSeat}");
                     }
 
                     else
                     {
-                        Console.Write($"{i,5} {reservedSeat}");
+                        Console.Write($"  {reservedSeat}");
                     }
                 }
                 else
@@ -206,24 +213,30 @@ static class EnterRoom
                     {
                         Console.ForegroundColor = ConsoleColor.Red;
                         char vipSeat = '■';
-                        Console.Write($"{i,5} {vipSeat}");
+                        Console.Write($"   {vipSeat}");
                     }
                     else if (comfortSeats.Contains(i))
                     {
                         char comfortSeat = '■';
                         Console.ForegroundColor = ConsoleColor.DarkMagenta;
-                        Console.Write($"{i,5} {comfortSeat}");
+                        Console.Write($"   {comfortSeat}");
+                    }
+                    else if (selectedSeats.Contains(i))
+                    {
+                        Console.BackgroundColor = ConsoleColor.DarkGreen;
+                        char vipSeat = '■';
+                        Console.Write($"   {vipSeat}");
                     }
                     else if (disabledSeats.Contains(i))
                     {
                         char disabilitySeat = '▲';
                         Console.ForegroundColor = ConsoleColor.Green;
-                        Console.Write($"{i,5} {disabilitySeat}");
+                        Console.Write($"  {disabilitySeat}");
                     }
 
                     else
                     {
-                        Console.Write($"{i,5} {unreservedSeat}");
+                        Console.Write($"  {unreservedSeat}");
                     }
                 }
                 if (i == currentSeat)
@@ -308,6 +321,8 @@ static class EnterRoom
             }
         }
     }
+
+
 
 
     public static void Reserve(RoomModel room, FilmModel film, List<int> seatList)
