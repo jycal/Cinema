@@ -66,9 +66,10 @@ public class GuestLogic
             {
                 //update existing model
                 // _films[index] = film;
-                _revenueLogic.RemoveRevenue(reservation!.RevenueId);
+                RevenueModel rev = _revenueLogic.GetById(1);
+                rev.Money -= reservation!.TotalAmount;
+                _revenueLogic.UpdateList(rev);
                 _guests.RemoveAt(index);
-                _guests.ForEach((x) => { if (x.Id > reservation!.Id) x.Id = x.Id - 1; });
                 GuestAccess.WriteAll(_guests);
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine($"\nReservation deleted\n");

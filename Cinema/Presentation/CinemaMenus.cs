@@ -437,7 +437,7 @@ View movies and order.
 |              Catering Menu               |
 |                                          |
 ============================================
-View menu and order.
+View menu.
 ";
         string[] options = { "Show current menu", "Search product by name", "Go back" };
         Menu cateringMenu = new Menu(prompt, options);
@@ -506,8 +506,8 @@ View menu and order.
         FoodModel food = _foodsLogic.GetByName(name);
         if (food is FoodModel)
         {
-            int temp_id = _revenueLogic._revenueList!.Count > 0 ? _revenueLogic._revenueList.Max(x => x.Id) + 1 : 1;
-            RevenueModel revenue = new RevenueModel(temp_id, Convert.ToDecimal(food.Cost));
+            RevenueModel revenue = _revenueLogic.GetById(1);
+            revenue.Money += food.Cost;
             _revenueLogic.UpdateList(revenue);
 
             string code = EnterRoom.ReservationCodeMaker();
@@ -665,6 +665,15 @@ View menu and order.
     {
         Console.Write("Enter the title of the movie: ");
         string title = Console.ReadLine()!;
+        Console.Write("Enter dates of the movie (Example: 01/01/2020 10:50:00, 01/01/2020 11:50:00): ");
+        string dates = Console.ReadLine()!;
+        List<DateTime> dateTimes = new List<DateTime>();
+        string[] dateTimesString = dates.Split(", ");
+        foreach (string dateTimeString in dateTimesString)
+        {
+            DateTime dateTime = DateTime.Parse(dateTimeString);
+            dateTimes.Add(dateTime);
+        }
         Console.Write("Enter the description of the movie: ");
         string description = Console.ReadLine()!;
         Console.Write("Enter the duration of the movie: ");
@@ -691,7 +700,7 @@ View menu and order.
                 break;
             }
         }
-        FilmModel film = new FilmModel(id, title, description, duration, genres, imageURL);
+        FilmModel film = new FilmModel(id, dateTimes, title, description, duration, genres, imageURL);
         _filmsLogic.UpdateList(film);
         Console.WriteLine("Movie added!");
         Console.WriteLine("Press any key to continue...");
@@ -995,8 +1004,8 @@ View menu and order.
 
     private static void ShowRevenue()
     {
-        decimal revenue = _revenueLogic.TotalRevenue();
-        Console.WriteLine($"Total revenue: {revenue}");
+        RevenueModel revenue = _revenueLogic.GetById(1);
+        Console.WriteLine($"Total revenue: {revenue.Money}");
         Console.WriteLine();
         Console.WriteLine("Press any key to continue...");
         Console.ReadKey(true);

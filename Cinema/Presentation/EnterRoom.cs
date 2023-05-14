@@ -347,15 +347,15 @@ static class EnterRoom
             // prchase test
             double ticketTotal = _ticketLogic.TicketPurchase(room, seatList);
             // revenue vastmeten
-            int temp_rev_id = _revenueLogic._revenueList!.Count > 0 ? _revenueLogic._revenueList.Max(x => x.Id) + 1 : 1;
-            RevenueModel revenue = new(temp_rev_id, Convert.ToDecimal(ticketTotal));
-            _revenueLogic.UpdateList(revenue);
+            RevenueModel rev = _revenueLogic.GetById(1);
+            rev.Money += ticketTotal + food;
+            _revenueLogic.UpdateList(rev);
 
             //total amount krijgen
             double totalAmount = ticketTotal + food;
             // guest naar json sturen
             string reservationCode = ReservationCodeMaker();
-            ReservationModel guest = new(1, reservationCode, fullName, email, title, seatList.Count, ticketTotal, room.Id, seatList, totalAmount, temp_rev_id);
+            ReservationModel guest = new(1, reservationCode, fullName, email, title, seatList.Count, ticketTotal, room.Id, seatList, totalAmount);
             _guestLogic.UpdateList(guest);
             // mail verzenden
             bool account = false;
@@ -389,15 +389,16 @@ static class EnterRoom
             double ticketTotal = _ticketLogic.TicketPurchase(room, seatList);
             // revenue vastmeten
             int temp_rev_id = _revenueLogic._revenueList!.Count > 0 ? _revenueLogic._revenueList.Max(x => x.Id) + 1 : 1;
-            RevenueModel revenue = new(temp_rev_id, Convert.ToDecimal(ticketTotal));
-            _revenueLogic.UpdateList(revenue);
+            RevenueModel rev = _revenueLogic.GetById(1);
+            rev.Money += ticketTotal + food;
+            _revenueLogic.UpdateList(rev);
             // naar json versturen
             string reservationCode = ReservationCodeMaker();
             //total amount krijgen
             double totalAmount = ticketTotal + food;
             int temp_id = film.Id = _reservationsLogic._reservations!.Count > 0 ? _reservationsLogic._reservations.Max(x => x.Id) + 1 : 1;
 
-            ReservationModel reservation = new(temp_id, reservationCode, _account.FullName, _account.EmailAddress, title, seatList.Count, ticketTotal, room.Id, seatList, totalAmount, temp_rev_id);
+            ReservationModel reservation = new(temp_id, reservationCode, _account.FullName, _account.EmailAddress, title, seatList.Count, ticketTotal, room.Id, seatList, totalAmount);
             _reservationsLogic.UpdateList(reservation);
             bool account = true;
             MailConformation mailConformation = new MailConformation(_account.EmailAddress, account);

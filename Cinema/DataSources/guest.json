@@ -11,8 +11,7 @@
     "seats": [
       287
     ],
-    "totalAmount": 10,
-    "revenueId": 1
+    "totalAmount": 10
   },
   {
     "id": 2,
@@ -27,8 +26,7 @@
       16,
       17
     ],
-    "totalAmount": 20,
-    "revenueId": 3
+    "totalAmount": 20
   },
   {
     "id": 3,
@@ -42,8 +40,7 @@
     "seats": [
       54
     ],
-    "totalAmount": 21.5,
-    "revenueId": 4
+    "totalAmount": 21.5
   },
   {
     "id": 4,
@@ -58,8 +55,7 @@
       53,
       54
     ],
-    "totalAmount": 39.5,
-    "revenueId": 5
+    "totalAmount": 39.5
   },
   {
     "id": 5,
@@ -74,8 +70,7 @@
       28,
       29
     ],
-    "totalAmount": 23.5,
-    "revenueId": 6
+    "totalAmount": 23.5
   },
   {
     "id": 6,
@@ -90,7 +85,20 @@
       117,
       118
     ],
-    "totalAmount": 20,
-    "revenueId": 4
+    "totalAmount": 20
+  },
+  {
+    "id": 7,
+    "reservationCode": "63KBJFK",
+    "fullName": "asdadad",
+    "email": "asjkdhasjkhd@asdha.c",
+    "movie": "65",
+    "ticketAmount": 1,
+    "ticketTotal": 10,
+    "roomNumber": 1,
+    "seats": [
+      44
+    ],
+    "totalAmount": 22.990000000000002
   }
 ]

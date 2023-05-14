@@ -1,18 +1,7 @@
 [
   {
     "id": 1,
-    "money": 10
-  },
-  {
-    "id": 2,
-    "money": 10
-  },
-  {
-    "id": 3,
-    "money": 13
-  },
-  {
-    "id": 4,
-    "money": 20
+    "name": "income",
+    "money": 0
   }
 ]

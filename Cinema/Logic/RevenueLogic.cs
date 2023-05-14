@@ -45,14 +45,4 @@ public class RevenueLogic
             Console.WriteLine($"Not found!?");
         }
     }
-
-    public decimal TotalRevenue()
-    {
-        decimal total = 0;
-        foreach (RevenueModel revenue in _revenueList)
-        {
-            total += revenue.Money;
-        }
-        return total;
-    }
 }

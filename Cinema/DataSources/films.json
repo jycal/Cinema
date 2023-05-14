@@ -1,6 +1,7 @@
 [
   {
     "id": 0,
+    "dates": null,
     "title": "John Wick 4",
     "description": "John Wick (Keanu Reeves) takes on his most deadly opponents yet in the fourth installment of the John Wick franchise. The price on John Wick\u0027s head is getting higher and higher, and his fight against the international assassin guild The High Table is developing into a global battle. To regain his freedom, he must face a new enemy with powerful alliances around the world and forces that turn old friends into enemies.",
     "duration": 169,
@@ -13,6 +14,7 @@
   },
   {
     "id": 1,
+    "dates": null,
     "title": "65",
     "description": "After a catastrophic crash on an unknown planet, pilot Mills (Adam Driver) soon finds out he crashed on Earth, but 65 million years ago. Mills and Koa (Ariana Greenblatt), the only other survivor, have only one chance at rescue.",
     "duration": 93,
@@ -25,6 +27,7 @@
   },
   {
     "id": 2,
+    "dates": null,
     "title": "Shazam! Fury of the Gods",
     "description": "In Shazam! Fury of the Gods from New Line Cinema continues the story of teenager Billy Batson, who by uttering the magic word SHAZAM! transforms into his alter ego, the adult superhero Shazam.",
     "duration": 130,
@@ -37,6 +40,7 @@
   },
   {
     "id": 3,
+    "dates": null,
     "title": "Creed III",
     "description": "Metro Goldwyn Mayer Pictures arrives with Creed III, making Michael B. Jordan\u0027s directorial debut and returning in the role of Adonis Creed in the third film of the hit franchise.",
     "duration": 117,
@@ -48,6 +52,7 @@
   },
   {
     "id": 4,
+    "dates": null,
     "title": "The Super Mario Bros. Movie (OV)",
     "description": "Illumination and Nintendo, two world-renowned names in the entertainment industry, are joining forces for the first time for THE SUPER MARIO BROS. MOVIE, a new theatrical film about one of pop culture\u0027s most famous plumbers.",
     "duration": 93,
@@ -60,6 +65,7 @@
   },
   {
     "id": 5,
+    "dates": null,
     "title": "All Inclusive",
     "description": "In this comedy, the relationship between Jacco (Tibor Luk\u00E1cs) and Sylvie (Jennifer Hoffman) is severely tested when Sylvie announces she wants to take a break during a vacation to a resort.",
     "duration": 115,
@@ -70,6 +76,7 @@
   },
   {
     "id": 6,
+    "dates": null,
     "title": "Scream VI",
     "description": "After the latest Ghostface murders, the four survivors leave Woodsboro behind and begin a new chapter.",
     "duration": 115,
@@ -81,6 +88,7 @@
   },
   {
     "id": 7,
+    "dates": null,
     "title": "Mummies(NL)",
     "description": "Mummies is een grappige en avontuurlijke Warner Bros. Pictures-animatiefilm voor het hele gezin. De film volgt de avonturen van drie Egyptische mummies die wonen in een ondergrondse geheime stad in het oude Egypte.",
     "duration": 89,
@@ -93,6 +101,7 @@
   },
   {
     "id": 8,
+    "dates": null,
     "title": "Dungeons \u0026 Dragons: Honor Among Thieves",
     "description": "A charming thief and a gang of adventurers embark on a spectacular heist to steal a lost relic. But when they antagonize the wrong people, everything gets gigantically out of hand.",
     "duration": 134,
@@ -105,6 +114,7 @@
   },
   {
     "id": 9,
+    "dates": null,
     "title": "Ant-Man and the Wasp: Quantumania",
     "description": "In Ant-Man and the Wasp: Quantumania, superhero partners Scott Lang (Paul Rudd) and Hope van Dyne (Evangeline Lilly) return to the big screen to continue their adventures as Ant-Man and The Wasp.",
     "duration": 124,
@@ -117,6 +127,7 @@
   },
   {
     "id": 10,
+    "dates": null,
     "title": "Avatar: The Way of Water",
     "description": "In Ant-Man and the Wasp: Quantumania, superhero partners Scott Lang (Paul Rudd) and Hope van Dyne (Evangeline Lilly) return to the big screen to continue their adventures as Ant-Man and The Wasp.",
     "duration": 192,
@@ -129,6 +140,7 @@
   },
   {
     "id": 11,
+    "dates": null,
     "title": "Cocaine Bear",
     "description": "Cocaine Bear is based on a 1985 true story about a drug smuggler, whose plane crashes, and the black bear who devours the lost cocaine.",
     "duration": 95,
@@ -139,6 +151,7 @@
   },
   {
     "id": 12,
+    "dates": null,
     "title": "Magic Mike\u0027s Last Dance",
     "description": "Magic Mike Lane (Channing Tatum) returns to the stage after a long time after a failed business deal leaves him broke and working as a bartender in Florida. For a hopefully final splurge, Mike goes to London with a wealthy socialite (Salma Hayek) who makes him an offer he can\u0027t refuse....",
     "duration": 112,
@@ -147,5 +160,18 @@
       "Romance"
     ],
     "imageURL": "https://21818cdde6.imgdist.com/public/_thumbs/Integrators/BeeProAgency/981647_966306/Magic-Mike-s-Last-Dance_ps_1_jpg_sd-high_Copyright-2022-Warner-Bros-Entertainment-Inc-All-Rights-Reserved-Photo-Credit-Claudette-Barius.webp_thumb.png?hash=1682510761536"
+  },
+  {
+    "id": 13,
+    "dates": [
+      "2023-01-01T12:00:00"
+    ],
+    "title": "Boba",
+    "description": "asdhasdjah",
+    "duration": 90,
+    "genre": [
+      "Action"
+    ],
+    "imageURL": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxINEhINDRAQDQ0NDxANDQ0NEhANDQ0NFRUWFhURFRUYHSggGBolGxUVITEhJSorLi8uFx8zODMtNygtLisBCgoKDg0OGhAQGi0lIB4rKy01ListLSsrLS0tLS0tLS03LSstLS0rLS0rLSstKy0tLSstLSsrLy0rLTUtLS0rLf/AABEIALcBEwMBIgACEQEDEQH/xAAbAAEAAwEBAQEAAAAAAAAAAAAAAQIDBAYFB//EADQQAAICAQIDBgQGAgIDAAAAAAABAhEDBCEFEjEGE0FRYZEiQnGBMlKhscHwBxRi0RUjQ//EABkBAQEBAQEBAAAAAAAAAAAAAAABAgMEBf/EACgRAQEAAgEEAgECBwAAAAAAAAABAhEDEiExQQRREyJhI4GRobHh8P/aAAwDAQACEQMRAD8A/TyWQGeZ9VJAYAEkACQQAAAAAACUQiUiUgK0S0TRLQTatCi1CgbVoUWoUDaoJoigqsnSbfgdGgVx7yS6/hXp5nLHH3su7\u002BVbz\u002Bnl9zu1M\u002BVUvokXH7eP5nL049E83/v7ufNJNvlVV18rKorFUSiPRw45Y4SZeUoIhBB0AwGAYDAEkAAKAAUDAYQYDAAAAAAAAJQAlIJFkgm0JEpDobY8XMrTT8/Qsm2MspO9Y0TR0x0t\u002BKJekfhTL01j8uP25qDRu9PJeHtuZyVddvqmhpeufalENFxQ01tnRnmlyr1eyXmzdojR4ueXeP8ADHaH18WQyzmGNyvprpcPdR3/ABy3k/U58kuZ34eBvqcl7Lx6\u002BiMKLfp4fj43l5LyZev8/wClAiaIMvpCCCCABgAGAAAAAAAAGAwDAYAAAAASASJSCRZIqWiRZIJFkgzazyYuZGfDfhlJ/wDGv1R1UZ8NjvJ\u002Bi/ke9pcv0WO3FqYvZvf1Ne8h5r3RVJFJ4k\u002Bqs1115OmN00\u002Bj9mQcUtPHy9rRg4pdHJfRszebXmL\u002BN9Tuk\u002BqT\u002BqTM5aaP5faTX6Hz\u002B\u002Ba\u002BaXuWx65r5vcn58PZ\u002BPKeHVm06qmpL2f7GTfIlFdNkvAyfEk9m1\u002BxbDmi5XfROkvMs5MMr2rnyYclmrESxNbv5ilGrt9XZRotevjx6MelnRWjRorRHXaiCJohEaAAwDAAEkAAAKAAlkBgSRRJDAEkAASkCUgJSLJEJF0isWpSLxRCReKLGLUSW32K6BUpfb\u002BTSS2ZGjVJ/VCpb\u002BmuiLDZMRIz6cWOR7HHM68y2OOUf70OHI6YMchml8L9Wy2X6kZG1Hr0Xkqs8/uur4mfI1deDZ19mW5znJu1HZfXa/3RxavY\u002Bz2X0/Ljc/zyvfb\u002B7UcfiYb5Z\u002Bzvy3WD6zRRo1aKNH2HllZNFWjRopRl0lUoii1FaI0gMAKMMMAASQAAAAMEtAQA0AAJFAEWSKpF0ipUpF0iqRdIMWrRRpFFYovFGo52omthp1t9/wDotNbDF0\u002B5MmbezWAYiJGfTn7YZ3\u002B5zyf2NtQ\u002BhzSf7Ucc73dcZ2c\u002BRXSKa51F\u002BHgbRVy9F19Gc3EX0XTqebLtha6zzHw9a\u002Bp63hWHkxQj5L9Oi/Sjyso804x/5L2W/wDB7XHDlio\u002BSS/Q18DHvlkvyL2kVaKNGjRRo\u002Bi4ysmijRo0UaM10ilFKL0VojcVDBJGkAmiAAFCgAFABQYDANBoMAKFAASkXSKIuipV0i6RSJdFjnV4mkUZxNImo50n0Jx9ERk6Fo9ETLwz6XiRIldCGYZc2br51vR5Ltx2vxcHhDLlx5MvfTcMcMdeCt23sj1ebrX2Pkcc4Lp9dCMNZhhnhB80FNXU66\u002Bmxwtm\u002B7p312R2c4rj1\u002BGOswKSx5Y3FZFyzTummvfcjiD389vE69BpY4MccWKKhjxpRxwjtGMV0SPH9vuManSQxPQ4Vny5tRHC\u002BaMpRhF3u66dEr6HHkm5MZ7dMLq7r7fC8fPnivLf\u002B/az17PNdlsblOU5VzRik63ipVvXuelZ6PhY649/bPPd56ZtFGjRmbPSxGbRRouyjM10ilFKLsoR0itBoUGRoaFAUAoUBQCgAFKDAYQYAAUAAJRdFEWRUq6NImcS6LHOtImkTKJpE1HOmUvHovoZZn0OXi3F8OihDJqckcUJzx4YuXzZJuoxX98GZyZvh1cRWXuci03KtR3U\u002B4eT8Czcr5XL0ujyX\u002BPI8Uisy4w205J4Hkljllvfm/Bty9K\u002B57RS6fQiRn0zHHlfUwmazf8APsZSPLk7RZtKN\u002BSPi6qXU\u002BxqXSZ8PWyOHyb4jrwx9rszirG5fmf9/g\u002Buzl4Xi5MUI\u002Bh0s\u002BnxY9OEn7PNld5WqMoyzKM0sUZRlmUZmusVKUWKkbioaAZGhoMABQAAAAKBiw2EGA2LAAWLAksmUssmEq6ZdMzTLplZrSLLxZkmXizUc7Fc76Hzu0/ZvBxTHixann5cGaGog8cnCXPFNdfKmzt1Et0a5dVDHCWSckoYleST2UUlbb\u002BxjKs5ztHFxaGqU8L0qxSwxaWaE5ShPl3/AAtfb9fPbm1Pa7SYtSuHZMqhqpRUlCSahbVqPP0ut6PqanimHHheqnlgtMod481p4\u002BT81nnMGh4bxiceKYow1OXH/wCuOb44yhKPhKDrdeFq9/UW9nKPvN2V8SdlsvA4eI8Y0\u002BjqWqzY8EZPli8slFSfkrPLru777OjXSpHxp/HOMV4yX6bnP2577U6PJHQSTzThF4pxdWrTuL\u002BnRnnewuXPh1el4XmvLLHpJ6rU5pXKpue0b917HPLj/Jn2vtvHPpj9aguVJeSSIbDZRs\u002Bm4SIbKNlmyjZmtyKtlGyzZSzLpEFC1lbI3EBiw2FAGxYACxYACwFLJbIDYQsWGxYCxYsmwIslMWLAsmWTKJlkys1omWizNMsmVixlqJfEkfI03Ac2THxHT6rLcNdqc7084u5Y9NkxwUV6VLm2PpZ5/GvsfTTMWpyzUjyPZ3sX/r6CfC9dmWtxZJzltF4ljhKmox3b2knK/Nm/ZvhOk4ZHJpNJNSyuSyZovIsma3snJeCpeXgfc08srnkWTk7q13PLfNVb833PDrsboeH6/Hro6qWHNlyZni0uTJjUcmTInzKN/FJfE3W/gMvF7uE8vMcc4fxKPG8WbH/sZdI8uOcZRT7jFhdKcZVttV\u002Bx6ntn2Qhxju8kMvdZcEnBy5ZTXdv8UUvCVpP7Hzf8mLizy4P/ABTydxyvvO67vbJfzXvVHo\u002BC8BWnmtW9TmWbJjT1eBTi9NmyqNOfI03F7fK10Mbva9vC/ca6TRx0mHHpozc44MccSlNrmkoqrfsOyWbHmz6ieNxlLA44Jyi06k1zctr6s/PeH8c1\u002Bo4tnw5IzjpMfeQ7tqscMadQyc1bt9fv6H6H2C4Vj0mLP3bcpZ9XlzZZS/O1Fcq9EqXuceLj/i7yvfW/6u3V\u002Bns9S2VbIbKtntZkGyrYbKtkbkQ2VsNlbI3IWVTJshMjRYsWGwFixYsCbIsWLAWBYABgMAAGAAAAAASmSmVJsGl0yyZmmSmVmxz52udW6Vq/RHLwjg\u002Bow63V6meqlk0Wp5J6fSdY4clJTe/RfCqppfE7XidmbBzbrqZYpZMX4W68uq9jFaz4\u002BuTV8Kcb4xm0ubDhx6TJqseobjLPidLBK1\u002BNV0q3e3Q8l23/AMcx4nqI66Ooy6bKlBSSissUoO047pxZ7ePE388E/paLvXwfVSXsxvXhwvBn7j4Wh7RaPNJ6PFqoZNRiThKHxLJcdm91ufmmu7MarTa2WfUaqGn0csrf\u002B7mzRhJ4H/8AL4t\u002BZx\u002BH9T9Uw8G0cM0tXjx4seonanlUGpyt27dDtBocWsx9xlUM2NtNxmrVro6Zy3cZbE/Hlb4ef1PHNJjhjePPhn3zjhwck1Pvp2oqKa67tHs\u002BG6VYMcca63Kcq8Zyk5Sfu2eR03Y\u002BDlgqGOOLSzWTGl8jX5VXU9q2T42Gt3V/m65S\u002BFmyrZVsiz1JpNkWRZFka0WVsWQRdCYQQQUDAYBhgAGAAAACgYDCDDDAAAAAAAFgATZKZUkCyZKZRMJhNJaT8EQ8MX4ImyWyndm9PHyJ7iPkXsWTUXqv2lbbImyrZFlZ0s2RZFk"
   }
 ]

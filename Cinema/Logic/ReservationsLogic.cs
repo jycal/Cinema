@@ -62,7 +62,11 @@ public class ReservationsLogic
         {
             //update existing model
             // _films[index] = film;
-            _revenueLogic.RemoveRevenue(reservation!.RevenueId);
+            RevenueModel rev = _revenueLogic.GetById(1);
+            rev.Money = rev.Money - reservation!.TotalAmount;
+            _revenueLogic.UpdateList(rev);
+            CinemaMenus._account.TicketList.Remove(id);
+            CinemaMenus._accountsLogic.UpdateList(CinemaMenus._account);
             _reservations.RemoveAt(index);
             _reservations.ForEach((x) => { if (x.Id > reservation!.Id) x.Id = x.Id - 1; });
             ReservationAccess.WriteAll(_reservations);
@@ -86,7 +90,11 @@ public class ReservationsLogic
             {
                 //update existing model
                 // _films[index] = film;
-                _revenueLogic.RemoveRevenue(reservation!.RevenueId);
+                RevenueModel rev = _revenueLogic.GetById(1);
+                rev.Money = rev.Money - reservation!.TotalAmount;
+                CinemaMenus._account.TicketList.Remove(reservation.Id);
+                CinemaMenus._accountsLogic.UpdateList(CinemaMenus._account);
+                _revenueLogic.UpdateList(rev);
                 _reservations.RemoveAt(index);
                 _reservations.ForEach((x) => { if (x.Id > reservation!.Id) x.Id = x.Id - 1; });
                 ReservationAccess.WriteAll(_reservations);

@@ -9,6 +9,8 @@ public class FilmModel
 {
     [JsonPropertyName("id")]
     public int Id { get; set; }
+    [JsonPropertyName("dates")]
+    public List<DateTime> Dates { get; set; }
 
     [JsonPropertyName("title")]
     public string Title { get; set; }
@@ -25,9 +27,10 @@ public class FilmModel
     [JsonPropertyName("imageURL")]
     public string ImageURL { get; set; }
 
-    public FilmModel(int id, string title, string description, int duration, List<string> genre, string imageURL)
+    public FilmModel(int id, List<DateTime> dates, string title, string description, int duration, List<string> genre, string imageURL)
     {
         Id = id;
+        Dates = dates;
         Title = title;
         Description = description;
         Duration = duration;

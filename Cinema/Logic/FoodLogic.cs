@@ -66,7 +66,7 @@ public class FoodsLogic
             {
                 System.Console.WriteLine("Which food price do you want to change?");
                 string secondanswer = Console.ReadLine()!;
-                foreach (FoodModel item in _foods.ToList())
+                foreach (FoodModel item in _foods!.ToList())
                 {
                     if (item.Name == secondanswer)
                     {
