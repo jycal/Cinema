@@ -116,10 +116,15 @@ public class FoodsLogic
             System.Console.WriteLine("What would you like?");
             string choice = Console.ReadLine()!;
             var food = GetByName(choice);
+            if (food == null)
+            {
+                System.Console.WriteLine("Does not exist");
+                BuyFood();
+            }
             // System.Console.WriteLine(food.Cost);
             // double price = GetTotalPrice(orderedFood);
             // System.Console.WriteLine(price);
-            return food.Cost;
+            return food!.Cost;
 
         }
         else if (answer == "N")

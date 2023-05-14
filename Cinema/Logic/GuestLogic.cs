@@ -67,7 +67,7 @@ public class GuestLogic
                 //update existing model
                 // _films[index] = film;
                 RevenueModel rev = _revenueLogic.GetById(1);
-                rev.Money -= reservation!.TotalAmount;
+                rev.Money = rev.Money - reservation!.TotalAmount;
                 _revenueLogic.UpdateList(rev);
                 _guests.RemoveAt(index);
                 GuestAccess.WriteAll(_guests);

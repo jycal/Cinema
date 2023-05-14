@@ -86,19 +86,5 @@
       118
     ],
     "totalAmount": 20
-  },
-  {
-    "id": 7,
-    "reservationCode": "63KBJFK",
-    "fullName": "asdadad",
-    "email": "asjkdhasjkhd@asdha.c",
-    "movie": "65",
-    "ticketAmount": 1,
-    "ticketTotal": 10,
-    "roomNumber": 1,
-    "seats": [
-      44
-    ],
-    "totalAmount": 22.990000000000002
   }
 ]
