@@ -65,10 +65,12 @@ public class MailConformation
     }
     public static string CreateBody()
     {
+        string selectedSeats = string.Join("/", reservation!.Seats.Select(seat => $"Row {seat[0] + 1} Seat {seat[1] + 1}\n"));
         string image = GetPicture(reservation!.Movie);
         string body = MailAccess.LoadAll();
         body = body.Replace("movieName", reservation!.Movie);
-        body = body.Replace("seatNumbers", $"{Convert.ToString(string.Join("/", reservation.Seats))}");
+        body = body.Replace("seatNumbers", $"{selectedSeats}");
+        // body = body.Replace("rowNumber", $"{Convert.ToString(reservation.Rows)}");
         body = body.Replace("ticketAmount", Convert.ToString(reservation!.TicketAmount));
         body = body.Replace("ticketTotal", Convert.ToString(reservation!.TicketTotal));
         body = body.Replace("totalAmount", Convert.ToString(reservation!.TotalAmount));

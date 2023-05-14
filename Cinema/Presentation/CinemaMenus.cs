@@ -15,11 +15,7 @@ public static class CinemaMenus
 
     public static void Start()
     {
-        // RunMainMenu();
-        VisualOverview vis = new VisualOverview();
-        VisualOverview.Run();
-        // AccountModel account = null!;
-        // EnterRoom.Start(account);
+        RunMainMenu();
     }
 
     private static void RunMainMenu()
@@ -411,7 +407,9 @@ View movies and order.
         string answer = Console.ReadLine()!.ToUpper();
         if (answer == "Y")
         {
-            EnterRoom.Start(_account);
+            // EnterRoom.Start(_account);
+            VisualOverview vis = new VisualOverview();
+            VisualOverview.Start(_account);
         }
         else if (answer == "N")
         {
@@ -914,22 +912,21 @@ View menu and order.
 |                                                 |
 ==================================================");
 
-        foreach (var item in reservation!.Seats)
-        {
-            Console.ForegroundColor = ConsoleColor.Magenta;
-            int Seats = item;
-            string Overview = $@"
+
+        Console.ForegroundColor = ConsoleColor.Magenta;
+        string selectedSeats = string.Join(", ", reservation.Seats.Select(seat => $"Row {seat[0] + 1}, Seat {seat[1] + 1}"));
+        string Overview = $@"
   Movie: {reservation.Movie}
   Full Name: {reservation.FullName}
   Email: {reservation.Email}
   Ticket Amount: {reservation.TicketAmount}
-  Seats: {Seats}
+  Seats: {selectedSeats}
   Total Money Amount: {reservation.TotalAmount}
 
 ==================================================";
-            Console.WriteLine(Overview);
+        Console.WriteLine(Overview);
 
-        }
+
         Console.ResetColor();
         Console.WriteLine();
         Console.WriteLine("Press any key to continue...");

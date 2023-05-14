@@ -6,8 +6,6 @@ using System.Threading.Tasks;
 
 public class VisualOverview
 {
-
-
     static private RoomsLogic _roomsLogic = new();
     static private FilmsLogic? _filmsLogic;
     static private ReservationsLogic? _reservationsLogic;
@@ -81,13 +79,49 @@ public class VisualOverview
         }
     }
 
-
-    public static void Run()
+    public static void Start(AccountModel account)
     {
-        RoomModel room = _roomsLogic.CheckEnter(1);
-        FilmModel film = _filmsLogic!.GetById(3);
+        _account = account;
+        Console.WriteLine("Welcome to the movie rooms page");
+        Console.WriteLine("Please enter the movie id\n");
+        int id = int.Parse(Console.ReadLine()!);
+        FilmModel film = _filmsLogic!.GetById(id);
+        if (film == null)
+        {
+            Console.WriteLine("No film found with that id");
+            Console.WriteLine("Please try again.\n");
+            //Write some code to go back to the menu
+            Console.WriteLine("Press any key to go back to the menu");
+            Console.ReadKey();
+            Console.Clear();
+            CinemaMenus.Start();
+            return;
+        }
+        Console.WriteLine("Please enter the room number\n");
 
-        List<int> selectedSeats = new List<int>();
+        int number = int.Parse(Console.ReadLine()!);
+        RoomModel room = _roomsLogic.CheckEnter(number);
+        if (room != null)
+        {
+            Console.WriteLine("Welcome to room " + room.RoomNumber);
+            Console.WriteLine($"This room has {room.MaxSeats} seats");
+
+            Run(room, film);
+        }
+        else
+        {
+            Console.WriteLine("No room found with that hall");
+        }
+    }
+
+    public static void Run(RoomModel room, FilmModel film)
+    {
+
+        // RoomModel room = _roomsLogic.CheckEnter(1);
+        // FilmModel film = _filmsLogic!.GetById(3);
+
+        List<int[]> selectedSeats = new List<int[]>();
+        // List<int> rowList = new List<int>();
 
         List<int> reservedSeats = room.Seats;
         List<int> vipSeats = room.VipSeats;
@@ -120,7 +154,7 @@ public class VisualOverview
         // Ask the user for a number input
         Console.WriteLine("How many tickets would you like to order?");
         numBoxesToSelect = int.Parse(Console.ReadLine()!);
-
+        Console.Clear();
         // Print the initial box to the console
         PrintBox();
 
@@ -171,7 +205,7 @@ public class VisualOverview
                     }
                     else if (dontPrint.Contains(cursorRow * roomWidth + cursorCol))
                     {
-                        // The selected square is in the blueSquares list, so do nothing.
+                        // The selected square is in the dontprint list, so do nothing.
                         break;
                     }
                     else if (selectedBoxes.Any(box => box[0] == cursorRow && box[1] == cursorCol))
@@ -195,13 +229,24 @@ public class VisualOverview
         {
             Console.SetCursorPosition(0, 0);
             Console.CursorVisible = false;
-            Console.Clear();
-
+            // Console.Clear();
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.WriteLine("■: Unreserved seat");
+            Console.ForegroundColor = ConsoleColor.DarkGray;
+            Console.WriteLine("■: Reserved seat");
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("■: VIP seat");
+            Console.ForegroundColor = ConsoleColor.Magenta;
+            Console.WriteLine("■: Comfort seat");
+            Console.ForegroundColor = ConsoleColor.DarkMagenta;
+            Console.WriteLine("▲: Disability seat\n");
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine("                                  Screen\n");
             // Print column numbers
             Console.Write("  ");
-            for (int j = 1; j < roomWidth; j++)
+            for (int j = 0; j < roomWidth; j++)
             {
-                Console.Write($"{j} ");
+                Console.Write($"{(j + 1)} ");
             }
             Console.WriteLine();
 
@@ -209,7 +254,7 @@ public class VisualOverview
             for (int i = 0; i < roomLength; i++)
             {
                 // Print row number to the left of the row
-                Console.Write($"|{"Row: " + i,10} |");
+                Console.Write($"|{"Row: " + (i + 1),10} |");
 
                 for (int j = 0; j < roomWidth; j++)
                 {
@@ -220,7 +265,30 @@ public class VisualOverview
                     }
                     else if (reservedSeats.Contains(seatNumber))
                     {
-                        Console.Write("■".DarkGray() + " ");
+                        if (vipSeats.Contains(seatNumber) || comfortSeats.Contains(seatNumber) || disabledSeats.Contains(seatNumber))
+                        {
+                            Console.Write("■".DarkGray() + " ");
+                        }
+                        else
+                        {
+                            Console.Write("■".DarkGray() + " ");
+                        }
+                    }
+                    else if (selectedBoxes.Any(box => box[0] == i && box[1] == j))
+                    {
+                        Console.Write("■".Green() + " ");
+                    }
+                    else if (comfortSeats.Contains(seatNumber) && selectedBoxes.Any(box => box[0] == i && box[1] == j))
+                    {
+                        Console.Write("■".Green() + " ");
+                    }
+                    else if (vipSeats.Contains(seatNumber) && selectedBoxes.Any(box => box[0] == i && box[1] == j))
+                    {
+                        Console.Write("■".Green() + " ");
+                    }
+                    else if (disabledSeats.Contains(seatNumber) && selectedBoxes.Any(box => box[0] == i && box[1] == j))
+                    {
+                        Console.Write("▲".Green() + " ");
                     }
                     else if (disabledSeats.Contains(seatNumber))
                     {
@@ -238,10 +306,6 @@ public class VisualOverview
                     {
                         Console.Write("■".White() + " ");
                     }
-                    else if (selectedBoxes.Any(box => box[0] == i && box[1] == j))
-                    {
-                        Console.Write("■".Green() + " ");
-                    }
                     else
                     {
                         Console.Write("■".Blue() + " ");
@@ -250,22 +314,31 @@ public class VisualOverview
                 Console.WriteLine();
             }
         }
-        // Print an empty line for spacing
+        // empty line for spacing
         Console.WriteLine();
+
+        // seats aan seatlist toevoegen
         Console.WriteLine($"You have selected {boxesSelected} seats:");
         foreach (int[] seat in selectedBoxes)
         {
-            Console.WriteLine($"- Row {seat[0]}, Seat {seat[1]}");
-            selectedSeats.Add(seat[1]);
+            Console.WriteLine($"- Row {seat[0] + 1}, Seat {seat[1] + 1}");
+            selectedSeats.Add(seat);
+            // if (!rowList.Contains(seat[0]))
+            // { rowList.Add(seat[0]); }
         }
+        // confirmation vragen
         System.Console.WriteLine("Are you sure you want to reserve these seats? Y|N");
         string answer = Console.ReadLine()!;
         if (answer.ToUpper() == "Y")
         {
             Reserve(room, film, selectedSeats);
             foreach (var seat in selectedSeats)
-            { room.Seats.Add(seat); }
-            _roomsLogic.UpdateList(room);
+            {
+                int seatNumber = (seat[0]) * roomWidth + seat[1];
+
+                room.Seats.Add(seatNumber);
+                _roomsLogic.UpdateList(room);
+            }
 
             Console.WriteLine("Reservation successful! Press any key to return to the main menu.");
             Console.ReadKey(true);
@@ -275,11 +348,20 @@ public class VisualOverview
         else
         {
             System.Console.WriteLine("try again or return to main menu?[1][2]");
-            Run();
+            string answer2 = Console.ReadLine()!;
+            if (answer2 == "1")
+            {
+                Start(_account);
+            }
+            else
+            {
+                CinemaMenus.Start();
+            }
+
         }
 
     }
-    public static void Reserve(RoomModel room, FilmModel film, List<int> seatList)
+    public static void Reserve(RoomModel room, FilmModel film, List<int[]> seatList)
     {
 
         if (_account == null)
@@ -314,9 +396,12 @@ public class VisualOverview
             // info naar guest json sturen
             string title = film.Title;
             // prchase test
-            double ticketTotal = _ticketLogic.TicketPurchase(room, seatList);
+            List<int> seats = new();
+            foreach (var seat in seatList)
+            { seats.Add(seat[1]); }
+            double ticketTotal = _ticketLogic!.TicketPurchase(room, seats);
             // revenue vastmeten
-            int temp_rev_id = _revenueLogic._revenueList!.Count > 0 ? _revenueLogic._revenueList.Max(x => x.Id) + 1 : 1;
+            int temp_rev_id = _revenueLogic!._revenueList!.Count > 0 ? _revenueLogic._revenueList.Max(x => x.Id) + 1 : 1;
             RevenueModel revenue = new(temp_rev_id, Convert.ToDecimal(ticketTotal));
             _revenueLogic.UpdateList(revenue);
 
@@ -325,7 +410,7 @@ public class VisualOverview
             // guest naar json sturen
             string reservationCode = ReservationCodeMaker();
             ReservationModel guest = new(1, reservationCode, fullName, email, title, seatList.Count, ticketTotal, room.Id, seatList, totalAmount, temp_rev_id);
-            _guestLogic.UpdateList(guest);
+            _guestLogic!.UpdateList(guest);
             // mail verzenden
             bool account = false;
             MailConformation mailConformation = new MailConformation(email, account);
@@ -355,16 +440,19 @@ public class VisualOverview
             string title = film.Title;
 
             // prchase test
-            double ticketTotal = _ticketLogic.TicketPurchase(room, seatList);
+            List<int> seats = new();
+            foreach (var seat in seatList)
+            { seats.Add(seat[1]); }
+            double ticketTotal = _ticketLogic!.TicketPurchase(room, seats);
             // revenue vastmeten
-            int temp_rev_id = _revenueLogic._revenueList!.Count > 0 ? _revenueLogic._revenueList.Max(x => x.Id) + 1 : 1;
+            int temp_rev_id = _revenueLogic!._revenueList!.Count > 0 ? _revenueLogic._revenueList.Max(x => x.Id) + 1 : 1;
             RevenueModel revenue = new(temp_rev_id, Convert.ToDecimal(ticketTotal));
             _revenueLogic.UpdateList(revenue);
             // naar json versturen
             string reservationCode = ReservationCodeMaker();
             //total amount krijgen
             double totalAmount = ticketTotal + food;
-            int temp_id = film.Id = _reservationsLogic._reservations!.Count > 0 ? _reservationsLogic._reservations.Max(x => x.Id) + 1 : 1;
+            int temp_id = film.Id = _reservationsLogic!._reservations!.Count > 0 ? _reservationsLogic._reservations.Max(x => x.Id) + 1 : 1;
 
             ReservationModel reservation = new(temp_id, reservationCode, _account.FullName, _account.EmailAddress, title, seatList.Count, ticketTotal, room.Id, seatList, totalAmount, temp_rev_id);
             _reservationsLogic.UpdateList(reservation);
@@ -372,7 +460,7 @@ public class VisualOverview
             MailConformation mailConformation = new MailConformation(_account.EmailAddress, account);
             mailConformation.SendMailConformation();
             _account.TicketList.Add(temp_id);
-            _accountsLogic.UpdateList(_account);
+            _accountsLogic!.UpdateList(_account);
         }
         Console.ForegroundColor = ConsoleColor.Green;
         System.Console.WriteLine("Your reservation has been confirmed and is now guaranteed.");
@@ -400,6 +488,7 @@ class Box
 
 public static class ConsoleExtensions
 {
+    // class voor de juiste kleuren zodat het sneller gaat met kleur oproepen(minder flikker)
     public static string Yellow(this string str)
     {
         return $"\u001b[33m{str}\u001b[0m";

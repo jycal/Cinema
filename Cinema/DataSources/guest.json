@@ -1,112 +1,134 @@
 [
   {
     "id": 1,
-    "reservationCode": "YU56FBO",
-    "fullName": "adsa",
-    "email": "n@b.c",
-    "movie": "Cocaine Bear",
-    "ticketAmount": 1,
-    "ticketTotal": 10,
-    "roomNumber": 2,
+    "reservationCode": "EISWEYX",
+    "fullName": "megs",
+    "email": "meganpieters3@gmail.com",
+    "movie": "Creed III",
+    "ticketAmount": 2,
+    "ticketTotal": 20,
+    "roomNumber": 1,
     "seats": [
-      287
+      [
+        4,
+        2
+      ],
+      [
+        4,
+        3
+      ]
     ],
-    "totalAmount": 10,
-    "revenueId": 1
+    "totalAmount": 20,
+    "revenueId": 10
   },
   {
     "id": 2,
-    "reservationCode": "02DM6A6",
-    "fullName": "mamama",
+    "reservationCode": "02YNGOJ",
+    "fullName": "hh",
     "email": "meganpieters3@gmail.com",
     "movie": "Creed III",
     "ticketAmount": 2,
     "ticketTotal": 20,
     "roomNumber": 1,
     "seats": [
-      16,
-      17
+      [
+        4,
+        2
+      ],
+      [
+        4,
+        3
+      ]
     ],
     "totalAmount": 20,
-    "revenueId": 3
+    "revenueId": 11
   },
   {
     "id": 3,
-    "reservationCode": "X5099S6",
-    "fullName": "mamamam",
+    "reservationCode": "W1I7D0E",
+    "fullName": "mega",
     "email": "meganpieters3@gmail.com",
     "movie": "Creed III",
-    "ticketAmount": 1,
-    "ticketTotal": 18,
+    "ticketAmount": 2,
+    "ticketTotal": 20,
     "roomNumber": 1,
     "seats": [
-      54
+      [
+        3,
+        8
+      ],
+      [
+        4,
+        8
+      ]
     ],
-    "totalAmount": 21.5,
-    "revenueId": 4
+    "totalAmount": 20,
+    "revenueId": 12
   },
   {
     "id": 4,
-    "reservationCode": "DQAPZHA",
-    "fullName": "oaoaoao",
+    "reservationCode": "04V7WGG",
+    "fullName": "meg",
     "email": "meganpieters3@gmail.com",
     "movie": "Creed III",
     "ticketAmount": 2,
-    "ticketTotal": 36,
+    "ticketTotal": 20,
     "roomNumber": 1,
     "seats": [
-      53,
-      54
+      [
+        4,
+        3
+      ],
+      [
+        4,
+        4
+      ]
     ],
-    "totalAmount": 39.5,
-    "revenueId": 5
+    "totalAmount": 20,
+    "revenueId": 13
   },
   {
     "id": 5,
-    "reservationCode": "UEYBUG1",
-    "fullName": "ooefe",
+    "reservationCode": "C6CD6H2",
+    "fullName": "meg",
     "email": "meganpieters3@gmail.com",
     "movie": "Creed III",
     "ticketAmount": 2,
     "ticketTotal": 20,
     "roomNumber": 1,
     "seats": [
-      28,
-      29
+      [
+        5,
+        3
+      ],
+      [
+        5,
+        2
+      ]
     ],
-    "totalAmount": 23.5,
-    "revenueId": 6
+    "totalAmount": 20,
+    "revenueId": 14
   },
   {
     "id": 6,
-    "reservationCode": "7D8TRLA",
-    "fullName": "megan p",
-    "email": "meganpieters3@gmail.com",
-    "movie": "Cocaine Bear",
-    "ticketAmount": 2,
-    "ticketTotal": 20,
-    "roomNumber": 1,
-    "seats": [
-      117,
-      118
-    ],
-    "totalAmount": 20,
-    "revenueId": 4
-  },
-  {
-    "id": 7,
-    "reservationCode": "ZQWL57L",
-    "fullName": "tt",
+    "reservationCode": "VE7TUP0",
+    "fullName": "meeh",
     "email": "meganpieters3@gmail.com",
     "movie": "Creed III",
     "ticketAmount": 2,
     "ticketTotal": 20,
     "roomNumber": 1,
     "seats": [
-      2,
-      3
+      [
+        4,
+        7
+      ],
+      [
+        4,
+        8
+      ]
     ],
-    "totalAmount": 23.5,
-    "revenueId": 5
+    "totalAmount": 20,
+    "revenueId": 15
   }
 ]
