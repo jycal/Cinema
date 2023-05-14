@@ -7,7 +7,7 @@ using System.Text.Json;
 //This class is not static so later on we can use inheritance and interfaces
 public class RoomsLogic
 {
-    private List<RoomModel> _rooms;
+    public List<RoomModel> _rooms;
 
     //Static properties are shared across all instances of the class
     //This can be used to get the current logged in account from anywhere in the program
@@ -40,7 +40,9 @@ public class RoomsLogic
 
     public RoomModel GetById(int id)
     {
-        return _rooms.Find(i => i.Id == id)!;
+        RoomModel room = _rooms.Find(i => i.Id == id)!;
+        // System.Console.WriteLine(room);
+        return room;
     }
 
     public RoomModel CheckEnter(int? roomNumber)

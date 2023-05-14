@@ -13,6 +13,7 @@ public class MailConformation
 
     static private GuestLogic? _guestLogic;
     static private ReservationModel? reservation;
+    static private RoomsLogic? _roomsLogic;
 
     static private string? EmailReciever;
 
@@ -20,6 +21,7 @@ public class MailConformation
     {
         _guestLogic = new GuestLogic();
         _reservationsLogic = new ReservationsLogic();
+        _roomsLogic = new RoomsLogic();
         EmailReciever = emailReciever;
         if (account == true)
         { reservation = _reservationsLogic!._reservations!.Last(); }
@@ -82,6 +84,7 @@ public class MailConformation
         body = body.Replace("roomNumber", Convert.ToString(reservation.RoomNumber));
         body = body.Replace("singleTicketPrice", Convert.ToString(reservation.TicketTotal / reservation!.TicketAmount));
         body = body.Replace("snackTotal", Convert.ToString(reservation.TotalAmount - reservation!.TicketTotal));
+        body = body.Replace("ticketType", Convert.ToString(GetTicketType(reservation.RoomNumber, reservation.Seats)));
 
         return body;
 
@@ -93,6 +96,37 @@ public class MailConformation
         FilmsLogic filmLogic = new();
         FilmModel film = filmLogic.GetByName(movietitle);
         return film.ImageURL;
+    }
+
+    public static string GetTicketType(int id, List<int[]> seats)
+    {
+        RoomModel room = _roomsLogic!.GetById(id);
+        // Console.WriteLine($"room: {room}");
+
+        List<int> seatList = new();
+        foreach (int[] seat in seats)
+        {
+            seatList.Add(seat[1]);
+        }
+        string type = "";
+        foreach (int seat1 in seatList)
+        {
+            if (room.VipSeats.Contains(seat1))
+            {
+                type += "VIP\n";
+            }
+            else if (room.ComfortSeats.Contains(seat1))
+            {
+                type += "Comfort\n";
+            }
+            else
+            {
+                type += "Regular\n";
+            }
+        }
+        return $"{type}";
+
+
     }
 }
 

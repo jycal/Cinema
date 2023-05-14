@@ -230,16 +230,12 @@ public class VisualOverview
             Console.SetCursorPosition(0, 0);
             Console.CursorVisible = false;
             // Console.Clear();
-            Console.ForegroundColor = ConsoleColor.Blue;
-            Console.WriteLine("■: Unreserved seat");
-            Console.ForegroundColor = ConsoleColor.DarkGray;
-            Console.WriteLine("■: Reserved seat");
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("■: VIP seat");
-            Console.ForegroundColor = ConsoleColor.Magenta;
-            Console.WriteLine("■: Comfort seat");
-            Console.ForegroundColor = ConsoleColor.DarkMagenta;
-            Console.WriteLine("▲: Disability seat\n");
+
+            Console.Write("■: Unreserved seat".Blue() + "\n");
+            Console.Write("■: Reserved seat".DarkGray() + "\n");
+            Console.Write("■: VIP seat".Red() + "\n");
+            Console.Write("■: Comfort seat".Orange() + "\n");
+            Console.Write("▲: Disability seat\n".DarkMagenta() + "\n");
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine("                                  Screen\n");
             // Print column numbers
@@ -292,11 +288,11 @@ public class VisualOverview
                     }
                     else if (disabledSeats.Contains(seatNumber))
                     {
-                        Console.Write("■".DarkMagenta() + " ");
+                        Console.Write("▲".DarkMagenta() + " ");
                     }
                     else if (comfortSeats.Contains(seatNumber))
                     {
-                        Console.Write("■".Magenta() + " ");
+                        Console.Write("■".Orange() + " ");
                     }
                     else if (vipSeats.Contains(seatNumber))
                     {
@@ -334,8 +330,9 @@ public class VisualOverview
             Reserve(room, film, selectedSeats);
             foreach (var seat in selectedSeats)
             {
+                // bereken het nummer van de stoel
                 int seatNumber = (seat[0]) * roomWidth + seat[1];
-
+                // toevoegen aan gereserveerde stoelen
                 room.Seats.Add(seatNumber);
                 _roomsLogic.UpdateList(room);
             }
@@ -522,6 +519,10 @@ public static class ConsoleExtensions
     public static string Blue(this string str)
     {
         return $"\u001b[34m{str}\u001b[0m";
+    }
+    public static string Orange(this string str)
+    {
+        return $"\u001b[38;5;208m{str}\u001b[0m";
     }
     public static string DarkGray(this string str)
     {
