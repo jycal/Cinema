@@ -70,7 +70,11 @@ public class TicketLogic
             {
                 totalAmount += ComfortTicket.Cost;
             }
-            else { totalAmount += NormalTicket.Cost; }
+            else
+            {
+                totalAmount += NormalTicket.Cost;
+            }
+            // System.Console.WriteLine(totalAmount);
         }
         return totalAmount;
     }

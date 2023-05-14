@@ -82,7 +82,7 @@ public class MailConformation
         body = body.Replace("{Image}", Convert.ToString(image));
         body = body.Replace("currentDate", DateTime.Today.ToString("dd/MM/yyyy"));
         body = body.Replace("roomNumber", Convert.ToString(reservation.RoomNumber));
-        body = body.Replace("singleTicketPrice", Convert.ToString(reservation.TicketTotal / reservation!.TicketAmount));
+        body = body.Replace("singleTicketPrice", Convert.ToString(GetTicketPrice(reservation.RoomNumber, reservation.Seats)));
         body = body.Replace("snackTotal", Convert.ToString(reservation.TotalAmount - reservation!.TicketTotal));
         body = body.Replace("ticketType", Convert.ToString(GetTicketType(reservation.RoomNumber, reservation.Seats)));
 
@@ -106,27 +106,83 @@ public class MailConformation
         List<int> seatList = new();
         foreach (int[] seat in seats)
         {
-            seatList.Add(seat[1]);
+            int seatNumber = (seat[0]) * room.RoomWidth + seat[1];
+            seatList.Add(seatNumber);
         }
         string type = "";
         foreach (int seat1 in seatList)
         {
             if (room.VipSeats.Contains(seat1))
             {
-                type += "VIP\n";
+                if (!type.Contains("VIP"))
+                { type += "VIP\n"; }
+                continue;
             }
             else if (room.ComfortSeats.Contains(seat1))
             {
-                type += "Comfort\n";
+                if (!type.Contains("Comfort"))
+                { type += "Comfort\n"; }
+                continue;
+
+            }
+            else if (room.DisabledSeats.Contains(seat1))
+            {
+                if (!type.Contains("Disability"))
+                { type += "Disability\n"; }
+                continue;
+
             }
             else
             {
-                type += "Regular\n";
+                if (!type.Contains("Regular"))
+                { type += "Regular\n"; }
+                continue;
+
             }
         }
         return $"{type}";
+    }
+    public static string GetTicketPrice(int id, List<int[]> seats)
+    {
+        RoomModel room = _roomsLogic!.GetById(id);
+        TicketLogic ticketlogic = new();
+        // Console.WriteLine($"room: {room}");
 
+        List<int> seatList = new();
+        foreach (int[] seat in seats)
+        {
+            int seatNumber = (seat[0]) * room.RoomWidth + seat[1];
+            seatList.Add(seatNumber);
+        }
+        List<double> prices = new();
+        foreach (int seat1 in seatList)
+        {
+            if (room.VipSeats.Contains(seat1))
+            {
+                TicketModel ticket = ticketlogic.GetByName("vipSeat");
+                if (!prices.Contains(ticket.Cost))
+                { prices.Add(ticket.Cost); }
+                continue;
+            }
+            else if (room.ComfortSeats.Contains(seat1))
+            {
+                TicketModel ticket = ticketlogic.GetByName("comfortSeat");
+                if (!prices.Contains(ticket.Cost))
+                { prices.Add(ticket.Cost); }
+                continue;
 
+            }
+            else
+            {
+                TicketModel ticket = ticketlogic.GetByName("normalSeat");
+                if (!prices.Contains(ticket.Cost))
+                { prices.Add(ticket.Cost); }
+                continue;
+
+            }
+        }
+        string price = string.Join($"\n", prices.Select(price => $"${price}\n"));
+        return price;
     }
 }
 

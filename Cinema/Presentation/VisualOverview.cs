@@ -395,7 +395,14 @@ public class VisualOverview
             // prchase test
             List<int> seats = new();
             foreach (var seat in seatList)
-            { seats.Add(seat[1]); }
+            {
+                int seatNumber = (seat[0]) * room.RoomWidth + seat[1];
+                seats.Add(seatNumber);
+            }
+            // foreach (int seat in seats)
+            // {
+            //     System.Console.WriteLine(seat);
+            // }
             double ticketTotal = _ticketLogic!.TicketPurchase(room, seats);
             // revenue vastmeten
             int temp_rev_id = _revenueLogic!._revenueList!.Count > 0 ? _revenueLogic._revenueList.Max(x => x.Id) + 1 : 1;
