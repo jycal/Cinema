@@ -162,6 +162,7 @@ public class VisualOverview
         while (boxesSelected < numBoxesToSelect)
         {
             ConsoleKeyInfo keyInfo = Console.ReadKey(true);
+            Console.CursorVisible = false;
 
             switch (keyInfo.Key)
             {
@@ -237,14 +238,35 @@ public class VisualOverview
             Console.Write("■: Comfort seat".Orange() + "\n");
             Console.Write("▲: Disability seat\n".DarkMagenta() + "\n");
             Console.ForegroundColor = ConsoleColor.White;
-            Console.WriteLine("                                  Screen\n");
+            Console.WriteLine($"Use arrow keys to navigate. Press ENTER to select a seat.\n");
+            if (room.Id == 3)
+            { Console.WriteLine("                                   |  Screen  |\n"); }
+            else if (room.Id == 2)
+            {
+                Console.WriteLine("                         |  Screen  |\n");
+            }
+            else if (room.Id == 1)
+            {
+                Console.WriteLine("                   |  Screen  |\n");
+            }
             // Print column numbers
-            Console.Write("  ");
+            Console.Write("   ");
             for (int j = 0; j < roomWidth; j++)
             {
                 Console.Write($"{(j + 1)} ");
             }
-            Console.WriteLine();
+            if (room.Id == 3)
+            { Console.WriteLine("\n----------------------------------------------------------------------------------"); }
+            else if (room.Id == 2)
+            {
+                Console.WriteLine("\n--------------------------------------------------------");
+            }
+            else if (room.Id == 1)
+            {
+                Console.WriteLine("\n-----------------------------------------");
+            }
+
+
 
             // Print the rest of the box with 12 rows and 14 columns
             for (int i = 0; i < roomLength; i++)
