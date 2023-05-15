@@ -71,5 +71,13 @@
     "ticketList": [
       1
     ]
+  },
+  {
+    "id": 8,
+    "type": 1,
+    "emailAddress": "meganpieters3@gmail.com",
+    "password": "Megan2003@",
+    "fullName": "meg",
+    "ticketList": []
   }
 ]

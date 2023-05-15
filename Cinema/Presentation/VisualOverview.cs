@@ -360,7 +360,7 @@ public class VisualOverview
     }
     public static void Reserve(RoomModel room, FilmModel film, List<int[]> seatList)
     {
-
+        Console.Clear();
         if (_account == null)
         {
             //foodlogic oproepen
