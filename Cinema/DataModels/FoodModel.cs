@@ -13,9 +13,13 @@ public class FoodModel
     [JsonPropertyName("Cost")]
     public double Cost { get; set; }
 
-    public FoodModel(string name, double cost)
+    [JsonPropertyName("Quantity")]
+    public double Quantity { get; set; }
+
+    public FoodModel(string name, double cost, double quantity)
     {
         Name = name;
         Cost = cost;
+        Quantity = quantity;
     }
 }

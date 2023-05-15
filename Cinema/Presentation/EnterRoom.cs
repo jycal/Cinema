@@ -316,16 +316,37 @@ static class EnterRoom
         if (_account == null)
         {
             //foodlogic oproepen
-            FoodsLogic foodLogic = new();
-            double food = foodLogic.BuyFood();
-            System.Console.WriteLine(food);
+            Console.WriteLine("Would you like to buy some food? Y/N");
+            string answer = Console.ReadLine()!;
+            if (answer == "Y")
+            {
+                FoodsLogic foodLogic = new();
+                double snacksTotal = foodLogic.BuyFood();
+                Console.WriteLine(snacksTotal);
+                Console.WriteLine();
+                Console.WriteLine("Do you wish to change your snack selection? Y/N");
+                string answer3 = Console.ReadLine()!;
+                if (answer3 == "Y")
+                {
+                    Console.Clear();
+                    foodLogic.SnacksTotal = 0;
+                    double newSnacksTotal = foodLogic.BuyFood();
+                    Console.WriteLine(newSnacksTotal);
+                }
+                else
+                {
+                    return;
+                }
+            }
+            if (answer == "N")
+            {
+                return;
+            }
             // gegevens vragen
-            Console.Clear();
             Console.Write("Enter email: ");
             string email = Console.ReadLine()!;
             Console.Write("Enter full name: ");
             string fullName = Console.ReadLine()!;
-
             // payment 
             Console.WriteLine("Press enter to continue...");
             Console.ReadLine();
@@ -352,7 +373,8 @@ static class EnterRoom
             _revenueLogic.UpdateList(revenue);
 
             //total amount krijgen
-            double totalAmount = ticketTotal + food;
+            // double totalAmount = ticketTotal + food;
+            double totalAmount = ticketTotal;
             // guest naar json sturen
             string reservationCode = ReservationCodeMaker();
             ReservationModel guest = new(1, reservationCode, fullName, email, title, seatList.Count, ticketTotal, room.Id, seatList, totalAmount, temp_rev_id);
