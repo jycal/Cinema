@@ -107,11 +107,15 @@ public class FoodsLogic
 
     public double BuyFood()
 {
-    List<FoodModel> orderedFood = new();
-        Console.Clear();
-        string[] options = _foods.Select(f => f.Name).ToArray();
-        string prompt = "Please select a food item to order:";
-        Menu mainMenu = new Menu(prompt, options);
+    List<FoodModel> orderedFood = new List<FoodModel>();
+    Console.Clear();
+    string[] options = _foods.Select(f => f.Name).ToArray();
+    string prompt = "Please select a food item to order (press spacebar to finish):";
+    Menu mainMenu = new Menu(prompt, options);
+    bool continueOrdering = true;
+
+    while (continueOrdering)
+    {
         int selectedIndex = -1;
         while (true)
         {
@@ -127,11 +131,12 @@ public class FoodsLogic
                 break;
             }
         }
+
         if (selectedIndex != -1)
         {
             var food = GetByName(options[selectedIndex]);
             Console.WriteLine($"You selected {food.Name}.");
-            Console.WriteLine($"Please set the quantity (maximum 4):");
+            Console.WriteLine($"Please set the quantity (maximum 4, or 'D' to deselect):");
             int quantity = 1;
             ConsoleKeyInfo keyInfo;
             do
@@ -159,31 +164,65 @@ public class FoodsLogic
                     Console.WriteLine();
                     break;
                 }
-        } while (keyInfo.Key != ConsoleKey.Enter);
-        food.Quantity = quantity;
-        orderedFood.Add(food);
-        SnacksTotal += food.Cost * quantity;
-        Console.WriteLine($"{quantity} {food.Name} added to your order.");
-        Console.WriteLine();
-        }
-        if (orderedFood.Count > 0)
-        {
-            Console.WriteLine("Your order:");
-            foreach (var food in orderedFood)
+                else if (keyInfo.Key == ConsoleKey.D)
+                {
+                    quantity = 0;
+                    Console.WriteLine();
+                    break;
+                }
+            } while (keyInfo.Key != ConsoleKey.Enter);
+
+            if (quantity == 0)
             {
-                Console.WriteLine($"{food.Quantity} x {food.Name} = {food.Cost * food.Quantity:c}");
+                // User deselected the item
+                orderedFood.RemoveAll(f => f.Name == food.Name);
+                SnacksTotal -= food.Cost * food.Quantity;
+                Console.WriteLine($"{food.Name} removed from your order.");
+                Console.WriteLine();
             }
-            Console.WriteLine($"Total cost: {SnacksTotal:c}");
+            else
+            {
+                SnacksTotal -= food.Cost * food.Quantity;
+                food.Quantity = quantity;
+                orderedFood.RemoveAll(f => f.Name == food.Name);
+                orderedFood.Add(food);
+                SnacksTotal += food.Cost * quantity;
+                Console.WriteLine($"{quantity} {food.Name} added to your order.");
+                Console.WriteLine();
+            }
+
+            // Ask if the user wants to select/deselect another item
+            Console.WriteLine("Do you want to select/deselect another item? (Y/N)");
+            ConsoleKeyInfo continueKeyInfo = Console.ReadKey(true);
+            if (continueKeyInfo.Key != ConsoleKey.Y)
+            {
+                continueOrdering = false;
+            }
         }
         else
         {
-            Console.WriteLine("No items ordered.");
+            // User cancelled the menu
+            break;
         }
-    // else
-    // {
-    //     Console.WriteLine("Wrong input.");
-    //     BuyFood();
-    // }
+    }
+
+    if (orderedFood.Count > 0)
+    {
+        Console.WriteLine("Your order:");
+        foreach (var food in orderedFood)
+        {
+            Console.WriteLine($"{food.Quantity} x {food.Name} = {food.Cost * food.Quantity:c}");
+        }
+        Console.WriteLine($"Total cost: {SnacksTotal:c}");
+    }
+    else
+    {
+        Console.WriteLine("No items ordered.");
+    }
+
+    Console.WriteLine("Press any key to continue...");
+    Console.ReadKey(true);
+
     return SnacksTotal;
 }
 }

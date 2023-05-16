@@ -318,9 +318,10 @@ static class EnterRoom
             //foodlogic oproepen
             Console.WriteLine("Would you like to buy some food? Y/N");
             string answer = Console.ReadLine()!;
+            FoodsLogic foodLogic = new();
             if (answer == "Y")
             {
-                FoodsLogic foodLogic = new();
+
                 double snacksTotal = foodLogic.BuyFood();
                 Console.WriteLine(snacksTotal);
                 Console.WriteLine();
@@ -335,12 +336,11 @@ static class EnterRoom
                 }
                 else
                 {
-                    return;
                 }
             }
             if (answer == "N")
             {
-                return;
+
             }
             // gegevens vragen
             Console.Write("Enter email: ");
@@ -351,6 +351,19 @@ static class EnterRoom
             Console.WriteLine("Press enter to continue...");
             Console.ReadLine();
             Console.Clear();
+            // confirm the reservation
+        Console.WriteLine("Do you want to proceed with the reservation? (Y/N)");
+        string confirmReservation = Console.ReadLine();
+        if (confirmReservation.ToUpper() == "N")
+        {
+            Console.WriteLine("Reservation cancelled.");
+            Console.WriteLine("Press any key to continue...");
+            Console.ReadKey(true);
+            CinemaMenus.Start();
+        }
+        else
+        {
+        }
             Console.WriteLine("\n--------------------------------");
             Console.WriteLine("         PAYMENT OPTIONS         ");
             Console.WriteLine("--------------------------------");
@@ -374,7 +387,7 @@ static class EnterRoom
 
             //total amount krijgen
             // double totalAmount = ticketTotal + food;
-            double totalAmount = ticketTotal;
+            double totalAmount = ticketTotal + foodLogic.SnacksTotal;
             // guest naar json sturen
             string reservationCode = ReservationCodeMaker();
             ReservationModel guest = new(1, reservationCode, fullName, email, title, seatList.Count, ticketTotal, room.Id, seatList, totalAmount, temp_rev_id);
@@ -387,6 +400,19 @@ static class EnterRoom
 
         else if (_account != null)
         {
+            // confirm the reservation
+        Console.WriteLine("Do you want to proceed with the reservation? (Y/N)");
+        string confirmReservation = Console.ReadLine();
+        if (confirmReservation.ToUpper() == "N")
+        {
+            Console.WriteLine("Reservation cancelled.");
+            Console.WriteLine("Press any key to continue...");
+            Console.ReadKey(true);
+            CinemaMenus.Start();
+        }
+        else
+        {
+        }
             //foodlogic oproepen
             FoodsLogic foodLogic = new();
             double food = foodLogic.BuyFood();
@@ -428,9 +454,9 @@ static class EnterRoom
             _accountsLogic.UpdateList(_account);
         }
         Console.ForegroundColor = ConsoleColor.Green;
-        System.Console.WriteLine("Your reservation has been confirmed and is now guaranteed.");
-        Console.ForegroundColor = ConsoleColor.White;
-        Console.WriteLine("Press any key to continue...");
+        // System.Console.WriteLine("Your reservation has been confirmed and is now guaranteed.");
+        // Console.ForegroundColor = ConsoleColor.White;
+        // Console.WriteLine("Press any key to continue...");
         Console.ReadKey(true);
     }
 

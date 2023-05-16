@@ -107,5 +107,187 @@
     ],
     "totalAmount": 10,
     "revenueId": 5
+  },
+  {
+    "id": 8,
+    "reservationCode": "2O8YMN5",
+    "fullName": "AryanJadoe",
+    "email": "aryanjd2005@gmail.com",
+    "movie": "The Super Mario Bros. Movie (OV)",
+    "ticketAmount": 2,
+    "ticketTotal": 20,
+    "roomNumber": 2,
+    "seats": [
+      30,
+      15
+    ],
+    "totalAmount": 27.5,
+    "revenueId": 6
+  },
+  {
+    "id": 9,
+    "reservationCode": "PXUCUQX",
+    "fullName": "ajjaja",
+    "email": "aryanjd2005@gmail.com",
+    "movie": "65",
+    "ticketAmount": 1,
+    "ticketTotal": 10,
+    "roomNumber": 1,
+    "seats": [
+      74
+    ],
+    "totalAmount": 17.25,
+    "revenueId": 7
+  },
+  {
+    "id": 10,
+    "reservationCode": "R2W1YRP",
+    "fullName": "Aryan Jadoenath",
+    "email": "aryanjd2005@gmail.com",
+    "movie": "65",
+    "ticketAmount": 1,
+    "ticketTotal": 10,
+    "roomNumber": 1,
+    "seats": [
+      104
+    ],
+    "totalAmount": 18.25,
+    "revenueId": 8
+  },
+  {
+    "id": 11,
+    "reservationCode": "HY16L08",
+    "fullName": "Aryan",
+    "email": "aryanjd2005@gmail.com",
+    "movie": "65",
+    "ticketAmount": 1,
+    "ticketTotal": 10,
+    "roomNumber": 1,
+    "seats": [
+      89
+    ],
+    "totalAmount": 13.75,
+    "revenueId": 9
+  },
+  {
+    "id": 12,
+    "reservationCode": "HWR5SQ2",
+    "fullName": "aaa",
+    "email": "aaa",
+    "movie": "65",
+    "ticketAmount": 1,
+    "ticketTotal": 10,
+    "roomNumber": 1,
+    "seats": [
+      58
+    ],
+    "totalAmount": 10,
+    "revenueId": 10
+  },
+  {
+    "id": 13,
+    "reservationCode": "7VJIGQF",
+    "fullName": "Aryan",
+    "email": "aryanjd2005@gmail.com",
+    "movie": "Scream VI",
+    "ticketAmount": 1,
+    "ticketTotal": 10,
+    "roomNumber": 2,
+    "seats": [
+      59
+    ],
+    "totalAmount": 10,
+    "revenueId": 11
+  },
+  {
+    "id": 14,
+    "reservationCode": "PE33GSE",
+    "fullName": "aaa",
+    "email": "aa",
+    "movie": "65",
+    "ticketAmount": 1,
+    "ticketTotal": 10,
+    "roomNumber": 1,
+    "seats": [
+      119
+    ],
+    "totalAmount": 10,
+    "revenueId": 12
+  },
+  {
+    "id": 15,
+    "reservationCode": "GEVGRHU",
+    "fullName": "aaaa",
+    "email": "aaa",
+    "movie": "65",
+    "ticketAmount": 1,
+    "ticketTotal": 10,
+    "roomNumber": 1,
+    "seats": [
+      134
+    ],
+    "totalAmount": 10,
+    "revenueId": 13
+  },
+  {
+    "id": 16,
+    "reservationCode": "OD937AH",
+    "fullName": "aryan",
+    "email": "aryanjd2005@gmail.com",
+    "movie": "65",
+    "ticketAmount": 1,
+    "ticketTotal": 10,
+    "roomNumber": 1,
+    "seats": [
+      134
+    ],
+    "totalAmount": 26.5,
+    "revenueId": 14
+  },
+  {
+    "id": 17,
+    "reservationCode": "AD8RK7Z",
+    "fullName": "aaaa",
+    "email": "aaa",
+    "movie": "65",
+    "ticketAmount": 1,
+    "ticketTotal": 10,
+    "roomNumber": 1,
+    "seats": [
+      72
+    ],
+    "totalAmount": 10,
+    "revenueId": 15
+  },
+  {
+    "id": 18,
+    "reservationCode": "IH7B52J",
+    "fullName": "aaaaa",
+    "email": "aaaa",
+    "movie": "65",
+    "ticketAmount": 1,
+    "ticketTotal": 10,
+    "roomNumber": 1,
+    "seats": [
+      57
+    ],
+    "totalAmount": 10,
+    "revenueId": 16
+  },
+  {
+    "id": 19,
+    "reservationCode": "YK3TP2M",
+    "fullName": "Aryan Jadoenath",
+    "email": "aryanjd2005@gmail.com",
+    "movie": "The Super Mario Bros. Movie (OV)",
+    "ticketAmount": 2,
+    "ticketTotal": 20,
+    "roomNumber": 3,
+    "seats": [
+      313,
+      312
+    ],
+    "totalAmount": 36.5,
+    "revenueId": 17
   }
 ]
