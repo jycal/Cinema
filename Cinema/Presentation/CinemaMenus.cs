@@ -567,17 +567,29 @@ View menu.
         Console.WriteLine("What is your reservation code?");
         string? reservationCode = Console.ReadLine();
         // var guestCheck = _guestLogic.GetByCode(reservationCode!);
-        var accCheck = _reservationsLogic.GetByCode(reservationCode!);
-        if (accCheck != null)
+        Console.WriteLine("Are you sure you want to delete the reservation? (Y/N):");
+        string? input = Console.ReadLine()!.ToUpper();
+        if (input == "Y")
         {
-            _reservationsLogic.DeleteReservationByCode(reservationCode!);
+            var accCheck = _reservationsLogic.GetByCode(reservationCode!);
+            if (accCheck != null)
+            {
+                _reservationsLogic.DeleteReservationByCode(reservationCode!);
 
+            }
+            else if (accCheck == null)
+            {
+                _guestLogic.DeleteReservation(reservationCode!);
+                // Console.Clear();
+            }
         }
-        else if (accCheck == null)
+        else if (input == "N")
         {
-            _guestLogic.DeleteReservation(reservationCode!);
-            // Console.Clear();
-
+            RunMenusMenu();
+        }
+        else
+        {
+            Console.WriteLine("Invalid input");
         }
         Console.WriteLine("Press any key to continue...");
         Console.ReadKey();

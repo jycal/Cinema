@@ -120,6 +120,7 @@ static class EnterRoom
         Console.CursorVisible = false;
 
         Console.WriteLine("How many tickets would you like to order?");
+
         int numTickets = int.Parse(Console.ReadLine()!);
 
         List<int> selectedSeats = new List<int>();
@@ -277,24 +278,35 @@ static class EnterRoom
                                 Console.Clear();
                                 Console.WriteLine($"You have selected the following seats: {string.Join(",", selectedSeats)}");
 
-                                Console.WriteLine("\nPress any key to confirm your reservation.");
-                                Console.ReadKey(true);
+                                Console.WriteLine("\nAre you satisfied with the chosen seats? (Y/N):");
+                                string? input = Console.ReadLine()!.ToUpper();
+                                if (input == "Y")
+                                {
 
-                                // foreach (var seat in selectedSeats)
-                                // {
-                                //     Reserve(room, id, seat);
-                                //     room.Seats.Add(seat);
-                                //     _roomsLogic.UpdateList(room);
-                                // }
-                                Reserve(room, films, selectedSeats);
-                                foreach (var seat in selectedSeats)
-                                { room.Seats.Add(seat); }
-                                _roomsLogic.UpdateList(room);
+                                    // foreach (var seat in selectedSeats)
+                                    // {
+                                    //     Reserve(room, id, seat);
+                                    //     room.Seats.Add(seat);
+                                    //     _roomsLogic.UpdateList(room);
+                                    // }
+                                    Reserve(room, films, selectedSeats);
+                                    foreach (var seat in selectedSeats)
+                                    { room.Seats.Add(seat); }
+                                    _roomsLogic.UpdateList(room);
 
-                                Console.WriteLine("Reservation successful! Press any key to return to the main menu.");
-                                Console.ReadKey(true);
+                                    Console.WriteLine("Reservation successful! Press any key to return to the main menu.");
+                                    Console.ReadKey(true);
 
-                                return;
+                                    return;
+                                }
+                                else if (input == "N")
+                                {
+                                    Display(room, films);
+                                }
+                                else
+                                {
+                                    Console.WriteLine("Invalid input");
+                                }
                             }
 
 
