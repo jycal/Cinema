@@ -11,6 +11,8 @@ public class FoodsLogic
     static public FoodModel? CurrentCost { get; private set; }
     public double TotalAmount = 0;
 
+    public double SnacksTotal = 0;
+
     public FoodsLogic()
     {
         _foods = FoodAccess.LoadAll();
@@ -72,7 +74,7 @@ public class FoodsLogic
                     {
                         System.Console.WriteLine("Enter new price:");
                         double thirdanswer = Convert.ToDouble(Console.ReadLine())!;
-                        FoodModel food = new FoodModel(secondanswer, thirdanswer);
+                        FoodModel food = new FoodModel(secondanswer, thirdanswer, 0);
                         UpdateList(food);
                     }
                 }
@@ -94,7 +96,7 @@ public class FoodsLogic
         foreach (var food in _foods!)
         {
             Console.WriteLine($@"
- {food.Name}: {food.Cost}
+ {food.Name}: {food.Cost}: {food.Quantity}
 
 ============================================");
         }
@@ -103,40 +105,124 @@ public class FoodsLogic
         Console.ReadKey(true);
     }
 
-
     public double BuyFood()
-    {
-        List<FoodModel> orderedFood = new();
-        System.Console.WriteLine("would you like to buy some food? Y/N");
-        string answer = Console.ReadLine()!;
-        if (answer == "Y")
-        {
-            Console.Clear();
-            DisplayFoodMenu();
-            System.Console.WriteLine("What would you like?");
-            string choice = Console.ReadLine()!;
-            var food = GetByName(choice);
-            if (food == null)
-            {
-                System.Console.WriteLine("Does not exist");
-                BuyFood();
-            }
-            // System.Console.WriteLine(food.Cost);
-            // double price = GetTotalPrice(orderedFood);
-            // System.Console.WriteLine(price);
-            return food!.Cost;
+{
+    List<FoodModel> orderedFood = new List<FoodModel>();
+    Console.Clear();
+    string[] options = _foods.Select(f => f.Name).ToArray();
+    string prompt = "Please select a food item to order (press spacebar to finish):";
+    Menu mainMenu = new Menu(prompt, options);
+    bool continueOrdering = true;
 
-        }
-        else if (answer == "N")
+    while (continueOrdering)
+    {
+        int selectedIndex = -1;
+        while (true)
         {
-            return 0;
+            selectedIndex = mainMenu.Run();
+            if (selectedIndex == -1)
+            {
+                // User cancelled the menu
+                break;
+            }
+            else
+            {
+                // User selected a food item
+                break;
+            }
+        }
+
+        if (selectedIndex != -1)
+        {
+            var food = GetByName(options[selectedIndex]);
+            Console.WriteLine($"You selected {food.Name}.");
+            Console.WriteLine($"Please set the quantity (maximum 4, or 'D' to deselect):");
+            int quantity = 1;
+            ConsoleKeyInfo keyInfo;
+            do
+            {
+                Console.Write(quantity);
+                keyInfo = Console.ReadKey();
+                if (keyInfo.Key == ConsoleKey.UpArrow)
+                {
+                    if (quantity < 4)
+                    {
+                        quantity++;
+                        Console.Write("\b \b");
+                    }
+                }
+                else if (keyInfo.Key == ConsoleKey.DownArrow)
+                {
+                    if (quantity > 1)
+                    {
+                        quantity--;
+                        Console.Write("\b \b");
+                    }
+                }
+                else if (keyInfo.Key == ConsoleKey.Enter)
+                {
+                    Console.WriteLine();
+                    break;
+                }
+                else if (keyInfo.Key == ConsoleKey.D)
+                {
+                    quantity = 0;
+                    Console.WriteLine();
+                    break;
+                }
+            } while (keyInfo.Key != ConsoleKey.Enter);
+
+            if (quantity == 0)
+            {
+                // User deselected the item
+                orderedFood.RemoveAll(f => f.Name == food.Name);
+                SnacksTotal -= food.Cost * food.Quantity;
+                Console.WriteLine($"{food.Name} removed from your order.");
+                Console.WriteLine();
+            }
+            else
+            {
+                SnacksTotal -= food.Cost * food.Quantity;
+                food.Quantity = quantity;
+                orderedFood.RemoveAll(f => f.Name == food.Name);
+                orderedFood.Add(food);
+                SnacksTotal += food.Cost * quantity;
+                Console.WriteLine($"{quantity} {food.Name} added to your order.");
+                Console.WriteLine();
+            }
+
+            // Ask if the user wants to select/deselect another item
+            Console.WriteLine("Do you want to select/deselect another item? (Y/N)");
+            ConsoleKeyInfo continueKeyInfo = Console.ReadKey(true);
+            if (continueKeyInfo.Key != ConsoleKey.Y)
+            {
+                continueOrdering = false;
+            }
         }
         else
         {
-            System.Console.WriteLine("wrong input");
-            BuyFood();
+            // User cancelled the menu
+            break;
         }
-        return 0;
     }
 
+    if (orderedFood.Count > 0)
+    {
+        Console.WriteLine("Your order:");
+        foreach (var food in orderedFood)
+        {
+            Console.WriteLine($"{food.Quantity} x {food.Name} = {food.Cost * food.Quantity:c}");
+        }
+        Console.WriteLine($"Total cost: {SnacksTotal:c}");
+    }
+    else
+    {
+        Console.WriteLine("No items ordered.");
+    }
+
+    Console.WriteLine("Press any key to continue...");
+    Console.ReadKey(true);
+
+    return SnacksTotal;
+}
 }

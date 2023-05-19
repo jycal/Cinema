@@ -166,34 +166,48 @@ Welcome to Starlight Cinema. What would you like to do?
         {
             Console.Clear();
         }
-        Console.WriteLine("Please enter your password:");
-        Console.ForegroundColor = ConsoleColor.Yellow;
-        Console.WriteLine("------------------------------------------------------------------------------------------");
-        Console.WriteLine(@"|   Must contain at least one special character(%!@#$%^&*()?/>.<,:;'\|}]{[_~`+=-         |");
-        Console.WriteLine("|   Must be longer than 6 characters                                                     |");
-        Console.WriteLine("|   Must contain at least one number                                                     |");
-        Console.WriteLine("|   One upper case                                                                       |");
-        Console.WriteLine("|   Atleast one lower case                                                               |");
-        Console.WriteLine("------------------------------------------------------------------------------------------");
-        Console.ResetColor();
-        SecureString pass = _accountsLogic.HashedPass();
-        string password = new System.Net.NetworkCredential(string.Empty, pass).Password;
-        int PasswordAttempts = 0;
-        while (_accountsLogic.PasswordFormatCheck(password) == false && PasswordAttempts < 3)
-        {
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("Wrong format! Please enter Password in the correct format...");
-            Console.ResetColor();
-            SecureString passs = _accountsLogic.HashedPass();
-            string Password = new System.Net.NetworkCredential(string.Empty, pass).Password;
-            password = Password;
-            PasswordAttempts += 1;
-        }
-        if (PasswordAttempts > 3)
-        {
-            Console.Clear();
-        }
-        Console.WriteLine();
+        Console.WriteLine("Please enter your password (You have 3 attempts):");
+Console.ForegroundColor = ConsoleColor.Yellow;
+Console.WriteLine("------------------------------------------------------------------------------------------");
+Console.WriteLine(@"|   Must contain at least one special character(%!@#$%^&*()?/>.<,:;'\|}]{[_~`+=-         |");
+Console.WriteLine("|   Must be longer than 6 characters                                                     |");
+Console.WriteLine("|   Must contain at least one number                                                     |");
+Console.WriteLine("|   One upper case                                                                       |");
+Console.WriteLine("|   Atleast one lower case                                                               |");
+Console.WriteLine("------------------------------------------------------------------------------------------");
+Console.ResetColor();
+
+int passwordAttempts = 0;
+string password = string.Empty;
+
+while (passwordAttempts < 3)
+{
+    SecureString pass = _accountsLogic.HashedPass();
+    password = new System.Net.NetworkCredential(string.Empty, pass).Password;
+
+    if (_accountsLogic.PasswordFormatCheck(password))
+    {
+        break;
+    }
+
+    Console.ForegroundColor = ConsoleColor.Red;
+    Console.WriteLine("Wrong format! Please enter the password in the correct format. You will be send back to the menu if you don't get the format right!");
+    Console.ResetColor();
+    passwordAttempts++;
+}
+
+if (passwordAttempts >= 3)
+{
+    Console.ForegroundColor = ConsoleColor.Red;
+    Console.WriteLine("No attempts left.");
+    Console.WriteLine("You will be send back to the menu.");
+    Console.ResetColor();
+    Console.Clear();
+    RunMainMenu();
+}
+
+Console.WriteLine();
+
         Console.WriteLine("Please enter your fullname");
         string firstName = Console.ReadLine()!;
         Console.WriteLine("Please enter your phone number");
