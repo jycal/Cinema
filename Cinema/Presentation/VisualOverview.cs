@@ -359,7 +359,7 @@ public class VisualOverview
                 _roomsLogic.UpdateList(room);
             }
 
-            Console.WriteLine("Reservation successful! Press any key to return to the main menu.");
+            Console.WriteLine("Press any key to return to the main menu.");
             Console.ReadKey(true);
 
             return;
@@ -374,7 +374,7 @@ public class VisualOverview
             }
             else
             {
-                CinemaMenus.Start();
+                return;
             }
 
         }
