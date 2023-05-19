@@ -526,7 +526,7 @@ View menu.
             revenue.Money += food.Cost;
             _revenueLogic.UpdateList(revenue);
 
-            string code = EnterRoom.ReservationCodeMaker();
+            string code = VisualOverview.ReservationCodeMaker();
             Console.WriteLine($"Your reservation code is: {code}");
             Console.WriteLine("Press any key to continue...");
             Console.ReadKey(true);

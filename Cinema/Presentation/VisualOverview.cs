@@ -386,9 +386,37 @@ public class VisualOverview
         if (_account == null)
         {
             //foodlogic oproepen
+            Console.WriteLine("Would you like to buy some food? Y/N");
+            string answer = Console.ReadLine()!;
             FoodsLogic foodLogic = new();
-            double food = foodLogic.BuyFood();
-            System.Console.WriteLine(food);
+            double food = 0;
+            if (answer == "Y")
+            {
+
+                double snacksTotal = foodLogic.BuyFood();
+                food += snacksTotal;
+                Console.WriteLine(snacksTotal);
+                Console.WriteLine();
+                Console.WriteLine("Do you wish to change your snack selection? Y/N");
+                string answer3 = Console.ReadLine()!;
+                if (answer3 == "Y")
+                {
+                    Console.Clear();
+                    foodLogic.SnacksTotal = 0;
+                    food = 0;
+                    double newSnacksTotal = foodLogic.BuyFood();
+                    food += newSnacksTotal;
+                    Console.WriteLine(newSnacksTotal);
+                }
+                else
+                {
+                    // ??
+                }
+            }
+            else if (answer == "N")
+            {
+                // Console.WriteLine("No food will be ordered");
+            }
             // gegevens vragen
             Console.Clear();
             Console.Write("Enter email: ");
@@ -400,6 +428,15 @@ public class VisualOverview
             Console.WriteLine("Press enter to continue...");
             Console.ReadLine();
             Console.Clear();
+            Console.WriteLine("Do you want to proceed with the reservation? (Y/N)");
+            string confirmReservation = Console.ReadLine()!;
+            if (confirmReservation.ToUpper() == "N")
+            {
+                Console.WriteLine("Reservation cancelled.");
+                Console.WriteLine("Press any key to continue...");
+                Console.ReadKey(true);
+                return;
+            }
             Console.WriteLine("\n--------------------------------");
             Console.WriteLine("         PAYMENT OPTIONS         ");
             Console.WriteLine("--------------------------------");
@@ -427,12 +464,13 @@ public class VisualOverview
             // }
             double ticketTotal = _ticketLogic!.TicketPurchase(room, seats);
             // revenue vastmeten
-            RevenueModel rev = _revenueLogic.GetById(1);
+            RevenueModel rev = _revenueLogic!.GetById(1);
             rev.Money += ticketTotal + food;
             _revenueLogic.UpdateList(rev);
 
             //total amount krijgen
-            double totalAmount = ticketTotal + food;
+            // double totalAmount = ticketTotal + food;
+            double totalAmount = ticketTotal + foodLogic.SnacksTotal;
             // guest naar json sturen
             string reservationCode = ReservationCodeMaker();
             ReservationModel guest = new(1, reservationCode, fullName, email, title, seatList.Count, ticketTotal, room.Id, seatList, totalAmount);
@@ -445,6 +483,15 @@ public class VisualOverview
 
         else if (_account != null)
         {
+            Console.WriteLine("Do you want to proceed with the reservation? (Y/N)");
+            string confirmReservation = Console.ReadLine()!;
+            if (confirmReservation.ToUpper() == "N")
+            {
+                Console.WriteLine("Reservation cancelled.");
+                Console.WriteLine("Press any key to continue...");
+                Console.ReadKey(true);
+                return;
+            }
             //foodlogic oproepen
             FoodsLogic foodLogic = new();
             double food = foodLogic.BuyFood();
