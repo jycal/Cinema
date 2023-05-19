@@ -95,7 +95,16 @@
     "roomWidth": 18,
     "roomNumber": 2,
     "maxPeople": 300,
-    "seats": [],
+    "seats": [
+      94,
+      112,
+      116,
+      98,
+      40,
+      4,
+      5,
+      6
+    ],
     "vipSeats": [
       116,
       117,

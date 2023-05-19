@@ -15,10 +15,7 @@ public static class CinemaMenus
 
     public static void Start()
     {
-        // RunMainMenu();
-        VisualOverview vis = new();
-        AccountModel acc = null;
-        VisualOverview.Start(acc);
+        RunMainMenu();
     }
 
     private static void RunMainMenu()
@@ -590,7 +587,7 @@ View menu.
         }
         else if (input == "N")
         {
-            RunMenusMenu();
+            return;
         }
         else
         {
