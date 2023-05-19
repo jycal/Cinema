@@ -86,6 +86,7 @@ public class AccountsLogic
     {
 
         List<ReservationModel> reservations = new();
+
         var ReservationsFromJson = ReservationAccess.LoadAll();
         foreach (ReservationModel reservation in ReservationsFromJson)
         {
@@ -103,29 +104,28 @@ public class AccountsLogic
         foreach (ReservationModel res in reservations)
         {
 
-            foreach (var item in res.Seats)
-            {
-                int ID = res.Id;
-                string Movie = res.Movie;
-                string FullName = res.FullName;
-                string Email = res.Email;
-                int TicketAmount = res.TicketAmount;
-                int Seats = item;
-                double TotalAmount = res.TotalAmount;
-                string Overview = $@"
+
+            int ID = res.Id;
+            string Movie = res.Movie;
+            string FullName = res.FullName;
+            string Email = res.Email;
+            int TicketAmount = res.TicketAmount;
+            string selectedSeats = string.Join(", ", res.Seats.Select(seat => $"Row {seat[0] + 1}, Seat {seat[1] + 1}"));
+            double TotalAmount = res.TotalAmount;
+            string Overview = $@"
 
   ID: {ID}
   Movie: {Movie}
   Full Name: {FullName}
   Email: {Email}
   Ticket Amount: {TicketAmount}
-  Seats: {Seats}
+  Seats: {selectedSeats}
   Total Money Amount: {TotalAmount}
 
 ==================================================";
-                Console.WriteLine(Overview);
-                Console.ResetColor();
-            }
+            Console.WriteLine(Overview);
+            Console.ResetColor();
+
         }
     }
 

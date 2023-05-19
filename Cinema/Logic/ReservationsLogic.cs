@@ -123,29 +123,28 @@ public class ReservationsLogic
         foreach (ReservationModel reservation in ReservationsFromJson)
         {
 
-            foreach (var item in reservation.Seats)
-            {
-                int ID = reservation.Id;
-                string Movie = reservation.Movie;
-                string FullName = reservation.FullName;
-                string Email = reservation.Email;
-                int TicketAmount = reservation.TicketAmount;
-                int Seats = item;
-                double TotalAmount = reservation.TotalAmount;
-                string Overview = $@"
+
+            int ID = reservation.Id;
+            string Movie = reservation.Movie;
+            string FullName = reservation.FullName;
+            string Email = reservation.Email;
+            int TicketAmount = reservation.TicketAmount;
+            string selectedSeats = string.Join(", ", reservation.Seats.Select(seat => $"Row {seat[0] + 1}, Seat {seat[1] + 1}"));
+            double TotalAmount = reservation.TotalAmount;
+            string Overview = $@"
 
   ID: {ID}
   Movie: {Movie}
   Full Name: {FullName}
   Email: {Email}
   Ticket Amount: {TicketAmount}
-  Seats: {Seats}
+  Seats: {selectedSeats}
   Total Money Amount: {TotalAmount}
 
 ==================================================";
-                Console.WriteLine(Overview);
-                Console.ResetColor();
-            }
+            Console.WriteLine(Overview);
+            Console.ResetColor();
+
         }
     }
 
