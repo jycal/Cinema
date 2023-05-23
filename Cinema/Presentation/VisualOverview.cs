@@ -98,7 +98,7 @@ public class VisualOverview
         }
         DateTime chosenDate = film.Dates[0];
         int index = 0;
-        if (film.Dates.Count > 1)
+        if (film.Dates.Count > 0)
         {
             Console.WriteLine("Please choose the date you want to see the movie\n");
             int count = 1;
