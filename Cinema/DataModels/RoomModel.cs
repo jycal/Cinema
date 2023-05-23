@@ -25,7 +25,7 @@ public class RoomModel
     public int MaxPeople { get; set; }
 
     [JsonPropertyName("seats")]
-    public List<int> Seats { get; set; }
+    public List<Tuple<int, int, DateTime, int>> Seats { get; set; }
 
     [JsonPropertyName("vipSeats")]
     public List<int> VipSeats { get; set; }
@@ -39,7 +39,7 @@ public class RoomModel
     [JsonPropertyName("noSeats")]
     public List<int> NoSeats { get; set; }
 
-    public RoomModel(int id, int maxSeats, int roomLength, int roomWidth, int roomNumber, int maxPeople, List<int> seats, List<int> vipSeats, List<int> disabledSeats, List<int> comfortSeats, List<int> noSeats)
+    public RoomModel(int id, int maxSeats, int roomLength, int roomWidth, int roomNumber, int maxPeople, List<Tuple<int, int, DateTime, int>> seats, List<int> vipSeats, List<int> disabledSeats, List<int> comfortSeats, List<int> noSeats)
     {
         Id = id;
         MaxSeats = maxSeats;

@@ -691,28 +691,195 @@ View menu.
 
     private static void AddMovie()
     {
-        Console.Write("Enter the title of the movie: ");
-        string title = Console.ReadLine()!;
-        Console.Write("Enter dates of the movie (Example: 01/01/2020 10:50:00, 01/01/2020 11:50:00): ");
-        string dates = Console.ReadLine()!;
-        List<DateTime> dateTimes = new List<DateTime>();
-        string[] dateTimesString = dates.Split(", ");
-        foreach (string dateTimeString in dateTimesString)
+        // variables
+        string title;
+        List<DateTime> dates = null!;
+        List<int> rooms = null!;
+        string description;
+        int duration;
+        List<string> genres;
+        string imageURL;
+
+        // title
+        while (true)
         {
-            DateTime dateTime = DateTime.Parse(dateTimeString);
-            dateTimes.Add(dateTime);
+            Console.Write("Enter the title of the movie: ");
+            title = Console.ReadLine()!;
+            if (string.IsNullOrEmpty(title))
+            {
+                Console.WriteLine("Title cannot be empty!");
+                Console.WriteLine("Press any key to continue...");
+                Console.ReadKey(true);
+            }
+            else
+            {
+                break;
+            }
         }
-        Console.Write("Enter the description of the movie: ");
-        string description = Console.ReadLine()!;
-        Console.Write("Enter the duration of the movie: ");
-        int duration = Convert.ToInt32(Console.ReadLine()!);
-        Console.Write("Enter the genre of the movie: ");
-        List<string> genres = new List<string>();
-        string genre = Console.ReadLine()!;
-        genres.Add(genre);
-        // image add
-        Console.Write("Enter the image url: ");
-        string imageURL = Console.ReadLine()!;
+        // dates
+        bool dateDone = false;
+        while (!dateDone)
+        {
+            Console.Write("Enter dates of the movie (Example: 01/01/2020 10:50:00, 01/01/2020 11:50:00): ");
+            string datesString = Console.ReadLine()!;
+            dates = new List<DateTime>();
+            if (string.IsNullOrEmpty(datesString))
+            {
+                Console.WriteLine("Dates cannot be empty!");
+                Console.WriteLine("Press any key to continue...");
+                Console.ReadKey(true);
+            }
+            else
+            {
+                string[] datesArray = datesString.Split(", ");
+                bool wentWrong = false;
+                foreach (string date in datesArray)
+                {
+                    if (date.Length != 19)
+                    {
+                        wentWrong = true;
+                        Console.WriteLine("Date format is incorrect! Must be DD/MM/YYYY HH:mm:ss");
+                        Console.WriteLine("Press any key to continue...");
+                        Console.ReadKey(true);
+                        break;
+                    }
+                    else
+                    {
+                        try
+                        {
+                            DateTime dateTime = DateTime.ParseExact(date, "dd/MM/yyyy HH:mm:ss", null!);
+                            dates.Add(dateTime);
+                        }
+                        catch (Exception)
+                        {
+                            wentWrong = true;
+                            Console.WriteLine("Date format is incorrect! Must be DD/MM/YYYY HH:mm:ss");
+                            Console.WriteLine("Press any key to continue...");
+                            Console.ReadKey(true);
+                            break;
+                        }
+                    }
+                }
+                if (!wentWrong)
+                {
+                    dateDone = true;
+                }
+            }
+        }
+        // rooms
+        bool roomDone = false;
+        while (!roomDone)
+        {
+            Console.Write("Enter the room of the movie (1, 2 or 3). 1st room = 1st date, 2nd room = 2nd date, etc. (Example: 1, 2): ");
+            string roomsString = Console.ReadLine()!;
+            if (string.IsNullOrEmpty(roomsString))
+            {
+                Console.WriteLine("Rooms cannot be empty!");
+                Console.WriteLine("Press any key to continue...");
+                Console.ReadKey(true);
+            }
+            else
+            {
+                string[] roomsArray = roomsString.Split(", ");
+                if (roomsArray.Length != dates.Count)
+                {
+                    Console.WriteLine("Amount of rooms must be equal to amount of dates!");
+                    Console.WriteLine("Press any key to continue...");
+                    Console.ReadKey(true);
+                    continue;
+                }
+                rooms = new List<int>();
+                bool wentWrong = false;
+                foreach (string room in roomsArray)
+                {
+                    if (room != "1" && room != "2" && room != "3")
+                    {
+                        wentWrong = true;
+                        Console.WriteLine("Room format is incorrect! Must be 1, 2, 3, etc.");
+                        Console.WriteLine("Press any key to continue...");
+                        Console.ReadKey(true);
+                        break;
+                    }
+                    else
+                    {
+                        int roomInt = Convert.ToInt32(room);
+                        rooms.Add(roomInt);
+                    }
+                }
+                if (!wentWrong)
+                {
+                    roomDone = true;
+                }
+            }
+        }
+        // description
+        while (true)
+        {
+            Console.Write("Enter the description of the movie: ");
+            description = Console.ReadLine()!;
+            if (string.IsNullOrEmpty(description))
+            {
+                Console.WriteLine("Description cannot be empty!");
+                Console.WriteLine("Press any key to continue...");
+                Console.ReadKey(true);
+            }
+            else
+            {
+                break;
+            }
+        }
+        // duration
+        while (true)
+        {
+            Console.Write("Enter the duration of the movie: ");
+            string input = Console.ReadLine()!;
+            if (string.IsNullOrEmpty(input))
+            {
+                Console.WriteLine("Duration cannot be empty!");
+                Console.WriteLine("Press any key to continue...");
+                Console.ReadKey(true);
+            }
+            else
+            {
+                duration = Convert.ToInt32(input);
+                break;
+            }
+        }
+        // genre
+        while (true)
+        {
+            Console.Write("Enter the genre of the movie: ");
+            string input = Console.ReadLine()!;
+            if (string.IsNullOrEmpty(input))
+            {
+                Console.WriteLine("Genre cannot be empty!");
+                Console.WriteLine("Press any key to continue...");
+                Console.ReadKey(true);
+            }
+            else
+            {
+                genres = new List<string>();
+                genres.Add(input);
+                break;
+            }
+        }
+        // image
+        while (true)
+        {
+            Console.Write("Enter the image url: ");
+            imageURL = Console.ReadLine()!;
+            if (string.IsNullOrEmpty(imageURL))
+            {
+                Console.WriteLine("Image url cannot be empty!");
+                Console.WriteLine("Press any key to continue...");
+                Console.ReadKey(true);
+            }
+            else
+            {
+                break;
+            }
+        }
+
         Console.Clear();
 
         int id = 0;
@@ -728,7 +895,7 @@ View menu.
                 break;
             }
         }
-        FilmModel film = new FilmModel(id, dateTimes, title, description, duration, genres, imageURL);
+        FilmModel film = new FilmModel(id, dates, rooms, title, description, duration, genres, imageURL);
         _filmsLogic.UpdateList(film);
         Console.WriteLine("Movie added!");
         Console.WriteLine("Press any key to continue...");

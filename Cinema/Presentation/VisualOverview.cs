@@ -94,19 +94,39 @@ public class VisualOverview
             Console.WriteLine("Press any key to go back to the menu");
             Console.ReadKey();
             Console.Clear();
-            CinemaMenus.Start();
             return;
         }
-        Console.WriteLine("Please enter the room number\n");
+        DateTime chosenDate = film.Dates[0];
+        int index = 0;
+        if (film.Dates.Count > 1)
+        {
+            Console.WriteLine("Please choose the date you want to see the movie\n");
+            int count = 1;
+            foreach (var date in film.Dates)
+            {
+                Console.WriteLine($"{count}. {date}");
+                count++;
+            }
+            int dateChoice = int.Parse(Console.ReadLine()!);
+            if (dateChoice > film.Dates.Count || dateChoice < 1)
+            {
+                Console.WriteLine("Please enter a valid date");
+                dateChoice = int.Parse(Console.ReadLine()!);
+            }
+            chosenDate = film.Dates[dateChoice - 1];
+            index = dateChoice - 1;
+        }
+        // Console.WriteLine("Please enter the room number\n");
 
-        int number = int.Parse(Console.ReadLine()!);
+        // int number = int.Parse(Console.ReadLine()!);
+        int number = film.Rooms[index];
         RoomModel room = _roomsLogic.CheckEnter(number);
         if (room != null)
         {
             Console.WriteLine("Welcome to room " + room.RoomNumber);
             Console.WriteLine($"This room has {room.MaxSeats} seats");
 
-            Run(room, film);
+            Run(room, film, chosenDate);
         }
         else
         {
@@ -114,7 +134,7 @@ public class VisualOverview
         }
     }
 
-    public static void Run(RoomModel room, FilmModel film)
+    public static void Run(RoomModel room, FilmModel film, DateTime chosenDate)
     {
 
         // RoomModel room = _roomsLogic.CheckEnter(1);
@@ -123,7 +143,7 @@ public class VisualOverview
         List<int[]> selectedSeats = new List<int[]>();
         // List<int> rowList = new List<int>();
 
-        List<int> reservedSeats = room.Seats;
+        List<Tuple<int, int, DateTime, int>> reservedSeats = room.Seats;
         List<int> vipSeats = room.VipSeats;
         List<int> disabledSeats = room.DisabledSeats;
         List<int> comfortSeats = room.ComfortSeats;
@@ -199,7 +219,9 @@ public class VisualOverview
                     break;
 
                 case ConsoleKey.Enter:
-                    if (reservedSeats.Contains(cursorRow * roomWidth + cursorCol))
+                    // Check if the selected square is in the reserved list
+                    Tuple<int, int, DateTime, int> seat = new Tuple<int, int, DateTime, int>(film.Id, room.Id, chosenDate, cursorRow * roomWidth + cursorCol);
+                    if (reservedSeats.Contains(seat))
                     {
                         // The selected square is in the reserved list, so do nothing.
                         break;
@@ -276,14 +298,16 @@ public class VisualOverview
 
                 for (int j = 0; j < roomWidth; j++)
                 {
+                    
                     int seatNumber = i * roomWidth + j;
+                    Tuple<int, int, DateTime, int> seatChoice = new Tuple<int, int, DateTime, int>(film.Id, room.Id, chosenDate, seatNumber);
                     if (i == cursorRow && j == cursorCol)
                     {
                         Console.Write("■".Yellow() + " ");
                     }
-                    else if (reservedSeats.Contains(seatNumber))
+                    else if (reservedSeats.Contains(seatChoice))
                     {
-                        if (vipSeats.Contains(seatNumber) || comfortSeats.Contains(seatNumber) || disabledSeats.Contains(seatNumber))
+                        if (vipSeats.Contains(seatNumber ) || comfortSeats.Contains(seatNumber ) || disabledSeats.Contains(seatNumber ))
                         {
                             Console.Write("■".DarkGray() + " ");
                         }
@@ -355,7 +379,8 @@ public class VisualOverview
                 // bereken het nummer van de stoel
                 int seatNumber = (seat[0]) * roomWidth + seat[1];
                 // toevoegen aan gereserveerde stoelen
-                room.Seats.Add(seatNumber);
+                Tuple<int, int, DateTime, int> dateSeat = new Tuple<int, int, DateTime, int>(film.Id, room.Id, chosenDate, seatNumber); 
+                room.Seats.Add(dateSeat);
                 _roomsLogic.UpdateList(room);
             }
 
