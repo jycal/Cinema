@@ -68,7 +68,7 @@ public class FoodsLogic
             {
                 System.Console.WriteLine("Which food price do you want to change?");
                 string secondanswer = Console.ReadLine()!;
-                foreach (FoodModel item in _foods.ToList())
+                foreach (FoodModel item in _foods!.ToList())
                 {
                     if (item.Name == secondanswer)
                     {
@@ -109,7 +109,7 @@ public class FoodsLogic
 {
     List<FoodModel> orderedFood = new List<FoodModel>();
     Console.Clear();
-    string[] options = _foods.Select(f => f.Name).ToArray();
+    string[] options = _foods!.Select(f => $"{f.Name} - {f.Cost:c}").ToArray(); // Added price to the options
     string prompt = "Please select a food item to order (press spacebar to finish):";
     Menu mainMenu = new Menu(prompt, options);
     bool continueOrdering = true;
@@ -134,29 +134,32 @@ public class FoodsLogic
 
         if (selectedIndex != -1)
         {
-            var food = GetByName(options[selectedIndex]);
-            Console.WriteLine($"You selected {food.Name}.");
-            Console.WriteLine($"Please set the quantity (maximum 4, or 'D' to deselect):");
+            var food = GetByName(options[selectedIndex].Split('-')[0].Trim()); // Extract the selected food item name
+            Console.ForegroundColor = ConsoleColor.Red; // Set the text color to red
+            Console.WriteLine($"You selected {food.Name} - {food.Cost:c}."); // Display the selected snack with price
+            Console.ResetColor(); // Reset the text color
+
+            Console.WriteLine($"Please set the quantity (maximum 5, or 'D' to deselect):");
             int quantity = 1;
             ConsoleKeyInfo keyInfo;
             do
             {
-                Console.Write(quantity);
+                Console.SetCursorPosition(0, Console.CursorTop);
+                Console.Write($"[{quantity}]");
+
                 keyInfo = Console.ReadKey();
-                if (keyInfo.Key == ConsoleKey.UpArrow)
+                if (keyInfo.Key == ConsoleKey.RightArrow)
                 {
-                    if (quantity < 4)
+                    if (quantity < 5)
                     {
                         quantity++;
-                        Console.Write("\b \b");
                     }
                 }
-                else if (keyInfo.Key == ConsoleKey.DownArrow)
+                else if (keyInfo.Key == ConsoleKey.LeftArrow)
                 {
                     if (quantity > 1)
                     {
                         quantity--;
-                        Console.Write("\b \b");
                     }
                 }
                 else if (keyInfo.Key == ConsoleKey.Enter)
@@ -166,18 +169,37 @@ public class FoodsLogic
                 }
                 else if (keyInfo.Key == ConsoleKey.D)
                 {
-                    quantity = 0;
-                    Console.WriteLine();
+                    Console.SetCursorPosition(0, Console.CursorTop);
+                    Console.Write($"Enter the quantity to remove: ");
+                    string input = Console.ReadLine()!;
+                    if (int.TryParse(input, out int removeQuantity) && removeQuantity >= 0 && removeQuantity <= food.Quantity)
+                    {
+                        quantity = -removeQuantity; // Use negative value to indicate removal
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid quantity. Please try again.");
+                    }
                     break;
                 }
-            } while (keyInfo.Key != ConsoleKey.Enter);
+            } while (keyInfo.Key != ConsoleKey.Enter || (quantity > 5 || quantity < 1)); // Check for valid quantity range
 
-            if (quantity == 0)
+            if (quantity < 0)
             {
                 // User deselected the item
-                orderedFood.RemoveAll(f => f.Name == food.Name);
-                SnacksTotal -= food.Cost * food.Quantity;
-                Console.WriteLine($"{food.Name} removed from your order.");
+                int removeQuantity = Math.Abs(quantity);
+                if (removeQuantity == food.Quantity)
+                {
+                    orderedFood.RemoveAll(f => f.Name == food.Name);
+                    SnacksTotal -= food.Cost * food.Quantity;
+                    Console.WriteLine($"{food.Name} removed from your order.");
+                }
+                else
+                {
+                    food.Quantity -= removeQuantity;
+                    SnacksTotal -= food.Cost * removeQuantity;
+                    Console.WriteLine($"{removeQuantity} {food.Name} removed from your order.");
+                }
                 Console.WriteLine();
             }
             else

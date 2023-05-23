@@ -289,5 +289,20 @@
     ],
     "totalAmount": 36.5,
     "revenueId": 17
+  },
+  {
+    "id": 20,
+    "reservationCode": "0WX3NTS",
+    "fullName": "atat",
+    "email": "aryanjd2005@gmail.com",
+    "movie": "65",
+    "ticketAmount": 1,
+    "ticketTotal": 10,
+    "roomNumber": 1,
+    "seats": [
+      103
+    ],
+    "totalAmount": 29,
+    "revenueId": 18
   }
 ]
