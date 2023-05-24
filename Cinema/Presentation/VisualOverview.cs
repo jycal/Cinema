@@ -254,13 +254,14 @@ public class VisualOverview
             Console.CursorVisible = false;
             // Console.Clear();
 
-            Console.Write("■: Unreserved seat".Blue() + "\n");
-            Console.Write("■: Reserved seat".DarkGray() + "\n");
-            Console.Write("■: VIP seat".Red() + "\n");
-            Console.Write("■: Comfort seat".Orange() + "\n");
-            Console.Write("▲: Disability seat\n".DarkMagenta() + "\n");
+            Console.Write("■: Unreserved Seat".Blue() + "\n");
+            Console.Write("■: Reserved Seat".DarkGray() + "\n");
+            Console.Write("■: VIP Seat".Red() + "\n");
+            Console.Write("■: Comfort Seat".Orange() + "\n");
+            Console.Write("▲: Disability Seat".DarkMagenta() + "\n");
+            Console.Write("[]: Exit Doors".Green() + $"\n");
             Console.ForegroundColor = ConsoleColor.White;
-            Console.WriteLine($"Use arrow keys to navigate. Press ENTER to select a seat.\n");
+            Console.WriteLine($"\nUse arrow keys to navigate. Press ENTER to select a seat.\n");
             if (room.Id == 3)
             { Console.WriteLine("                                   |  Screen  |\n"); }
             else if (room.Id == 2)
@@ -269,23 +270,32 @@ public class VisualOverview
             }
             else if (room.Id == 1)
             {
-                Console.WriteLine("                   |  Screen  |\n");
+                Console.WriteLine("                  |  Screen  |\n");
             }
             // Print column numbers
-            Console.Write("   ");
-            for (int j = 0; j < roomWidth; j++)
-            {
-                Console.Write($"{(j + 1)} ");
-            }
+            // Console.Write("   ");
+            // for (int j = 0; j < roomWidth; j++)
+            // {
+            //     Console.Write($"{(j + 1)} ");
+            // }
             if (room.Id == 3)
-            { Console.WriteLine("\n----------------------------------------------------------------------------------"); }
+            {
+                Console.WriteLine("\n----------------------------------------------------------------------------------");
+                Console.Write("[]                                                                              []".Green() + $"\n");
+                Console.WriteLine("----------------------------------------------------------------------------------\n");
+            }
             else if (room.Id == 2)
             {
                 Console.WriteLine("\n--------------------------------------------------------");
+                Console.Write("[]                                                   []".Green() + $"\n");
+                Console.WriteLine("--------------------------------------------------------\n");
             }
             else if (room.Id == 1)
             {
                 Console.WriteLine("\n-----------------------------------------");
+
+                Console.Write("[]                                      []".Green() + $"\n");
+                Console.WriteLine("-----------------------------------------\n");
             }
 
 

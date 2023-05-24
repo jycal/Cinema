@@ -31,7 +31,10 @@
       102
     ],
     "disabledSeats": [
-      3
+      2,
+      3,
+      8,
+      9
     ],
     "comfortSeats": [
       41,
@@ -132,7 +135,14 @@
       242,
       243
     ],
-    "disabledSeats": [],
+    "disabledSeats": [
+      3,
+      4,
+      5,
+      12,
+      13,
+      14
+    ],
     "comfortSeats": [
       60,
       61,
@@ -355,7 +365,14 @@
       223,
       226
     ],
-    "disabledSeats": [],
+    "disabledSeats": [
+      8,
+      9,
+      10,
+      20,
+      21,
+      22
+    ],
     "comfortSeats": [
       222,
       247,
