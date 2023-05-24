@@ -101,7 +101,9 @@ Welcome to Starlight Cinema. What would you like to do?
             Console.Write("Please enter your email address: ");
             string email = Console.ReadLine()!;
             Console.Write("Please enter your password: ");
-            string password = Console.ReadLine()!;
+            string password = string.Empty;
+            SecureString pass = _accountsLogic.HashedPass();
+            password = new System.Net.NetworkCredential(string.Empty, pass).Password;
             AccountModel correctEmail = _accountsLogic.GetByMail(email);
 
             if (correctEmail != null)
