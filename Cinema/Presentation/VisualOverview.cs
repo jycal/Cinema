@@ -461,15 +461,13 @@ public class VisualOverview
             Console.WriteLine("Press enter to continue...");
             Console.ReadLine();
             Console.Clear();
-            Console.WriteLine("Do you want to proceed with the reservation? (Y/N)");
-            string confirmReservation = Console.ReadLine()!;
-            if (confirmReservation.ToUpper() == "N")
+            string prompt = "Do you want to proceed with the reservation?";
+            string[] options = { "Yes", "No" };
+            Menu mainMenu = new Menu(prompt, options);
+            int selectedIndex = mainMenu.Run();
+            switch (selectedIndex)
             {
-                Console.WriteLine("Reservation cancelled.");
-                Console.WriteLine("Press any key to continue...");
-                Console.ReadKey(true);
-                return;
-            }
+                case 0:
             Console.WriteLine("\n--------------------------------");
             Console.WriteLine("         PAYMENT OPTIONS         ");
             Console.WriteLine("--------------------------------");
@@ -503,30 +501,36 @@ public class VisualOverview
 
             //total amount krijgen
             // double totalAmount = ticketTotal + food;
-            double totalAmount = ticketTotal + foodLogic.SnacksTotal;
+            double totalAmount = ticketTotal + food;
             // guest naar json sturen
             string reservationCode = ReservationCodeMaker();
-            ReservationModel guest = new(1, reservationCode, fullName, email, title, seatList.Count, ticketTotal, room.Id, seatList, totalAmount);
+            ReservationModel guest = new(1, reservationCode, fullName, email, title, seatList.Count,food, ticketTotal, room.Id, seatList, totalAmount);
             _guestLogic!.UpdateList(guest);
             // mail verzenden
             bool account = false;
             MailConformation mailConformation = new MailConformation(email, account);
             mailConformation.SendMailConformation();
+            break;
+            case 1:
+            Console.WriteLine("Reservation cancelled.");
+                Console.WriteLine("Press any key to continue...");
+                Console.ReadKey(true);
+                return;
+
+                }
         }
 
         else if (_account != null)
         {
-            Console.WriteLine("Do you want to proceed with the reservation? (Y/N)");
-            string confirmReservation = Console.ReadLine()!;
-            if (confirmReservation.ToUpper() == "N")
-            {
-                Console.WriteLine("Reservation cancelled.");
-                Console.WriteLine("Press any key to continue...");
-                Console.ReadKey(true);
-                return;
-            }
+            string prompt = "Do you want to proceed with the reservation?";
+            string[] options = { "Yes", "No" };
+            Menu mainMenu = new Menu(prompt, options);
+            int selectedIndex = mainMenu.Run();
 
-            System.Console.WriteLine(food);
+            switch (selectedIndex)
+            {
+                case 0:
+                    System.Console.WriteLine(food);
             Console.WriteLine("\n--------------------------------");
             Console.WriteLine("         PAYMENT OPTIONS         ");
             Console.WriteLine("--------------------------------");
@@ -558,13 +562,20 @@ public class VisualOverview
             double totalAmount = ticketTotal + food;
             int temp_id = film.Id = _reservationsLogic!._reservations!.Count > 0 ? _reservationsLogic._reservations.Max(x => x.Id) + 1 : 1;
 
-            ReservationModel reservation = new(temp_id, reservationCode, _account.FullName, _account.EmailAddress, title, seatList.Count, ticketTotal, room.Id, seatList, totalAmount);
+            ReservationModel reservation = new(temp_id, reservationCode, _account.FullName, _account.EmailAddress, title, seatList.Count, food, ticketTotal, room.Id, seatList, totalAmount);
             _reservationsLogic.UpdateList(reservation);
             bool account = true;
             MailConformation mailConformation = new MailConformation(_account.EmailAddress, account);
             mailConformation.SendMailConformation();
             _account.TicketList.Add(temp_id);
             _accountsLogic!.UpdateList(_account);
+            break;
+                case 1:
+                    Console.WriteLine("Reservation cancelled.");
+                Console.WriteLine("Press any key to continue...");
+                Console.ReadKey(true);
+                return;
+            }
         }
         Console.ForegroundColor = ConsoleColor.Green;
         System.Console.WriteLine("Your reservation has been confirmed and is now guaranteed.");

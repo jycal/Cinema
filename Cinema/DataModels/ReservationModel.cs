@@ -23,7 +23,10 @@ public class ReservationModel
     public string Movie { get; set; }
 
     [JsonPropertyName("ticketAmount")]
-    public int TicketAmount { get; set; }
+    public double TicketAmount { get; set; }
+
+    [JsonPropertyName("snackAmount")]
+    public double SnackAmount { get; set; }
 
     [JsonPropertyName("ticketTotal")]
     public double TicketTotal { get; set; }
@@ -36,7 +39,7 @@ public class ReservationModel
     [JsonPropertyName("totalAmount")]
     public double TotalAmount { get; set; }
 
-    public ReservationModel(int id, string reservationCode, string fullName, string email, string movie, int ticketAmount, double ticketTotal, int roomNumber, List<int[]> seats, double totalAmount)
+    public ReservationModel(int id, string reservationCode, string fullName, string email, string movie, double ticketAmount, double snackAmount,  double ticketTotal, int roomNumber, List<int[]> seats, double totalAmount)
     {
         Id = id;
         ReservationCode = reservationCode;
@@ -44,6 +47,7 @@ public class ReservationModel
         Email = email;
         Movie = movie;
         TicketAmount = ticketAmount;
+        SnackAmount = snackAmount;
         TicketTotal = ticketTotal;
         RoomNumber = roomNumber;
         Seats = seats;
