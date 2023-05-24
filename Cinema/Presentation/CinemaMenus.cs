@@ -167,46 +167,46 @@ Welcome to Starlight Cinema. What would you like to do?
             Console.Clear();
         }
         Console.WriteLine("Please enter your password (You have 3 attempts):");
-Console.ForegroundColor = ConsoleColor.Yellow;
-Console.WriteLine("------------------------------------------------------------------------------------------");
-Console.WriteLine(@"|   Must contain at least one special character(%!@#$%^&*()?/>.<,:;'\|}]{[_~`+=-         |");
-Console.WriteLine("|   Must be longer than 6 characters                                                     |");
-Console.WriteLine("|   Must contain at least one number                                                     |");
-Console.WriteLine("|   One upper case                                                                       |");
-Console.WriteLine("|   Atleast one lower case                                                               |");
-Console.WriteLine("------------------------------------------------------------------------------------------");
-Console.ResetColor();
+        Console.ForegroundColor = ConsoleColor.Yellow;
+        Console.WriteLine("------------------------------------------------------------------------------------------");
+        Console.WriteLine(@"|   Must contain at least one special character(%!@#$%^&*()?/>.<,:;'\|}]{[_~`+=-         |");
+        Console.WriteLine("|   Must be longer than 6 characters                                                     |");
+        Console.WriteLine("|   Must contain at least one number                                                     |");
+        Console.WriteLine("|   One upper case                                                                       |");
+        Console.WriteLine("|   Atleast one lower case                                                               |");
+        Console.WriteLine("------------------------------------------------------------------------------------------");
+        Console.ResetColor();
 
-int passwordAttempts = 0;
-string password = string.Empty;
+        int passwordAttempts = 0;
+        string password = string.Empty;
 
-while (passwordAttempts < 3)
-{
-    SecureString pass = _accountsLogic.HashedPass();
-    password = new System.Net.NetworkCredential(string.Empty, pass).Password;
+        while (passwordAttempts < 3)
+        {
+            SecureString pass = _accountsLogic.HashedPass();
+            password = new System.Net.NetworkCredential(string.Empty, pass).Password;
 
-    if (_accountsLogic.PasswordFormatCheck(password))
-    {
-        break;
-    }
+            if (_accountsLogic.PasswordFormatCheck(password))
+            {
+                break;
+            }
 
-    Console.ForegroundColor = ConsoleColor.Red;
-    Console.WriteLine("Wrong format! Please enter the password in the correct format. You will be send back to the menu if you don't get the format right!");
-    Console.ResetColor();
-    passwordAttempts++;
-}
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("Wrong format! Please enter the password in the correct format. You will be send back to the menu if you don't get the format right!");
+            Console.ResetColor();
+            passwordAttempts++;
+        }
 
-if (passwordAttempts >= 3)
-{
-    Console.ForegroundColor = ConsoleColor.Red;
-    Console.WriteLine("No attempts left.");
-    Console.WriteLine("You will be send back to the menu.");
-    Console.ResetColor();
-    Console.Clear();
-    RunMainMenu();
-}
+        if (passwordAttempts >= 3)
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("No attempts left.");
+            Console.WriteLine("You will be send back to the menu.");
+            Console.ResetColor();
+            Console.Clear();
+            RunMainMenu();
+        }
 
-Console.WriteLine();
+        Console.WriteLine();
 
         Console.WriteLine("Please enter your fullname");
         string firstName = Console.ReadLine()!;
@@ -394,6 +394,8 @@ View movies and order.
         {
             case 0:
                 _filmsLogic.MovieOverview();
+                Console.WriteLine("Press any key to continue...");
+                Console.ReadKey(true);
                 OrderSeatConfirm();
                 break;
             case 1:
@@ -417,22 +419,30 @@ View movies and order.
 
     private static void OrderSeatConfirm()
     {
-        Console.Write("\nDo you want to order seats? (Y/N): ");
-        string answer = Console.ReadLine()!.ToUpper();
-        if (answer == "Y")
+
+        string prompt = "\nDo you want to order seats?";
+        string[] options = { "Yes", "No, return to movie menu", "Return to main menu" };
+        Menu movieMenu = new Menu(prompt, options);
+        int selectedIndex = movieMenu.Run();
+        _filmsLogic.MovieOverview();
+
+        switch (selectedIndex)
         {
-            // EnterRoom.Start(_account);
-            VisualOverview vis = new VisualOverview();
-            VisualOverview.Start(_account);
-        }
-        else if (answer == "N")
-        {
-            RunMovieMenu();
-        }
-        else
-        {
-            Console.WriteLine("Invalid input!");
-            OrderSeatConfirm();
+            case 0:
+                VisualOverview vis = new VisualOverview();
+                VisualOverview.Start(_account);
+                break;
+            case 1:
+                RunMovieMenu();
+                break;
+            case 2:
+                RunMenusMenu();
+                break;
+            default:
+                Console.WriteLine("Invalid input!");
+                OrderSeatConfirm();
+                break;
+
         }
     }
 

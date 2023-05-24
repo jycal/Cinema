@@ -298,7 +298,7 @@ public class VisualOverview
 
                 for (int j = 0; j < roomWidth; j++)
                 {
-                    
+
                     int seatNumber = i * roomWidth + j;
                     Tuple<int, int, DateTime, int> seatChoice = new Tuple<int, int, DateTime, int>(film.Id, room.Id, chosenDate, seatNumber);
                     if (i == cursorRow && j == cursorCol)
@@ -307,7 +307,7 @@ public class VisualOverview
                     }
                     else if (reservedSeats.Contains(seatChoice))
                     {
-                        if (vipSeats.Contains(seatNumber ) || comfortSeats.Contains(seatNumber ) || disabledSeats.Contains(seatNumber ))
+                        if (vipSeats.Contains(seatNumber) || comfortSeats.Contains(seatNumber) || disabledSeats.Contains(seatNumber))
                         {
                             Console.Write("■".DarkGray() + " ");
                         }
@@ -369,81 +369,79 @@ public class VisualOverview
             // { rowList.Add(seat[0]); }
         }
         // confirmation vragen
-        System.Console.WriteLine("Are you sure you want to reserve these seats? Y|N");
-        string answer = Console.ReadLine()!;
-        if (answer.ToUpper() == "Y")
-        {
-            Reserve(room, film, selectedSeats);
-            foreach (var seat in selectedSeats)
-            {
-                // bereken het nummer van de stoel
-                int seatNumber = (seat[0]) * roomWidth + seat[1];
-                // toevoegen aan gereserveerde stoelen
-                Tuple<int, int, DateTime, int> dateSeat = new Tuple<int, int, DateTime, int>(film.Id, room.Id, chosenDate, seatNumber); 
-                room.Seats.Add(dateSeat);
-                _roomsLogic.UpdateList(room);
-            }
+        string prompt = "Are you sure you want to reserve these seats?";
+        string[] options = { "Yes", "No, try again", "Return to main menu" };
+        Menu mainMenu = new Menu(prompt, options);
+        int selectedIndex = mainMenu.Run();
 
-            Console.WriteLine("Press any key to return to the main menu.");
-            Console.ReadKey(true);
-
-            return;
-        }
-        else
+        switch (selectedIndex)
         {
-            System.Console.WriteLine("try again or return to main menu?[1][2]");
-            string answer2 = Console.ReadLine()!;
-            if (answer2 == "1")
-            {
+            case 0:
+                Reserve(room, film, selectedSeats);
+                foreach (var seat in selectedSeats)
+                {
+                    // bereken het nummer van de stoel
+                    int seatNumber = (seat[0]) * roomWidth + seat[1];
+                    // toevoegen aan gereserveerde stoelen
+                    Tuple<int, int, DateTime, int> dateSeat = new Tuple<int, int, DateTime, int>(film.Id, room.Id, chosenDate, seatNumber);
+                    room.Seats.Add(dateSeat);
+                    _roomsLogic.UpdateList(room);
+                }
+                break;
+            case 1:
                 Start(_account);
-            }
-            else
-            {
-                return;
-            }
+                break;
+            case 2:
+                break;
 
         }
+        // string answer = Console.ReadLine()!;
+        // if (answer.ToUpper() == "Y")
+        // {
+        //     Reserve(room, film, selectedSeats);
+        //     foreach (var seat in selectedSeats)
+        //     { 
+        //         // bereken het nummer van de stoel
+        //         int seatNumber = (seat[0]) * roomWidth + seat[1];
+        //         // toevoegen aan gereserveerde stoelen
+        //         Tuple<int, int, DateTime, int> dateSeat = new Tuple<int, int, DateTime, int>(film.Id, room.Id, chosenDate, seatNumber); 
+        //         room.Seats.Add(dateSeat);
+        //         _roomsLogic.UpdateList(room);
+        //     }
+
+        //     Console.WriteLine("Press any key to return to the main menu.");
+        //     Console.ReadKey(true);
+
+        //     return;
+        // }
+        // else
+        // {
+        //     System.Console.WriteLine("try again or return to main menu?[1][2]");
+        //     string answer2 = Console.ReadLine()!;
+        //     if (answer2 == "1")
+        //     {
+        //         Start(_account);
+        //     }
+        //     else
+        //     {
+        //         return;
+        //     }
+
+        // }
 
     }
     public static void Reserve(RoomModel room, FilmModel film, List<int[]> seatList)
     {
         Console.Clear();
+        FoodsLogic foodLogic = new();
+        double food = GetFoodAmount();
+
+
         if (_account == null)
         {
-            //foodlogic oproepen
-            Console.WriteLine("Would you like to buy some food? Y/N");
-            string answer = Console.ReadLine()!;
-            FoodsLogic foodLogic = new();
-            double food = 0;
-            if (answer == "Y")
-            {
-
-                double snacksTotal = foodLogic.BuyFood();
-                food += snacksTotal;
-                Console.WriteLine(snacksTotal);
-                Console.WriteLine();
-                Console.WriteLine("Do you wish to change your snack selection? Y/N");
-                string answer3 = Console.ReadLine()!;
-                if (answer3 == "Y")
-                {
-                    Console.Clear();
-                    foodLogic.SnacksTotal = 0;
-                    food = 0;
-                    double newSnacksTotal = foodLogic.BuyFood();
-                    food += newSnacksTotal;
-                    Console.WriteLine(newSnacksTotal);
-                }
-                else
-                {
-                    // ??
-                }
-            }
-            else if (answer == "N")
-            {
-                // Console.WriteLine("No food will be ordered");
-            }
             // gegevens vragen
             Console.Clear();
+            System.Console.WriteLine(food);
             Console.Write("Enter email: ");
             string email = Console.ReadLine()!;
             Console.Write("Enter full name: ");
@@ -517,9 +515,7 @@ public class VisualOverview
                 Console.ReadKey(true);
                 return;
             }
-            //foodlogic oproepen
-            FoodsLogic foodLogic = new();
-            double food = foodLogic.BuyFood();
+
             System.Console.WriteLine(food);
             Console.WriteLine("\n--------------------------------");
             Console.WriteLine("         PAYMENT OPTIONS         ");
@@ -528,10 +524,10 @@ public class VisualOverview
             Console.WriteLine("2. Ideal");
             Console.WriteLine("--------------------------------");
             Console.Write("Enter your choice of payment: ");
-            string? answer = Console.ReadLine();
+            string? answer2 = Console.ReadLine();
             Console.Clear();
-            Payment.PaymentWithPayPal(answer!);
-            Payment.PaymentWithIdeal(answer!);
+            Payment.PaymentWithPayPal(answer2!);
+            Payment.PaymentWithIdeal(answer2!);
 
 
             // film moet nog aan room gekoppeld worden dus nu title handmatig
@@ -567,6 +563,50 @@ public class VisualOverview
         Console.ReadKey(true);
     }
 
+    public static double GetFoodAmount()
+    {
+        //foodlogic oproepen
+        FoodsLogic foodLogic = new();
+        string prompt = "Would you like to order food?";
+        string[] options = { "Yes", "No" };
+        Menu mainMenu = new Menu(prompt, options);
+        int selectedIndex = mainMenu.Run();
+
+        switch (selectedIndex)
+        {
+            case 0:
+                double food = 0;
+                double snacksTotal = foodLogic.BuyFood();
+                food += snacksTotal;
+                Console.WriteLine(snacksTotal);
+                Console.WriteLine();
+                food = NewFoodAmount(food);
+                return food;
+            case 1:
+                return 0;
+        }
+        return 0;
+
+    }
+
+    public static double NewFoodAmount(double current)
+    {
+        FoodsLogic foodLogic = new();
+        string prompt = "Do you wish to change your snack selection?";
+        string[] options = { "Yes", "No" };
+        Menu mainMenu = new Menu(prompt, options);
+        int selectedIndex = mainMenu.Run();
+        switch (selectedIndex)
+        {
+            case 0:
+                Console.Clear();
+                double food = GetFoodAmount();
+                return food;
+            case 1:
+                return current;
+        }
+        return current;
+    }
 
 
     public static string ReservationCodeMaker()

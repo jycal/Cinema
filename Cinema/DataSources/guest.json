@@ -1,2 +1,40 @@
 [
+  {
+    "id": 1,
+    "reservationCode": "UAB47P1",
+    "fullName": "e",
+    "email": "meganpieters3@gmail.com",
+    "movie": "65",
+    "ticketAmount": 2,
+    "ticketTotal": 20,
+    "roomNumber": 1,
+    "seats": [
+      [
+        1,
+        2
+      ],
+      [
+        1,
+        3
+      ]
+    ],
+    "totalAmount": 23.75
+  },
+  {
+    "id": 2,
+    "reservationCode": "YNX3GRL",
+    "fullName": "meg",
+    "email": "meganpieters3@gmail.com",
+    "movie": "65",
+    "ticketAmount": 1,
+    "ticketTotal": 10,
+    "roomNumber": 1,
+    "seats": [
+      [
+        2,
+        1
+      ]
+    ],
+    "totalAmount": 10
+  }
 ]
