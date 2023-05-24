@@ -360,7 +360,7 @@ public class VisualOverview
         Console.WriteLine();
 
         // seats aan seatlist toevoegen
-        Console.WriteLine($"You have selected {boxesSelected} seats:");
+        Console.WriteLine($"\nYou have selected {boxesSelected} seats:");
         foreach (int[] seat in selectedBoxes)
         {
             Console.WriteLine($"- Row {seat[0] + 1}, Seat {seat[1] + 1}");
@@ -441,10 +441,10 @@ public class VisualOverview
         {
             // gegevens vragen
             Console.Clear();
-            System.Console.WriteLine(food);
-            Console.Write("Enter email: ");
+            // System.Console.WriteLine(food);
+            Console.Write("Please enter your email: ");
             string email = Console.ReadLine()!;
-            Console.Write("Enter full name: ");
+            Console.Write("Please enter your full name: ");
             string fullName = Console.ReadLine()!;
 
             // payment 
