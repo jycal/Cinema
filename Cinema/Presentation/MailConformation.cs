@@ -72,7 +72,9 @@ public class MailConformation
             client.Authenticate(emailAdress, password);
 
             client.Send(email);
-            System.Console.WriteLine("email send");
+            Console.ForegroundColor = ConsoleColor.Green;
+            System.Console.WriteLine($"\nEmail has been send\n");
+            Console.ResetColor();
 
         }
         catch (Exception x)
