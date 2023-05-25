@@ -34,7 +34,7 @@
   {
     "id": 5,
     "type": 1,
-    "emailAddress": "jyczhangnl@gmail.com",
+    "emailAddress": "adawd",
     "password": "xyz",
     "fullName": "xyz",
     "ticketList": []
@@ -71,6 +71,14 @@
     "emailAddress": "meganpieters3@gmail.com",
     "password": "Megan2003@",
     "fullName": "meme",
+    "ticketList": []
+  },
+  {
+    "id": 9,
+    "type": 1,
+    "emailAddress": "jyczhangnl@gmail.com",
+    "password": "asdfghj##nnNN112",
+    "fullName": "ajkgdkajwga",
     "ticketList": []
   }
 ]

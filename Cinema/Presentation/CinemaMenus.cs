@@ -652,37 +652,63 @@ View menu.
 
     private static void RunAdvancedMenu()
     {
-        string prompt = @"============================================
+        if (_account.Type == 2)
+        {
+string prompt = @"============================================
 |                                          |
 |             Advanced Menu                |
 |                                          |
 ============================================
 ";
-        string[] options = { "Advanced Movie Menu", "Advanced Seat Menu", "Advanced Food Menu", "Advanced Reservation Menu", "Advanced Revenue Menu", "Go back" };
-        Menu advancedMenu = new Menu(prompt, options);
-        int selectedIndex = advancedMenu.Run();
+            string[] options = { "Advanced Movie Menu", "Advanced Seat Menu", "Advanced Food Menu", "Advanced Reservation Menu", "Advanced Revenue Menu", "Go back" };
+            Menu advancedMenu = new Menu(prompt, options);
+            int selectedIndex = advancedMenu.Run();
 
-        switch (selectedIndex)
-        {
-            case 0:
-                RunAdvancedMovieMenu();
-                break;
-            case 1:
-                RunAdvancedSeatMenu();
-                break;
-            case 2:
-                RunAdvancedFoodMenu();
-                break;
-            case 3:
-                RunAdvancedReservationMenu();
-                break;
-            case 4:
-                RunAdvancedRevenueMenu();
-                break;
-            case 5:
-                RunMenusMenu();
-                break;
+            switch (selectedIndex)
+            {
+                case 0:
+                    RunAdvancedMovieMenu();
+                    break;
+                case 1:
+                    RunAdvancedSeatMenu();
+                    break;
+                case 2:
+                    RunAdvancedFoodMenu();
+                    break;
+                case 3:
+                    RunAdvancedReservationMenu();
+                    break;
+                case 4:
+                    RunAdvancedRevenueMenu();
+                    break;
+                case 5:
+                    RunMenusMenu();
+                    break;
+            }
         }
+        else
+        {
+            string prompt = @"============================================
+|                                          |
+|             Advanced Menu                |
+|                                          |
+============================================
+";
+            string[] options = { "Advanced Reservation Menu", "Go back" };
+            Menu advancedMenu = new Menu(prompt, options);
+            int selectedIndex = advancedMenu.Run();
+
+            switch (selectedIndex)
+            {
+                case 0:
+                    RunAdvancedReservationMenu();
+                    break;
+                case 1:
+                    RunMenusMenu();
+                    break;
+            }
+        }
+            
     }
 
     private static void RunAdvancedMovieMenu()
