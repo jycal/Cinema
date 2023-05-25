@@ -151,21 +151,42 @@ Welcome to Starlight Cinema. What would you like to do?
         Console.WriteLine("-----------------------------");
         Console.ResetColor();
         string email = Console.ReadLine()!;
-        int EmailAttempts = 0;
-        while (_accountsLogic.EmailFormatCheck(email) == false && EmailAttempts < 3)
+        // int EmailAttempts = 0;
+
+
+        while (_accountsLogic.EmailFormatCheck(email) == false)
         {
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("Wrong format! Please enter Email in the correct format...");
             Console.ResetColor();
             Console.Write("Email address: ");
             string Email = Console.ReadLine()!;
+            if (_accountsLogic.GetByMail(email) != null)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                System.Console.WriteLine("email already exists try again");
+                Console.ResetColor();
+                System.Console.WriteLine("Press any key to continue");
+                Console.ReadKey(true);
+                Register();
+            }
             email = Email;
-            EmailAttempts += 1;
+            // EmailAttempts += 1;
         }
-        if (EmailAttempts > 3)
+        if (_accountsLogic.GetByMail(email) != null)
         {
+            Console.ForegroundColor = ConsoleColor.Red;
+            System.Console.WriteLine("email already exists try again");
+            Console.ResetColor();
+            System.Console.WriteLine("Press any key to continue");
+            Console.ReadKey(true);
             Console.Clear();
+            Register();
         }
+        // if (EmailAttempts > 3)
+        // {
+        //     Console.Clear();
+        // }
         Console.WriteLine("Please enter your password (You have 3 attempts):");
         Console.ForegroundColor = ConsoleColor.Yellow;
         Console.WriteLine("------------------------------------------------------------------------------------------");
@@ -191,7 +212,7 @@ Welcome to Starlight Cinema. What would you like to do?
             }
 
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("Wrong format! Please enter the password in the correct format. You will be send back to the menu if you don't get the format right!");
+            Console.WriteLine($"\nWrong format! Please enter the password in the correct format. You will be send back to the menu if you don't get the format right!");
             Console.ResetColor();
             passwordAttempts++;
         }
@@ -200,8 +221,10 @@ Welcome to Starlight Cinema. What would you like to do?
         {
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("No attempts left.");
-            Console.WriteLine("You will be send back to the menu.");
             Console.ResetColor();
+            Console.WriteLine("You will be send back to the menu.");
+            System.Console.WriteLine("Press any key to continue");
+            Console.ReadKey(true);
             Console.Clear();
             RunMainMenu();
         }
@@ -215,6 +238,7 @@ Welcome to Starlight Cinema. What would you like to do?
         Console.ForegroundColor = ConsoleColor.Yellow;
         // ✰⍟✰
         Console.WriteLine($"Congratulations!!\nYour account has been made!\nEnjoy your time at Starlight Cinema");
+
         Console.ResetColor();
         int id = 0;
         while (true)
@@ -232,6 +256,8 @@ Welcome to Starlight Cinema. What would you like to do?
         List<int> tickets = new List<int>();
         AccountModel account = new AccountModel(id, 1, email, password, firstName, tickets);
         _accountsLogic.UpdateList(account);
+        MailConformation mail = new(email);
+        mail.SendRegistrationConformation();
         Console.WriteLine("Press any key to continue...");
         Console.ReadKey(true);
     }

@@ -17,6 +17,12 @@ public class MailConformation
 
     static private string? EmailReciever;
 
+    static private bool Regristration = false;
+
+    static private AccountModel? newAccount;
+
+    static private AccountsLogic? _accountslogic = new();
+
     public MailConformation(string emailReciever, bool account)
     {
         _guestLogic = new GuestLogic();
@@ -27,6 +33,18 @@ public class MailConformation
         { reservation = _reservationsLogic!._reservations!.Last(); }
         else { reservation = _guestLogic!._guests!.Last(); }
     }
+
+    public MailConformation(string emailReciever)
+    {
+        _guestLogic = new GuestLogic();
+        _reservationsLogic = new ReservationsLogic();
+        _roomsLogic = new RoomsLogic();
+        EmailReciever = emailReciever;
+        newAccount = _accountslogic!.GetByMail(emailReciever);
+        Regristration = true;
+    }
+
+
     public void SendMailConformation()
     {
         MimeMessage email = new MimeMessage();
@@ -42,6 +60,8 @@ public class MailConformation
             Text = CreateBody()
         };
 
+
+
         SmtpClient client = new SmtpClient();
         try
         {
@@ -53,6 +73,49 @@ public class MailConformation
 
             client.Send(email);
             System.Console.WriteLine("email send");
+
+        }
+        catch (Exception x)
+        {
+            System.Console.WriteLine(x.Message);
+        }
+        finally
+        {
+            client.Disconnect(true);
+            client.Dispose();
+        }
+    }
+
+    public void SendRegistrationConformation()
+    {
+        MimeMessage email = new MimeMessage();
+        // zoek reservation
+
+        email.From.Add(new MailboxAddress("Starlight Cinema", "cinemastarlightinfo@gmail.com"));
+        email.To.Add(new MailboxAddress("Receiver Name", EmailReciever));
+
+
+        email.Subject = $"Welcome to Starlight Cinema!";
+        // string Body = System.IO.File.ReadAllText(HttpContext.Current.Server.MapPath("~/test.html"));
+        email.Body = new TextPart(MimeKit.Text.TextFormat.Html)
+        {
+            Text = CreateRegistrationBody()
+        };
+
+
+        SmtpClient client = new SmtpClient();
+        try
+        {
+            client.Connect("smtp.gmail.com", 465, true);
+            string emailAdress = "cinemastarlightinfo@gmail.com";
+            string password = "zctjlsquzyoodket";
+            // Note: only needed if the SMTP server requires authentication
+            client.Authenticate(emailAdress, password);
+
+            client.Send(email);
+            Console.ForegroundColor = ConsoleColor.Green;
+            System.Console.WriteLine($"\nEmail has been send\n");
+            Console.ResetColor();
 
         }
         catch (Exception x)
@@ -85,10 +148,21 @@ public class MailConformation
         body = body.Replace("singleTicketPrice", Convert.ToString(GetTicketPrice(reservation.RoomNumber, reservation.Seats)));
         body = body.Replace("snackTotal", Convert.ToString(reservation.TotalAmount - reservation!.TicketTotal));
         body = body.Replace("ticketType", Convert.ToString(GetTicketType(reservation.RoomNumber, reservation.Seats)));
-
         return body;
 
     }
+
+    public static string CreateRegistrationBody()
+    {
+        string body = MailAccess.LoadAllRegistration();
+        body = body.Replace("Username", newAccount!.FullName);
+        body = body.Replace("UserEmail", newAccount!.EmailAddress);
+        body = body.Replace("UserID", Convert.ToString(newAccount!.Id));
+        Regristration = false;
+        return body;
+
+    }
+
 
     public static string GetPicture(string movietitle)
     {
