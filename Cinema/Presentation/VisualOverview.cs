@@ -468,56 +468,53 @@ public class VisualOverview
             switch (selectedIndex)
             {
                 case 0:
-            Console.WriteLine("\n--------------------------------");
-            Console.WriteLine("         PAYMENT OPTIONS         ");
-            Console.WriteLine("--------------------------------");
-            Console.WriteLine("1. Paypal");
-            Console.WriteLine("2. Ideal");
-            Console.WriteLine("--------------------------------");
-            Console.Write("Enter your choice of payment: ");
-            string? answer2 = Console.ReadLine();
-            Console.Clear();
-            Payment.PaymentWithPayPal(answer2!);
-            Payment.PaymentWithIdeal(answer2!);
+                    Console.WriteLine("\n--------------------------------");
+                    Console.WriteLine("         PAYMENT OPTIONS         ");
+                    Console.WriteLine("--------------------------------");
+                    Console.WriteLine("1. Paypal");
+                    Console.WriteLine("2. Ideal");
+                    Console.WriteLine("--------------------------------");
+                    SelectPayment();
+                    Console.Clear();
 
-            // info naar guest json sturen
-            string title = film.Title;
-            // prchase test
-            List<int> seats = new();
-            foreach (var seat in seatList)
-            {
-                int seatNumber = (seat[0]) * room.RoomWidth + seat[1];
-                seats.Add(seatNumber);
+                    // info naar guest json sturen
+                    string title = film.Title;
+                    // prchase test
+                    List<int> seats = new();
+                    foreach (var seat in seatList)
+                    {
+                        int seatNumber = (seat[0]) * room.RoomWidth + seat[1];
+                        seats.Add(seatNumber);
+                    }
+                    // foreach (int seat in seats)
+                    // {
+                    //     System.Console.WriteLine(seat);
+                    // }
+                    double ticketTotal = _ticketLogic!.TicketPurchase(room, seats);
+                    // revenue vastmeten
+                    RevenueModel rev = _revenueLogic!.GetById(1);
+                    rev.Money += ticketTotal + food;
+                    _revenueLogic.UpdateList(rev);
+
+                    //total amount krijgen
+                    // double totalAmount = ticketTotal + food;
+                    double totalAmount = ticketTotal + food;
+                    // guest naar json sturen
+                    string reservationCode = ReservationCodeMaker();
+                    ReservationModel guest = new(1, reservationCode, fullName, email, title, seatList.Count, food, ticketTotal, room.Id, seatList, totalAmount);
+                    _guestLogic!.UpdateList(guest);
+                    // mail verzenden
+                    bool account = false;
+                    MailConformation mailConformation = new MailConformation(email, account);
+                    mailConformation.SendMailConformation();
+                    break;
+                case 1:
+                    Console.WriteLine("Reservation cancelled.");
+                    Console.WriteLine("Press any key to continue...");
+                    Console.ReadKey(true);
+                    return;
+
             }
-            // foreach (int seat in seats)
-            // {
-            //     System.Console.WriteLine(seat);
-            // }
-            double ticketTotal = _ticketLogic!.TicketPurchase(room, seats);
-            // revenue vastmeten
-            RevenueModel rev = _revenueLogic!.GetById(1);
-            rev.Money += ticketTotal + food;
-            _revenueLogic.UpdateList(rev);
-
-            //total amount krijgen
-            // double totalAmount = ticketTotal + food;
-            double totalAmount = ticketTotal + food;
-            // guest naar json sturen
-            string reservationCode = ReservationCodeMaker();
-            ReservationModel guest = new(1, reservationCode, fullName, email, title, seatList.Count,food, ticketTotal, room.Id, seatList, totalAmount);
-            _guestLogic!.UpdateList(guest);
-            // mail verzenden
-            bool account = false;
-            MailConformation mailConformation = new MailConformation(email, account);
-            mailConformation.SendMailConformation();
-            break;
-            case 1:
-            Console.WriteLine("Reservation cancelled.");
-                Console.WriteLine("Press any key to continue...");
-                Console.ReadKey(true);
-                return;
-
-                }
         }
 
         else if (_account != null)
@@ -531,50 +528,46 @@ public class VisualOverview
             {
                 case 0:
                     System.Console.WriteLine(food);
-            Console.WriteLine("\n--------------------------------");
-            Console.WriteLine("         PAYMENT OPTIONS         ");
-            Console.WriteLine("--------------------------------");
-            Console.WriteLine("1. Paypal");
-            Console.WriteLine("2. Ideal");
-            Console.WriteLine("--------------------------------");
-            Console.Write("Enter your choice of payment: ");
-            string? answer2 = Console.ReadLine();
-            Console.Clear();
-            Payment.PaymentWithPayPal(answer2!);
-            Payment.PaymentWithIdeal(answer2!);
+                    Console.WriteLine("\n--------------------------------");
+                    Console.WriteLine("         PAYMENT OPTIONS         ");
+                    Console.WriteLine("--------------------------------");
+                    Console.WriteLine("1. Paypal");
+                    Console.WriteLine("2. Ideal");
+                    Console.WriteLine("--------------------------------");
+                    SelectPayment();
+                    Console.Clear();
 
+                    // film moet nog aan room gekoppeld worden dus nu title handmatig
+                    string title = film.Title;
 
-            // film moet nog aan room gekoppeld worden dus nu title handmatig
-            string title = film.Title;
+                    // prchase test
+                    List<int> seats = new();
+                    foreach (var seat in seatList)
+                    { seats.Add(seat[1]); }
+                    double ticketTotal = _ticketLogic!.TicketPurchase(room, seats);
+                    // revenue vastmeten
+                    RevenueModel rev = _revenueLogic!.GetById(1);
+                    rev.Money += ticketTotal + food;
+                    _revenueLogic.UpdateList(rev);
+                    // naar json versturen
+                    string reservationCode = ReservationCodeMaker();
+                    //total amount krijgen
+                    double totalAmount = ticketTotal + food;
+                    int temp_id = film.Id = _reservationsLogic!._reservations!.Count > 0 ? _reservationsLogic._reservations.Max(x => x.Id) + 1 : 1;
 
-            // prchase test
-            List<int> seats = new();
-            foreach (var seat in seatList)
-            { seats.Add(seat[1]); }
-            double ticketTotal = _ticketLogic!.TicketPurchase(room, seats);
-            // revenue vastmeten
-            RevenueModel rev = _revenueLogic!.GetById(1);
-            rev.Money += ticketTotal + food;
-            _revenueLogic.UpdateList(rev);
-            // naar json versturen
-            string reservationCode = ReservationCodeMaker();
-            //total amount krijgen
-            double totalAmount = ticketTotal + food;
-            int temp_id = film.Id = _reservationsLogic!._reservations!.Count > 0 ? _reservationsLogic._reservations.Max(x => x.Id) + 1 : 1;
-
-            ReservationModel reservation = new(temp_id, reservationCode, _account.FullName, _account.EmailAddress, title, seatList.Count, food, ticketTotal, room.Id, seatList, totalAmount);
-            _reservationsLogic.UpdateList(reservation);
-            bool account = true;
-            MailConformation mailConformation = new MailConformation(_account.EmailAddress, account);
-            mailConformation.SendMailConformation();
-            _account.TicketList.Add(temp_id);
-            _accountsLogic!.UpdateList(_account);
-            break;
+                    ReservationModel reservation = new(temp_id, reservationCode, _account.FullName, _account.EmailAddress, title, seatList.Count, food, ticketTotal, room.Id, seatList, totalAmount);
+                    _reservationsLogic.UpdateList(reservation);
+                    bool account = true;
+                    MailConformation mailConformation = new MailConformation(_account.EmailAddress, account);
+                    mailConformation.SendMailConformation();
+                    _account.TicketList.Add(temp_id);
+                    _accountsLogic!.UpdateList(_account);
+                    break;
                 case 1:
                     Console.WriteLine("Reservation cancelled.");
-                Console.WriteLine("Press any key to continue...");
-                Console.ReadKey(true);
-                return;
+                    Console.WriteLine("Press any key to continue...");
+                    Console.ReadKey(true);
+                    return;
             }
         }
         Console.ForegroundColor = ConsoleColor.Green;
@@ -608,6 +601,25 @@ public class VisualOverview
         }
         return 0;
 
+    }
+
+    public static void SelectPayment()
+    {
+        string prompt = "Select your choice of payment";
+        string[] options = { "Paypal", "iDeal" };
+        Menu mainMenu = new Menu(prompt, options);
+        int selectedIndex = mainMenu.Run();
+
+        switch (selectedIndex)
+        {
+            case 0:
+                Payment.PaymentWithPayPal();
+                break;
+
+            case 1:
+                Payment.PaymentWithIdeal();
+                break;
+        }
     }
 
     public static double NewFoodAmount(double current)
@@ -690,4 +702,5 @@ public static class ConsoleExtensions
     {
         return $"\u001b[90m{str}\u001b[0m";
     }
+
 }
