@@ -109,7 +109,7 @@ public class AccountsLogic
             string Movie = res.Movie;
             string FullName = res.FullName;
             string Email = res.Email;
-            int TicketAmount = res.TicketAmount;
+            double TicketAmount = res.TicketAmount;
             string selectedSeats = string.Join(", ", res.Seats.Select(seat => $"Row {seat[0] + 1}, Seat {seat[1] + 1}"));
             double TotalAmount = res.TotalAmount;
             string Overview = $@"

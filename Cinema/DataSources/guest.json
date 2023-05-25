@@ -6,6 +6,7 @@
     "email": "meganpieters3@gmail.com",
     "movie": "65",
     "ticketAmount": 2,
+    "snackAmount": 0,
     "ticketTotal": 20,
     "roomNumber": 1,
     "seats": [
@@ -27,6 +28,7 @@
     "email": "meganpieters3@gmail.com",
     "movie": "65",
     "ticketAmount": 1,
+    "snackAmount": 0,
     "ticketTotal": 10,
     "roomNumber": 1,
     "seats": [
@@ -36,5 +38,95 @@
       ]
     ],
     "totalAmount": 10
+  },
+  {
+    "id": 3,
+    "reservationCode": "5MKLBTO",
+    "fullName": "",
+    "email": "aryanjd2005@gmail.com",
+    "movie": "65",
+    "ticketAmount": 1,
+    "snackAmount": 0,
+    "ticketTotal": 13,
+    "roomNumber": 1,
+    "seats": [
+      [
+        4,
+        3
+      ]
+    ],
+    "totalAmount": 13
+  },
+  {
+    "id": 4,
+    "reservationCode": "JM0Z6I9",
+    "fullName": "aaa",
+    "email": "aryanjd2005@gmail.com",
+    "movie": "Shazam! Fury of the Gods",
+    "ticketAmount": 1,
+    "snackAmount": 0,
+    "ticketTotal": 10,
+    "roomNumber": 1,
+    "seats": [
+      [
+        4,
+        0
+      ]
+    ],
+    "totalAmount": 10
+  },
+  {
+    "id": 5,
+    "reservationCode": "PMCY55F",
+    "fullName": "aa",
+    "email": "aryanjd2005@gmail.com",
+    "movie": "Shazam! Fury of the Gods",
+    "ticketAmount": 1,
+    "snackAmount": 0,
+    "ticketTotal": 13,
+    "roomNumber": 1,
+    "seats": [
+      [
+        4,
+        3
+      ]
+    ],
+    "totalAmount": 24.9
+  },
+  {
+    "id": 6,
+    "reservationCode": "X240GEN",
+    "fullName": "Aaasa",
+    "email": "aryanjd2005@gmail.com",
+    "movie": "65",
+    "ticketAmount": 1,
+    "snackAmount": 10,
+    "ticketTotal": 9.5,
+    "roomNumber": 1,
+    "seats": [
+      [
+        3,
+        0
+      ]
+    ],
+    "totalAmount": 19.5
+  },
+  {
+    "id": 7,
+    "reservationCode": "6JQG2Y7",
+    "fullName": "aa",
+    "email": "aryanjd2005@gmail.com",
+    "movie": "65",
+    "ticketAmount": 1,
+    "snackAmount": 11.9,
+    "ticketTotal": 10,
+    "roomNumber": 1,
+    "seats": [
+      [
+        3,
+        1
+      ]
+    ],
+    "totalAmount": 21.9
   }
 ]

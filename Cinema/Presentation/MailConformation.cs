@@ -148,7 +148,7 @@ public class MailConformation
         body = body.Replace("currentDate", DateTime.Today.ToString("dd/MM/yyyy"));
         body = body.Replace("roomNumber", Convert.ToString(reservation.RoomNumber));
         body = body.Replace("singleTicketPrice", Convert.ToString(GetTicketPrice(reservation.RoomNumber, reservation.Seats)));
-        body = body.Replace("snackTotal", Convert.ToString(reservation.TotalAmount - reservation!.TicketTotal));
+        body = body.Replace("snackTotal", Convert.ToString(reservation.SnackAmount));
         body = body.Replace("ticketType", Convert.ToString(GetTicketType(reservation.RoomNumber, reservation.Seats)));
         return body;
 
