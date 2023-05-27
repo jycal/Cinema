@@ -387,7 +387,7 @@ public class VisualOverview
         switch (selectedIndex)
         {
             case 0:
-                Reserve(room, film, selectedSeats);
+                Reserve(room, film, selectedSeats, chosenDate);
                 foreach (var seat in selectedSeats)
                 {
                     // bereken het nummer van de stoel
@@ -440,7 +440,7 @@ public class VisualOverview
         // }
 
     }
-    public static void Reserve(RoomModel room, FilmModel film, List<int[]> seatList)
+    public static void Reserve(RoomModel room, FilmModel film, List<int[]> seatList, DateTime chosenDate)
     {
         Console.Clear();
         FoodsLogic foodLogic = new();
@@ -501,7 +501,7 @@ public class VisualOverview
                     double totalAmount = ticketTotal + food;
                     // guest naar json sturen
                     string reservationCode = ReservationCodeMaker();
-                    ReservationModel guest = new(1, reservationCode, fullName, email, title, seatList.Count, food, ticketTotal, room.Id, seatList, totalAmount);
+                    ReservationModel guest = new(1, reservationCode, fullName, email, title, seatList.Count, food, ticketTotal, room.Id, seatList, totalAmount, chosenDate);
                     _guestLogic!.UpdateList(guest);
                     // mail verzenden
                     bool account = false;
@@ -555,7 +555,7 @@ public class VisualOverview
                     double totalAmount = ticketTotal + food;
                     int temp_id = film.Id = _reservationsLogic!._reservations!.Count > 0 ? _reservationsLogic._reservations.Max(x => x.Id) + 1 : 1;
 
-                    ReservationModel reservation = new(temp_id, reservationCode, _account.FullName, _account.EmailAddress, title, seatList.Count, food, ticketTotal, room.Id, seatList, totalAmount);
+                    ReservationModel reservation = new(temp_id, reservationCode, _account.FullName, _account.EmailAddress, title, seatList.Count, food, ticketTotal, room.Id, seatList, totalAmount, chosenDate);
                     _reservationsLogic.UpdateList(reservation);
                     bool account = true;
                     MailConformation mailConformation = new MailConformation(_account.EmailAddress, account);
