@@ -21,10 +21,7 @@
     "emailAddress": "g@b.c",
     "password": "xyz",
     "fullName": "George Washington",
-    "ticketList": [
-      1,
-      1
-    ]
+    "ticketList": []
   },
   {
     "id": 0,
@@ -35,24 +32,12 @@
     "ticketList": []
   },
   {
-    "id": 4,
-    "type": 1,
-    "emailAddress": "meganpieters3@gmail.com",
-    "password": "may",
-    "fullName": "megan",
-    "ticketList": [
-      17
-    ]
-  },
-  {
     "id": 5,
     "type": 1,
-    "emailAddress": "jyczhangnl@gmail.com",
+    "emailAddress": "adawd",
     "password": "xyz",
     "fullName": "xyz",
-    "ticketList": [
-      16
-    ]
+    "ticketList": []
   },
   {
     "id": 6,
@@ -68,8 +53,32 @@
     "emailAddress": "bob@com.c",
     "password": "ABCDef12#",
     "fullName": "Bob",
+    "ticketList": []
+  },
+  {
+    "id": 4,
+    "type": 1,
+    "emailAddress": "Meganpieters3@gmail.com",
+    "password": "Megan2003@",
+    "fullName": "Megan pieters",
     "ticketList": [
       1
     ]
+  },
+  {
+    "id": 8,
+    "type": 1,
+    "emailAddress": "meganpieters3@gmail.com",
+    "password": "Megan2003@",
+    "fullName": "meme",
+    "ticketList": []
+  },
+  {
+    "id": 9,
+    "type": 1,
+    "emailAddress": "jyczhangnl@gmail.com",
+    "password": "asdfghj##nnNN112",
+    "fullName": "ajkgdkajwga",
+    "ticketList": []
   }
 ]

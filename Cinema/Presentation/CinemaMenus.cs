@@ -101,7 +101,9 @@ Welcome to Starlight Cinema. What would you like to do?
             Console.Write("Please enter your email address: ");
             string email = Console.ReadLine()!;
             Console.Write("Please enter your password: ");
-            string password = Console.ReadLine()!;
+            string password = string.Empty;
+            SecureString pass = _accountsLogic.HashedPass();
+            password = new System.Net.NetworkCredential(string.Empty, pass).Password;
             AccountModel correctEmail = _accountsLogic.GetByMail(email);
 
             if (correctEmail != null)
@@ -151,62 +153,85 @@ Welcome to Starlight Cinema. What would you like to do?
         Console.WriteLine("-----------------------------");
         Console.ResetColor();
         string email = Console.ReadLine()!;
-        int EmailAttempts = 0;
-        while (_accountsLogic.EmailFormatCheck(email) == false && EmailAttempts < 3)
+        // int EmailAttempts = 0;
+
+
+        while (_accountsLogic.EmailFormatCheck(email) == false)
         {
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("Wrong format! Please enter Email in the correct format...");
             Console.ResetColor();
             Console.Write("Email address: ");
             string Email = Console.ReadLine()!;
+            if (_accountsLogic.GetByMail(email) != null)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                System.Console.WriteLine("email already exists try again");
+                Console.ResetColor();
+                System.Console.WriteLine("Press any key to continue");
+                Console.ReadKey(true);
+                Register();
+            }
             email = Email;
-            EmailAttempts += 1;
+            // EmailAttempts += 1;
         }
-        if (EmailAttempts > 3)
+        if (_accountsLogic.GetByMail(email) != null)
         {
+            Console.ForegroundColor = ConsoleColor.Red;
+            System.Console.WriteLine("email already exists try again");
+            Console.ResetColor();
+            System.Console.WriteLine("Press any key to continue");
+            Console.ReadKey(true);
             Console.Clear();
+            Register();
         }
+        // if (EmailAttempts > 3)
+        // {
+        //     Console.Clear();
+        // }
         Console.WriteLine("Please enter your password (You have 3 attempts):");
-Console.ForegroundColor = ConsoleColor.Yellow;
-Console.WriteLine("------------------------------------------------------------------------------------------");
-Console.WriteLine(@"|   Must contain at least one special character(%!@#$%^&*()?/>.<,:;'\|}]{[_~`+=-         |");
-Console.WriteLine("|   Must be longer than 6 characters                                                     |");
-Console.WriteLine("|   Must contain at least one number                                                     |");
-Console.WriteLine("|   One upper case                                                                       |");
-Console.WriteLine("|   Atleast one lower case                                                               |");
-Console.WriteLine("------------------------------------------------------------------------------------------");
-Console.ResetColor();
+        Console.ForegroundColor = ConsoleColor.Yellow;
+        Console.WriteLine("------------------------------------------------------------------------------------------");
+        Console.WriteLine(@"|   Must contain at least one special character(%!@#$%^&*()?/>.<,:;'\|}]{[_~`+=-         |");
+        Console.WriteLine("|   Must be longer than 6 characters                                                     |");
+        Console.WriteLine("|   Must contain at least one number                                                     |");
+        Console.WriteLine("|   One upper case                                                                       |");
+        Console.WriteLine("|   Atleast one lower case                                                               |");
+        Console.WriteLine("------------------------------------------------------------------------------------------");
+        Console.ResetColor();
 
-int passwordAttempts = 0;
-string password = string.Empty;
+        int passwordAttempts = 0;
+        string password = string.Empty;
 
-while (passwordAttempts < 3)
-{
-    SecureString pass = _accountsLogic.HashedPass();
-    password = new System.Net.NetworkCredential(string.Empty, pass).Password;
+        while (passwordAttempts < 3)
+        {
+            SecureString pass = _accountsLogic.HashedPass();
+            password = new System.Net.NetworkCredential(string.Empty, pass).Password;
 
-    if (_accountsLogic.PasswordFormatCheck(password))
-    {
-        break;
-    }
+            if (_accountsLogic.PasswordFormatCheck(password))
+            {
+                break;
+            }
 
-    Console.ForegroundColor = ConsoleColor.Red;
-    Console.WriteLine("Wrong format! Please enter the password in the correct format. You will be send back to the menu if you don't get the format right!");
-    Console.ResetColor();
-    passwordAttempts++;
-}
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine($"\nWrong format! Please enter the password in the correct format. You will be send back to the menu if you don't get the format right!");
+            Console.ResetColor();
+            passwordAttempts++;
+        }
 
-if (passwordAttempts >= 3)
-{
-    Console.ForegroundColor = ConsoleColor.Red;
-    Console.WriteLine("No attempts left.");
-    Console.WriteLine("You will be send back to the menu.");
-    Console.ResetColor();
-    Console.Clear();
-    RunMainMenu();
-}
+        if (passwordAttempts >= 3)
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("No attempts left.");
+            Console.ResetColor();
+            Console.WriteLine("You will be send back to the menu.");
+            System.Console.WriteLine("Press any key to continue");
+            Console.ReadKey(true);
+            Console.Clear();
+            RunMainMenu();
+        }
 
-Console.WriteLine();
+        Console.WriteLine();
 
         Console.WriteLine("Please enter your fullname");
         string firstName = Console.ReadLine()!;
@@ -215,6 +240,7 @@ Console.WriteLine();
         Console.ForegroundColor = ConsoleColor.Yellow;
         // ✰⍟✰
         Console.WriteLine($"Congratulations!!\nYour account has been made!\nEnjoy your time at Starlight Cinema");
+
         Console.ResetColor();
         int id = 0;
         while (true)
@@ -232,6 +258,8 @@ Console.WriteLine();
         List<int> tickets = new List<int>();
         AccountModel account = new AccountModel(id, 1, email, password, firstName, tickets);
         _accountsLogic.UpdateList(account);
+        MailConformation mail = new(email);
+        mail.SendRegistrationConformation();
         Console.WriteLine("Press any key to continue...");
         Console.ReadKey(true);
     }
@@ -394,6 +422,8 @@ View movies and order.
         {
             case 0:
                 _filmsLogic.MovieOverview();
+                Console.WriteLine("Press any key to continue...");
+                Console.ReadKey(true);
                 OrderSeatConfirm();
                 break;
             case 1:
@@ -417,20 +447,30 @@ View movies and order.
 
     private static void OrderSeatConfirm()
     {
-        Console.Write("\nDo you want to order seats? (Y/N): ");
-        string answer = Console.ReadLine()!.ToUpper();
-        if (answer == "Y")
+
+        string prompt = "\nDo you want to order seats?";
+        string[] options = { "Yes", "No, return to movie menu", "Return to main menu" };
+        Menu movieMenu = new Menu(prompt, options);
+        int selectedIndex = movieMenu.Run();
+        _filmsLogic.MovieOverview();
+
+        switch (selectedIndex)
         {
-            EnterRoom.Start(_account);
-        }
-        else if (answer == "N")
-        {
-            RunMovieMenu();
-        }
-        else
-        {
-            Console.WriteLine("Invalid input!");
-            OrderSeatConfirm();
+            case 0:
+                VisualOverview vis = new VisualOverview();
+                VisualOverview.Start(_account);
+                break;
+            case 1:
+                RunMovieMenu();
+                break;
+            case 2:
+                RunMenusMenu();
+                break;
+            default:
+                Console.WriteLine("Invalid input!");
+                OrderSeatConfirm();
+                break;
+
         }
     }
 
@@ -451,7 +491,7 @@ View movies and order.
 |              Catering Menu               |
 |                                          |
 ============================================
-View menu and order.
+View menu.
 ";
         string[] options = { "Show current menu", "Search product by name", "Go back" };
         Menu cateringMenu = new Menu(prompt, options);
@@ -461,12 +501,12 @@ View menu and order.
         {
             case 0:
                 _foodsLogic.DisplayFoodMenu();
-                OrderFoodConfirm();
+                // OrderFoodConfirm();
                 RunCateringMenu();
                 break;
             case 1:
                 SearchProduct();
-                OrderFoodConfirm();
+                // OrderFoodConfirm();
                 RunCateringMenu();
                 break;
             case 2:
@@ -520,11 +560,11 @@ View menu and order.
         FoodModel food = _foodsLogic.GetByName(name);
         if (food is FoodModel)
         {
-            int temp_id = _revenueLogic._revenueList!.Count > 0 ? _revenueLogic._revenueList.Max(x => x.Id) + 1 : 1;
-            RevenueModel revenue = new RevenueModel(temp_id, Convert.ToDecimal(food.Cost));
+            RevenueModel revenue = _revenueLogic.GetById(1);
+            revenue.Money += food.Cost;
             _revenueLogic.UpdateList(revenue);
 
-            string code = EnterRoom.ReservationCodeMaker();
+            string code = VisualOverview.ReservationCodeMaker();
             Console.WriteLine($"Your reservation code is: {code}");
             Console.WriteLine("Press any key to continue...");
             Console.ReadKey(true);
@@ -581,17 +621,29 @@ View menu and order.
         Console.WriteLine("What is your reservation code?");
         string? reservationCode = Console.ReadLine();
         // var guestCheck = _guestLogic.GetByCode(reservationCode!);
-        var accCheck = _reservationsLogic.GetByCode(reservationCode!);
-        if (accCheck != null)
+        Console.WriteLine("Are you sure you want to delete the reservation? (Y/N):");
+        string? input = Console.ReadLine()!.ToUpper();
+        if (input == "Y")
         {
-            _reservationsLogic.DeleteReservationByCode(reservationCode!);
+            var accCheck = _reservationsLogic.GetByCode(reservationCode!);
+            if (accCheck != null)
+            {
+                _reservationsLogic.DeleteReservationByCode(reservationCode!);
 
+            }
+            else if (accCheck == null)
+            {
+                _guestLogic.DeleteReservation(reservationCode!);
+                // Console.Clear();
+            }
         }
-        else if (accCheck == null)
+        else if (input == "N")
         {
-            _guestLogic.DeleteReservation(reservationCode!);
-            // Console.Clear();
-
+            return;
+        }
+        else
+        {
+            Console.WriteLine("Invalid input");
         }
         Console.WriteLine("Press any key to continue...");
         Console.ReadKey();
@@ -600,37 +652,63 @@ View menu and order.
 
     private static void RunAdvancedMenu()
     {
-        string prompt = @"============================================
+        if (_account.Type == 2)
+        {
+string prompt = @"============================================
 |                                          |
 |             Advanced Menu                |
 |                                          |
 ============================================
 ";
-        string[] options = { "Advanced Movie Menu", "Advanced Seat Menu", "Advanced Food Menu", "Advanced Reservation Menu", "Advanced Revenue Menu", "Go back" };
-        Menu advancedMenu = new Menu(prompt, options);
-        int selectedIndex = advancedMenu.Run();
+            string[] options = { "Advanced Movie Menu", "Advanced Seat Menu", "Advanced Food Menu", "Advanced Reservation Menu", "Advanced Revenue Menu", "Go back" };
+            Menu advancedMenu = new Menu(prompt, options);
+            int selectedIndex = advancedMenu.Run();
 
-        switch (selectedIndex)
-        {
-            case 0:
-                RunAdvancedMovieMenu();
-                break;
-            case 1:
-                RunAdvancedSeatMenu();
-                break;
-            case 2:
-                RunAdvancedFoodMenu();
-                break;
-            case 3:
-                RunAdvancedReservationMenu();
-                break;
-            case 4:
-                RunAdvancedRevenueMenu();
-                break;
-            case 5:
-                RunMenusMenu();
-                break;
+            switch (selectedIndex)
+            {
+                case 0:
+                    RunAdvancedMovieMenu();
+                    break;
+                case 1:
+                    RunAdvancedSeatMenu();
+                    break;
+                case 2:
+                    RunAdvancedFoodMenu();
+                    break;
+                case 3:
+                    RunAdvancedReservationMenu();
+                    break;
+                case 4:
+                    RunAdvancedRevenueMenu();
+                    break;
+                case 5:
+                    RunMenusMenu();
+                    break;
+            }
         }
+        else
+        {
+            string prompt = @"============================================
+|                                          |
+|             Advanced Menu                |
+|                                          |
+============================================
+";
+            string[] options = { "Advanced Reservation Menu", "Go back" };
+            Menu advancedMenu = new Menu(prompt, options);
+            int selectedIndex = advancedMenu.Run();
+
+            switch (selectedIndex)
+            {
+                case 0:
+                    RunAdvancedReservationMenu();
+                    break;
+                case 1:
+                    RunMenusMenu();
+                    break;
+            }
+        }
+            
     }
 
     private static void RunAdvancedMovieMenu()
@@ -677,19 +755,195 @@ View menu and order.
 
     private static void AddMovie()
     {
-        Console.Write("Enter the title of the movie: ");
-        string title = Console.ReadLine()!;
-        Console.Write("Enter the description of the movie: ");
-        string description = Console.ReadLine()!;
-        Console.Write("Enter the duration of the movie: ");
-        int duration = Convert.ToInt32(Console.ReadLine()!);
-        Console.Write("Enter the genre of the movie: ");
-        List<string> genres = new List<string>();
-        string genre = Console.ReadLine()!;
-        genres.Add(genre);
-        // image add
-        Console.Write("Enter the image url: ");
-        string imageURL = Console.ReadLine()!;
+        // variables
+        string title;
+        List<DateTime> dates = null!;
+        List<int> rooms = null!;
+        string description;
+        int duration;
+        List<string> genres;
+        string imageURL;
+
+        // title
+        while (true)
+        {
+            Console.Write("Enter the title of the movie: ");
+            title = Console.ReadLine()!;
+            if (string.IsNullOrEmpty(title))
+            {
+                Console.WriteLine("Title cannot be empty!");
+                Console.WriteLine("Press any key to continue...");
+                Console.ReadKey(true);
+            }
+            else
+            {
+                break;
+            }
+        }
+        // dates
+        bool dateDone = false;
+        while (!dateDone)
+        {
+            Console.Write("Enter dates of the movie (Example: 01/01/2020 10:50:00, 01/01/2020 11:50:00): ");
+            string datesString = Console.ReadLine()!;
+            dates = new List<DateTime>();
+            if (string.IsNullOrEmpty(datesString))
+            {
+                Console.WriteLine("Dates cannot be empty!");
+                Console.WriteLine("Press any key to continue...");
+                Console.ReadKey(true);
+            }
+            else
+            {
+                string[] datesArray = datesString.Split(", ");
+                bool wentWrong = false;
+                foreach (string date in datesArray)
+                {
+                    if (date.Length != 19)
+                    {
+                        wentWrong = true;
+                        Console.WriteLine("Date format is incorrect! Must be DD/MM/YYYY HH:mm:ss");
+                        Console.WriteLine("Press any key to continue...");
+                        Console.ReadKey(true);
+                        break;
+                    }
+                    else
+                    {
+                        try
+                        {
+                            DateTime dateTime = DateTime.ParseExact(date, "dd/MM/yyyy HH:mm:ss", null!);
+                            dates.Add(dateTime);
+                        }
+                        catch (Exception)
+                        {
+                            wentWrong = true;
+                            Console.WriteLine("Date format is incorrect! Must be DD/MM/YYYY HH:mm:ss");
+                            Console.WriteLine("Press any key to continue...");
+                            Console.ReadKey(true);
+                            break;
+                        }
+                    }
+                }
+                if (!wentWrong)
+                {
+                    dateDone = true;
+                }
+            }
+        }
+        // rooms
+        bool roomDone = false;
+        while (!roomDone)
+        {
+            Console.Write("Enter the room of the movie (1, 2 or 3). 1st room = 1st date, 2nd room = 2nd date, etc. (Example: 1, 2): ");
+            string roomsString = Console.ReadLine()!;
+            if (string.IsNullOrEmpty(roomsString))
+            {
+                Console.WriteLine("Rooms cannot be empty!");
+                Console.WriteLine("Press any key to continue...");
+                Console.ReadKey(true);
+            }
+            else
+            {
+                string[] roomsArray = roomsString.Split(", ");
+                if (roomsArray.Length != dates.Count)
+                {
+                    Console.WriteLine("Amount of rooms must be equal to amount of dates!");
+                    Console.WriteLine("Press any key to continue...");
+                    Console.ReadKey(true);
+                    continue;
+                }
+                rooms = new List<int>();
+                bool wentWrong = false;
+                foreach (string room in roomsArray)
+                {
+                    if (room != "1" && room != "2" && room != "3")
+                    {
+                        wentWrong = true;
+                        Console.WriteLine("Room format is incorrect! Must be 1, 2, 3, etc.");
+                        Console.WriteLine("Press any key to continue...");
+                        Console.ReadKey(true);
+                        break;
+                    }
+                    else
+                    {
+                        int roomInt = Convert.ToInt32(room);
+                        rooms.Add(roomInt);
+                    }
+                }
+                if (!wentWrong)
+                {
+                    roomDone = true;
+                }
+            }
+        }
+        // description
+        while (true)
+        {
+            Console.Write("Enter the description of the movie: ");
+            description = Console.ReadLine()!;
+            if (string.IsNullOrEmpty(description))
+            {
+                Console.WriteLine("Description cannot be empty!");
+                Console.WriteLine("Press any key to continue...");
+                Console.ReadKey(true);
+            }
+            else
+            {
+                break;
+            }
+        }
+        // duration
+        while (true)
+        {
+            Console.Write("Enter the duration of the movie: ");
+            string input = Console.ReadLine()!;
+            if (string.IsNullOrEmpty(input))
+            {
+                Console.WriteLine("Duration cannot be empty!");
+                Console.WriteLine("Press any key to continue...");
+                Console.ReadKey(true);
+            }
+            else
+            {
+                duration = Convert.ToInt32(input);
+                break;
+            }
+        }
+        // genre
+        while (true)
+        {
+            Console.Write("Enter the genre of the movie: ");
+            string input = Console.ReadLine()!;
+            if (string.IsNullOrEmpty(input))
+            {
+                Console.WriteLine("Genre cannot be empty!");
+                Console.WriteLine("Press any key to continue...");
+                Console.ReadKey(true);
+            }
+            else
+            {
+                genres = new List<string>();
+                genres.Add(input);
+                break;
+            }
+        }
+        // image
+        while (true)
+        {
+            Console.Write("Enter the image url: ");
+            imageURL = Console.ReadLine()!;
+            if (string.IsNullOrEmpty(imageURL))
+            {
+                Console.WriteLine("Image url cannot be empty!");
+                Console.WriteLine("Press any key to continue...");
+                Console.ReadKey(true);
+            }
+            else
+            {
+                break;
+            }
+        }
+
         Console.Clear();
 
         int id = 0;
@@ -705,7 +959,7 @@ View menu and order.
                 break;
             }
         }
-        FilmModel film = new FilmModel(id, title, description, duration, genres, imageURL);
+        FilmModel film = new FilmModel(id, dates, rooms, title, description, duration, genres, imageURL);
         _filmsLogic.UpdateList(film);
         Console.WriteLine("Movie added!");
         Console.WriteLine("Press any key to continue...");
@@ -924,22 +1178,21 @@ View menu and order.
 |                                                 |
 ==================================================");
 
-        foreach (var item in reservation!.Seats)
-        {
-            Console.ForegroundColor = ConsoleColor.Magenta;
-            int Seats = item;
-            string Overview = $@"
+
+        Console.ForegroundColor = ConsoleColor.Magenta;
+        string selectedSeats = string.Join(", ", reservation.Seats.Select(seat => $"Row {seat[0] + 1}, Seat {seat[1] + 1}"));
+        string Overview = $@"
   Movie: {reservation.Movie}
   Full Name: {reservation.FullName}
   Email: {reservation.Email}
   Ticket Amount: {reservation.TicketAmount}
-  Seats: {Seats}
+  Seats: {selectedSeats}
   Total Money Amount: {reservation.TotalAmount}
 
 ==================================================";
-            Console.WriteLine(Overview);
+        Console.WriteLine(Overview);
 
-        }
+
         Console.ResetColor();
         Console.WriteLine();
         Console.WriteLine("Press any key to continue...");
@@ -1009,8 +1262,8 @@ View menu and order.
 
     private static void ShowRevenue()
     {
-        decimal revenue = _revenueLogic.TotalRevenue();
-        Console.WriteLine($"Total revenue: {revenue}");
+        RevenueModel revenue = _revenueLogic.GetById(1);
+        Console.WriteLine($"Total revenue: {revenue.Money}");
         Console.WriteLine();
         Console.WriteLine("Press any key to continue...");
         Console.ReadKey(true);

@@ -41,6 +41,8 @@ public class Menu
         ConsoleKey keyPressed;
         do
         {
+            // Console.CursorSize = 1;
+            // Console.SetCursorPosition(0, Console.CursorTop + 1);
             Console.Clear();
             Display_options();
 

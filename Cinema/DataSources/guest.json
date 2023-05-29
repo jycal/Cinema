@@ -1,308 +1,132 @@
 [
   {
     "id": 1,
-    "reservationCode": "YU56FBO",
-    "fullName": "adsa",
-    "email": "n@b.c",
-    "movie": "Cocaine Bear",
-    "ticketAmount": 1,
-    "ticketTotal": 10,
-    "roomNumber": 2,
+    "reservationCode": "UAB47P1",
+    "fullName": "e",
+    "email": "meganpieters3@gmail.com",
+    "movie": "65",
+    "ticketAmount": 2,
+    "snackAmount": 0,
+    "ticketTotal": 20,
+    "roomNumber": 1,
     "seats": [
-      287
+      [
+        1,
+        2
+      ],
+      [
+        1,
+        3
+      ]
     ],
-    "totalAmount": 10,
-    "revenueId": 1
+    "totalAmount": 23.75
   },
   {
     "id": 2,
-    "reservationCode": "02DM6A6",
-    "fullName": "mamama",
+    "reservationCode": "YNX3GRL",
+    "fullName": "meg",
     "email": "meganpieters3@gmail.com",
-    "movie": "Creed III",
-    "ticketAmount": 2,
-    "ticketTotal": 20,
+    "movie": "65",
+    "ticketAmount": 1,
+    "snackAmount": 0,
+    "ticketTotal": 10,
     "roomNumber": 1,
     "seats": [
-      16,
-      17
+      [
+        2,
+        1
+      ]
     ],
-    "totalAmount": 20,
-    "revenueId": 3
+    "totalAmount": 10
   },
   {
     "id": 3,
-    "reservationCode": "X5099S6",
-    "fullName": "mamamam",
-    "email": "meganpieters3@gmail.com",
-    "movie": "Creed III",
+    "reservationCode": "5MKLBTO",
+    "fullName": "",
+    "email": "aryanjd2005@gmail.com",
+    "movie": "65",
     "ticketAmount": 1,
-    "ticketTotal": 18,
+    "snackAmount": 0,
+    "ticketTotal": 13,
     "roomNumber": 1,
     "seats": [
-      54
+      [
+        4,
+        3
+      ]
     ],
-    "totalAmount": 21.5,
-    "revenueId": 4
+    "totalAmount": 13
   },
   {
     "id": 4,
-    "reservationCode": "DQAPZHA",
-    "fullName": "oaoaoao",
-    "email": "meganpieters3@gmail.com",
-    "movie": "Creed III",
-    "ticketAmount": 2,
-    "ticketTotal": 36,
+    "reservationCode": "JM0Z6I9",
+    "fullName": "aaa",
+    "email": "aryanjd2005@gmail.com",
+    "movie": "Shazam! Fury of the Gods",
+    "ticketAmount": 1,
+    "snackAmount": 0,
+    "ticketTotal": 10,
     "roomNumber": 1,
     "seats": [
-      53,
-      54
+      [
+        4,
+        0
+      ]
     ],
-    "totalAmount": 39.5,
-    "revenueId": 5
+    "totalAmount": 10
   },
   {
     "id": 5,
-    "reservationCode": "UEYBUG1",
-    "fullName": "ooefe",
-    "email": "meganpieters3@gmail.com",
-    "movie": "Creed III",
-    "ticketAmount": 2,
-    "ticketTotal": 20,
+    "reservationCode": "PMCY55F",
+    "fullName": "aa",
+    "email": "aryanjd2005@gmail.com",
+    "movie": "Shazam! Fury of the Gods",
+    "ticketAmount": 1,
+    "snackAmount": 0,
+    "ticketTotal": 13,
     "roomNumber": 1,
     "seats": [
-      28,
-      29
+      [
+        4,
+        3
+      ]
     ],
-    "totalAmount": 23.5,
-    "revenueId": 6
+    "totalAmount": 24.9
   },
   {
     "id": 6,
-    "reservationCode": "RB9OHUL",
-    "fullName": "aryan",
+    "reservationCode": "X240GEN",
+    "fullName": "Aaasa",
     "email": "aryanjd2005@gmail.com",
-    "movie": "Shazam! Fury of the Gods",
-    "ticketAmount": 2,
-    "ticketTotal": 20,
+    "movie": "65",
+    "ticketAmount": 1,
+    "snackAmount": 10,
+    "ticketTotal": 9.5,
     "roomNumber": 1,
     "seats": [
-      44,
-      42
+      [
+        3,
+        0
+      ]
     ],
-    "totalAmount": 23.75,
-    "revenueId": 4
+    "totalAmount": 19.5
   },
   {
     "id": 7,
-    "reservationCode": "F079B0I",
-    "fullName": "asaa",
-    "email": "ar@ga",
-    "movie": "65",
-    "ticketAmount": 1,
-    "ticketTotal": 10,
-    "roomNumber": 1,
-    "seats": [
-      9
-    ],
-    "totalAmount": 10,
-    "revenueId": 5
-  },
-  {
-    "id": 8,
-    "reservationCode": "2O8YMN5",
-    "fullName": "AryanJadoe",
-    "email": "aryanjd2005@gmail.com",
-    "movie": "The Super Mario Bros. Movie (OV)",
-    "ticketAmount": 2,
-    "ticketTotal": 20,
-    "roomNumber": 2,
-    "seats": [
-      30,
-      15
-    ],
-    "totalAmount": 27.5,
-    "revenueId": 6
-  },
-  {
-    "id": 9,
-    "reservationCode": "PXUCUQX",
-    "fullName": "ajjaja",
+    "reservationCode": "6JQG2Y7",
+    "fullName": "aa",
     "email": "aryanjd2005@gmail.com",
     "movie": "65",
     "ticketAmount": 1,
+    "snackAmount": 11.9,
     "ticketTotal": 10,
     "roomNumber": 1,
     "seats": [
-      74
+      [
+        3,
+        1
+      ]
     ],
-    "totalAmount": 17.25,
-    "revenueId": 7
-  },
-  {
-    "id": 10,
-    "reservationCode": "R2W1YRP",
-    "fullName": "Aryan Jadoenath",
-    "email": "aryanjd2005@gmail.com",
-    "movie": "65",
-    "ticketAmount": 1,
-    "ticketTotal": 10,
-    "roomNumber": 1,
-    "seats": [
-      104
-    ],
-    "totalAmount": 18.25,
-    "revenueId": 8
-  },
-  {
-    "id": 11,
-    "reservationCode": "HY16L08",
-    "fullName": "Aryan",
-    "email": "aryanjd2005@gmail.com",
-    "movie": "65",
-    "ticketAmount": 1,
-    "ticketTotal": 10,
-    "roomNumber": 1,
-    "seats": [
-      89
-    ],
-    "totalAmount": 13.75,
-    "revenueId": 9
-  },
-  {
-    "id": 12,
-    "reservationCode": "HWR5SQ2",
-    "fullName": "aaa",
-    "email": "aaa",
-    "movie": "65",
-    "ticketAmount": 1,
-    "ticketTotal": 10,
-    "roomNumber": 1,
-    "seats": [
-      58
-    ],
-    "totalAmount": 10,
-    "revenueId": 10
-  },
-  {
-    "id": 13,
-    "reservationCode": "7VJIGQF",
-    "fullName": "Aryan",
-    "email": "aryanjd2005@gmail.com",
-    "movie": "Scream VI",
-    "ticketAmount": 1,
-    "ticketTotal": 10,
-    "roomNumber": 2,
-    "seats": [
-      59
-    ],
-    "totalAmount": 10,
-    "revenueId": 11
-  },
-  {
-    "id": 14,
-    "reservationCode": "PE33GSE",
-    "fullName": "aaa",
-    "email": "aa",
-    "movie": "65",
-    "ticketAmount": 1,
-    "ticketTotal": 10,
-    "roomNumber": 1,
-    "seats": [
-      119
-    ],
-    "totalAmount": 10,
-    "revenueId": 12
-  },
-  {
-    "id": 15,
-    "reservationCode": "GEVGRHU",
-    "fullName": "aaaa",
-    "email": "aaa",
-    "movie": "65",
-    "ticketAmount": 1,
-    "ticketTotal": 10,
-    "roomNumber": 1,
-    "seats": [
-      134
-    ],
-    "totalAmount": 10,
-    "revenueId": 13
-  },
-  {
-    "id": 16,
-    "reservationCode": "OD937AH",
-    "fullName": "aryan",
-    "email": "aryanjd2005@gmail.com",
-    "movie": "65",
-    "ticketAmount": 1,
-    "ticketTotal": 10,
-    "roomNumber": 1,
-    "seats": [
-      134
-    ],
-    "totalAmount": 26.5,
-    "revenueId": 14
-  },
-  {
-    "id": 17,
-    "reservationCode": "AD8RK7Z",
-    "fullName": "aaaa",
-    "email": "aaa",
-    "movie": "65",
-    "ticketAmount": 1,
-    "ticketTotal": 10,
-    "roomNumber": 1,
-    "seats": [
-      72
-    ],
-    "totalAmount": 10,
-    "revenueId": 15
-  },
-  {
-    "id": 18,
-    "reservationCode": "IH7B52J",
-    "fullName": "aaaaa",
-    "email": "aaaa",
-    "movie": "65",
-    "ticketAmount": 1,
-    "ticketTotal": 10,
-    "roomNumber": 1,
-    "seats": [
-      57
-    ],
-    "totalAmount": 10,
-    "revenueId": 16
-  },
-  {
-    "id": 19,
-    "reservationCode": "YK3TP2M",
-    "fullName": "Aryan Jadoenath",
-    "email": "aryanjd2005@gmail.com",
-    "movie": "The Super Mario Bros. Movie (OV)",
-    "ticketAmount": 2,
-    "ticketTotal": 20,
-    "roomNumber": 3,
-    "seats": [
-      313,
-      312
-    ],
-    "totalAmount": 36.5,
-    "revenueId": 17
-  },
-  {
-    "id": 20,
-    "reservationCode": "0WX3NTS",
-    "fullName": "atat",
-    "email": "aryanjd2005@gmail.com",
-    "movie": "65",
-    "ticketAmount": 1,
-    "ticketTotal": 10,
-    "roomNumber": 1,
-    "seats": [
-      103
-    ],
-    "totalAmount": 29,
-    "revenueId": 18
+    "totalAmount": 21.9
   }
 ]

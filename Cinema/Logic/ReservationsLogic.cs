@@ -62,7 +62,11 @@ public class ReservationsLogic
         {
             //update existing model
             // _films[index] = film;
-            _revenueLogic.RemoveRevenue(reservation!.RevenueId);
+            RevenueModel rev = _revenueLogic.GetById(1);
+            rev.Money = rev.Money - reservation!.TotalAmount;
+            _revenueLogic.UpdateList(rev);
+            CinemaMenus._account.TicketList.Remove(id);
+            CinemaMenus._accountsLogic.UpdateList(CinemaMenus._account);
             _reservations.RemoveAt(index);
             _reservations.ForEach((x) => { if (x.Id > reservation!.Id) x.Id = x.Id - 1; });
             ReservationAccess.WriteAll(_reservations);
@@ -86,7 +90,11 @@ public class ReservationsLogic
             {
                 //update existing model
                 // _films[index] = film;
-                _revenueLogic.RemoveRevenue(reservation!.RevenueId);
+                RevenueModel rev = _revenueLogic.GetById(1);
+                rev.Money = rev.Money - reservation!.TotalAmount;
+                CinemaMenus._account.TicketList.Remove(reservation.Id);
+                CinemaMenus._accountsLogic.UpdateList(CinemaMenus._account);
+                _revenueLogic.UpdateList(rev);
                 _reservations.RemoveAt(index);
                 _reservations.ForEach((x) => { if (x.Id > reservation!.Id) x.Id = x.Id - 1; });
                 ReservationAccess.WriteAll(_reservations);
@@ -115,29 +123,28 @@ public class ReservationsLogic
         foreach (ReservationModel reservation in ReservationsFromJson)
         {
 
-            foreach (var item in reservation.Seats)
-            {
-                int ID = reservation.Id;
-                string Movie = reservation.Movie;
-                string FullName = reservation.FullName;
-                string Email = reservation.Email;
-                int TicketAmount = reservation.TicketAmount;
-                int Seats = item;
-                double TotalAmount = reservation.TotalAmount;
-                string Overview = $@"
+
+            int ID = reservation.Id;
+            string Movie = reservation.Movie;
+            string FullName = reservation.FullName;
+            string Email = reservation.Email;
+            double TicketAmount = reservation.TicketAmount;
+            string selectedSeats = string.Join(", ", reservation.Seats.Select(seat => $"Row {seat[0] + 1}, Seat {seat[1] + 1}"));
+            double TotalAmount = reservation.TotalAmount;
+            string Overview = $@"
 
   ID: {ID}
   Movie: {Movie}
   Full Name: {FullName}
   Email: {Email}
   Ticket Amount: {TicketAmount}
-  Seats: {Seats}
+  Seats: {selectedSeats}
   Total Money Amount: {TotalAmount}
 
 ==================================================";
-                Console.WriteLine(Overview);
-                Console.ResetColor();
-            }
+            Console.WriteLine(Overview);
+            Console.ResetColor();
+
         }
     }
 
