@@ -174,15 +174,7 @@ public class VisualOverview
         Console.CursorVisible = false;
         Console.Clear();
 
-        // Fill the box with black square symbols
-        for (int i = 0; i < roomLength; i++)
-        {
-            for (int j = 0; j < roomWidth; j++)
-            {
-                // normale stoelen
-                box[i, j] = new Box { Value = "■", IsBlue = false };
-            }
-        }
+
 
         // Print the initial box to the console
         PrintBox();
@@ -541,7 +533,13 @@ public class VisualOverview
                     // prchase test
                     List<int> seats = new();
                     foreach (var seat in seatList)
-                    { seats.Add(seat[1]); }
+                    {
+                        int seatNumber = (seat[0]) * room.RoomWidth + seat[1];
+                        seats.Add(seatNumber);
+                        Tuple<int, int, DateTime, int> dateSeat = new Tuple<int, int, DateTime, int>(film.Id, room.Id, chosenDate, seatNumber);
+                        room.Seats.Add(dateSeat);
+                        _roomsLogic.UpdateList(room);
+                    }
                     double ticketTotal = _ticketLogic!.TicketPurchase(room, seats);
                     // revenue vastmeten
                     RevenueModel rev = _revenueLogic!.GetById(1);
