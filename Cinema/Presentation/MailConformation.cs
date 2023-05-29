@@ -143,7 +143,7 @@ public class MailConformation
         body = body.Replace("movieName", reservation!.Movie);
         body = body.Replace("seatNumbers", $"{selectedSeats}");
         body = body.Replace("MovieDate", $"{reservation.Date.ToString("dddd, dd MMMM yyyy HH:mm")}");
-        body = body.Replace("MovieDate2", $"{reservation.Date.ToString("MM/dd/yyyy")}");
+        body = body.Replace("ShortDate", $"{reservation.Date.ToString("dd/MM/yyyy")}");
         body = body.Replace("MovieDuration", $"{Convert.ToString(film.Duration)}");
         body = body.Replace("ticketAmount", Convert.ToString(reservation!.TicketAmount));
         body = body.Replace("ticketTotal", Convert.ToString(reservation!.TicketTotal));
