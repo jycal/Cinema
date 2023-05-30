@@ -83,42 +83,73 @@ public class VisualOverview
     {
         _account = account;
         Console.WriteLine("Welcome to the movie rooms page");
-        Console.WriteLine("Please enter the movie id\n");
-        int id = int.Parse(Console.ReadLine()!);
-        FilmModel film = _filmsLogic!.GetById(id);
-        if (film == null)
+
+        int movieId = 0;
+        do
         {
-            Console.WriteLine("No film found with that id");
-            Console.WriteLine("Please try again.\n");
-            //Write some code to go back to the menu
-            Console.WriteLine("Press any key to go back to the menu");
-            Console.ReadKey();
-            Console.Clear();
-            return;
-        }
+            Console.WriteLine("Please enter the movie id\n");
+            string id = Console.ReadLine()!;
+            if (string.IsNullOrEmpty(id) || Convert.ToInt32(id) <= 0)
+            {
+                Console.WriteLine("No film found with that id");
+                Console.WriteLine("Please try again.\n");
+                //Write some code to go back to the menu
+                Console.WriteLine("Press any key to go back to the menu");
+                Console.ReadKey();
+                Console.Clear();
+                return;
+            }
+            else if (Convert.ToInt32(id) > 0)
+            {
+                movieId = Convert.ToInt32(id);
+            }
+
+        } while (movieId <= 0);
+
+        FilmModel film = _filmsLogic!.GetById(movieId);
         DateTime chosenDate = film.Dates[0];
         int index = 0;
-        if (film.Dates.Count > 0)
+
+        if (film.Age == 16 || film.Age == 18)
+        {
+            System.Console.Write("Mind your age! You will be checked for ID! Trust you will be dealt with >:[\n".Orange());
+            Console.ResetColor();
+        }
+        else if (film.Age == 13)
+        {
+            System.Console.Write("We recommend Parental Guidance\n".Orange());
+            Console.ResetColor();
+        }
+
+        int count = 1;
+        foreach (var date in film.Dates)
+        {
+            Console.WriteLine($"{count}. {date}");
+            count++;
+        }
+
+        int dateSelection = 0;
+        do
         {
             Console.WriteLine("Please choose the date you want to see the movie\n");
-            int count = 1;
-            foreach (var date in film.Dates)
+            string dateChoice = Console.ReadLine()!;
+            if (string.IsNullOrEmpty(dateChoice) || Convert.ToInt32(dateChoice) <= 0)
             {
-                Console.WriteLine($"{count}. {date}");
-                count++;
+                Console.ForegroundColor = ConsoleColor.Red;
+                System.Console.WriteLine("Please enter a valid date");
+                Console.ResetColor();
+                continue;
             }
-            int dateChoice = int.Parse(Console.ReadLine()!);
-            if (dateChoice > film.Dates.Count || dateChoice < 1)
+            else if (Convert.ToInt32(dateChoice) > 0)
             {
-                Console.WriteLine("Please enter a valid date");
-                dateChoice = int.Parse(Console.ReadLine()!);
+                dateSelection = Convert.ToInt32(dateChoice);
             }
-            chosenDate = film.Dates[dateChoice - 1];
-            index = dateChoice - 1;
-        }
-        // Console.WriteLine("Please enter the room number\n");
+        } while (dateSelection <= 0);
 
-        // int number = int.Parse(Console.ReadLine()!);
+        chosenDate = film.Dates[dateSelection - 1];
+        index = dateSelection - 1;
+
+        Console.WriteLine("Please enter the room number\n");
         int number = film.Rooms[index];
         RoomModel room = _roomsLogic.CheckEnter(number);
         if (room != null)

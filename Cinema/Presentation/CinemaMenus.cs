@@ -654,7 +654,7 @@ View menu.
     {
         if (_account.Type == 2)
         {
-string prompt = @"============================================
+            string prompt = @"============================================
 |                                          |
 |             Advanced Menu                |
 |                                          |
@@ -708,7 +708,7 @@ string prompt = @"============================================
                     break;
             }
         }
-            
+
     }
 
     private static void RunAdvancedMovieMenu()
@@ -762,6 +762,7 @@ string prompt = @"============================================
         string description;
         int duration;
         List<string> genres;
+        int age;
         string imageURL;
 
         // title
@@ -927,6 +928,22 @@ string prompt = @"============================================
                 break;
             }
         }
+        while (true)
+        {
+            Console.WriteLine("Enter the age rating of the movie: ");
+            string rated = Console.ReadLine()!;
+            if (string.IsNullOrEmpty(rated))
+            {
+                Console.WriteLine("Genre cannot be empty!");
+                Console.WriteLine("Press any key to continue...");
+                Console.ReadKey(true);
+            }
+            else
+            {
+                age = Convert.ToInt32(rated);
+                break;
+            }
+        }
         // image
         while (true)
         {
@@ -959,7 +976,7 @@ string prompt = @"============================================
                 break;
             }
         }
-        FilmModel film = new FilmModel(id, dates, rooms, title, description, duration, genres, imageURL);
+        FilmModel film = new FilmModel(id, dates, rooms, title, description, duration, genres, age, imageURL);
         _filmsLogic.UpdateList(film);
         Console.WriteLine("Movie added!");
         Console.WriteLine("Press any key to continue...");
