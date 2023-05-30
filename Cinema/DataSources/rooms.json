@@ -210,7 +210,20 @@
     "roomWidth": 18,
     "roomNumber": 2,
     "maxPeople": 300,
-    "seats": [],
+    "seats": [
+      {
+        "Item1": 10,
+        "Item2": 2,
+        "Item3": "2023-01-05T14:00:00",
+        "Item4": 331
+      },
+      {
+        "Item1": 5,
+        "Item2": 2,
+        "Item3": "2023-06-03T20:00:00",
+        "Item4": 202
+      }
+    ],
     "vipSeats": [
       116,
       117,

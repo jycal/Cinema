@@ -80,5 +80,13 @@
     "password": "asdfghj##nnNN112",
     "fullName": "ajkgdkajwga",
     "ticketList": []
+  },
+  {
+    "id": 10,
+    "type": 1,
+    "emailAddress": "oedaiusha@gmail.com",
+    "password": "Krishna@01",
+    "fullName": "Usha",
+    "ticketList": []
   }
 ]
