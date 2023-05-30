@@ -100,6 +100,7 @@ Welcome to Starlight Cinema. What would you like to do?
         {
             Console.Write("Please enter your email address: ");
             string email = Console.ReadLine()!;
+            Console.Write("Please enter your password: ");
             string password = string.Empty;
             SecureString pass = _accountsLogic.HashedPass();
             password = new System.Net.NetworkCredential(string.Empty, pass).Password;
@@ -115,7 +116,7 @@ Welcome to Starlight Cinema. What would you like to do?
                 else
                 {
                     _account = correctEmail;
-                    Console.WriteLine("\nWelcome back " + _account.FullName);
+                    Console.WriteLine("Welcome back " + _account.FullName);
                     Console.WriteLine("Press any key to continue...");
                     Console.ReadKey(true);
                     Console.Clear();
@@ -654,7 +655,7 @@ View menu.
                 string FullName = res.FullName;
                 string Email = res.Email;
                 double ticketAmount = res.TicketAmount;
-                double snackAmount = 0;
+                double snackAmount = res.SnackAmount;
                 double TicketAmount = res.TicketAmount;
                 double totalCost = res.TotalAmount;
                 string selectedSeats = string.Join(", ", res.Seats.Select(seat => $"(Row {seat[0] + 1} Seat {seat[1] + 1})"));
