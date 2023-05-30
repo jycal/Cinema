@@ -39,7 +39,10 @@ public class ReservationModel
     [JsonPropertyName("totalAmount")]
     public double TotalAmount { get; set; }
 
-    public ReservationModel(int id, string reservationCode, string fullName, string email, string movie, double ticketAmount, double snackAmount,  double ticketTotal, int roomNumber, List<int[]> seats, double totalAmount)
+    [JsonPropertyName("date")]
+    public DateTime Date { get; set; }
+
+    public ReservationModel(int id, string reservationCode, string fullName, string email, string movie, double ticketAmount, double snackAmount, double ticketTotal, int roomNumber, List<int[]> seats, double totalAmount, DateTime date)
     {
         Id = id;
         ReservationCode = reservationCode;
@@ -52,5 +55,6 @@ public class ReservationModel
         RoomNumber = roomNumber;
         Seats = seats;
         TotalAmount = totalAmount;
+        Date = date;
     }
 }
