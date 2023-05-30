@@ -652,7 +652,7 @@ View menu.
 
     private static void RunAdvancedMenu()
     {
-        if (_account.Type == 2)
+        if (_account.Type == 3)
         {
 string prompt = @"============================================
 |                                          |
