@@ -618,7 +618,7 @@ View menu.
                 string FullName = res.FullName;
                 string Email = res.Email;
                 double ticketAmount = res.TicketAmount;
-                double snackAmount = res.SnackAmount;
+                double snackAmount = 0;
                 double TicketAmount = res.TicketAmount;
                 double totalCost = res.TotalAmount;
                 string selectedSeats = string.Join(", ", res.Seats.Select(seat => $"(Row {seat[0] + 1} Seat {seat[1] + 1})"));
