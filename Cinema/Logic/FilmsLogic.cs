@@ -140,7 +140,7 @@ public class FilmsLogic
     public void SearchByTitle(string filter)
     {
         var MoviesFromJson = FilmsAccess.LoadAll();
-        Console.ForegroundColor = ConsoleColor.Yellow;;
+        Console.ForegroundColor = ConsoleColor.Magenta;
         Console.WriteLine(CurrentMovieOverview);
         foreach (FilmModel item in MoviesFromJson)
         {
@@ -184,8 +184,7 @@ public class FilmsLogic
     public void SearchByGenre(string filter)
     {
         var MoviesFromJson = FilmsAccess.LoadAll();
-        var Yellow = ConsoleExtensions.Yellow;
-        Console.ForegroundColor = ConsoleColor.Yellow;
+        Console.ForegroundColor = ConsoleColor.Magenta;
         Console.WriteLine(CurrentMovieOverview);
         foreach (FilmModel item in MoviesFromJson)
         {
@@ -234,7 +233,7 @@ public class FilmsLogic
     public void MovieSortedByABCTitle()
     {
         var MoviesFromJson = FilmsAccess.LoadAll();
-        Console.ForegroundColor = ConsoleColor.Yellow;
+        Console.ForegroundColor = ConsoleColor.Magenta;
         Console.WriteLine(CurrentMovieOverview);
         var descListOb = MoviesFromJson.OrderBy(x => x.Title);
         // Console.WriteLine(descListOb);

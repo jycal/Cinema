@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.IO;
 
-public static class FoodAccess
+static class FoodAccess
 {
     static string path = System.IO.Path.GetFullPath(System.IO.Path.Combine(Environment.CurrentDirectory, @"DataSources/Food.json"));
 

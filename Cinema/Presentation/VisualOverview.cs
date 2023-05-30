@@ -645,7 +645,7 @@ public class VisualOverview
     public static double NewFoodAmount(double current)
     {
         FoodsLogic foodLogic = new();
-        string prompt = "Do you wish to change your snack selection?\nMind you your food cart will be emptied!";
+        string prompt = "Do you wish to change your snack selection?";
         string[] options = { "Yes", "No" };
         Menu mainMenu = new Menu(prompt, options);
         int selectedIndex = mainMenu.Run();

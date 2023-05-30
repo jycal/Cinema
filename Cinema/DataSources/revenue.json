@@ -1,6 +1,7 @@
 [
   {
     "id": 1,
-    "name": "income"
+    "name": "income",
+    "money": 3150.5
   }
 ]
