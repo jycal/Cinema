@@ -1,1 +1,68 @@
-[]
+[
+  {
+    "id": 1,
+    "reservationCode": "Q7CJYUZ",
+    "fullName": "mgg",
+    "email": "meganpieters3@gmail.com",
+    "movie": "65",
+    "ticketAmount": 1,
+    "snackAmount": 0,
+    "ticketTotal": 10,
+    "roomNumber": 1,
+    "seats": [
+      [
+        1,
+        1
+      ]
+    ],
+    "totalAmount": 10
+  },
+  {
+    "id": 2,
+    "reservationCode": "Q7NGX9D",
+    "fullName": "meme",
+    "email": "meganpieters3@gmail.com",
+    "movie": "65",
+    "ticketAmount": 1,
+    "snackAmount": 0,
+    "ticketTotal": 10,
+    "roomNumber": 1,
+    "seats": [
+      [
+        3,
+        1
+      ]
+    ],
+    "totalAmount": 10
+  },
+  {
+    "id": 3,
+    "reservationCode": "D45ZCF2",
+    "fullName": "George Washington",
+    "email": "g@b.c",
+    "movie": "Dungeons \u0026 Dragons: Honor Among Thieves",
+    "ticketAmount": 4,
+    "snackAmount": 0,
+    "ticketTotal": 40,
+    "roomNumber": 1,
+    "seats": [
+      [
+        7,
+        0
+      ],
+      [
+        7,
+        1
+      ],
+      [
+        7,
+        2
+      ],
+      [
+        7,
+        3
+      ]
+    ],
+    "totalAmount": 40
+  }
+]

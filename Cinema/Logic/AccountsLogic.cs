@@ -144,7 +144,7 @@ public class AccountsLogic
     }
     public SecureString HashedPass()
     {
-        Console.Write("Password: ");
+        Console.Write("Please enter your password: ");
         SecureString pass = new SecureString();
         ConsoleKeyInfo keyInfo;
         do

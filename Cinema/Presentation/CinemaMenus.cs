@@ -100,8 +100,9 @@ Welcome to Starlight Cinema. What would you like to do?
         {
             Console.Write("Please enter your email address: ");
             string email = Console.ReadLine()!;
-            Console.Write("Please enter your password: ");
-            string password = Console.ReadLine()!;
+            string password = string.Empty;
+            SecureString pass = _accountsLogic.HashedPass();
+            password = new System.Net.NetworkCredential(string.Empty, pass).Password;
             AccountModel correctEmail = _accountsLogic.GetByMail(email);
 
             if (correctEmail != null)
@@ -114,7 +115,7 @@ Welcome to Starlight Cinema. What would you like to do?
                 else
                 {
                     _account = correctEmail;
-                    Console.WriteLine("Welcome back " + _account.FullName);
+                    Console.WriteLine("\nWelcome back " + _account.FullName);
                     Console.WriteLine("Press any key to continue...");
                     Console.ReadKey(true);
                     Console.Clear();
@@ -562,19 +563,85 @@ View menu.
 |                                          |
 ============================================
 ";
-        string[] options = { "Cancel ticket", "Go back" };
+        string[] options = { "My tickets", "Cancel ticket", "Go back" };
         Menu ticketMenu = new Menu(prompt, options);
         int selectedIndex = ticketMenu.Run();
 
         switch (selectedIndex)
         {
             case 0:
-                CancelTicket();
+                MyTickets();
                 RunTicketMenu();
                 break;
             case 1:
+                CancelTicket();
+                RunTicketMenu();
+                break;
+            case 2:
                 RunMenusMenu();
                 break;
+        }
+    }
+
+    private static void MyTickets()
+    {
+        if (_account == null)
+        {
+            Console.WriteLine("You are not logged in!");
+            Console.WriteLine("Press any key to continue...");
+            Console.ReadKey(true);
+            RunMainMenu();
+        }
+        else
+        {
+            List<ReservationModel> reservations = new List<ReservationModel>();
+            foreach (int id in _account.TicketList)
+            {
+                ReservationModel reser = _reservationsLogic.GetById(id);
+                if (reser is ReservationModel)
+                {
+                    reservations.Add(reser);
+                }
+            }
+            Console.ForegroundColor = ConsoleColor.Magenta;
+            Console.WriteLine(@"============================================
+|                                          |
+|                My Tickets                |
+|                                          |
+============================================");
+            foreach (ReservationModel res in reservations)
+            {
+                int ID = res.Id;
+                string Movie = res.Movie;
+                int RoomNumber = res.RoomNumber;
+                string code = res.ReservationCode;
+                string FullName = res.FullName;
+                string Email = res.Email;
+                double ticketAmount = res.TicketAmount;
+                double snackAmount = res.SnackAmount;
+                double TicketAmount = res.TicketAmount;
+                double totalCost = res.TotalAmount;
+                string selectedSeats = string.Join(", ", res.Seats.Select(seat => $"(Row {seat[0] + 1} Seat {seat[1] + 1})"));
+                double TotalAmount = res.TotalAmount;
+                string Overview = $@"
+    ID: {ID}    
+    Movie: {Movie}
+    Room Number: {RoomNumber}
+    Reservation Code: {code}
+    Full Name: {FullName}
+    Email: {Email}
+    Ticket Amount: {TicketAmount}
+    Snack Amount: {snackAmount}
+    Total Cost: {totalCost}
+    Seats: {selectedSeats}
+    Total Money Amount: {TotalAmount}
+
+============================================";
+                Console.WriteLine(Overview);
+                Console.ResetColor();
+            }
+            Console.WriteLine("Press any key to continue...");
+            Console.ReadKey(true);
         }
     }
 
