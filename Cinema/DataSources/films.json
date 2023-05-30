@@ -17,6 +17,7 @@
       "Crime",
       "Thriller"
     ],
+    "age": 16,
     "imageURL": "https://21818cdde6.imgdist.com/public/_thumbs/Integrators/BeeProAgency/981647_966306/john%20wick.webp_thumb.png?hash=1682510761536"
   },
   {
@@ -37,6 +38,7 @@
       "Science Fiction",
       "Thriller"
     ],
+    "age": 13,
     "imageURL": "https://21818cdde6.imgdist.com/public/_thumbs/Integrators/BeeProAgency/981647_966306/65.jpg_thumb.png?hash=1682510761536"
   },
   {
@@ -55,6 +57,7 @@
       "Adventure",
       "Comedy"
     ],
+    "age": 13,
     "imageURL": "https://21818cdde6.imgdist.com/public/_thumbs/Integrators/BeeProAgency/981647_966306/shazam.jpg_thumb.png?hash=1682510761536"
   },
   {
@@ -72,6 +75,7 @@
       "Drama",
       "Sport"
     ],
+    "age": 13,
     "imageURL": "https://21818cdde6.imgdist.com/public/_thumbs/Integrators/BeeProAgency/981647_966306/creed.jpg_thumb.png?hash=1682510761536"
   },
   {
@@ -92,6 +96,7 @@
       "Adventure",
       "Comedy"
     ],
+    "age": 6,
     "imageURL": "https://21818cdde6.imgdist.com/public/_thumbs/Integrators/BeeProAgency/981647_966306/suoerrr.jpg_thumb.png?hash=1682510761536"
   },
   {
@@ -110,6 +115,7 @@
     "genre": [
       "Comedy"
     ],
+    "age": 12,
     "imageURL": "https://21818cdde6.imgdist.com/public/_thumbs/Integrators/BeeProAgency/981647_966306/all%20inv.jpg_thumb.png?hash=1682510761536"
   },
   {
@@ -129,6 +135,7 @@
       "Horror",
       "Thriller"
     ],
+    "age": 16,
     "imageURL": "https://21818cdde6.imgdist.com/public/_thumbs/Integrators/BeeProAgency/981647_966306/scream.jpg_thumb.png?hash=1682510761536"
   },
   {
@@ -149,6 +156,7 @@
       "Comedy",
       "Kinderfilm"
     ],
+    "age": 6,
     "imageURL": "https://21818cdde6.imgdist.com/public/_thumbs/Integrators/BeeProAgency/981647_966306/mum.jpg_thumb.png?hash=1682510761536"
   },
   {
@@ -169,6 +177,7 @@
       "Adventure",
       "Fantasy"
     ],
+    "age": 12,
     "imageURL": "https://21818cdde6.imgdist.com/public/_thumbs/Integrators/BeeProAgency/981647_966306/dd.jpg_thumb.png?hash=1682510761536"
   },
   {
@@ -187,6 +196,7 @@
       "Adventure",
       "Comedy"
     ],
+    "age": 13,
     "imageURL": "https://21818cdde6.imgdist.com/public/_thumbs/Integrators/BeeProAgency/981647_966306/ant.jpg_thumb.png?hash=1682510761536"
   },
   {
@@ -205,6 +215,7 @@
       "Adventure",
       "Fantasy"
     ],
+    "age": 13,
     "imageURL": "https://21818cdde6.imgdist.com/public/_thumbs/Integrators/BeeProAgency/981647_966306/Afbeelding2vat.jpg_thumb.png?hash=1682510761536"
   },
   {
@@ -221,6 +232,7 @@
     "genre": [
       "Thriller"
     ],
+    "age": 16,
     "imageURL": "https://21818cdde6.imgdist.com/public/_thumbs/Integrators/BeeProAgency/981647_966306/cocaine_1.jpg_thumb.png?hash=1682510761536"
   },
   {
@@ -238,6 +250,7 @@
       "Comedy",
       "Romance"
     ],
+    "age": 16,
     "imageURL": "https://21818cdde6.imgdist.com/public/_thumbs/Integrators/BeeProAgency/981647_966306/Magic-Mike-s-Last-Dance_ps_1_jpg_sd-high_Copyright-2022-Warner-Bros-Entertainment-Inc-All-Rights-Reserved-Photo-Credit-Claudette-Barius.webp_thumb.png?hash=1682510761536"
   }
 ]
