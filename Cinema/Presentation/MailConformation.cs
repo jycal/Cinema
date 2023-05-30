@@ -11,13 +11,15 @@ public class MailConformation
 {
     static private ReservationsLogic? _reservationsLogic;
 
+    static private FilmsLogic? _filmsLogic;
+
     static private GuestLogic? _guestLogic;
     static private ReservationModel? reservation;
     static private RoomsLogic? _roomsLogic;
 
     static private string? EmailReciever;
 
-    static private bool Regristration = false;
+    static private FilmModel? film;
 
     static private AccountModel? newAccount;
 
@@ -28,10 +30,12 @@ public class MailConformation
         _guestLogic = new GuestLogic();
         _reservationsLogic = new ReservationsLogic();
         _roomsLogic = new RoomsLogic();
+        _filmsLogic = new();
         EmailReciever = emailReciever;
         if (account == true)
         { reservation = _reservationsLogic!._reservations!.Last(); }
         else { reservation = _guestLogic!._guests!.Last(); }
+
     }
 
     public MailConformation(string emailReciever)
@@ -41,7 +45,7 @@ public class MailConformation
         _roomsLogic = new RoomsLogic();
         EmailReciever = emailReciever;
         newAccount = _accountslogic!.GetByMail(emailReciever);
-        Regristration = true;
+
     }
 
 
@@ -132,12 +136,15 @@ public class MailConformation
     }
     public static string CreateBody()
     {
+        film = _filmsLogic!.GetByName(reservation!.Movie);
         string selectedSeats = string.Join("/", reservation!.Seats.Select(seat => $"Row {seat[0] + 1} Seat {seat[1] + 1}\n"));
         string image = GetPicture(reservation!.Movie);
         string body = MailAccess.LoadAll();
         body = body.Replace("movieName", reservation!.Movie);
         body = body.Replace("seatNumbers", $"{selectedSeats}");
-        // body = body.Replace("rowNumber", $"{Convert.ToString(reservation.Rows)}");
+        body = body.Replace("MovieDate", $"{reservation.Date.ToString("dddd, dd MMMM yyyy HH:mm")}");
+        body = body.Replace("ShortDate", $"{reservation.Date.ToString("dd/MM/yyyy")}");
+        body = body.Replace("MovieDuration", $"{Convert.ToString(film.Duration)}");
         body = body.Replace("ticketAmount", Convert.ToString(reservation!.TicketAmount));
         body = body.Replace("ticketTotal", Convert.ToString(reservation!.TicketTotal));
         body = body.Replace("totalAmount", Convert.ToString(reservation!.TotalAmount));
@@ -160,7 +167,7 @@ public class MailConformation
         body = body.Replace("Username", newAccount!.FullName);
         body = body.Replace("UserEmail", newAccount!.EmailAddress);
         body = body.Replace("UserID", Convert.ToString(newAccount!.Id));
-        Regristration = false;
+
         return body;
 
     }

@@ -123,10 +123,29 @@ public class VisualOverview
         RoomModel room = _roomsLogic.CheckEnter(number);
         if (room != null)
         {
-            Console.WriteLine("Welcome to room " + room.RoomNumber);
-            Console.WriteLine($"This room has {room.MaxSeats} seats");
+            // Ask the user for a number input
+            int numBoxesToSelect = 0;
+            do
+            {
+                Console.WriteLine("How many tickets would you like to order?");
+                string tickets = Console.ReadLine()!;
+                if (string.IsNullOrEmpty(tickets) || Convert.ToInt32(tickets) <= 0)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    System.Console.WriteLine($"\nMust enter a valid number\n");
+                    Console.ResetColor();
+                    continue;
+                }
+                else if (Convert.ToInt32(tickets) > 0)
+                {
+                    numBoxesToSelect = Convert.ToInt32(tickets);
+                }
 
-            Run(room, film, chosenDate);
+
+            } while (numBoxesToSelect <= 0);
+            Console.Clear();
+
+            Run(room, film, chosenDate, numBoxesToSelect);
         }
         else
         {
@@ -134,7 +153,7 @@ public class VisualOverview
         }
     }
 
-    public static void Run(RoomModel room, FilmModel film, DateTime chosenDate)
+    public static void Run(RoomModel room, FilmModel film, DateTime chosenDate, int numBoxesToSelect)
     {
 
         // RoomModel room = _roomsLogic.CheckEnter(1);
@@ -155,26 +174,15 @@ public class VisualOverview
         Box[,] box = new Box[roomLength, roomWidth];
         int cursorRow = 0; // Cursor's row position
         int cursorCol = 0; // Cursor's column position
-        int numBoxesToSelect = 0; // Number of boxes to select
+        // int numBoxesToSelect = 0; // Number of boxes to select
         int boxesSelected = 0; // Number of boxes currently selected
         List<int[]> selectedBoxes = new List<int[]>(); // List of selected boxes
         Console.SetCursorPosition(0, 0);
         Console.CursorVisible = false;
         Console.Clear();
 
-        // Fill the box with black square symbols
-        for (int i = 0; i < roomLength; i++)
-        {
-            for (int j = 0; j < roomWidth; j++)
-            {
-                // normale stoelen
-                box[i, j] = new Box { Value = "■", IsBlue = false };
-            }
-        }
-        // Ask the user for a number input
-        Console.WriteLine("How many tickets would you like to order?");
-        numBoxesToSelect = int.Parse(Console.ReadLine()!);
-        Console.Clear();
+
+
         // Print the initial box to the console
         PrintBox();
 
@@ -378,6 +386,8 @@ public class VisualOverview
             // if (!rowList.Contains(seat[0]))
             // { rowList.Add(seat[0]); }
         }
+        Console.WriteLine("Press enter to continue...");
+        Console.ReadKey(true);
         // confirmation vragen
         string prompt = "Are you sure you want to reserve these seats?";
         string[] options = { "Yes", "No, try again", "Return to main menu" };
@@ -387,16 +397,7 @@ public class VisualOverview
         switch (selectedIndex)
         {
             case 0:
-                Reserve(room, film, selectedSeats);
-                foreach (var seat in selectedSeats)
-                {
-                    // bereken het nummer van de stoel
-                    int seatNumber = (seat[0]) * roomWidth + seat[1];
-                    // toevoegen aan gereserveerde stoelen
-                    Tuple<int, int, DateTime, int> dateSeat = new Tuple<int, int, DateTime, int>(film.Id, room.Id, chosenDate, seatNumber);
-                    room.Seats.Add(dateSeat);
-                    _roomsLogic.UpdateList(room);
-                }
+                Reserve(room, film, selectedSeats, chosenDate);
                 break;
             case 1:
                 Start(_account);
@@ -405,42 +406,10 @@ public class VisualOverview
                 break;
 
         }
-        // string answer = Console.ReadLine()!;
-        // if (answer.ToUpper() == "Y")
-        // {
-        //     Reserve(room, film, selectedSeats);
-        //     foreach (var seat in selectedSeats)
-        //     { 
-        //         // bereken het nummer van de stoel
-        //         int seatNumber = (seat[0]) * roomWidth + seat[1];
-        //         // toevoegen aan gereserveerde stoelen
-        //         Tuple<int, int, DateTime, int> dateSeat = new Tuple<int, int, DateTime, int>(film.Id, room.Id, chosenDate, seatNumber); 
-        //         room.Seats.Add(dateSeat);
-        //         _roomsLogic.UpdateList(room);
-        //     }
 
-        //     Console.WriteLine("Press any key to return to the main menu.");
-        //     Console.ReadKey(true);
-
-        //     return;
-        // }
-        // else
-        // {
-        //     System.Console.WriteLine("try again or return to main menu?[1][2]");
-        //     string answer2 = Console.ReadLine()!;
-        //     if (answer2 == "1")
-        //     {
-        //         Start(_account);
-        //     }
-        //     else
-        //     {
-        //         return;
-        //     }
-
-        // }
 
     }
-    public static void Reserve(RoomModel room, FilmModel film, List<int[]> seatList)
+    public static void Reserve(RoomModel room, FilmModel film, List<int[]> seatList, DateTime chosenDate)
     {
         Console.Clear();
         FoodsLogic foodLogic = new();
@@ -452,10 +421,45 @@ public class VisualOverview
             // gegevens vragen
             Console.Clear();
             // System.Console.WriteLine(food);
-            Console.Write("Please enter your email: ");
+            Console.WriteLine("Email address:");
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine("-----------------------------");
+            Console.WriteLine("|  Email must contain a @   |");
+            Console.WriteLine("-----------------------------");
+            Console.ResetColor();
             string email = Console.ReadLine()!;
-            Console.Write("Please enter your full name: ");
-            string fullName = Console.ReadLine()!;
+            // int EmailAttempts = 0;
+
+
+            while (_accountsLogic!.EmailFormatCheck(email) == false)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Wrong format! Please enter Email in the correct format...");
+                Console.ResetColor();
+                Console.Write("Email address: ");
+                string Email = Console.ReadLine()!;
+                email = Email;
+                // EmailAttempts += 1;
+            }
+
+            string fullName = null!;
+            do
+            {
+                Console.Write("Please enter your full name: ");
+                string tickets = Console.ReadLine()!;
+                if (string.IsNullOrEmpty(tickets))
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    System.Console.WriteLine($"\nMust enter a valid name\n");
+                    Console.ResetColor();
+                    continue;
+                }
+                else
+                {
+                    fullName = tickets;
+                }
+
+            } while (fullName == null);
 
             // payment 
             Console.WriteLine("Press enter to continue...");
@@ -485,6 +489,9 @@ public class VisualOverview
                     {
                         int seatNumber = (seat[0]) * room.RoomWidth + seat[1];
                         seats.Add(seatNumber);
+                        Tuple<int, int, DateTime, int> dateSeat = new Tuple<int, int, DateTime, int>(film.Id, room.Id, chosenDate, seatNumber);
+                        room.Seats.Add(dateSeat);
+                        _roomsLogic.UpdateList(room);
                     }
                     // foreach (int seat in seats)
                     // {
@@ -501,15 +508,22 @@ public class VisualOverview
                     double totalAmount = ticketTotal + food;
                     // guest naar json sturen
                     string reservationCode = ReservationCodeMaker();
-                    ReservationModel guest = new(1, reservationCode, fullName, email, title, seatList.Count, food, ticketTotal, room.Id, seatList, totalAmount);
+                    ReservationModel guest = new(1, reservationCode, fullName, email, title, seatList.Count, food, ticketTotal, room.Id, seatList, totalAmount, chosenDate);
                     _guestLogic!.UpdateList(guest);
                     // mail verzenden
                     bool account = false;
+                    Console.Clear();
+
+                    System.Console.Write("Sending conformation email please wait".Orange() + $"\n");
+                    Console.Clear();
                     MailConformation mailConformation = new MailConformation(email, account);
                     mailConformation.SendMailConformation();
+
                     break;
                 case 1:
-                    Console.WriteLine("Reservation cancelled.");
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine("Reservation has been cancelled.");
+                    Console.ResetColor();
                     Console.WriteLine("Press any key to continue...");
                     Console.ReadKey(true);
                     return;
@@ -543,7 +557,13 @@ public class VisualOverview
                     // prchase test
                     List<int> seats = new();
                     foreach (var seat in seatList)
-                    { seats.Add(seat[1]); }
+                    {
+                        int seatNumber = (seat[0]) * room.RoomWidth + seat[1];
+                        seats.Add(seatNumber);
+                        Tuple<int, int, DateTime, int> dateSeat = new Tuple<int, int, DateTime, int>(film.Id, room.Id, chosenDate, seatNumber);
+                        room.Seats.Add(dateSeat);
+                        _roomsLogic.UpdateList(room);
+                    }
                     double ticketTotal = _ticketLogic!.TicketPurchase(room, seats);
                     // revenue vastmeten
                     RevenueModel rev = _revenueLogic!.GetById(1);
@@ -555,7 +575,7 @@ public class VisualOverview
                     double totalAmount = ticketTotal + food;
                     int temp_id = film.Id = _reservationsLogic!._reservations!.Count > 0 ? _reservationsLogic._reservations.Max(x => x.Id) + 1 : 1;
 
-                    ReservationModel reservation = new(temp_id, reservationCode, _account.FullName, _account.EmailAddress, title, seatList.Count, food, ticketTotal, room.Id, seatList, totalAmount);
+                    ReservationModel reservation = new(temp_id, reservationCode, _account.FullName, _account.EmailAddress, title, seatList.Count, food, ticketTotal, room.Id, seatList, totalAmount, chosenDate);
                     _reservationsLogic.UpdateList(reservation);
                     bool account = true;
                     MailConformation mailConformation = new MailConformation(_account.EmailAddress, account);
