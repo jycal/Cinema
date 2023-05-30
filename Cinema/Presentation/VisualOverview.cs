@@ -128,12 +128,19 @@ public class VisualOverview
             do
             {
                 Console.WriteLine("How many tickets would you like to order?");
-                numBoxesToSelect = int.Parse(Console.ReadLine()!);
-                if (String.IsNullOrEmpty(Convert.ToString(numBoxesToSelect)))
+                string tickets = Console.ReadLine()!;
+                if (string.IsNullOrEmpty(tickets) || Convert.ToInt32(tickets) <= 0)
                 {
-                    System.Console.WriteLine("must enter number");
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    System.Console.WriteLine($"\nMust enter a valid number\n");
+                    Console.ResetColor();
                     continue;
                 }
+                else if (Convert.ToInt32(tickets) > 0)
+                {
+                    numBoxesToSelect = Convert.ToInt32(tickets);
+                }
+
 
             } while (numBoxesToSelect <= 0);
             Console.Clear();
@@ -434,8 +441,25 @@ public class VisualOverview
                 email = Email;
                 // EmailAttempts += 1;
             }
-            Console.Write("Please enter your full name: ");
-            string fullName = Console.ReadLine()!;
+
+            string fullName = null!;
+            do
+            {
+                Console.Write("Please enter your full name: ");
+                string tickets = Console.ReadLine()!;
+                if (string.IsNullOrEmpty(tickets))
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    System.Console.WriteLine($"\nMust enter a valid name\n");
+                    Console.ResetColor();
+                    continue;
+                }
+                else
+                {
+                    fullName = tickets;
+                }
+
+            } while (fullName == null);
 
             // payment 
             Console.WriteLine("Press enter to continue...");

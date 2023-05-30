@@ -388,29 +388,32 @@ Welcome to Starlight Cinema. What would you like to do?
 ============================================
 View movies and order.
 ";
-        string[] options = { "Show all movies", "Show movies sorted by title", "Search movies by title", "Search movies by genre", "Go back" };
+        string[] options = { "Order Ticket", "Show all movies", "Show movies sorted by title", "Search movies by title", "Search movies by genre", "Go back" };
         Menu movieMenu = new Menu(prompt, options);
         int selectedIndex = movieMenu.Run();
 
         switch (selectedIndex)
         {
             case 0:
+                OrderSeatConfirm();
+                break;
+            case 1:
                 ShowMovies(0);
                 RunMovieMenu();
                 break;
-            case 1:
+            case 2:
                 ShowMovies(1);
                 RunMovieMenu();
                 break;
-            case 2:
+            case 3:
                 ShowMovies(2);
                 RunMovieMenu();
                 break;
-            case 3:
+            case 4:
                 ShowMovies(3);
                 RunMovieMenu();
                 break;
-            case 4:
+            case 5:
                 RunMenusMenu();
                 break;
         }
@@ -428,19 +431,22 @@ View movies and order.
                 break;
             case 1:
                 _filmsLogic.MovieSortedByABCTitle();
-                OrderSeatConfirm();
+                Console.WriteLine("Press any key to continue...");
+                Console.ReadKey(true);
                 break;
             case 2:
                 Console.Write("Please enter the title: ");
                 string title = Console.ReadLine()!;
                 _filmsLogic.SearchByTitle(title);
-                OrderSeatConfirm();
+                Console.WriteLine("Press any key to continue...");
+                Console.ReadKey(true);
                 break;
             case 3:
                 Console.Write("Please enter the genre: ");
                 string genre = Console.ReadLine()!;
                 _filmsLogic.SearchByGenre(genre);
-                OrderSeatConfirm();
+                Console.WriteLine("Press any key to continue...");
+                Console.ReadKey(true);
                 break;
         }
     }
@@ -452,11 +458,12 @@ View movies and order.
         string[] options = { "Yes", "No, return to movie menu", "Return to main menu" };
         Menu movieMenu = new Menu(prompt, options);
         int selectedIndex = movieMenu.Run();
-        _filmsLogic.MovieOverview();
+
 
         switch (selectedIndex)
         {
             case 0:
+                _filmsLogic.MovieOverview();
                 VisualOverview vis = new VisualOverview();
                 VisualOverview.Start(_account);
                 break;
@@ -654,7 +661,7 @@ View menu.
     {
         if (_account.Type == 2)
         {
-string prompt = @"============================================
+            string prompt = @"============================================
 |                                          |
 |             Advanced Menu                |
 |                                          |
@@ -708,7 +715,7 @@ string prompt = @"============================================
                     break;
             }
         }
-            
+
     }
 
     private static void RunAdvancedMovieMenu()
