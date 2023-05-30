@@ -128,5 +128,23 @@
       ]
     ],
     "totalAmount": 21.9
+  },
+  {
+    "id": 8,
+    "reservationCode": "IEUD8LV",
+    "fullName": "Usha",
+    "email": "oedaiusha@gmail.com",
+    "movie": "Avatar: The Way of Water",
+    "ticketAmount": 1,
+    "snackAmount": 8.25,
+    "ticketTotal": 10,
+    "roomNumber": 2,
+    "seats": [
+      [
+        18,
+        7
+      ]
+    ],
+    "totalAmount": 18.25
   }
 ]
