@@ -128,7 +128,7 @@ public class ReservationsLogic
             string Movie = reservation.Movie;
             string FullName = reservation.FullName;
             string Email = reservation.Email;
-            int TicketAmount = reservation.TicketAmount;
+            double TicketAmount = reservation.TicketAmount;
             string selectedSeats = string.Join(", ", reservation.Seats.Select(seat => $"Row {seat[0] + 1}, Seat {seat[1] + 1}"));
             double TotalAmount = reservation.TotalAmount;
             string Overview = $@"

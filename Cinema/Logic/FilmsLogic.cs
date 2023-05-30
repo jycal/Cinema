@@ -101,7 +101,7 @@ public class FilmsLogic
     public void MovieOverview()
     {
         var MoviesFromJson = FilmsAccess.LoadAll();
-        Console.ForegroundColor = ConsoleColor.Magenta;
+        Console.ForegroundColor = ConsoleColor.Yellow;
         Console.WriteLine(CurrentMovieOverview);
         foreach (FilmModel item in MoviesFromJson)
         {
@@ -196,24 +196,24 @@ public class FilmsLogic
                 }
                 else
                 {
-                int ID = item.Id;
-                string Dates = string.Join(", ", item.Dates);
-                int dateNumber = 1;
-                string Rooms = "";
-                foreach (var room in item.Rooms)
-                {
-                    Rooms += $"{dateNumber}. Date: {room} ";
-                    dateNumber++;
-                }
-                string Title = item.Title;
-                string Description = item.Description;
-                int Duration = item.Duration;
-                string Genre = "";
-                foreach (var genre2 in item.Genre)
-                {
-                    Genre += $"{genre2} ";
-                }
-                string Overview = $@"
+                    int ID = item.Id;
+                    string Dates = string.Join(", ", item.Dates);
+                    int dateNumber = 1;
+                    string Rooms = "";
+                    foreach (var room in item.Rooms)
+                    {
+                        Rooms += $"{dateNumber}. Date: {room} ";
+                        dateNumber++;
+                    }
+                    string Title = item.Title;
+                    string Description = item.Description;
+                    int Duration = item.Duration;
+                    string Genre = "";
+                    foreach (var genre2 in item.Genre)
+                    {
+                        Genre += $"{genre2} ";
+                    }
+                    string Overview = $@"
   ID: {ID}
   Dates: {Dates}
   Rooms: {Rooms}
