@@ -22,7 +22,7 @@
     "password": "xyz",
     "fullName": "George Washington",
     "ticketList": [
-      3
+      2
     ]
   },
   {
@@ -63,9 +63,7 @@
     "emailAddress": "Meganpieters3@gmail.com",
     "password": "Megan2003@",
     "fullName": "Megan pieters",
-    "ticketList": [
-      1
-    ]
+    "ticketList": []
   },
   {
     "id": 8,

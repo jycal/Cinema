@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 public class VisualOverview
 {
-    static private RoomsLogic _roomsLogic = new();
+    static private RoomsLogic? _roomsLogic;
     static private FilmsLogic? _filmsLogic;
     static private ReservationsLogic? _reservationsLogic;
     static private RevenueLogic? _revenueLogic;
@@ -17,6 +17,15 @@ public class VisualOverview
 
     public VisualOverview()
     {
+        if (CinemaMenus._roomsLogic == null)
+        {
+            CinemaMenus._roomsLogic = new RoomsLogic();
+            _roomsLogic = CinemaMenus._roomsLogic;
+        }
+        else
+        {
+            _roomsLogic = CinemaMenus._roomsLogic;
+        }
 
         if (CinemaMenus._filmsLogic == null)
         {
@@ -485,13 +494,15 @@ public class VisualOverview
                     string title = film.Title;
                     // prchase test
                     List<int> seats = new();
+                    List<Tuple<int, int, DateTime, int>> seatsInfo = new();
                     foreach (var seat in seatList)
                     {
                         int seatNumber = (seat[0]) * room.RoomWidth + seat[1];
                         seats.Add(seatNumber);
                         Tuple<int, int, DateTime, int> dateSeat = new Tuple<int, int, DateTime, int>(film.Id, room.Id, chosenDate, seatNumber);
+                        seatsInfo.Add(dateSeat);
                         room.Seats.Add(dateSeat);
-                        _roomsLogic.UpdateList(room);
+                        _roomsLogic?.UpdateList(room);
                     }
                     // foreach (int seat in seats)
                     // {
@@ -508,7 +519,7 @@ public class VisualOverview
                     double totalAmount = ticketTotal + food;
                     // guest naar json sturen
                     string reservationCode = ReservationCodeMaker();
-                    ReservationModel guest = new(1, reservationCode, fullName, email, title, seatList.Count, food, ticketTotal, room.Id, seatList, totalAmount, chosenDate);
+                    ReservationModel guest = new(1, reservationCode, fullName, email, title, seatList.Count, food, ticketTotal, room.Id, seatList, seatsInfo, totalAmount, chosenDate);
                     _guestLogic!.UpdateList(guest);
                     // mail verzenden
                     bool account = false;
@@ -556,12 +567,14 @@ public class VisualOverview
 
                     // prchase test
                     List<int> seats = new();
+                    List<Tuple<int, int, DateTime, int>> seatsInfo = new();
                     foreach (var seat in seatList)
                     {
                         int seatNumber = (seat[0]) * room.RoomWidth + seat[1];
                         seats.Add(seatNumber);
                         Tuple<int, int, DateTime, int> dateSeat = new Tuple<int, int, DateTime, int>(film.Id, room.Id, chosenDate, seatNumber);
                         room.Seats.Add(dateSeat);
+                        seatsInfo.Add(dateSeat);
                         _roomsLogic.UpdateList(room);
                     }
                     double ticketTotal = _ticketLogic!.TicketPurchase(room, seats);
@@ -575,7 +588,7 @@ public class VisualOverview
                     double totalAmount = ticketTotal + food;
                     int temp_id = film.Id = _reservationsLogic!._reservations!.Count > 0 ? _reservationsLogic._reservations.Max(x => x.Id) + 1 : 1;
 
-                    ReservationModel reservation = new(temp_id, reservationCode, _account.FullName, _account.EmailAddress, title, seatList.Count, food, ticketTotal, room.Id, seatList, totalAmount, chosenDate);
+                    ReservationModel reservation = new(temp_id, reservationCode, _account.FullName, _account.EmailAddress, title, seatList.Count, food, ticketTotal, room.Id, seatList, seatsInfo, totalAmount, chosenDate);
                     _reservationsLogic.UpdateList(reservation);
                     bool account = true;
                     MailConformation mailConformation = new MailConformation(_account.EmailAddress, account);

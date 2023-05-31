@@ -8,6 +8,7 @@ public class GuestLogic
 {
     public List<ReservationModel>? _guests;
     public RevenueLogic _revenueLogic;
+    public RoomsLogic roomsLogic;
 
     //Static properties are shared across all instances of the class
     //This can be used to get the current logged in account from anywhere in the program
@@ -16,6 +17,16 @@ public class GuestLogic
 
     public GuestLogic()
     {
+        if (CinemaMenus._roomsLogic == null)
+        {
+            CinemaMenus._roomsLogic = new RoomsLogic();
+            roomsLogic = CinemaMenus._roomsLogic;
+        }
+        else
+        {
+            roomsLogic = CinemaMenus._roomsLogic;
+        }
+
         if (CinemaMenus._revenueLogic == null)
         {
             CinemaMenus._revenueLogic = new RevenueLogic();
@@ -66,6 +77,14 @@ public class GuestLogic
             {
                 //update existing model
                 // _films[index] = film;
+                RoomModel room = roomsLogic.GetById(reservation!.RoomNumber);
+                // film id, room id, date, seat number
+                foreach (var seat in reservation!.SeatsInfo)
+                {
+                    room.Seats.Remove(seat);                   
+                }
+                roomsLogic.UpdateList(room);
+
                 RevenueModel rev = _revenueLogic.GetById(1);
                 rev.Money = rev.Money - reservation!.TotalAmount;
                 _revenueLogic.UpdateList(rev);

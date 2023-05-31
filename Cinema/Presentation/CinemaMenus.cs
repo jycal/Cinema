@@ -7,6 +7,7 @@ public static class CinemaMenus
 
     // instantiated when needed
     public static GuestLogic _guestLogic = new GuestLogic();
+    public static RoomsLogic _roomsLogic = null!;
     public static FilmsLogic _filmsLogic = null!;
     public static FoodsLogic _foodsLogic = null!;
     public static ReservationsLogic _reservationsLogic = null!;
@@ -96,11 +97,11 @@ Welcome to Starlight Cinema. What would you like to do?
 ============================================
 ");
         int tries = 3;
+        bool logIn = false;
         while (tries > 0)
         {
             Console.Write("Please enter your email address: ");
             string email = Console.ReadLine()!;
-            Console.Write("Please enter your password: ");
             string password = string.Empty;
             SecureString pass = _accountsLogic.HashedPass();
             password = new System.Net.NetworkCredential(string.Empty, pass).Password;
@@ -116,7 +117,8 @@ Welcome to Starlight Cinema. What would you like to do?
                 else
                 {
                     _account = correctEmail;
-                    Console.WriteLine("Welcome back " + _account.FullName);
+                    logIn = true;
+                    Console.WriteLine("\nWelcome back " + _account.FullName);
                     Console.WriteLine("Press any key to continue...");
                     Console.ReadKey(true);
                     Console.Clear();
@@ -130,10 +132,14 @@ Welcome to Starlight Cinema. What would you like to do?
                 Console.WriteLine("Wrong password or email! Please try again...");
             }
         }
-        Console.WriteLine("0 tries left. Please try again later...");
-        Console.WriteLine("Press any key to continue...");
-        Console.ReadKey(true);
-        Console.Clear();
+        if (!logIn)
+        {
+            Console.WriteLine("0 tries left. Please try again later...");
+            Console.WriteLine("Press any key to continue...");
+            Console.ReadKey(true);
+            Console.Clear();
+        }
+
     }
 
     private static void Register()
@@ -466,6 +472,7 @@ View movies and order.
                 _filmsLogic.MovieOverview();
                 VisualOverview vis = new VisualOverview();
                 VisualOverview.Start(_account);
+                RunMovieMenu();
                 break;
             case 1:
                 RunMovieMenu();
@@ -634,7 +641,7 @@ View menu.
             Console.WriteLine("You are not logged in!");
             Console.WriteLine("Press any key to continue...");
             Console.ReadKey(true);
-            RunMainMenu();
+            return;
         }
         else
         {
@@ -647,7 +654,7 @@ View menu.
                     reservations.Add(reser);
                 }
             }
-            Console.ForegroundColor = ConsoleColor.Magenta;
+            Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine(@"============================================
 |                                          |
 |                My Tickets                |
@@ -657,6 +664,7 @@ View menu.
             {
                 int ID = res.Id;
                 string Movie = res.Movie;
+                string Date = res.Date.ToString("dd/MM/yyyy");
                 int RoomNumber = res.RoomNumber;
                 string code = res.ReservationCode;
                 string FullName = res.FullName;
@@ -670,6 +678,7 @@ View menu.
                 string Overview = $@"
     ID: {ID}    
     Movie: {Movie}
+    Dates: {Date}
     Room Number: {RoomNumber}
     Reservation Code: {code}
     Full Name: {FullName}
@@ -682,9 +691,9 @@ View menu.
 
 ============================================";
                 Console.WriteLine(Overview);
-                Console.ResetColor();
             }
-            Console.WriteLine("Press any key to continue...");
+            Console.WriteLine("\nPress any key to continue...");
+            Console.ResetColor();
             Console.ReadKey(true);
         }
     }
