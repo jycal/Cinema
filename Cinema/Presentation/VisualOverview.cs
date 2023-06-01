@@ -121,7 +121,8 @@ public class VisualOverview
 
         if (film.Age == 16 || film.Age == 18)
         {
-            System.Console.Write("Mind your age! You will be checked for ID! Trust you will be dealt with >:[\n".Orange());
+            System.Console.WriteLine();
+            System.Console.Write($"Mind your age! You will be checked for ID! Trust you will be dealt with >:[".Orange() + "$\n");
             Console.ResetColor();
         }
         else if (film.Age == 13)
