@@ -110,7 +110,7 @@ public class FoodsLogic
         List<FoodModel> orderedFood = new List<FoodModel>();
         Console.Clear();
         string[] options = _foods!.Select(f => $"{f.Name} - {f.Cost:c}").ToArray(); // Added price to the options
-        string prompt = "Please select a food item to order (press enter to finish):\nUse your arrow keys(upper and lower) to navigate.";
+        string prompt = $"Please select a food item to order (press enter to finish):\nUse your arrow keys(upper and lower) to navigate.\n";
 
         Menu mainMenu = new Menu(prompt, options);
         bool continueOrdering = true;
@@ -140,8 +140,8 @@ public class FoodsLogic
                 orderedFood.ForEach(x => System.Console.WriteLine($"You selected {x.Name} - ${x.Cost}."));
                 Console.WriteLine($"You selected {food.Quantity} x {food.Name} - {food.Cost:c}."); // Display the selected snack with price
                 Console.ResetColor(); // Reset the text color
-                Console.WriteLine($"Please set the quantity (maximum 5, or 'D' to deselect):");
-                Console.WriteLine("Use your arrow keys: left(decrease) and right(increase) to set the quantity.");
+                Console.WriteLine($"\nPlease set the quantity (maximum 5, or 'D' to deselect):");
+                Console.WriteLine($"Use your arrow keys: left(decrease) and right(increase) to set the quantity.\n");
                 int quantity = 1;
                 ConsoleKeyInfo keyInfo;
                 do
@@ -229,7 +229,7 @@ public class FoodsLogic
             {
                 if (food.Quantity > 0)
                 {
-                Console.WriteLine($"{food.Quantity} x {food.Name} = ${food.Cost * food.Quantity}");
+                    Console.WriteLine($"{food.Quantity} x {food.Name} = ${food.Cost * food.Quantity}");
                 }
             }
             Console.WriteLine($"Total cost: ${Math.Round(SnacksTotal, 2)}");

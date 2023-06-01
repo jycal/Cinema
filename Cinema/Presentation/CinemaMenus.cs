@@ -638,7 +638,9 @@ View menu.
     {
         if (_account == null)
         {
+            Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("You are not logged in!");
+            Console.ResetColor();
             Console.WriteLine("Press any key to continue...");
             Console.ReadKey(true);
             return;
@@ -700,37 +702,59 @@ View menu.
 
     private static void CancelTicket()
     {
-        Console.WriteLine("What is your reservation code?");
-        string? reservationCode = Console.ReadLine();
-        // var guestCheck = _guestLogic.GetByCode(reservationCode!);
-        Console.WriteLine("Are you sure you want to delete the reservation? (Y/N):");
-        string? input = Console.ReadLine()!.ToUpper();
-        if (input == "Y")
+        string reservationCode = "";
+        while (true)
         {
-            var accCheck = _reservationsLogic.GetByCode(reservationCode!);
-            if (accCheck != null)
+            Console.WriteLine("What is your reservation code?");
+            string? code = Console.ReadLine();
+            if (string.IsNullOrEmpty(code))
             {
-                _reservationsLogic.DeleteReservationByCode(reservationCode!);
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Description cannot be empty!");
+                Console.ResetColor();
+                Console.WriteLine("Press any key to continue...");
+                Console.ReadKey(true);
+            }
+            else
+            {
+                reservationCode = code;
+                break;
+            }
+        }
 
-            }
-            else if (accCheck == null)
-            {
-                _guestLogic.DeleteReservation(reservationCode!);
-                // Console.Clear();
-            }
-        }
-        else if (input == "N")
+        // var guestCheck = _guestLogic.GetByCode(reservationCode!);
+        string prompt = "Are you sure you want to delete the reservation?";
+        string[] options = { "Yes", "No" };
+        Menu mainMenu = new Menu(prompt, options);
+        int selectedIndex = mainMenu.Run();
+
+        switch (selectedIndex)
         {
-            return;
+            case 0:
+                var accCheck = _reservationsLogic.GetByCode(reservationCode!);
+                if (accCheck != null)
+                {
+                    _reservationsLogic.DeleteReservationByCode(reservationCode!);
+
+                }
+                else if (accCheck == null)
+                {
+                    _guestLogic.DeleteReservation(reservationCode!);
+                    // Console.Clear();
+                }
+                break;
+            case 1:
+                return;
         }
-        else
-        {
-            Console.WriteLine("Invalid input");
-        }
+
         Console.WriteLine("Press any key to continue...");
         Console.ReadKey();
         Console.Clear();
     }
+
+
+
+
 
     private static void RunAdvancedMenu()
     {
