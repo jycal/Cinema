@@ -46,10 +46,25 @@ public class FilmsLogic
         else
         {
             //add new model
+            // dates and room cannot exist already
+            foreach (var date in film.Dates)
+            {
+                foreach (var room in film.Rooms)
+                {
+                    var film2 = _films.Find(r => r.Dates.Contains(date) && r.Rooms.Contains(room));
+                    if (film2 != null)
+                    {
+                        Console.WriteLine("Date or room already exists");
+                        return;
+                    }
+                }
+            }
+
+            Console.WriteLine("Film added");
             _films.Add(film);
         }
         FilmsAccess.WriteAll(_films);
-
+        Console.WriteLine("Press any key to continue...");
     }
 
     public bool DeleteFilm(int id)

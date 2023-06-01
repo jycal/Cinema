@@ -1084,9 +1084,6 @@ View menu.
         }
         FilmModel film = new FilmModel(id, dates, rooms, title, description, duration, genres, age, imageURL);
         _filmsLogic.UpdateList(film);
-        Console.WriteLine("Movie added!");
-        Console.WriteLine("Press any key to continue...");
-        Console.ReadKey(true);
     }
 
     private static void DeleteMovie()
