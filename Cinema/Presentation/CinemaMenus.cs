@@ -98,10 +98,27 @@ Welcome to Starlight Cinema. What would you like to do?
 ");
         int tries = 3;
         bool logIn = false;
+        Console.Write("Enter email and password, you have 3 tries to get the right password".Orange());
+        System.Console.WriteLine();
         while (tries > 0)
         {
-            Console.Write("Please enter your email address: ");
-            string email = Console.ReadLine()!;
+            string email = "";
+            while (true)
+            {
+                Console.Write("Please enter your email address: ");
+                string mail = Console.ReadLine()!;
+                if (string.IsNullOrEmpty(mail) || _accountsLogic.GetByMail(mail) == null)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    System.Console.WriteLine($"\nWrong email adress. Please try again..\n");
+                    Console.ResetColor();
+                }
+                else
+                {
+                    email = mail;
+                    break;
+                }
+            }
             string password = string.Empty;
             SecureString pass = _accountsLogic.HashedPass();
             password = new System.Net.NetworkCredential(string.Empty, pass).Password;
@@ -112,13 +129,20 @@ Welcome to Starlight Cinema. What would you like to do?
                 if (correctEmail.Password != password)
                 {
                     tries--;
-                    Console.WriteLine("Wrong password or email! Please try again...");
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    System.Console.WriteLine();
+                    Console.WriteLine($"\nWrong password or email! Please try again...\n");
+                    Console.ResetColor();
                 }
                 else
                 {
                     _account = correctEmail;
                     logIn = true;
-                    Console.WriteLine("\nWelcome back " + _account.FullName);
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    System.Console.WriteLine();
+                    Console.WriteLine("Welcome back " + _account.FullName);
+                    Console.ResetColor();
+                    System.Console.WriteLine();
                     Console.WriteLine("Press any key to continue...");
                     Console.ReadKey(true);
                     Console.Clear();
@@ -126,15 +150,19 @@ Welcome to Starlight Cinema. What would you like to do?
                     break;
                 }
             }
-            else
-            {
-                tries--;
-                Console.WriteLine("Wrong password or email! Please try again...");
-            }
+            // else
+            // {
+            //     tries--;
+            //     Console.ForegroundColor = ConsoleColor.Red;
+            //     Console.WriteLine($"\nWrong password or email! Please try again...\n");
+            //     Console.ResetColor();
+            // }
         }
         if (!logIn)
         {
-            Console.WriteLine("0 tries left. Please try again later...");
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("You have 0 tries left. Please try again later...");
+            Console.ResetColor();
             Console.WriteLine("Press any key to continue...");
             Console.ReadKey(true);
             Console.Clear();
