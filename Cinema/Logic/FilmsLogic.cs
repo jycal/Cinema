@@ -122,6 +122,7 @@ public class FilmsLogic
             {
                 Genre += $"{genre} ";
             }
+            int Age = item.Age;
             string Overview = $@"
   ID: {ID}
   Dates: {Dates}
@@ -130,6 +131,7 @@ public class FilmsLogic
   Description: {Description}
   Duration: {Duration}
   Genre: {Genre}
+  Rated: {Age}
 
 ============================================";
             Console.WriteLine(Overview);
@@ -163,6 +165,7 @@ public class FilmsLogic
                 {
                     Genre += $"{genre} ";
                 }
+                int Age = item.Age;
                 string Overview = $@"
   ID: {ID}
   Dates: {Dates}
@@ -171,6 +174,7 @@ public class FilmsLogic
   Description: {Description}
   Duration: {Duration}
   Genre: {Genre}
+  Rated: {Age}
 
 ============================================";
                 Console.WriteLine(Overview);
@@ -213,6 +217,7 @@ public class FilmsLogic
                     {
                         Genre += $"{genre2} ";
                     }
+                    int Age = item.Age;
                     string Overview = $@"
   ID: {ID}
   Dates: {Dates}
@@ -221,6 +226,7 @@ public class FilmsLogic
   Description: {Description}
   Duration: {Duration}
   Genre: {Genre}
+  Rated: {Age}
 
 ============================================";
                     Console.WriteLine(Overview);
@@ -256,6 +262,7 @@ public class FilmsLogic
             {
                 Genre += $"{genre} ";
             }
+            int Age = item.Age;
             string Overview = $@"
   ID: {ID}
   Dates: {Dates}
@@ -264,6 +271,7 @@ public class FilmsLogic
   Description: {Description}
   Duration: {Duration}
   Genre: {Genre}
+  Rated: {Age}
 
 ============================================";
             Console.WriteLine(Overview);
