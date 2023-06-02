@@ -699,12 +699,12 @@ View menu.
                 string code = res.ReservationCode;
                 string FullName = res.FullName;
                 string Email = res.Email;
-                double ticketAmount = res.TicketAmount;
-                double snackAmount = res.SnackAmount;
-                double TicketAmount = res.TicketAmount;
-                double totalCost = res.TotalAmount;
+                double ticketAmount = Math.Round(res.TicketAmount);
+                double snackAmount = Math.Round(res.SnackAmount, 2);
+                double TicketAmount = Math.Round(res.TicketAmount, 2);
+                double totalCost = Math.Round(res.TotalAmount, 2);
                 string selectedSeats = string.Join(", ", res.Seats.Select(seat => $"(Row {seat[0] + 1} Seat {seat[1] + 1})"));
-                double TotalAmount = res.TotalAmount;
+                double TotalAmount = Math.Round(res.TotalAmount, 2);
                 string Overview = $@"
     ID: {ID}    
     Movie: {Movie}
@@ -714,10 +714,10 @@ View menu.
     Full Name: {FullName}
     Email: {Email}
     Ticket Amount: {TicketAmount}
-    Snack Amount: {snackAmount}
-    Total Cost: {totalCost}
+    Snack Amount: ${snackAmount}
+    Total Cost: ${totalCost}
     Seats: {selectedSeats}
-    Total Money Amount: {TotalAmount}
+    Total Money Amount: ${TotalAmount}
 
 ============================================";
                 Console.WriteLine(Overview);
