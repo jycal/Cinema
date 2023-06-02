@@ -70,7 +70,9 @@ Welcome to Starlight Cinema. What would you like to do?
 
     private static void DisplayContactInfo()
     {
-        Console.WriteLine(@"============================================
+        System.Console.WriteLine();
+        Console.ForegroundColor = ConsoleColor.Yellow;
+        Console.WriteLine(@"===============================================
 |                                              |
 |            Cinema information                |
 |                                              |
@@ -83,6 +85,7 @@ Welcome to Starlight Cinema. What would you like to do?
 |                                              |
 ================================================
 ");
+        Console.ResetColor();
         Console.WriteLine("Press any key to continue...");
         Console.ReadKey(true);
         Console.Clear();
@@ -140,7 +143,7 @@ Welcome to Starlight Cinema. What would you like to do?
                     logIn = true;
                     Console.ForegroundColor = ConsoleColor.Green;
                     System.Console.WriteLine();
-                    Console.WriteLine("Welcome back " + _account.FullName);
+                    Console.WriteLine($"\n" + "Welcome back " + _account.FullName);
                     Console.ResetColor();
                     System.Console.WriteLine();
                     Console.WriteLine("Press any key to continue...");
@@ -722,8 +725,9 @@ View menu.
 ============================================";
                 Console.WriteLine(Overview);
             }
-            Console.WriteLine("\nPress any key to continue...");
             Console.ResetColor();
+            Console.WriteLine("\nPress any key to continue...");
+
             Console.ReadKey(true);
         }
     }
@@ -1333,23 +1337,62 @@ View menu.
         Console.WriteLine();
         Console.Write("Enter the name of the seat: ");
         string name = Console.ReadLine()!;
-        Console.Write("Enter the new price of the seat: ");
-        string input = Console.ReadLine()!;
-        if (string.IsNullOrEmpty(name) || string.IsNullOrEmpty(input))
+        string input = "";
+        do
         {
+            Console.Write("Enter the new price of the seat: ");
+            input = Console.ReadLine()!;
+            if (string.IsNullOrEmpty(input))
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Name or price cannot be empty!");
+                Console.ResetColor();
+                Console.WriteLine("Press any key to continue...");
+                Console.ReadKey(true);
+                RunAdvancedSeatMenu();
+            }
+            else if (IsNumber(input) == false)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                System.Console.WriteLine("Price has to be a number");
+                Console.ResetColor();
+                Console.WriteLine("Press any key to continue...");
+                Console.ReadKey(true);
+                RunAdvancedSeatMenu();
+            }
+            else if (Convert.ToDouble(input) <= 0)
+            {
+                System.Console.WriteLine();
+                Console.ForegroundColor = ConsoleColor.Red;
+                System.Console.WriteLine("Price must be more than 0 and a number");
+                Console.ResetColor();
+                System.Console.WriteLine();
+            }
+
+        } while (Convert.ToDouble(input) <= 0);
+        // System.Console.WriteLine("test");
+        if (string.IsNullOrEmpty(name))
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            System.Console.WriteLine();
             Console.WriteLine("Name or price cannot be empty!");
+            Console.ResetColor();
+            System.Console.WriteLine();
             Console.WriteLine("Press any key to continue...");
             Console.ReadKey(true);
-            RunAdvancedMenu();
+            RunAdvancedSeatMenu();
         }
         double price = Convert.ToDouble(input);
+
         TicketModel ticket = _ticketLogic.GetByName(name);
         if (ticket is TicketModel)
         {
             ticket.Cost = price;
             _ticketLogic.UpdateList(ticket);
             Console.ForegroundColor = ConsoleColor.Green;
+            System.Console.WriteLine();
             Console.WriteLine("Seat price changed!");
+            System.Console.WriteLine();
             Console.ResetColor();
             Console.WriteLine("Press any key to continue...");
             Console.ReadKey(true);
@@ -1357,13 +1400,22 @@ View menu.
         else
         {
             Console.ForegroundColor = ConsoleColor.Red;
+            System.Console.WriteLine();
             Console.WriteLine("No seat with that name was found!");
             Console.ResetColor();
+            System.Console.WriteLine();
             Console.WriteLine("Press any key to continue...");
             Console.ReadKey(true);
         }
     }
-
+    public static bool IsNumber(String s)
+    {
+        foreach (Char ch in s)
+        {
+            if (!Char.IsDigit(ch)) return false;
+        }
+        return true;
+    }
     private static void RunAdvancedFoodMenu()
     {
         if (_foodsLogic == null)
