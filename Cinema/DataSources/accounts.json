@@ -71,7 +71,9 @@
     "emailAddress": "meganpieters3@gmail.com",
     "password": "Megan2003@",
     "fullName": "meme",
-    "ticketList": []
+    "ticketList": [
+      1
+    ]
   },
   {
     "id": 9,

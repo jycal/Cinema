@@ -1,1 +1,29 @@
-[]
+[
+  {
+    "id": 1,
+    "reservationCode": "6710DSH",
+    "fullName": "meme",
+    "email": "meganpieters3@gmail.com",
+    "movie": "65",
+    "ticketAmount": 1,
+    "snackAmount": 11,
+    "ticketTotal": 10,
+    "roomNumber": 1,
+    "seats": [
+      [
+        4,
+        0
+      ]
+    ],
+    "seatsInfo": [
+      {
+        "Item1": 1,
+        "Item2": 1,
+        "Item3": "2023-06-01T15:00:00",
+        "Item4": 48
+      }
+    ],
+    "totalAmount": 21,
+    "date": "2023-06-01T15:00:00"
+  }
+]

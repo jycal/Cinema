@@ -1,1 +1,110 @@
-[]
+[
+  {
+    "id": 1,
+    "reservationCode": "PQ8CXOP",
+    "fullName": "meg",
+    "email": "meganpieters3@gmail.com",
+    "movie": "65",
+    "ticketAmount": 1,
+    "snackAmount": 3.75,
+    "ticketTotal": 10,
+    "roomNumber": 1,
+    "seats": [
+      [
+        2,
+        3
+      ]
+    ],
+    "seatsInfo": [
+      {
+        "Item1": 1,
+        "Item2": 1,
+        "Item3": "2023-06-01T15:00:00",
+        "Item4": 27
+      }
+    ],
+    "totalAmount": 13.75,
+    "date": "2023-06-01T15:00:00"
+  },
+  {
+    "id": 2,
+    "reservationCode": "2YES4UY",
+    "fullName": "w",
+    "email": "meganpieters3@gmail.com",
+    "movie": "65",
+    "ticketAmount": 1,
+    "snackAmount": 3.75,
+    "ticketTotal": 10,
+    "roomNumber": 1,
+    "seats": [
+      [
+        2,
+        5
+      ]
+    ],
+    "seatsInfo": [
+      {
+        "Item1": 1,
+        "Item2": 1,
+        "Item3": "2023-06-01T15:00:00",
+        "Item4": 29
+      }
+    ],
+    "totalAmount": 13.75,
+    "date": "2023-06-01T15:00:00"
+  },
+  {
+    "id": 3,
+    "reservationCode": "559EEI2",
+    "fullName": "r",
+    "email": "meganpieters3@gmail.com",
+    "movie": "Creed III",
+    "ticketAmount": 1,
+    "snackAmount": 0,
+    "ticketTotal": 10,
+    "roomNumber": 1,
+    "seats": [
+      [
+        3,
+        2
+      ]
+    ],
+    "seatsInfo": [
+      {
+        "Item1": 3,
+        "Item2": 1,
+        "Item3": "2023-06-02T16:00:00",
+        "Item4": 38
+      }
+    ],
+    "totalAmount": 10,
+    "date": "2023-06-02T16:00:00"
+  },
+  {
+    "id": 4,
+    "reservationCode": "GT6UF40",
+    "fullName": "w",
+    "email": "meganpieters3@gmail.com",
+    "movie": "65",
+    "ticketAmount": 1,
+    "snackAmount": 3.75,
+    "ticketTotal": 10,
+    "roomNumber": 1,
+    "seats": [
+      [
+        3,
+        3
+      ]
+    ],
+    "seatsInfo": [
+      {
+        "Item1": 1,
+        "Item2": 1,
+        "Item3": "2023-06-01T15:00:00",
+        "Item4": 39
+      }
+    ],
+    "totalAmount": 13.75,
+    "date": "2023-06-01T15:00:00"
+  }
+]
