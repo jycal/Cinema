@@ -26,8 +26,34 @@ public class FilmsLogic
     public FilmsLogic()
     {
         _films = FilmsAccess.LoadAll();
+        removeOldies();
     }
 
+    public void removeOldies()
+    {
+        List<Tuple<int, DateTime>> filmIdDate = new();
+        foreach (var film in _films)
+        {
+            foreach (var date in film.Dates)
+            {
+                if (date < DateTime.Now)
+                {
+                    var filmId = film.Id;
+                    var dateRemove = date;
+                    filmIdDate.Add(new Tuple<int, DateTime>(filmId, dateRemove));
+                }
+            }
+        }
+        foreach (var index in filmIdDate)
+        {
+            FilmModel film = _films.Find(x => x.Id == index.Item1)!;
+            int indexOfDate = film.Dates.IndexOf(index.Item2);
+            Console.WriteLine(indexOfDate);
+            _films.Find(x => x.Id == index.Item1)!.Rooms.RemoveAt(indexOfDate);
+            _films.Find(x => x.Id == index.Item1)!.Dates.Remove(index.Item2);
+        }
+        FilmsAccess.WriteAll(_films);
+    }
 
     public void UpdateList(FilmModel film)
     {
@@ -95,7 +121,38 @@ public class FilmsLogic
 
     public FilmModel GetById(int id)
     {
-        return _films.Find(i => i.Id == id)!;
+        FilmModel film = _films.Find(i => i.Id == id)!;
+        if (film == null)
+        {
+            return film!;
+        }
+
+        if (film.Dates.Count() > 0)
+        {
+            return film;
+        }
+        else
+        {
+            return null!;
+        }
+    }
+
+    public FilmModel GetByIdOld(int id)
+    {
+        FilmModel film = _films.Find(i => i.Id == id)!;
+        if (film == null)
+        {
+            return film!;
+        }
+
+        if (film.Dates.Count == 0)
+        {
+            return film;
+        }
+        else
+        {
+            return null!;
+        }
     }
 
     public FilmModel GetByName(string name)
@@ -113,8 +170,10 @@ public class FilmsLogic
     //     return CurrentFilm;
     // }
 
-    public void MovieOverview()
+    public void MovieOverviewOld()
     {
+        removeOldies();
+
         var MoviesFromJson = FilmsAccess.LoadAll();
         Console.ForegroundColor = ConsoleColor.Yellow;
         Console.WriteLine(CurrentMovieOverview);
@@ -154,13 +213,68 @@ public class FilmsLogic
         Console.ResetColor();
     }
 
+    public void MovieOverview()
+    {
+        removeOldies();
+
+        var MoviesFromJson = FilmsAccess.LoadAll();
+        Console.ForegroundColor = ConsoleColor.Yellow;
+        Console.WriteLine(CurrentMovieOverview);
+        foreach (FilmModel item in MoviesFromJson)
+        {
+            if (item.Dates.Count == 0)
+            {
+                continue;
+            }
+
+            int ID = item.Id;
+            string Dates = string.Join(", ", item.Dates);
+            int dateNumber = 1;
+            string Rooms = "";
+            foreach (var room in item.Rooms)
+            {
+                Rooms += $"{dateNumber}. Date: {room} ";
+                dateNumber++;
+            }
+            string Title = item.Title;
+            string Description = item.Description;
+            int Duration = item.Duration;
+            string Genre = "";
+            foreach (var genre in item.Genre)
+            {
+                Genre += $"{genre} ";
+            }
+            int Age = item.Age;
+            string Overview = $@"
+  ID: {ID}
+  Dates: {Dates}
+  Rooms: {Rooms}
+  Title: {Title}
+  Description: {Description}
+  Duration: {Duration}
+  Genre: {Genre}
+  Rated: {Age}
+
+============================================";
+            Console.WriteLine(Overview);
+        }
+        Console.ResetColor();
+    }
+
     public void SearchByTitle(string filter)
     {
+        removeOldies();
+
         var MoviesFromJson = FilmsAccess.LoadAll();
         Console.ForegroundColor = ConsoleColor.Magenta;
         Console.WriteLine(CurrentMovieOverview);
         foreach (FilmModel item in MoviesFromJson)
         {
+            if (item.Dates.Count == 0)
+            {
+                continue;
+            }
+
             if (item.Title == filter)
             {
                 int ID = item.Id;
@@ -202,11 +316,18 @@ public class FilmsLogic
     }
     public void SearchByGenre(string filter)
     {
+        removeOldies();
+
         var MoviesFromJson = FilmsAccess.LoadAll();
         Console.ForegroundColor = ConsoleColor.Magenta;
         Console.WriteLine(CurrentMovieOverview);
         foreach (FilmModel item in MoviesFromJson)
         {
+            if (item.Dates.Count == 0)
+            {
+                continue;
+            }
+
             foreach (var genre in item.Genre)
             {
                 if (genre != filter)
@@ -253,6 +374,8 @@ public class FilmsLogic
 
     public void MovieSortedByABCTitle()
     {
+        removeOldies();
+
         var MoviesFromJson = FilmsAccess.LoadAll();
         Console.ForegroundColor = ConsoleColor.Magenta;
         Console.WriteLine(CurrentMovieOverview);
@@ -260,6 +383,11 @@ public class FilmsLogic
         // Console.WriteLine(descListOb);
         foreach (FilmModel item in descListOb)
         {
+            if (item.Dates.Count == 0)
+            {
+                continue;
+            }
+
             int ID = item.Id;
             string Dates = string.Join(", ", item.Dates);
             int dateNumber = 1;
