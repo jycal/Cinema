@@ -702,12 +702,12 @@ View menu.
                 string code = res.ReservationCode;
                 string FullName = res.FullName;
                 string Email = res.Email;
-                double ticketAmount = res.TicketAmount;
-                double snackAmount = res.SnackAmount;
-                double TicketAmount = res.TicketAmount;
-                double totalCost = res.TotalAmount;
+                double ticketAmount = Math.Round(res.TicketAmount);
+                double snackAmount = Math.Round(res.SnackAmount, 2);
+                double TicketAmount = Math.Round(res.TicketAmount, 2);
+                double totalCost = Math.Round(res.TotalAmount, 2);
                 string selectedSeats = string.Join(", ", res.Seats.Select(seat => $"(Row {seat[0] + 1} Seat {seat[1] + 1})"));
-                double TotalAmount = res.TotalAmount;
+                double TotalAmount = Math.Round(res.TotalAmount, 2);
                 string Overview = $@"
     ID: {ID}    
     Movie: {Movie}
@@ -717,10 +717,10 @@ View menu.
     Full Name: {FullName}
     Email: {Email}
     Ticket Amount: {TicketAmount}
-    Snack Amount: {snackAmount}
-    Total Cost: {totalCost}
+    Snack Amount: ${snackAmount}
+    Total Cost: ${totalCost}
     Seats: {selectedSeats}
-    Total Money Amount: {TotalAmount}
+    Total Money Amount: ${TotalAmount}
 
 ============================================";
                 Console.WriteLine(Overview);
@@ -861,14 +861,14 @@ View menu.
 |                                          |
 ============================================
 ";
-        string[] options = { "View all movies", "Add a movie", "Delete a movie", "Go back" };
+        string[] options = { "View all movies", "Add a movie", "Add an old movie back", "Delete a movie", "Go back" };
         Menu advancedMovieMenu = new Menu(prompt, options);
         int selectedIndex = advancedMovieMenu.Run();
 
         switch (selectedIndex)
         {
             case 0:
-                _filmsLogic.MovieOverview();
+                _filmsLogic.MovieOverviewOld();
                 Console.WriteLine("\nPress any key to continue...");
                 Console.ReadKey(true);
                 RunAdvancedMovieMenu();
@@ -878,13 +878,17 @@ View menu.
                 RunAdvancedMovieMenu();
                 break;
             case 2:
-                _filmsLogic.MovieOverview();
+                AddOldMovie();
+                RunAdvancedMovieMenu();
+                break;
+            case 3:
+                _filmsLogic.MovieOverviewOld();
                 Console.WriteLine("\nPress any key to continue...");
                 Console.ReadKey(true);
                 DeleteMovie();
                 RunAdvancedMovieMenu();
                 break;
-            case 3:
+            case 4:
                 RunAdvancedMenu();
                 break;
         }
@@ -1115,6 +1119,143 @@ View menu.
         }
         FilmModel film = new FilmModel(id, dates, rooms, title, description, duration, genres, age, imageURL);
         _filmsLogic.UpdateList(film);
+        Console.WriteLine("Movie added!");
+        Console.WriteLine("Press any key to continue...");
+        Console.ReadKey(true);
+    }
+
+    private static void AddOldMovie()
+    {
+        Console.Write("Enter the id of the movie: ");
+        string input = Console.ReadLine()!;
+        if (string.IsNullOrEmpty(input))
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("Movie not found");
+            Console.ResetColor();
+            Console.WriteLine("Press any key to continue...");
+            Console.ReadKey(true);
+            return;
+        }
+        int id = Convert.ToInt32(input);
+        FilmModel movie = _filmsLogic.GetByIdOld(id);
+        if (movie is FilmModel)
+        {
+            List<DateTime> dates = null!;
+            List<int> rooms = null!;
+
+            // dates
+            bool dateDone = false;
+            while (!dateDone)
+            {
+                Console.Write("Enter dates of the movie (Example: 01/01/2020 10:50:00, 01/01/2020 11:50:00): ");
+                string datesString = Console.ReadLine()!;
+                dates = new List<DateTime>();
+                if (string.IsNullOrEmpty(datesString))
+                {
+                    Console.WriteLine("Dates cannot be empty!");
+                    Console.WriteLine("Press any key to continue...");
+                    Console.ReadKey(true);
+                }
+                else
+                {
+                    string[] datesArray = datesString.Split(", ");
+                    bool wentWrong = false;
+                    foreach (string date in datesArray)
+                    {
+                        if (date.Length != 19)
+                        {
+                            wentWrong = true;
+                            Console.WriteLine("Date format is incorrect! Must be DD/MM/YYYY HH:mm:ss");
+                            Console.WriteLine("Press any key to continue...");
+                            Console.ReadKey(true);
+                            break;
+                        }
+                        else
+                        {
+                            try
+                            {
+                                DateTime dateTime = DateTime.ParseExact(date, "dd/MM/yyyy HH:mm:ss", null!);
+                                dates.Add(dateTime);
+                            }
+                            catch (Exception)
+                            {
+                                wentWrong = true;
+                                Console.WriteLine("Date format is incorrect! Must be DD/MM/YYYY HH:mm:ss");
+                                Console.WriteLine("Press any key to continue...");
+                                Console.ReadKey(true);
+                                break;
+                            }
+                        }
+                    }
+                    if (!wentWrong)
+                    {
+                        dateDone = true;
+                    }
+                }
+            }
+            // rooms
+            bool roomDone = false;
+            while (!roomDone)
+            {
+                Console.Write("Enter the room of the movie (1, 2 or 3). 1st room = 1st date, 2nd room = 2nd date, etc. (Example: 1, 2): ");
+                string roomsString = Console.ReadLine()!;
+                if (string.IsNullOrEmpty(roomsString))
+                {
+                    Console.WriteLine("Rooms cannot be empty!");
+                    Console.WriteLine("Press any key to continue...");
+                    Console.ReadKey(true);
+                }
+                else
+                {
+                    string[] roomsArray = roomsString.Split(", ");
+                    if (roomsArray.Length != dates.Count)
+                    {
+                        Console.WriteLine("Amount of rooms must be equal to amount of dates!");
+                        Console.WriteLine("Press any key to continue...");
+                        Console.ReadKey(true);
+                        continue;
+                    }
+                    rooms = new List<int>();
+                    bool wentWrong = false;
+                    foreach (string room in roomsArray)
+                    {
+                        if (room != "1" && room != "2" && room != "3")
+                        {
+                            wentWrong = true;
+                            Console.WriteLine("Room format is incorrect! Must be 1, 2, 3, etc.");
+                            Console.WriteLine("Press any key to continue...");
+                            Console.ReadKey(true);
+                            break;
+                        }
+                        else
+                        {
+                            int roomInt = Convert.ToInt32(room);
+                            rooms.Add(roomInt);
+                        }
+                    }
+                    if (!wentWrong)
+                    {
+                        roomDone = true;
+                    }
+                }
+            }
+
+            movie.Dates = dates;
+            movie.Rooms = rooms;
+            _filmsLogic.UpdateList(movie);
+            Console.WriteLine("Movie added!");
+            Console.WriteLine("Press any key to continue...");
+            Console.ReadKey(true);
+        }
+        else
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("Movie not found");
+            Console.WriteLine("Press any key to continue...");
+            Console.ReadKey(true);
+            Console.ResetColor();
+        }
     }
 
     private static void DeleteMovie()
