@@ -74,7 +74,7 @@ public class FoodsLogic
                 {
                     System.Console.WriteLine("Enter new price:");
                     double thirdanswer = Convert.ToDouble(Console.ReadLine())!;
-                    FoodModel food = new FoodModel(secondanswer, thirdanswer, 0);
+                    FoodModel food = new FoodModel(secondanswer, thirdanswer, 0, 0);
                     UpdateList(food);
                 }
             }
@@ -136,10 +136,18 @@ public class FoodsLogic
             if (selectedIndex != -1)
             {
                 var food = GetByName(options[selectedIndex].Split('-')[0].Trim()); // Extract the selected food item name
-                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.ForegroundColor = ConsoleColor.Yellow; // Set the text color to red
+                Console.WriteLine();
                 orderedFood.ForEach(x => System.Console.WriteLine($"You selected {x.Name} - ${x.Cost}."));
                 Console.WriteLine($"You selected {food.Quantity} x {food.Name} - {food.Cost:c}."); // Display the selected snack with price
                 Console.ResetColor(); // Reset the text color
+                if (food.Age == 18)
+                {
+                    Console.WriteLine();
+                    Console.Write("You have to show your ID at the cash register!!".Orange());
+                    Console.ResetColor();
+                    Console.WriteLine();
+                }
                 Console.WriteLine($"\nPlease set the quantity (maximum 5, or 'D' to deselect):");
                 Console.WriteLine($"Use your arrow keys: left(decrease) and right(increase) to set the quantity.\n");
                 int quantity = 1;
@@ -240,19 +248,20 @@ public class FoodsLogic
 
         if (orderedFood.Count > 0)
         {
-            // int counter = 0;
+            Console.WriteLine();
             Console.WriteLine("Your order:");
             orderedFood = orderedFood.Distinct().ToList();
             foreach (var food in orderedFood)
             {
                 if (food.Quantity > 0)
                 {
-
+                    Console.ForegroundColor = ConsoleColor.Yellow;
                     Console.WriteLine($"{food.Quantity} x {food.Name} = ${food.Cost * food.Quantity}");
-
+                    Console.ResetColor();
                 }
             }
             Console.WriteLine($"Total cost: ${Math.Round(SnacksTotal, 2)}");
+            Console.WriteLine();
         }
         else
         {
