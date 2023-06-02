@@ -96,12 +96,13 @@ public class VisualOverview
         int movieId = 0;
         do
         {
-            Console.WriteLine("Please enter the movie id\n");
+            Console.WriteLine("Please enter the movie id");
             string id = Console.ReadLine()!;
             if (string.IsNullOrEmpty(id) || Convert.ToInt32(id) <= 0)
             {
-                Console.WriteLine("No film found with that id");
-                Console.WriteLine("Please try again.\n");
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine($"No film found with that id\n");
+                Console.ResetColor();
                 //Write some code to go back to the menu
                 Console.WriteLine("Press any key to go back to the menu");
                 Console.ReadKey();
@@ -122,28 +123,34 @@ public class VisualOverview
         if (film.Age == 16 || film.Age == 18)
         {
             System.Console.WriteLine();
-            System.Console.Write($"Mind your age! You will be checked for ID! Trust you will be dealt with >:[".Orange() + "$\n");
+            System.Console.Write($"Mind your age! You will be checked for ID! Trust you will be dealt with >:[".Orange());
+            System.Console.WriteLine();
             Console.ResetColor();
         }
         else if (film.Age == 13)
         {
-            System.Console.Write("We recommend Parental Guidance\n".Orange());
+            System.Console.WriteLine();
+            System.Console.Write("We recommend Parental Guidance when visiting this movie\n".Orange());
+            System.Console.WriteLine();
             Console.ResetColor();
         }
 
         int count = 1;
         foreach (var date in film.Dates)
         {
+            Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine($"{count}. {date}");
+            Console.ResetColor();
             count++;
         }
 
         int dateSelection = 0;
         do
         {
-            Console.WriteLine("Please choose the date you want to see the movie\n");
+            System.Console.WriteLine();
+            Console.WriteLine("Please choose the date you want to see the movie:\n");
             string dateChoice = Console.ReadLine()!;
-            if (string.IsNullOrEmpty(dateChoice) || Convert.ToInt32(dateChoice) <= 0)
+            if (string.IsNullOrEmpty(dateChoice) || Convert.ToInt32(dateChoice) <= 0 || Convert.ToInt32(dateChoice) > count)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
                 System.Console.WriteLine("Please enter a valid date");
@@ -556,9 +563,8 @@ public class VisualOverview
                     // mail verzenden
                     bool account = false;
                     Console.Clear();
+                    System.Console.Write("Sending conformation email please wait...".Orange() + $"\n");
 
-                    System.Console.Write("Sending conformation email please wait".Orange() + $"\n");
-                    Console.Clear();
                     MailConformation mailConformation = new MailConformation(email, account);
                     mailConformation.SendMailConformation();
 
@@ -607,7 +613,7 @@ public class VisualOverview
                         Tuple<int, int, DateTime, int> dateSeat = new Tuple<int, int, DateTime, int>(film.Id, room.Id, chosenDate, seatNumber);
                         room.Seats.Add(dateSeat);
                         seatsInfo.Add(dateSeat);
-                        _roomsLogic.UpdateList(room);
+                        _roomsLogic!.UpdateList(room);
                     }
                     double ticketTotal = _ticketLogic!.TicketPurchase(room, seats);
                     // revenue vastmeten
@@ -623,6 +629,8 @@ public class VisualOverview
                     ReservationModel reservation = new(temp_id, reservationCode, _account.FullName, _account.EmailAddress, title, seatList.Count, food, ticketTotal, room.Id, seatList, seatsInfo, totalAmount, chosenDate);
                     _reservationsLogic.UpdateList(reservation);
                     bool account = true;
+                    Console.Clear();
+                    System.Console.Write("Sending conformation email please wait...".Orange() + $"\n");
                     MailConformation mailConformation = new MailConformation(_account.EmailAddress, account);
                     mailConformation.SendMailConformation();
                     _account.TicketList.Add(temp_id);
@@ -637,6 +645,7 @@ public class VisualOverview
         }
         Console.ForegroundColor = ConsoleColor.Green;
         System.Console.WriteLine("Your reservation has been confirmed and is now guaranteed.");
+        System.Console.WriteLine();
         Console.ForegroundColor = ConsoleColor.White;
         Console.WriteLine("Press any key to continue...");
         Console.ReadKey(true);

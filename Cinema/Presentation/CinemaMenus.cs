@@ -98,10 +98,27 @@ Welcome to Starlight Cinema. What would you like to do?
 ");
         int tries = 3;
         bool logIn = false;
+        Console.Write("Enter email and password, you have 3 tries to get the right password".Orange());
+        System.Console.WriteLine();
         while (tries > 0)
         {
-            Console.Write("Please enter your email address: ");
-            string email = Console.ReadLine()!;
+            string email = "";
+            while (true)
+            {
+                Console.Write("Please enter your email address: ");
+                string mail = Console.ReadLine()!;
+                if (string.IsNullOrEmpty(mail) || _accountsLogic.GetByMail(mail) == null)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    System.Console.WriteLine($"\nWrong email adress. Please try again..\n");
+                    Console.ResetColor();
+                }
+                else
+                {
+                    email = mail;
+                    break;
+                }
+            }
             string password = string.Empty;
             SecureString pass = _accountsLogic.HashedPass();
             password = new System.Net.NetworkCredential(string.Empty, pass).Password;
@@ -112,13 +129,20 @@ Welcome to Starlight Cinema. What would you like to do?
                 if (correctEmail.Password != password)
                 {
                     tries--;
-                    Console.WriteLine("Wrong password or email! Please try again...");
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    System.Console.WriteLine();
+                    Console.WriteLine($"\nWrong password or email! Please try again...\n");
+                    Console.ResetColor();
                 }
                 else
                 {
                     _account = correctEmail;
                     logIn = true;
-                    Console.WriteLine("\nWelcome back " + _account.FullName);
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    System.Console.WriteLine();
+                    Console.WriteLine("Welcome back " + _account.FullName);
+                    Console.ResetColor();
+                    System.Console.WriteLine();
                     Console.WriteLine("Press any key to continue...");
                     Console.ReadKey(true);
                     Console.Clear();
@@ -126,15 +150,19 @@ Welcome to Starlight Cinema. What would you like to do?
                     break;
                 }
             }
-            else
-            {
-                tries--;
-                Console.WriteLine("Wrong password or email! Please try again...");
-            }
+            // else
+            // {
+            //     tries--;
+            //     Console.ForegroundColor = ConsoleColor.Red;
+            //     Console.WriteLine($"\nWrong password or email! Please try again...\n");
+            //     Console.ResetColor();
+            // }
         }
         if (!logIn)
         {
-            Console.WriteLine("0 tries left. Please try again later...");
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("You have 0 tries left. Please try again later...");
+            Console.ResetColor();
             Console.WriteLine("Press any key to continue...");
             Console.ReadKey(true);
             Console.Clear();
@@ -638,7 +666,9 @@ View menu.
     {
         if (_account == null)
         {
+            Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("You are not logged in!");
+            Console.ResetColor();
             Console.WriteLine("Press any key to continue...");
             Console.ReadKey(true);
             return;
@@ -700,37 +730,59 @@ View menu.
 
     private static void CancelTicket()
     {
-        Console.WriteLine("What is your reservation code?");
-        string? reservationCode = Console.ReadLine();
-        // var guestCheck = _guestLogic.GetByCode(reservationCode!);
-        Console.WriteLine("Are you sure you want to delete the reservation? (Y/N):");
-        string? input = Console.ReadLine()!.ToUpper();
-        if (input == "Y")
+        string reservationCode = "";
+        while (true)
         {
-            var accCheck = _reservationsLogic.GetByCode(reservationCode!);
-            if (accCheck != null)
+            Console.WriteLine("What is your reservation code?");
+            string? code = Console.ReadLine();
+            if (string.IsNullOrEmpty(code))
             {
-                _reservationsLogic.DeleteReservationByCode(reservationCode!);
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Description cannot be empty!");
+                Console.ResetColor();
+                Console.WriteLine("Press any key to continue...");
+                Console.ReadKey(true);
+            }
+            else
+            {
+                reservationCode = code;
+                break;
+            }
+        }
 
-            }
-            else if (accCheck == null)
-            {
-                _guestLogic.DeleteReservation(reservationCode!);
-                // Console.Clear();
-            }
-        }
-        else if (input == "N")
+        // var guestCheck = _guestLogic.GetByCode(reservationCode!);
+        string prompt = "Are you sure you want to delete the reservation?";
+        string[] options = { "Yes", "No" };
+        Menu mainMenu = new Menu(prompt, options);
+        int selectedIndex = mainMenu.Run();
+
+        switch (selectedIndex)
         {
-            return;
+            case 0:
+                var accCheck = _reservationsLogic.GetByCode(reservationCode!);
+                if (accCheck != null)
+                {
+                    _reservationsLogic.DeleteReservationByCode(reservationCode!);
+
+                }
+                else if (accCheck == null)
+                {
+                    _guestLogic.DeleteReservation(reservationCode!);
+                    // Console.Clear();
+                }
+                break;
+            case 1:
+                return;
         }
-        else
-        {
-            Console.WriteLine("Invalid input");
-        }
+
         Console.WriteLine("Press any key to continue...");
         Console.ReadKey();
         Console.Clear();
     }
+
+
+
+
 
     private static void RunAdvancedMenu()
     {
