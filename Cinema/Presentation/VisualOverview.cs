@@ -571,7 +571,9 @@ public class VisualOverview
                     break;
                 case 1:
                     Console.ForegroundColor = ConsoleColor.Green;
-                    Console.WriteLine("Reservation has been cancelled.");
+                    System.Console.WriteLine();
+                    Console.WriteLine($"Reservation has been cancelled.");
+                    System.Console.WriteLine();
                     Console.ResetColor();
                     Console.WriteLine("Press any key to continue...");
                     Console.ReadKey(true);
