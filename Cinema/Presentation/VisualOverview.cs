@@ -563,9 +563,8 @@ public class VisualOverview
                     // mail verzenden
                     bool account = false;
                     Console.Clear();
+                    System.Console.Write("Sending conformation email please wait...".Orange() + $"\n");
 
-                    System.Console.Write("Sending conformation email please wait".Orange() + $"\n");
-                    Console.Clear();
                     MailConformation mailConformation = new MailConformation(email, account);
                     mailConformation.SendMailConformation();
 
@@ -614,7 +613,7 @@ public class VisualOverview
                         Tuple<int, int, DateTime, int> dateSeat = new Tuple<int, int, DateTime, int>(film.Id, room.Id, chosenDate, seatNumber);
                         room.Seats.Add(dateSeat);
                         seatsInfo.Add(dateSeat);
-                        _roomsLogic.UpdateList(room);
+                        _roomsLogic!.UpdateList(room);
                     }
                     double ticketTotal = _ticketLogic!.TicketPurchase(room, seats);
                     // revenue vastmeten
@@ -630,6 +629,8 @@ public class VisualOverview
                     ReservationModel reservation = new(temp_id, reservationCode, _account.FullName, _account.EmailAddress, title, seatList.Count, food, ticketTotal, room.Id, seatList, seatsInfo, totalAmount, chosenDate);
                     _reservationsLogic.UpdateList(reservation);
                     bool account = true;
+                    Console.Clear();
+                    System.Console.Write("Sending conformation email please wait...".Orange() + $"\n");
                     MailConformation mailConformation = new MailConformation(_account.EmailAddress, account);
                     mailConformation.SendMailConformation();
                     _account.TicketList.Add(temp_id);
@@ -644,6 +645,7 @@ public class VisualOverview
         }
         Console.ForegroundColor = ConsoleColor.Green;
         System.Console.WriteLine("Your reservation has been confirmed and is now guaranteed.");
+        System.Console.WriteLine();
         Console.ForegroundColor = ConsoleColor.White;
         Console.WriteLine("Press any key to continue...");
         Console.ReadKey(true);
