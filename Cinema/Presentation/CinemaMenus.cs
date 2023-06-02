@@ -70,7 +70,9 @@ Welcome to Starlight Cinema. What would you like to do?
 
     private static void DisplayContactInfo()
     {
-        Console.WriteLine(@"============================================
+        System.Console.WriteLine();
+        Console.ForegroundColor = ConsoleColor.Yellow;
+        Console.WriteLine(@"===============================================
 |                                              |
 |            Cinema information                |
 |                                              |
@@ -83,6 +85,7 @@ Welcome to Starlight Cinema. What would you like to do?
 |                                              |
 ================================================
 ");
+        Console.ResetColor();
         Console.WriteLine("Press any key to continue...");
         Console.ReadKey(true);
         Console.Clear();
