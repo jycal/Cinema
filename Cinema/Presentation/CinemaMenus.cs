@@ -1038,7 +1038,7 @@ View menu.
         // duration
         while (true)
         {
-            Console.Write("Enter the duration of the movie: ");
+            Console.Write("Enter the duration of the movie (Example: 120): ");
             string input = Console.ReadLine()!;
             if (string.IsNullOrEmpty(input))
             {
@@ -1055,7 +1055,7 @@ View menu.
         // genre
         while (true)
         {
-            Console.Write("Enter the genre of the movie: ");
+            Console.Write("Enter the genre of the movie (Example: Horror, Thriller): ");
             string input = Console.ReadLine()!;
             if (string.IsNullOrEmpty(input))
             {
@@ -1072,7 +1072,7 @@ View menu.
         }
         while (true)
         {
-            Console.WriteLine("Enter the age rating of the movie: ");
+            Console.WriteLine("Enter the age rating of the movie (Example: 12): ");
             string rated = Console.ReadLine()!;
             if (string.IsNullOrEmpty(rated))
             {
@@ -1089,9 +1089,9 @@ View menu.
         // image
         while (true)
         {
-            Console.Write("Enter the image url: ");
+            Console.Write("Enter the image url (Format: https://.... ): ");
             imageURL = Console.ReadLine()!;
-            if (string.IsNullOrEmpty(imageURL))
+            if (string.IsNullOrEmpty(imageURL) && imageURL.StartsWith("https://") == false)
             {
                 Console.WriteLine("Image url cannot be empty!");
                 Console.WriteLine("Press any key to continue...");
@@ -1430,7 +1430,7 @@ View menu.
 |                                          |
 ============================================
 ";
-        string[] options = { "View all food", "Change a food price", "Go back" };
+        string[] options = { "View all food", "Change a food price", "Add a snack", "Remove a snack", "Go back" };
         Menu advancedFoodMenu = new Menu(prompt, options);
         int selectedIndex = advancedFoodMenu.Run();
 
@@ -1446,6 +1446,34 @@ View menu.
                 RunAdvancedFoodMenu();
                 break;
             case 2:
+                Console.WriteLine("Enter a snack name: ");
+                string? name = Console.ReadLine();
+                Console.WriteLine("Enter a snack price: ");
+                double cost = Convert.ToDouble(Console.ReadLine());
+                Console.WriteLine("Enter a snack quatity: ");
+                double quantity = Convert.ToDouble(Console.ReadLine());
+                Console.WriteLine("Enter a age rating: ");
+                int age = Convert.ToInt32(Console.ReadLine());
+                FoodModel food = new FoodModel(name!, cost, quantity, age);
+                _foodsLogic.AddFood(food);
+                // SetFoodPrice();
+                RunAdvancedFoodMenu();
+                break;
+            case 3:
+                Console.WriteLine("Enter a snack name: ");
+                string? Name = Console.ReadLine();
+                Console.WriteLine("Enter a snack price: ");
+                double Cost = Convert.ToDouble(Console.ReadLine());
+                Console.WriteLine("Enter a snack quatity: ");
+                double Quantity = Convert.ToDouble(Console.ReadLine());
+                Console.WriteLine("Enter a age rating: ");
+                int Age = Convert.ToInt32(Console.ReadLine());
+                FoodModel Food = new FoodModel(Name!, Cost, Quantity, Age);
+                _foodsLogic.DeleteFood(Food);
+                // SetFoodPrice();
+                RunAdvancedFoodMenu();
+                break;
+            case 4:
                 RunAdvancedMenu();
                 break;
         }

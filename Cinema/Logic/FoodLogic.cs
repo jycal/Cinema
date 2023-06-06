@@ -40,6 +40,38 @@ public class FoodsLogic
         FoodAccess.WriteAll(_foods);
     }
 
+    public void AddFood(FoodModel acc)
+    {
+        _foods!.Add(acc);
+        FoodAccess.WriteAll(_foods);
+    }
+
+    public bool DeleteFood(FoodModel acc)
+    {
+        //Find if there is already an model with the same id
+        string name = acc.Name;
+        var food = _foods!.Find(r => r.Name == name);
+        if (food == null)
+        {
+            return false;
+        }
+        int index = _foods!.FindIndex(s => s.Name == name!);
+
+        if (index != -1)
+        {
+            //update existing model
+            // _films[index] = film;
+            _foods!.RemoveAt(index);
+            // _foods!.ForEach((x) => { if (x.Id > film!.Id) x.Id = x.Id - 1; });
+            FoodAccess.WriteAll(_foods);
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
     public FoodModel GetByName(string name)
     {
         FoodModel foodItem = _foods!.Find(i => i.Name == name)!;

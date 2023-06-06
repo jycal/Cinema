@@ -185,7 +185,7 @@ public class FilmsLogic
             string Rooms = "";
             foreach (var room in item.Rooms)
             {
-                Rooms += $"{dateNumber}. Date: {room} ";
+                Rooms += $"{dateNumber}.";
                 dateNumber++;
             }
             string Title = item.Title;
@@ -200,7 +200,7 @@ public class FilmsLogic
             string Overview = $@"
   ID: {ID}
   Dates: {Dates}
-  Rooms: {Rooms}
+  Rooms: {Rooms[0]}
   Title: {Title}
   Description: {Description}
   Duration: {Duration}
