@@ -56,6 +56,22 @@ public class GuestLogic
         GuestAccess.WriteAll(_guests);
     }
 
+    public bool AddAccount(AccountModel acc)
+    {
+        // email already exists in the list
+        bool emailExists = _accounts.Any(s => s.EmailAddress == acc.EmailAddress);
+        if (emailExists)
+        {
+            return true;
+        }
+        else
+        {
+           _accounts.Add(acc);
+           GuestAccess.WriteAll(_guests);
+           return true;
+        }
+    }
+
     public void DeleteReservation(string reservationCode)
     {
         //Find if there is already an model with the same id

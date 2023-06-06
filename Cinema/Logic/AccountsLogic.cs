@@ -15,7 +15,6 @@ public class AccountsLogic
         _accounts = AccountsAccess.LoadAll();
     }
 
-
     public void UpdateList(AccountModel acc)
     {
         //Find if there is already an model with the same id
@@ -32,7 +31,22 @@ public class AccountsLogic
             _accounts.Add(acc);
         }
         AccountsAccess.WriteAll(_accounts);
+    }
 
+    public bool AddAccount(AccountModel acc)
+    {
+        // email already exists in the list
+        bool emailExists = _accounts.Any(s => s.EmailAddress == acc.EmailAddress);
+        if (emailExists)
+        {
+            return true;
+        }
+        else
+        {
+           _accounts.Add(acc);
+           AccountsAccess.WriteAll(_guests);
+           return true;
+        }
     }
 
     public AccountModel GetById(int id)
