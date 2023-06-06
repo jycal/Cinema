@@ -1,0 +1,14 @@
+[
+  {
+    "Name": "vipSeat",
+    "Cost": 18
+  },
+  {
+    "Name": "comfortSeat",
+    "Cost": 13
+  },
+  {
+    "Name": "normalSeat",
+    "Cost": 10
+  }
+]
