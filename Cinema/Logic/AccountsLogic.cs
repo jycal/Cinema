@@ -33,22 +33,6 @@ public class AccountsLogic
         AccountsAccess.WriteAll(_accounts);
     }
 
-    public bool AddAccount(AccountModel acc)
-    {
-        // email already exists in the list
-        bool emailExists = _accounts.Any(s => s.EmailAddress == acc.EmailAddress);
-        if (emailExists)
-        {
-            return true;
-        }
-        else
-        {
-           _accounts.Add(acc);
-           AccountsAccess.WriteAll(_guests);
-           return true;
-        }
-    }
-
     public AccountModel GetById(int id)
     {
         return _accounts!.Find(i => i.Id == id)!;

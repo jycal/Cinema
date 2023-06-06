@@ -24,8 +24,12 @@ public class UnitTest1
         List<Tuple<int, int, DateTime, int>> info = new();
         Tuple<int, int, DateTime, int> thing = new(1, 1, new DateTime(2021, 12, 28, 10, 10, 10), 1);
         info.Add(thing);
+        ReservationModel test = guest.GetByEmail("Josh@nl");
         ReservationModel model = new(1, "DHawE", "John Pork", "Josh@nl", "john Wick 4", 2, 2, 2, 1, seats, info, 10, new DateTime(2021, 12, 28, 10, 10, 10));
-        guest.AddAccount(model);
+        if (test == null)
+        {
+            guest.UpdateList(model);
+        }
         Assert.AreEqual(guest.GetByEmail("Josh@nl").Email, model.Email);
     }
 
