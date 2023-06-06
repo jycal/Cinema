@@ -167,14 +167,14 @@ public class VisualOverview
             if (dateChoice.All(Char.IsLetter))
             {
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine($"No date found with that id\n");
+                Console.WriteLine($"Please enter a valid date\n");
                 Console.ResetColor();
                 Start(account);
             }
             if (CinemaMenus.IsNumber(dateChoice) == false)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine($"No date found with that id\n");
+                Console.WriteLine($"Please enter a valid date\n");
                 Console.ResetColor();
                 Start(account);
             }
@@ -205,6 +205,20 @@ public class VisualOverview
             {
                 Console.WriteLine("How many tickets would you like to order?");
                 string tickets = Console.ReadLine()!;
+                if (tickets.All(Char.IsLetter))
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine($"Must enter a valid number\n");
+                    Console.ResetColor();
+                    Start(account);
+                }
+                if (CinemaMenus.IsNumber(tickets) == false)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine($"Must enter a valid number\n");
+                    Console.ResetColor();
+                    Start(account);
+                }
                 if (string.IsNullOrEmpty(tickets) || Convert.ToInt32(tickets) <= 0)
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
