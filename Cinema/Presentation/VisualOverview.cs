@@ -98,24 +98,34 @@ public class VisualOverview
         {
             Console.WriteLine("Please enter the movie id");
             string id = Console.ReadLine()!;
-            if (string.IsNullOrEmpty(id) || Convert.ToInt32(id) <= 0)
+            if (CinemaMenus.IsNumber(id) == false)
             {
-                char newId = Convert.ToChar(id);
-                if (char.IsDigit(newId))
-                {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine($"No film found with that id\n");
-                    Console.ResetColor();
-                    //Write some code to go back to the menu
-                    Console.WriteLine("Press any key to go back to the menu");
-                    Console.ReadKey();
-                    Console.Clear();
-                    return;
-                }
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine($"No film found with that id\n");
+                Console.ResetColor();
+                Start(account);
+            }
+            if (string.IsNullOrEmpty(id) || Convert.ToInt32(id) < 0)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine($"No film found with that id\n");
+                Console.ResetColor();
+                //Write some code to go back to the menu
+                Console.WriteLine("Press any key to go back to the menu");
+                Console.ReadKey();
+                Console.Clear();
+                return;
             }
             else if (Convert.ToInt32(id) > 0)
             {
                 movieId = Convert.ToInt32(id);
+            }
+            if (CinemaMenus._filmsLogic.GetById(movieId) == null)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine($"No film found with that id\n");
+                Console.ResetColor();
+                Start(account);
             }
 
         } while (movieId <= 0);
