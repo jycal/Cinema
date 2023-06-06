@@ -1,9 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-
 public class GuestLogic
 {
     public List<ReservationModel>? _guests;
@@ -60,7 +54,6 @@ public class GuestLogic
             _guests.Add(guest);
         }
         GuestAccess.WriteAll(_guests);
-
     }
 
     public void DeleteReservation(string reservationCode)
@@ -112,6 +105,4 @@ public class GuestLogic
     {
         return _guests!.Find(i => i.ReservationCode == reservationCode)!;
     }
-
-
 }

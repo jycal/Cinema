@@ -1,13 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Net.Http;
-using System.Net;
-using System.IO;
-using System.Text;
-using Newtonsoft.Json;
-
 public class FilmsLogic
 {
     private string CurrentMovieOverview = @"============================================
@@ -421,14 +411,4 @@ public class FilmsLogic
         }
         Console.ResetColor();
     }
-
-    // HttpClient is intended to be instantiated once per application, rather than per-use. See Remarks.
-    // public readonly HttpClient client = new HttpClient();
-
-    // public void Task()
-    // {
-    //     WebClient client = new WebClient();
-    //     String downloadedString = client.DownloadString("https://www.imdb.com/title/tt6718170/?ref_=hm_fanfav_tt_i_1_pd_fp1");
-    //     System.Console.WriteLine(downloadedString);
-    // }
 }

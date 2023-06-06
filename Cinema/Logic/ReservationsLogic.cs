@@ -1,9 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-
 public class ReservationsLogic
 {
     public List<ReservationModel>? _reservations;
@@ -60,7 +54,6 @@ public class ReservationsLogic
             _reservations.Add(film);
         }
         ReservationAccess.WriteAll(_reservations);
-
     }
 
     public void DeleteReservation(int id)
