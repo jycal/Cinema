@@ -1,0 +1,214 @@
+[
+  {
+    "id": 0,
+    "dates": [],
+    "rooms": [],
+    "title": "John Wick 4",
+    "description": "John Wick (Keanu Reeves) takes on his most deadly opponents yet in the fourth installment of the John Wick franchise. The price on John Wick\u0027s head is getting higher and higher, and his fight against the international assassin guild The High Table is developing into a global battle. To regain his freedom, he must face a new enemy with powerful alliances around the world and forces that turn old friends into enemies.",
+    "duration": 169,
+    "genre": [
+      "Action",
+      "Crime",
+      "Thriller"
+    ],
+    "age": 16,
+    "imageURL": "https://21818cdde6.imgdist.com/public/_thumbs/Integrators/BeeProAgency/981647_966306/john%20wick.webp_thumb.png?hash=1682510761536"
+  },
+  {
+    "id": 1,
+    "dates": [],
+    "rooms": [],
+    "title": "65",
+    "description": "After a catastrophic crash on an unknown planet, pilot Mills (Adam Driver) soon finds out he crashed on Earth, but 65 million years ago. Mills and Koa (Ariana Greenblatt), the only other survivor, have only one chance at rescue.",
+    "duration": 93,
+    "genre": [
+      "Action",
+      "Science Fiction",
+      "Thriller"
+    ],
+    "age": 13,
+    "imageURL": "https://21818cdde6.imgdist.com/public/_thumbs/Integrators/BeeProAgency/981647_966306/65.jpg_thumb.png?hash=1682510761536"
+  },
+  {
+    "id": 2,
+    "dates": [],
+    "rooms": [],
+    "title": "Shazam! Fury of the Gods",
+    "description": "In Shazam! Fury of the Gods from New Line Cinema continues the story of teenager Billy Batson, who by uttering the magic word SHAZAM! transforms into his alter ego, the adult superhero Shazam.",
+    "duration": 130,
+    "genre": [
+      "Action",
+      "Adventure",
+      "Comedy"
+    ],
+    "age": 13,
+    "imageURL": "https://21818cdde6.imgdist.com/public/_thumbs/Integrators/BeeProAgency/981647_966306/shazam.jpg_thumb.png?hash=1682510761536"
+  },
+  {
+    "id": 3,
+    "dates": [],
+    "rooms": [],
+    "title": "Creed III",
+    "description": "Metro Goldwyn Mayer Pictures arrives with Creed III, making Michael B. Jordan\u0027s directorial debut and returning in the role of Adonis Creed in the third film of the hit franchise.",
+    "duration": 117,
+    "genre": [
+      "Drama",
+      "Sport"
+    ],
+    "age": 13,
+    "imageURL": "https://21818cdde6.imgdist.com/public/_thumbs/Integrators/BeeProAgency/981647_966306/creed.jpg_thumb.png?hash=1682510761536"
+  },
+  {
+    "id": 4,
+    "dates": [],
+    "rooms": [],
+    "title": "The Super Mario Bros. Movie (OV)",
+    "description": "Illumination and Nintendo, two world-renowned names in the entertainment industry, are joining forces for the first time for THE SUPER MARIO BROS. MOVIE, a new theatrical film about one of pop culture\u0027s most famous plumbers.",
+    "duration": 93,
+    "genre": [
+      "Animation",
+      "Adventure",
+      "Comedy"
+    ],
+    "age": 6,
+    "imageURL": "https://21818cdde6.imgdist.com/public/_thumbs/Integrators/BeeProAgency/981647_966306/suoerrr.jpg_thumb.png?hash=1682510761536"
+  },
+  {
+    "id": 5,
+    "dates": [],
+    "rooms": [],
+    "title": "All Inclusive",
+    "description": "In this comedy, the relationship between Jacco (Tibor Luk\u00E1cs) and Sylvie (Jennifer Hoffman) is severely tested when Sylvie announces she wants to take a break during a vacation to a resort.",
+    "duration": 115,
+    "genre": [
+      "Comedy"
+    ],
+    "age": 12,
+    "imageURL": "https://21818cdde6.imgdist.com/public/_thumbs/Integrators/BeeProAgency/981647_966306/all%20inv.jpg_thumb.png?hash=1682510761536"
+  },
+  {
+    "id": 6,
+    "dates": [
+      "2023-06-07T12:00:00",
+      "2023-06-09T14:00:00"
+    ],
+    "rooms": [
+      2,
+      3
+    ],
+    "title": "Scream VI",
+    "description": "After the latest Ghostface murders, the four survivors leave Woodsboro behind and begin a new chapter.",
+    "duration": 115,
+    "genre": [
+      "Horror",
+      "Thriller"
+    ],
+    "age": 16,
+    "imageURL": "https://21818cdde6.imgdist.com/public/_thumbs/Integrators/BeeProAgency/981647_966306/scream.jpg_thumb.png?hash=1682510761536"
+  },
+  {
+    "id": 7,
+    "dates": [
+      "2023-06-21T14:00:00",
+      "2023-06-11T16:00:00"
+    ],
+    "rooms": [
+      1,
+      2
+    ],
+    "title": "Mummies(NL)",
+    "description": "Mummies is een grappige en avontuurlijke Warner Bros. Pictures-animatiefilm voor het hele gezin. De film volgt de avonturen van drie Egyptische mummies die wonen in een ondergrondse geheime stad in het oude Egypte.",
+    "duration": 89,
+    "genre": [
+      "Animation",
+      "Comedy",
+      "Kinderfilm"
+    ],
+    "age": 6,
+    "imageURL": "https://21818cdde6.imgdist.com/public/_thumbs/Integrators/BeeProAgency/981647_966306/mum.jpg_thumb.png?hash=1682510761536"
+  },
+  {
+    "id": 8,
+    "dates": [
+      "2023-08-03T16:00:00"
+    ],
+    "rooms": [
+      1
+    ],
+    "title": "Dungeons \u0026 Dragons: Honor Among Thieves",
+    "description": "A charming thief and a gang of adventurers embark on a spectacular heist to steal a lost relic. But when they antagonize the wrong people, everything gets gigantically out of hand.",
+    "duration": 134,
+    "genre": [
+      "Action",
+      "Adventure",
+      "Fantasy"
+    ],
+    "age": 12,
+    "imageURL": "https://21818cdde6.imgdist.com/public/_thumbs/Integrators/BeeProAgency/981647_966306/dd.jpg_thumb.png?hash=1682510761536"
+  },
+  {
+    "id": 9,
+    "dates": [],
+    "rooms": [],
+    "title": "Ant-Man and the Wasp: Quantumania",
+    "description": "In Ant-Man and the Wasp: Quantumania, superhero partners Scott Lang (Paul Rudd) and Hope van Dyne (Evangeline Lilly) return to the big screen to continue their adventures as Ant-Man and The Wasp.",
+    "duration": 124,
+    "genre": [
+      "Action",
+      "Adventure",
+      "Comedy"
+    ],
+    "age": 13,
+    "imageURL": "https://21818cdde6.imgdist.com/public/_thumbs/Integrators/BeeProAgency/981647_966306/ant.jpg_thumb.png?hash=1682510761536"
+  },
+  {
+    "id": 10,
+    "dates": [],
+    "rooms": [],
+    "title": "Avatar: The Way of Water",
+    "description": "In Ant-Man and the Wasp: Quantumania, superhero partners Scott Lang (Paul Rudd) and Hope van Dyne (Evangeline Lilly) return to the big screen to continue their adventures as Ant-Man and The Wasp.",
+    "duration": 192,
+    "genre": [
+      "Action",
+      "Adventure",
+      "Fantasy"
+    ],
+    "age": 13,
+    "imageURL": "https://21818cdde6.imgdist.com/public/_thumbs/Integrators/BeeProAgency/981647_966306/Afbeelding2vat.jpg_thumb.png?hash=1682510761536"
+  },
+  {
+    "id": 13,
+    "dates": [
+      "2023-12-08T14:00:00"
+    ],
+    "rooms": [
+      2
+    ],
+    "title": "Cocaine Bear",
+    "description": "Cocaine Bear is based on a 1985 true story about a drug smuggler, whose plane crashes, and the black bear who devours the lost cocaine.",
+    "duration": 95,
+    "genre": [
+      "Thriller"
+    ],
+    "age": 16,
+    "imageURL": "https://21818cdde6.imgdist.com/public/_thumbs/Integrators/BeeProAgency/981647_966306/cocaine_1.jpg_thumb.png?hash=1682510761536"
+  },
+  {
+    "id": 12,
+    "dates": [
+      "2023-11-08T14:00:00"
+    ],
+    "rooms": [
+      1
+    ],
+    "title": "Magic Mike\u0027s Last Dance",
+    "description": "Magic Mike Lane (Channing Tatum) returns to the stage after a long time after a failed business deal leaves him broke and working as a bartender in Florida. For a hopefully final splurge, Mike goes to London with a wealthy socialite (Salma Hayek) who makes him an offer he can\u0027t refuse....",
+    "duration": 112,
+    "genre": [
+      "Comedy",
+      "Romance"
+    ],
+    "age": 16,
+    "imageURL": "https://21818cdde6.imgdist.com/public/_thumbs/Integrators/BeeProAgency/981647_966306/Magic-Mike-s-Last-Dance_ps_1_jpg_sd-high_Copyright-2022-Warner-Bros-Entertainment-Inc-All-Rights-Reserved-Photo-Credit-Claudette-Barius.webp_thumb.png?hash=1682510761536"
+  }
+]

@@ -1,0 +1,116 @@
+[
+  {
+    "Name": "Popcorn Small",
+    "Cost": 3.75,
+    "Quantity": 0,
+    "Age": 0
+  },
+  {
+    "Name": "Popcorn Medium",
+    "Cost": 4.75,
+    "Quantity": 0,
+    "Age": 0
+  },
+  {
+    "Name": "Popcorn Large",
+    "Cost": 5.95,
+    "Quantity": 0,
+    "Age": 0
+  },
+  {
+    "Name": "Nachos Chico (including 1 dip)",
+    "Cost": 4.99,
+    "Quantity": 0,
+    "Age": 0
+  },
+  {
+    "Name": "Nachos Grande (including 2 dips)",
+    "Cost": 7.25,
+    "Quantity": 0,
+    "Age": 0
+  },
+  {
+    "Name": "Swirls icecream",
+    "Cost": 5.99,
+    "Quantity": 0,
+    "Age": 0
+  },
+  {
+    "Name": "Mini Sushi Box",
+    "Cost": 7.99,
+    "Quantity": 0,
+    "Age": 0
+  },
+  {
+    "Name": "Coco Cola",
+    "Cost": 3.5,
+    "Quantity": 0,
+    "Age": 0
+  },
+  {
+    "Name": "Coco Cola Light",
+    "Cost": 3.5,
+    "Quantity": 0,
+    "Age": 0
+  },
+  {
+    "Name": "Coco Cola Zero",
+    "Cost": 3.5,
+    "Quantity": 0,
+    "Age": 0
+  },
+  {
+    "Name": "Spa Blauw",
+    "Cost": 3.5,
+    "Quantity": 0,
+    "Age": 0
+  },
+  {
+    "Name": "Spa Rood",
+    "Cost": 3.5,
+    "Quantity": 0,
+    "Age": 0
+  },
+  {
+    "Name": "Fanta",
+    "Cost": 3.5,
+    "Quantity": 0,
+    "Age": 0
+  },
+  {
+    "Name": "Sprite",
+    "Cost": 3.5,
+    "Quantity": 0,
+    "Age": 0
+  },
+  {
+    "Name": "Fanta Cassis",
+    "Cost": 3.5,
+    "Quantity": 0,
+    "Age": 0
+  },
+  {
+    "Name": "Heineken 0,5L",
+    "Cost": 4.5,
+    "Quantity": 0,
+    "Age": 18
+  },
+  {
+    "Name": "Soju Lycee (1 bottle)",
+    "Cost": 11.99,
+    "Quantity": 0,
+    "Age": 18
+  },
+  {
+    "Name": "Soju Raspberry (1 bottle)",
+    "Cost": 12.99,
+    "Quantity": 0,
+    "Age": 18
+  },
+  {
+    "Name": "Soju Pineapple (1 bottle)",
+    "Cost": 12.99,
+    "Quantity": 0,
+    "Age": 18
+  }
+]
