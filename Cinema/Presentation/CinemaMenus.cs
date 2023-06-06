@@ -1038,7 +1038,7 @@ View menu.
         // duration
         while (true)
         {
-            Console.Write("Enter the duration of the movie: ");
+            Console.Write("Enter the duration of the movie (Example: 120): ");
             string input = Console.ReadLine()!;
             if (string.IsNullOrEmpty(input))
             {
@@ -1055,7 +1055,7 @@ View menu.
         // genre
         while (true)
         {
-            Console.Write("Enter the genre of the movie: ");
+            Console.Write("Enter the genre of the movie (Example: Horror, Thriller): ");
             string input = Console.ReadLine()!;
             if (string.IsNullOrEmpty(input))
             {
@@ -1072,7 +1072,7 @@ View menu.
         }
         while (true)
         {
-            Console.WriteLine("Enter the age rating of the movie: ");
+            Console.WriteLine("Enter the age rating of the movie (Example: 12): ");
             string rated = Console.ReadLine()!;
             if (string.IsNullOrEmpty(rated))
             {
@@ -1089,9 +1089,9 @@ View menu.
         // image
         while (true)
         {
-            Console.Write("Enter the image url: ");
+            Console.Write("Enter the image url (Format: https://.... ): ");
             imageURL = Console.ReadLine()!;
-            if (string.IsNullOrEmpty(imageURL))
+            if (string.IsNullOrEmpty(imageURL) && imageURL.StartsWith("https://") == false)
             {
                 Console.WriteLine("Image url cannot be empty!");
                 Console.WriteLine("Press any key to continue...");
