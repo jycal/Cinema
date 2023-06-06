@@ -164,6 +164,20 @@ public class VisualOverview
             System.Console.WriteLine();
             Console.WriteLine("Please choose the date you want to see the movie:\n");
             string dateChoice = Console.ReadLine()!;
+            if (dateChoice.All(Char.IsLetter))
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine($"No date found with that id\n");
+                Console.ResetColor();
+                Start(account);
+            }
+            if (CinemaMenus.IsNumber(dateChoice) == false)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine($"No date found with that id\n");
+                Console.ResetColor();
+                Start(account);
+            }
             if (string.IsNullOrEmpty(dateChoice) || Convert.ToInt32(dateChoice) <= 0 || Convert.ToInt32(dateChoice) > count)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
