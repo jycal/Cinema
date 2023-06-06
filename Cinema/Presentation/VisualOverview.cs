@@ -230,7 +230,13 @@ public class VisualOverview
                 {
                     numBoxesToSelect = Convert.ToInt32(tickets);
                 }
-
+                if (numBoxesToSelect > room.MaxSeats)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine($"Can not order more tickets than seats available\n");
+                    Console.ResetColor();
+                    Start(account);
+                }
 
             } while (numBoxesToSelect <= 0);
             Console.Clear();
