@@ -1,4 +1,7 @@
 //This class is not static so later on we can use inheritance and interfaces
+using System;
+using System.IO;
+using System.Globalization;
 public class FoodsLogic
 {
     public List<FoodModel>? _foods;
@@ -37,6 +40,38 @@ public class FoodsLogic
         FoodAccess.WriteAll(_foods);
     }
 
+    public void AddFood(FoodModel acc)
+    {
+        _foods!.Add(acc);
+        FoodAccess.WriteAll(_foods);
+    }
+
+    public bool DeleteFood(FoodModel acc)
+    {
+        //Find if there is already an model with the same id
+        string name = acc.Name;
+        var food = _foods!.Find(r => r.Name == name);
+        if (food == null)
+        {
+            return false;
+        }
+        int index = _foods!.FindIndex(s => s.Name == name!);
+
+        if (index != -1)
+        {
+            //update existing model
+            // _films[index] = film;
+            _foods!.RemoveAt(index);
+            // _foods!.ForEach((x) => { if (x.Id > film!.Id) x.Id = x.Id - 1; });
+            FoodAccess.WriteAll(_foods);
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
     public FoodModel GetByName(string name)
     {
         FoodModel foodItem = _foods!.Find(i => i.Name == name)!;
@@ -62,26 +97,83 @@ public class FoodsLogic
 
     public void ChangePrice()
     {
-        System.Console.WriteLine("Do you want to change the food prices? (Y/N)");
-        string firstanswer = Console.ReadLine()!;
-        if (firstanswer.ToUpper() == "Y")
+        string prompt = "Do you want to change the food prices?";
+        string[] options = { "Yes", "No" };
+        Menu advancedFoodMenu = new Menu(prompt, options);
+        int selectedIndex = advancedFoodMenu.Run();
+
+        switch (selectedIndex)
         {
-            System.Console.WriteLine("Which food price do you want to change?");
-            string secondanswer = Console.ReadLine()!;
-            foreach (FoodModel item in _foods!.ToList())
-            {
-                if (item.Name == secondanswer)
+            case 0:
+
+                string answer = "";
+                do
                 {
-                    System.Console.WriteLine("Enter new price:");
-                    double thirdanswer = Convert.ToDouble(Console.ReadLine())!;
-                    FoodModel food = new FoodModel(secondanswer, thirdanswer, 0, 0);
-                    UpdateList(food);
+                    System.Console.WriteLine("Which food price do you want to change?");
+                    string tempanswer = Console.ReadLine()!;
+                    if (string.IsNullOrEmpty(tempanswer))
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        System.Console.WriteLine($"Item can not be empty\n");
+                        Console.ResetColor();
+                        Console.ReadKey(true);
+                    }
+                    else
+                    {
+                        answer = tempanswer;
+                    }
+                } while (string.IsNullOrEmpty(answer) == true);
+                // System.Console.WriteLine(answer);
+                // Console.ReadKey(true);
+                bool found = false;
+                foreach (FoodModel item in _foods!.ToList())
+                {
+                    // System.Console.WriteLine(item);
+                    if (item.Name == answer)
+                    {
+                        System.Console.WriteLine("Enter new price:");
+                        string newPrice = Console.ReadLine()!;
+                        if (CinemaMenus.IsNumber(newPrice) == false || string.IsNullOrEmpty(newPrice))
+                        {
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            System.Console.WriteLine("Price has to be a number");
+                            Console.ResetColor();
+                            Console.WriteLine("Press any key to continue...");
+                            Console.ReadKey(true);
+                            ChangePrice();
+                        }
+                        System.Console.WriteLine(newPrice);
+                        double Price = double.Parse(newPrice, CultureInfo.InvariantCulture);
+                        System.Console.WriteLine(Price);
+                        Console.ReadKey(true);
+                        FoodModel food = new FoodModel(answer, Price, 0, 0);
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        System.Console.WriteLine("Price has been changed");
+                        Console.ResetColor();
+                        UpdateList(food);
+                        found = true;
+                        Console.WriteLine("Press any key to continue...");
+                        Console.ReadKey(true);
+                        break;
+                    }
+
                 }
-            }
-        }
-        if (firstanswer.ToUpper() == "N")
-        {
-            System.Console.WriteLine("No changes will be made.....");
+                if (found == false)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    System.Console.WriteLine("Item has not been found");
+                    Console.ResetColor();
+                    Console.WriteLine("Press any key to continue...");
+                    Console.ReadKey(true);
+                }
+
+                break;
+            case 1:
+                System.Console.WriteLine("Returning to menu");
+                Console.WriteLine("Press any key to continue...");
+                Console.ReadKey(true);
+                break;
+
         }
     }
 
@@ -96,7 +188,7 @@ public class FoodsLogic
         foreach (var food in _foods!)
         {
             Console.WriteLine($@"
- {food.Name}: {food.Cost}: {food.Quantity}
+ {food.Name}: {food.Cost}
 
 ============================================");
         }

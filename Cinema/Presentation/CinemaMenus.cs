@@ -1413,6 +1413,7 @@ View menu.
         foreach (Char ch in s)
         {
             if (!Char.IsDigit(ch)) return false;
+            if (s.Contains(".")) return true;
         }
         return true;
     }
@@ -1429,7 +1430,7 @@ View menu.
 |                                          |
 ============================================
 ";
-        string[] options = { "View all food", "Change a food price", "Go back" };
+        string[] options = { "View all food", "Change a food price", "Add a snack", "Remove a snack", "Go back" };
         Menu advancedFoodMenu = new Menu(prompt, options);
         int selectedIndex = advancedFoodMenu.Run();
 
@@ -1445,6 +1446,34 @@ View menu.
                 RunAdvancedFoodMenu();
                 break;
             case 2:
+                Console.WriteLine("Enter a snack name: ");
+                string? name = Console.ReadLine();
+                Console.WriteLine("Enter a snack price: ");
+                double cost = Convert.ToDouble(Console.ReadLine());
+                Console.WriteLine("Enter a snack quatity: ");
+                double quantity = Convert.ToDouble(Console.ReadLine());
+                Console.WriteLine("Enter a age rating: ");
+                int age = Convert.ToInt32(Console.ReadLine());
+                FoodModel food = new FoodModel(name!, cost, quantity, age);
+                _foodsLogic.AddFood(food);
+                // SetFoodPrice();
+                RunAdvancedFoodMenu();
+                break;
+            case 3:
+                Console.WriteLine("Enter a snack name: ");
+                string? Name = Console.ReadLine();
+                Console.WriteLine("Enter a snack price: ");
+                double Cost = Convert.ToDouble(Console.ReadLine());
+                Console.WriteLine("Enter a snack quatity: ");
+                double Quantity = Convert.ToDouble(Console.ReadLine());
+                Console.WriteLine("Enter a age rating: ");
+                int Age = Convert.ToInt32(Console.ReadLine());
+                FoodModel Food = new FoodModel(Name!, Cost, Quantity, Age);
+                _foodsLogic.DeleteFood(Food);
+                // SetFoodPrice();
+                RunAdvancedFoodMenu();
+                break;
+            case 4:
                 RunAdvancedMenu();
                 break;
         }
