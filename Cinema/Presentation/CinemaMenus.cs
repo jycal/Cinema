@@ -1413,6 +1413,7 @@ View menu.
         foreach (Char ch in s)
         {
             if (!Char.IsDigit(ch)) return false;
+            if (s.Contains(".")) return true;
         }
         return true;
     }
