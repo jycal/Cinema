@@ -100,14 +100,18 @@ public class VisualOverview
             string id = Console.ReadLine()!;
             if (string.IsNullOrEmpty(id) || Convert.ToInt32(id) <= 0)
             {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine($"No film found with that id\n");
-                Console.ResetColor();
-                //Write some code to go back to the menu
-                Console.WriteLine("Press any key to go back to the menu");
-                Console.ReadKey();
-                Console.Clear();
-                return;
+                char newId = Convert.ToChar(id);
+                if (char.IsDigit(newId))
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine($"No film found with that id\n");
+                    Console.ResetColor();
+                    //Write some code to go back to the menu
+                    Console.WriteLine("Press any key to go back to the menu");
+                    Console.ReadKey();
+                    Console.Clear();
+                    return;
+                }
             }
             else if (Convert.ToInt32(id) > 0)
             {
@@ -166,7 +170,7 @@ public class VisualOverview
         chosenDate = film.Dates[dateSelection - 1];
         index = dateSelection - 1;
 
-        Console.WriteLine("Please enter the room number\n");
+        // Console.WriteLine("Please enter the room number\n");
         int number = film.Rooms[index];
         RoomModel room = _roomsLogic.CheckEnter(number);
         if (room != null)
@@ -571,7 +575,9 @@ public class VisualOverview
                     break;
                 case 1:
                     Console.ForegroundColor = ConsoleColor.Green;
-                    Console.WriteLine("Reservation has been cancelled.");
+                    System.Console.WriteLine();
+                    Console.WriteLine($"Reservation has been cancelled.");
+                    System.Console.WriteLine();
                     Console.ResetColor();
                     Console.WriteLine("Press any key to continue...");
                     Console.ReadKey(true);

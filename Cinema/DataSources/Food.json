@@ -61,18 +61,22 @@
   },
   {
     "Name": "Heineken 0,5L",
-    "Cost": 4.5
+    "Cost": 4.5,
+    "Age": 18
   },
   {
     "Name": "Soju Lycee (1 bottle)",
-    "Cost": 11.99
+    "Cost": 11.99,
+    "Age": 18
   },
   {
     "Name": "Soju Raspberry (1 bottle)",
-    "Cost": 12.99
+    "Cost": 12.99,
+    "Age": 18
   },
   {
     "Name": "Soju Pineapple (1 bottle)",
-    "Cost": 12.99
+    "Cost": 12.99,
+    "Age": 18
   }
 ]
