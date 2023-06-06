@@ -106,5 +106,32 @@
     ],
     "totalAmount": 13.75,
     "date": "2023-06-01T15:00:00"
+  },
+  {
+    "id": 5,
+    "reservationCode": "DHawE",
+    "fullName": "John Pork",
+    "email": "Josh@nl",
+    "movie": "john Wick 4",
+    "ticketAmount": 2,
+    "snackAmount": 2,
+    "ticketTotal": 2,
+    "roomNumber": 1,
+    "seats": [
+      [
+        1,
+        2
+      ]
+    ],
+    "seatsInfo": [
+      {
+        "Item1": 1,
+        "Item2": 1,
+        "Item3": "2021-12-28T10:10:10",
+        "Item4": 1
+      }
+    ],
+    "totalAmount": 10,
+    "date": "2021-12-28T10:10:10"
   }
 ]
