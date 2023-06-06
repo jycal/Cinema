@@ -1447,21 +1447,46 @@ View menu.
             case 2:
                 Console.WriteLine("Enter a snack name: ");
                 string? name = Console.ReadLine();
+                if (name == null)
+                {
+                    Console.WriteLine("Wrong input! Enter in the correct format...");
+                    name = Console.ReadLine();
+                }
                 Console.WriteLine("Enter a snack price: ");
                 double cost = Convert.ToDouble(Console.ReadLine());
+                if (cost == null)
+                {
+                    Console.WriteLine("Wrong input! Enter in the correct format...");
+                    cost = Convert.ToDouble(Console.ReadLine());
+                }
                 Console.WriteLine("Enter a snack quatity: ");
                 double quantity = Convert.ToDouble(Console.ReadLine());
+                if (quantity == null)
+                {
+                    Console.WriteLine("Wrong input! Enter in the correct format...");
+                    quantity = Convert.ToDouble(Console.ReadLine());
+                }
                 Console.WriteLine("Enter a age rating: ");
                 int age = Convert.ToInt32(Console.ReadLine());
+                if (age == null)
+                {
+                    Console.WriteLine("Wrong input! Enter in the correct format...");
+                    age = Convert.ToInt32(Console.ReadLine());
+                }
                 FoodModel food = new FoodModel(name!, cost, quantity, age);
                 _foodsLogic.AddFood(food);
                 // SetFoodPrice();
                 RunAdvancedFoodMenu();
                 break;
             case 3:
+            string Name = " ";
+            do
+            {
                 Console.WriteLine("Enter a snack name: ");
-                string? Name = Console.ReadLine();
-                Console.WriteLine("Enter a snack price: ");
+                Name += Console.ReadLine();
+
+            } while (string.IsNullOrEmpty(Name) == true);
+            Console.WriteLine("Enter a snack price: ");
                 double Cost = Convert.ToDouble(Console.ReadLine());
                 Console.WriteLine("Enter a snack quatity: ");
                 double Quantity = Convert.ToDouble(Console.ReadLine());
