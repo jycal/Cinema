@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Security;
-using System.Text;
-using System.Text.Json;
+﻿using System.Security;
 
-
-//This class is not static so later on we can use inheritance and interfaces
 public class AccountsLogic
 {
     public List<AccountModel>? _accounts;

@@ -1,9 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-
 public class TicketLogic
 {
     public List<TicketModel>? _tickets;
@@ -111,7 +105,6 @@ public class TicketLogic
 
     }
 
-
     public double GetTotalAmount(double ticketTotal, double SnackTotal)
     {
         return ticketTotal += SnackTotal;
@@ -135,4 +128,3 @@ public class TicketLogic
         }
     }
 }
-
