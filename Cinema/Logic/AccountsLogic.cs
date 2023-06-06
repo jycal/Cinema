@@ -15,7 +15,6 @@ public class AccountsLogic
         _accounts = AccountsAccess.LoadAll();
     }
 
-
     public void UpdateList(AccountModel acc)
     {
         //Find if there is already an model with the same id
@@ -32,7 +31,6 @@ public class AccountsLogic
             _accounts.Add(acc);
         }
         AccountsAccess.WriteAll(_accounts);
-
     }
 
     public AccountModel GetById(int id)
