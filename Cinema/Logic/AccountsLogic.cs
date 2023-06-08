@@ -86,7 +86,7 @@ public class AccountsLogic
                 reservations.Add(reservation);
             }
         }
-        Console.ForegroundColor = ConsoleColor.Magenta;
+        // Console.ForegroundColor = ConsoleColor.Magenta;
         Console.WriteLine(@"==================================================
 |                                                 |
 |                  Reservations                   |

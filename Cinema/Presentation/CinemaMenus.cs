@@ -1,3 +1,4 @@
+using System.Globalization;
 using System.Security;
 
 public static class CinemaMenus
@@ -27,11 +28,13 @@ public static class CinemaMenus
         string prompt = @" ____  ____  __   ____  __    __  ___  _  _  ____     ___  __  __ _  ____  _  _   __  
 / ___)(_  _)/ _\ (  _ \(  )  (  )/ __)/ )( \(_  _)   / __)(  )(  ( \(  __)( \/ ) / _\ 
 \___ \  )( /    \ )   // (_/\ )(( (_ \) __ (  )(    ( (__  )( /    / ) _) / \/ \/    \
-(____/ (__)\_/\_/(__\_)\____/(__)\___/\_)(_/ (__)    \___)(__)\_)__)(____)\_)(_/\_/\_/
+(____/ (__)\_/\_/(__\_)\____/(__)\___/\_)(_/ (__)    \___)(__)\_)__)(____)\_)(_/\_/\_/".BrightCyan() +
+
+@"
 
 Welcome to Starlight Cinema. What would you like to do?
 (Use arrow keys to cycle through options and press enter to select an option.)
-";
+".BrightWhite();
         string[] options = { "Login", "Register", "Continue as Guest", "Contact", "Exit" };
         Menu mainMenu = new Menu(prompt, options);
         int selectedIndex = mainMenu.Run();
@@ -61,7 +64,9 @@ Welcome to Starlight Cinema. What would you like to do?
 
     private static void ExitCinema()
     {
-        Console.WriteLine("Thank you for visiting Starlight Cinema. We hope to see you again soon!");
+        System.Console.WriteLine();
+        Console.WriteLine("Thank you for visiting Starlight Cinema. We hope to see you again soon!".BrightCyan());
+        System.Console.WriteLine();
         Console.WriteLine("Press any key to exit...");
         Console.ReadKey(true);
         Console.Clear();
@@ -71,20 +76,20 @@ Welcome to Starlight Cinema. What would you like to do?
     private static void DisplayContactInfo()
     {
         System.Console.WriteLine();
-        Console.ForegroundColor = ConsoleColor.Yellow;
+        // Console.ForegroundColor = ConsoleColor.Yellow;
         Console.WriteLine(@"===============================================
 |                                              |
-|            Cinema information                |
+|            ".BrightCyan() + @"Cinema Information".BrightWhite() + @"                |
 |                                              |
 ================================================
 |                                              |
-| Phone number:  +31-655-574-244.              |
-| Location:      Wijnhaven 107,                |
-|                3011 WN  in Rotterdam         |
-| Email:         CinemaStarlightinfo@gmail.com |
+| ".BrightCyan() + @"Phone number:  +31-655-574-244.".BrightWhite() + @"              |
+| ".BrightCyan() + @"Location:      Wijnhaven 107,".BrightWhite() + @"                |
+|                ".BrightCyan() + @"3011 WN  in Rotterdam".BrightWhite() + @"         |
+| ".BrightCyan() + @"Email:         CinemaStarlightinfo@gmail.com".BrightWhite() + @" |
 |                                              |
 ================================================
-");
+".BrightCyan());
         Console.ResetColor();
         Console.WriteLine("Press any key to continue...");
         Console.ReadKey(true);
@@ -95,10 +100,10 @@ Welcome to Starlight Cinema. What would you like to do?
     {
         Console.WriteLine(@"============================================
 |                                          |
-|                 Login                    |
+|                 ".BrightCyan() + @"Login".BrightWhite() + @"                    |
 |                                          |
 ============================================
-");
+".BrightCyan());
         int tries = 3;
         bool logIn = false;
         Console.Write("Enter email and password, you have 3 tries to get the right password".Orange());
@@ -178,10 +183,10 @@ Welcome to Starlight Cinema. What would you like to do?
         Console.ForegroundColor = ConsoleColor.Yellow;
         Console.WriteLine(@"============================================
 |                                          |
-|                Register                  |
+|                ".BrightCyan() + @"Register".BrightWhite() + @"                  |
 |                                          |
 ============================================
-");
+".BrightCyan());
         Console.ResetColor();
         Console.WriteLine("Email address:");
         Console.ForegroundColor = ConsoleColor.Yellow;
@@ -306,10 +311,10 @@ Welcome to Starlight Cinema. What would you like to do?
     {
         string prompt = @"============================================
 |                                          |
-|                 Menus                    |
+|                 ".BrightCyan() + @"Menus".BrightWhite() + @"                    |
 |                                          |
 ============================================
-";
+".BrightCyan();
         string[] options = { "Movie Menu", "Catering Menu", "Ticket Menu", "Advanced Menu", "Contact", "Logout", "Exit" };
         List<string> tempOptions = new List<string>(options);
         if (_account == null)
@@ -421,11 +426,10 @@ Welcome to Starlight Cinema. What would you like to do?
 
         string prompt = @"============================================
 |                                          |
-|               Movie Menu                 |
+|               ".BrightCyan() + @"Movie Menu".BrightWhite() + @"                 |
 |                                          |
 ============================================
-View movies and order.
-";
+".BrightCyan();
         string[] options = { "Order Ticket", "Show all movies", "Show movies sorted by title", "Search movies by title", "Search movies by genre", "Go back" };
         Menu movieMenu = new Menu(prompt, options);
         int selectedIndex = movieMenu.Run();
@@ -534,11 +538,10 @@ View movies and order.
 
         string prompt = @"============================================
 |                                          |
-|              Catering Menu               |
+|              ".BrightCyan() + @"Catering Menu".BrightWhite() + @"               |
 |                                          |
 ============================================
-View menu.
-";
+".BrightCyan();
         string[] options = { "Show current menu", "Search product by name", "Go back" };
         Menu cateringMenu = new Menu(prompt, options);
         int selectedIndex = cateringMenu.Run();
@@ -642,10 +645,10 @@ View menu.
 
         string prompt = @"============================================
 |                                          |
-|              Ticket Menu                 |
+|              ".BrightCyan() + @"Ticket Menu".BrightWhite() + @"                 |
 |                                          |
 ============================================
-";
+".BrightCyan();
         string[] options = { "My tickets", "Cancel ticket", "Go back" };
         Menu ticketMenu = new Menu(prompt, options);
         int selectedIndex = ticketMenu.Run();
@@ -671,8 +674,10 @@ View menu.
         if (_account == null)
         {
             Console.ForegroundColor = ConsoleColor.Red;
+            System.Console.WriteLine();
             Console.WriteLine("You are not logged in!");
             Console.ResetColor();
+            System.Console.WriteLine();
             Console.WriteLine("Press any key to continue...");
             Console.ReadKey(true);
             return;
@@ -691,9 +696,9 @@ View menu.
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine(@"============================================
 |                                          |
-|                My Tickets                |
+|                ".BrightYellow() + @"My Tickets".BrightWhite() + @"                |
 |                                          |
-============================================");
+============================================".BrightYellow());
             foreach (ReservationModel res in reservations)
             {
                 int ID = res.Id;
@@ -723,7 +728,7 @@ View menu.
     Seats: {selectedSeats}
     Total Money Amount: ${TotalAmount}
 
-============================================";
+" + @"============================================".BrightYellow();
                 Console.WriteLine(Overview);
             }
             Console.ResetColor();
@@ -795,10 +800,10 @@ View menu.
         {
             string prompt = @"============================================
 |                                          |
-|             Advanced Menu                |
+|             ".BrightCyan() + @"Advanced Menu".BrightWhite() + @"                |
 |                                          |
 ============================================
-";
+".BrightCyan();
             string[] options = { "Advanced Movie Menu", "Advanced Seat Menu", "Advanced Food Menu", "Advanced Reservation Menu", "Advanced Revenue Menu", "Go back" };
             Menu advancedMenu = new Menu(prompt, options);
             int selectedIndex = advancedMenu.Run();
@@ -829,10 +834,10 @@ View menu.
         {
             string prompt = @"============================================
 |                                          |
-|             Advanced Menu                |
+|   ".BrightCyan() + @"Advanced Menu".BrightWhite() + @"                |
 |                                          |
 ============================================
-";
+".BrightCyan();
             string[] options = { "Advanced Reservation Menu", "Go back" };
             Menu advancedMenu = new Menu(prompt, options);
             int selectedIndex = advancedMenu.Run();
@@ -859,10 +864,10 @@ View menu.
 
         string prompt = @"============================================
 |                                          |
-|           Advanced Movie Menu            |
+|           ".BrightCyan() + @"Advanced Movie Menu".BrightWhite() + @"            |
 |                                          |
 ============================================
-";
+".BrightCyan();
         string[] options = { "View all movies", "Add a movie", "Add an old movie back", "Delete a movie", "Go back" };
         Menu advancedMovieMenu = new Menu(prompt, options);
         int selectedIndex = advancedMovieMenu.Run();
@@ -1300,10 +1305,10 @@ View menu.
 
         string prompt = @"============================================
 |                                          |
-|            Advanced Seat Menu            |
+|            ".BrightCyan() + @"Advanced Seat Menu".BrightWhite() + @"            |
 |                                          |
 ============================================
-";
+".BrightCyan();
         string[] options = { "View all seats", "Change a seat price", "Go back" };
         Menu advancedSeatMenu = new Menu(prompt, options);
         int selectedIndex = advancedSeatMenu.Run();
@@ -1427,10 +1432,10 @@ View menu.
 
         string prompt = @"============================================
 |                                          |
-|            Advanced Food Menu            |
+|            ".BrightCyan() + @"Advanced Food Menu".BrightWhite() + @"            |
 |                                          |
 ============================================
-";
+".BrightCyan();
         string[] options = { "View all food", "Change a food price", "Add a snack", "Remove a snack", "Go back" };
         Menu advancedFoodMenu = new Menu(prompt, options);
         int selectedIndex = advancedFoodMenu.Run();
@@ -1447,33 +1452,153 @@ View menu.
                 RunAdvancedFoodMenu();
                 break;
             case 2:
+                string name = string.Empty;
+                string cost = string.Empty;
+                string quantity = string.Empty;
+                string age = string.Empty;
+
                 Console.WriteLine("Enter a snack name: ");
-                string? name = Console.ReadLine();
+                name = Console.ReadLine();
+
+                if (string.IsNullOrEmpty(name))
+                {
+                    Console.WriteLine("Enter a snack name (last chance): ");
+                    name = Console.ReadLine();
+
+                    if (string.IsNullOrEmpty(name))
+                    {
+                        RunAdvancedFoodMenu();
+                    }
+                }
+
                 Console.WriteLine("Enter a snack price: ");
-                double cost = Convert.ToDouble(Console.ReadLine());
-                Console.WriteLine("Enter a snack quatity: ");
-                double quantity = Convert.ToDouble(Console.ReadLine());
-                Console.WriteLine("Enter a age rating: ");
-                int age = Convert.ToInt32(Console.ReadLine());
-                FoodModel food = new FoodModel(name!, cost, quantity, age);
+                cost = Console.ReadLine();
+
+                if (string.IsNullOrEmpty(cost) || !CinemaMenus.IsNumber(cost))
+                {
+                    Console.WriteLine("Enter a snack price (last chance): ");
+                    cost = Console.ReadLine();
+
+                    if (string.IsNullOrEmpty(cost) || !CinemaMenus.IsNumber(cost))
+                    {
+                        Console.WriteLine("Press any key to continue...");
+                        Console.ReadKey(true);
+                        RunAdvancedFoodMenu();
+                    }
+                }
+
+                Console.WriteLine("Enter a snack quantity: ");
+                quantity = Console.ReadLine();
+
+                if (string.IsNullOrEmpty(quantity) || !CinemaMenus.IsNumber(quantity))
+                {
+                    Console.WriteLine("Enter a snack quantity (last chance): ");
+                    quantity = Console.ReadLine();
+
+                    if (string.IsNullOrEmpty(quantity) || !CinemaMenus.IsNumber(quantity))
+                    {
+                        Console.WriteLine("Press any key to continue...");
+                        Console.ReadKey(true);
+                        RunAdvancedFoodMenu();
+                    }
+                }
+
+                Console.WriteLine("Enter an age rating: ");
+                age = Console.ReadLine();
+
+                if (string.IsNullOrEmpty(age) || !CinemaMenus.IsNumber(age))
+                {
+                    Console.WriteLine("Enter an age rating (last chance): ");
+                    age = Console.ReadLine();
+
+                    if (string.IsNullOrEmpty(age) || !CinemaMenus.IsNumber(age))
+                    {
+                        Console.WriteLine("Press any key to continue...");
+                        Console.ReadKey(true);
+                        RunAdvancedFoodMenu();
+                    }
+                }
+
+                FoodModel food = new FoodModel(name, double.Parse(cost, CultureInfo.InvariantCulture), double.Parse(quantity, CultureInfo.InvariantCulture), Convert.ToInt32(age));
                 _foodsLogic.AddFood(food);
                 // SetFoodPrice();
                 RunAdvancedFoodMenu();
                 break;
+
             case 3:
+                string Name = string.Empty;
+                string Cost = string.Empty;
+                string Quantity = string.Empty;
+                string Age = string.Empty;
+
                 Console.WriteLine("Enter a snack name: ");
-                string? Name = Console.ReadLine();
+                Name = Console.ReadLine();
+
+                if (string.IsNullOrEmpty(Name))
+                {
+                    Console.WriteLine("Enter a snack name (last chance): ");
+                    Name = Console.ReadLine();
+
+                    if (string.IsNullOrEmpty(Name))
+                    {
+                        RunAdvancedFoodMenu();
+                    }
+                }
+
                 Console.WriteLine("Enter a snack price: ");
-                double Cost = Convert.ToDouble(Console.ReadLine());
-                Console.WriteLine("Enter a snack quatity: ");
-                double Quantity = Convert.ToDouble(Console.ReadLine());
-                Console.WriteLine("Enter a age rating: ");
-                int Age = Convert.ToInt32(Console.ReadLine());
-                FoodModel Food = new FoodModel(Name!, Cost, Quantity, Age);
+                Cost = Console.ReadLine();
+
+                if (string.IsNullOrEmpty(Cost) || !CinemaMenus.IsNumber(Cost))
+                {
+                    Console.WriteLine("Enter a snack price (last chance): ");
+                    Cost = Console.ReadLine();
+
+                    if (string.IsNullOrEmpty(Cost) || !CinemaMenus.IsNumber(Cost))
+                    {
+                        Console.WriteLine("Press any key to continue...");
+                        Console.ReadKey(true);
+                        RunAdvancedFoodMenu();
+                    }
+                }
+
+                Console.WriteLine("Enter a snack quantity: ");
+                Quantity = Console.ReadLine();
+
+                if (string.IsNullOrEmpty(Quantity) || !CinemaMenus.IsNumber(Quantity))
+                {
+                    Console.WriteLine("Enter a snack quantity (last chance): ");
+                    Quantity = Console.ReadLine();
+
+                    if (string.IsNullOrEmpty(Quantity) || !CinemaMenus.IsNumber(Quantity))
+                    {
+                        Console.WriteLine("Press any key to continue...");
+                        Console.ReadKey(true);
+                        RunAdvancedFoodMenu();
+                    }
+                }
+
+                Console.WriteLine("Enter an age rating: ");
+                Age = Console.ReadLine();
+
+                if (string.IsNullOrEmpty(Age) || !CinemaMenus.IsNumber(Age))
+                {
+                    Console.WriteLine("Enter an age rating (last chance): ");
+                    Age = Console.ReadLine();
+
+                    if (string.IsNullOrEmpty(Age) || !CinemaMenus.IsNumber(Age))
+                    {
+                        Console.WriteLine("Press any key to continue...");
+                        Console.ReadKey(true);
+                        RunAdvancedFoodMenu();
+                    }
+                }
+
+                FoodModel Food = new FoodModel(Name, double.Parse(Cost, CultureInfo.InvariantCulture), double.Parse(Quantity, CultureInfo.InvariantCulture), Convert.ToInt32(Age));
                 _foodsLogic.DeleteFood(Food);
                 // SetFoodPrice();
                 RunAdvancedFoodMenu();
                 break;
+
             case 4:
                 RunAdvancedMenu();
                 break;
@@ -1494,10 +1619,10 @@ View menu.
 
         string prompt = @"============================================
 |                                          |
-|         Advanced Reservation Menu        |
+|".BrightCyan() + @"Advanced Reservation Menu".BrightWhite() + @"        |
 |                                          |
 ============================================
-";
+".BrightCyan();
         string[] options = { "View all reservations", "Search a reservation", "Delete a reservation", "Go back" };
         Menu advancedReservationMenu = new Menu(prompt, options);
         int selectedIndex = advancedReservationMenu.Run();
@@ -1537,7 +1662,9 @@ View menu.
         var reservation = _reservationsLogic.GetByEmail(email);
         if (reservation == null)
         {
+            Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("Email not found!");
+            Console.ResetColor();
             Console.WriteLine("Press any key to continue...");
             Console.ReadKey(true);
             return;
@@ -1545,12 +1672,12 @@ View menu.
 
         Console.WriteLine(@"==================================================
 |                                                 |
-|                  Reservations                   |
+|                  ".BrightYellow() + @"Reservations".BrightWhite() + @"                   |
 |                                                 |
-==================================================");
+==================================================".BrightYellow());
 
 
-        Console.ForegroundColor = ConsoleColor.Magenta;
+        Console.ForegroundColor = ConsoleColor.Yellow;
         string selectedSeats = string.Join(", ", reservation.Seats.Select(seat => $"Row {seat[0] + 1}, Seat {seat[1] + 1}"));
         string Overview = $@"
   Movie: {reservation.Movie}
@@ -1558,7 +1685,7 @@ View menu.
   Email: {reservation.Email}
   Ticket Amount: {reservation.TicketAmount}
   Seats: {selectedSeats}
-  Total Money Amount: {reservation.TotalAmount}
+  Total Money Amount: {Math.Round(reservation.TotalAmount, 2)}
 
 ==================================================";
         Console.WriteLine(Overview);
@@ -1577,7 +1704,9 @@ View menu.
         if (string.IsNullOrEmpty(input))
         {
             Console.ForegroundColor = ConsoleColor.Red;
+            System.Console.WriteLine();
             Console.WriteLine("Reservation not found");
+            System.Console.WriteLine();
             Console.ResetColor();
             Console.WriteLine("Press any key to continue...");
             Console.ReadKey(true);
@@ -1589,13 +1718,17 @@ View menu.
         {
             Console.ForegroundColor = ConsoleColor.Green;
             _reservationsLogic.DeleteReservation(id);
+            System.Console.WriteLine();
             Console.WriteLine("Reservation deleted");
+            System.Console.WriteLine();
             Console.ResetColor();
         }
         else
         {
             Console.ForegroundColor = ConsoleColor.Red;
+            System.Console.WriteLine();
             Console.WriteLine("Reservation not found");
+            System.Console.WriteLine();
             Console.ResetColor();
         }
         Console.WriteLine("Press any key to continue...");
@@ -1608,13 +1741,14 @@ View menu.
         {
             _revenueLogic = new RevenueLogic();
         }
-
+        Console.ForegroundColor = ConsoleColor.Blue;
         string prompt = @"============================================
 |                                          |
-|                 Revenue                  |
+|                 ".BrightCyan() + @"Revenue".BrightWhite() + @"                  |
 |                                          |
 ============================================
-";
+".BrightCyan();
+        Console.ResetColor();
         string[] options = { "View revenue", "Go back" };
         Menu advancedReservationMenu = new Menu(prompt, options);
         int selectedIndex = advancedReservationMenu.Run();
@@ -1634,7 +1768,7 @@ View menu.
     private static void ShowRevenue()
     {
         RevenueModel revenue = _revenueLogic.GetById(1);
-        Console.WriteLine($"Total revenue: {revenue.Money}");
+        Console.WriteLine($"Total revenue: ${revenue.Money}");
         Console.WriteLine();
         Console.WriteLine("Press any key to continue...");
         Console.ReadKey(true);

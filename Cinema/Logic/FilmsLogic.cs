@@ -2,9 +2,9 @@ public class FilmsLogic
 {
     private string CurrentMovieOverview = @"============================================
 |                                          |
-|                 Movies                   |
+|               ".BrightYellow() + @"Movie Menu".BrightWhite() + @"                 |
 |                                          |
-============================================";
+============================================".BrightYellow();
     private List<FilmModel> _films;
 
     //Static properties are shared across all instances of the class
@@ -165,7 +165,7 @@ public class FilmsLogic
         removeOldies();
 
         var MoviesFromJson = FilmsAccess.LoadAll();
-        Console.ForegroundColor = ConsoleColor.Yellow;
+        // Console.ForegroundColor = ConsoleColor.Yellow;
         Console.WriteLine(CurrentMovieOverview);
         foreach (FilmModel item in MoviesFromJson)
         {
@@ -190,14 +190,14 @@ public class FilmsLogic
             string Overview = $@"
   ID: {ID}
   Dates: {Dates}
-  Rooms: {Rooms[0]}
+  Rooms: {Rooms}
   Title: {Title}
   Description: {Description}
   Duration: {Duration}
   Genre: {Genre}
   Rated: {Age}
 
-============================================";
+" + @"============================================".BrightYellow();
             Console.WriteLine(Overview);
         }
         Console.ResetColor();
@@ -208,7 +208,7 @@ public class FilmsLogic
         removeOldies();
 
         var MoviesFromJson = FilmsAccess.LoadAll();
-        Console.ForegroundColor = ConsoleColor.Yellow;
+        // Console.ForegroundColor = ConsoleColor.Yellow;
         Console.WriteLine(CurrentMovieOverview);
         foreach (FilmModel item in MoviesFromJson)
         {
@@ -245,7 +245,7 @@ public class FilmsLogic
   Genre: {Genre}
   Rated: {Age}
 
-============================================";
+" + @"============================================".BrightYellow();
             Console.WriteLine(Overview);
         }
         Console.ResetColor();
@@ -256,16 +256,19 @@ public class FilmsLogic
         removeOldies();
 
         var MoviesFromJson = FilmsAccess.LoadAll();
-        Console.ForegroundColor = ConsoleColor.Magenta;
+        // Console.ForegroundColor = ConsoleColor.Magenta;
         Console.WriteLine(CurrentMovieOverview);
         foreach (FilmModel item in MoviesFromJson)
         {
             if (item.Dates.Count == 0)
             {
+                // System.Console.WriteLine();
+                // System.Console.WriteLine("No movies found..".Red());
+                // System.Console.WriteLine();
                 continue;
             }
 
-            if (item.Title == filter)
+            if (item.Title.ToLower().Contains(filter.ToLower()))
             {
                 int ID = item.Id;
                 string Dates = string.Join(", ", item.Dates);
@@ -295,32 +298,35 @@ public class FilmsLogic
   Genre: {Genre}
   Rated: {Age}
 
-============================================";
+" + @"============================================".BrightYellow();
                 Console.WriteLine(Overview);
             }
         }
         Console.ResetColor();
         Console.WriteLine();
-        Console.WriteLine("Press any key to continue...");
-        Console.ReadKey(true);
+        // Console.WriteLine("Press any key to continue...");
+        // Console.ReadKey(true);
     }
     public void SearchByGenre(string filter)
     {
         removeOldies();
 
         var MoviesFromJson = FilmsAccess.LoadAll();
-        Console.ForegroundColor = ConsoleColor.Magenta;
+        // Console.ForegroundColor = ConsoleColor.Magenta;
         Console.WriteLine(CurrentMovieOverview);
         foreach (FilmModel item in MoviesFromJson)
         {
             if (item.Dates.Count == 0)
             {
-                continue;
+                // System.Console.WriteLine();
+                // System.Console.WriteLine("No movies found..".Red());
+                // System.Console.WriteLine();
+                break;
             }
 
             foreach (var genre in item.Genre)
             {
-                if (genre != filter)
+                if (!genre.ToLower().Contains(filter.ToLower()))
                 {
                     continue;
                 }
@@ -354,7 +360,7 @@ public class FilmsLogic
   Genre: {Genre}
   Rated: {Age}
 
-============================================";
+" + @"============================================".BrightYellow();
                     Console.WriteLine(Overview);
                 }
             }
@@ -367,7 +373,7 @@ public class FilmsLogic
         removeOldies();
 
         var MoviesFromJson = FilmsAccess.LoadAll();
-        Console.ForegroundColor = ConsoleColor.Magenta;
+        // Console.ForegroundColor = ConsoleColor.Magenta;
         Console.WriteLine(CurrentMovieOverview);
         var descListOb = MoviesFromJson.OrderBy(x => x.Title);
         // Console.WriteLine(descListOb);
@@ -406,7 +412,7 @@ public class FilmsLogic
   Genre: {Genre}
   Rated: {Age}
 
-============================================";
+" + @"============================================".BrightYellow();
             Console.WriteLine(Overview);
         }
         Console.ResetColor();

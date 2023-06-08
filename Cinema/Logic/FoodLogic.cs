@@ -138,9 +138,9 @@ public class FoodsLogic
                             Console.ReadKey(true);
                             ChangePrice();
                         }
-                        System.Console.WriteLine(newPrice);
+                        // System.Console.WriteLine(newPrice);
                         double Price = double.Parse(newPrice, CultureInfo.InvariantCulture);
-                        System.Console.WriteLine(Price);
+                        // System.Console.WriteLine(Price);
                         Console.ReadKey(true);
                         FoodModel food = new FoodModel(answer, Price, 0, 0);
                         Console.ForegroundColor = ConsoleColor.Green;
@@ -176,16 +176,16 @@ public class FoodsLogic
     {
         Console.WriteLine(@"============================================
 |                                           |
-|                   Menu                    |
+|     ".BrightYellow() + @"Advanced Reservation Menu".BrightWhite() + @"                    |
 |                                           |
-============================================");
+============================================".BrightYellow());
 
         foreach (var food in _foods!)
         {
             Console.WriteLine($@"
  {food.Name}: {food.Cost}
 
-============================================");
+" + @"============================================".BrightYellow());
         }
         Console.WriteLine();
         Console.WriteLine("Press any key to continue...");
