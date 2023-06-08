@@ -190,7 +190,7 @@ public class FilmsLogic
             string Overview = $@"
   ID: {ID}
   Dates: {Dates}
-  Rooms: {Rooms[0]}
+  Rooms: {Rooms}
   Title: {Title}
   Description: {Description}
   Duration: {Duration}
