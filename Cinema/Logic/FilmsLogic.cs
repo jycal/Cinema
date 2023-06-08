@@ -262,10 +262,13 @@ public class FilmsLogic
         {
             if (item.Dates.Count == 0)
             {
+                // System.Console.WriteLine();
+                // System.Console.WriteLine("No movies found..".Red());
+                // System.Console.WriteLine();
                 continue;
             }
 
-            if (item.Title == filter)
+            if (item.Title.ToLower().Contains(filter.ToLower()))
             {
                 int ID = item.Id;
                 string Dates = string.Join(", ", item.Dates);
@@ -301,8 +304,8 @@ public class FilmsLogic
         }
         Console.ResetColor();
         Console.WriteLine();
-        Console.WriteLine("Press any key to continue...");
-        Console.ReadKey(true);
+        // Console.WriteLine("Press any key to continue...");
+        // Console.ReadKey(true);
     }
     public void SearchByGenre(string filter)
     {
@@ -315,12 +318,15 @@ public class FilmsLogic
         {
             if (item.Dates.Count == 0)
             {
-                continue;
+                // System.Console.WriteLine();
+                // System.Console.WriteLine("No movies found..".Red());
+                // System.Console.WriteLine();
+                break;
             }
 
             foreach (var genre in item.Genre)
             {
-                if (genre != filter)
+                if (!genre.ToLower().Contains(filter.ToLower()))
                 {
                     continue;
                 }
