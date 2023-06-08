@@ -2,7 +2,7 @@ public class FilmsLogic
 {
     private string CurrentMovieOverview = @"============================================
 |                                          |
-|                 ".BrightYellow() + @"Advanced Reservation Menu".BrightWhite() + @"                   |
+|               ".BrightYellow() + @"Movie Menu".BrightWhite() + @"                 |
 |                                          |
 ============================================".BrightYellow();
     private List<FilmModel> _films;
