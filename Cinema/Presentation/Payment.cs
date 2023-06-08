@@ -6,9 +6,9 @@ public static class Payment
         bool isValid = false;
         do
         {
-            Console.WriteLine("\n--------------------------------");
-            Console.WriteLine("         PAYPAL PAYMENT         ");
-            Console.WriteLine("--------------------------------");
+            Console.WriteLine("\n--------------------------------".BrightCyan());
+            Console.WriteLine("         PAYPAL PAYMENT         ".BrightWhite());
+            Console.WriteLine("--------------------------------".BrightCyan());
             Console.WriteLine("To go through with the payment, please enter 6 digits of your bank number:");
             Console.WriteLine("To return to the main menu, enter '0'.");
             bank = Console.ReadLine()!;
@@ -45,9 +45,9 @@ public static class Payment
         bool isValid = false;
         do
         {
-            Console.WriteLine("\n--------------------------------");
-            Console.WriteLine("          IDEAL PAYMENT         ");
-            Console.WriteLine("--------------------------------");
+            Console.WriteLine("\n--------------------------------".BrightCyan());
+            Console.WriteLine("          IDEAL PAYMENT         ".BrightWhite());
+            Console.WriteLine("--------------------------------".BrightCyan());
             Console.WriteLine("Please enter your bank number (format: NL-000-000):\n");
             Console.WriteLine("To return to the main menu, enter '0'.");
             bank = Console.ReadLine()!;
