@@ -92,24 +92,34 @@ public class VisualOverview
         {
             Console.WriteLine("Please enter the movie id");
             string id = Console.ReadLine()!;
-            if (string.IsNullOrEmpty(id) || Convert.ToInt32(id) <= 0)
+            if (CinemaMenus.IsNumber(id) == false)
             {
-                char newId = Convert.ToChar(id);
-                if (char.IsDigit(newId))
-                {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine($"No film found with that id\n");
-                    Console.ResetColor();
-                    //Write some code to go back to the menu
-                    Console.WriteLine("Press any key to go back to the menu");
-                    Console.ReadKey();
-                    Console.Clear();
-                    return;
-                }
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine($"No film found with that id\n");
+                Console.ResetColor();
+                Start(account);
+            }
+            if (string.IsNullOrEmpty(id) || Convert.ToInt32(id) < 0)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine($"No film found with that id\n");
+                Console.ResetColor();
+                //Write some code to go back to the menu
+                Console.WriteLine("Press any key to go back to the menu");
+                Console.ReadKey();
+                Console.Clear();
+                return;
             }
             else if (Convert.ToInt32(id) > 0)
             {
                 movieId = Convert.ToInt32(id);
+            }
+            if (CinemaMenus._filmsLogic.GetById(movieId) == null)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine($"No film found with that id\n");
+                Console.ResetColor();
+                Start(account);
             }
 
         } while (movieId <= 0);
@@ -148,6 +158,20 @@ public class VisualOverview
             System.Console.WriteLine();
             Console.WriteLine("Please choose the date you want to see the movie:\n");
             string dateChoice = Console.ReadLine()!;
+            if (dateChoice.All(Char.IsLetter))
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine($"Please enter a valid date\n");
+                Console.ResetColor();
+                Start(account);
+            }
+            if (CinemaMenus.IsNumber(dateChoice) == false)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine($"Please enter a valid date\n");
+                Console.ResetColor();
+                Start(account);
+            }
             if (string.IsNullOrEmpty(dateChoice) || Convert.ToInt32(dateChoice) <= 0 || Convert.ToInt32(dateChoice) > count)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
@@ -175,6 +199,20 @@ public class VisualOverview
             {
                 Console.WriteLine("How many tickets would you like to order?");
                 string tickets = Console.ReadLine()!;
+                if (tickets.All(Char.IsLetter))
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine($"Must enter a valid number\n");
+                    Console.ResetColor();
+                    Start(account);
+                }
+                if (CinemaMenus.IsNumber(tickets) == false)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine($"Must enter a valid number\n");
+                    Console.ResetColor();
+                    Start(account);
+                }
                 if (string.IsNullOrEmpty(tickets) || Convert.ToInt32(tickets) <= 0)
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
@@ -186,7 +224,13 @@ public class VisualOverview
                 {
                     numBoxesToSelect = Convert.ToInt32(tickets);
                 }
-
+                if (numBoxesToSelect > room.MaxSeats)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine($"Can not order more tickets than seats available\n");
+                    Console.ResetColor();
+                    Start(account);
+                }
 
             } while (numBoxesToSelect <= 0);
             Console.Clear();
