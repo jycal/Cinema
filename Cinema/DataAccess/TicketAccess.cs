@@ -1,20 +1,14 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Text.Json;
 
 public class TicketAccess
 {
-    static string path = System.IO.Path.GetFullPath(System.IO.Path.Combine(Environment.CurrentDirectory, @"DataSources/ticket.json"));
-
+    public static string path = System.IO.Path.GetFullPath(System.IO.Path.Combine(Environment.CurrentDirectory, @"DataSources/ticket.json"));
 
     public static List<TicketModel> LoadAll()
     {
         string json = File.ReadAllText(path);
         return JsonSerializer.Deserialize<List<TicketModel>>(json)!;
     }
-
 
     public static void WriteAll(List<TicketModel> room)
     {

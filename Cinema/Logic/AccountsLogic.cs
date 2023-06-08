@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Security;
-using System.Text;
-using System.Text.Json;
+﻿using System.Security;
 
-
-//This class is not static so later on we can use inheritance and interfaces
 public class AccountsLogic
 {
     public List<AccountModel>? _accounts;
@@ -21,7 +14,6 @@ public class AccountsLogic
     {
         _accounts = AccountsAccess.LoadAll();
     }
-
 
     public void UpdateList(AccountModel acc)
     {
@@ -39,7 +31,6 @@ public class AccountsLogic
             _accounts.Add(acc);
         }
         AccountsAccess.WriteAll(_accounts);
-
     }
 
     public AccountModel GetById(int id)
@@ -95,7 +86,7 @@ public class AccountsLogic
                 reservations.Add(reservation);
             }
         }
-        Console.ForegroundColor = ConsoleColor.Magenta;
+        // Console.ForegroundColor = ConsoleColor.Magenta;
         Console.WriteLine(@"==================================================
 |                                                 |
 |                  Reservations                   |

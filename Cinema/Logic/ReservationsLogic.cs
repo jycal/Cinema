@@ -1,9 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-
 public class ReservationsLogic
 {
     public List<ReservationModel>? _reservations;
@@ -60,7 +54,6 @@ public class ReservationsLogic
             _reservations.Add(film);
         }
         ReservationAccess.WriteAll(_reservations);
-
     }
 
     public void DeleteReservation(int id)
@@ -76,7 +69,7 @@ public class ReservationsLogic
             RoomModel room = roomsLogic.GetById(reservation!.RoomNumber);
             foreach (var seat in reservation!.SeatsInfo)
             {
-                room.Seats.Remove(seat);                   
+                room.Seats.Remove(seat);
             }
             roomsLogic.UpdateList(room);
 
@@ -112,7 +105,7 @@ public class ReservationsLogic
                 // film id, room id, date, seat number
                 foreach (var seat in reservation!.SeatsInfo)
                 {
-                    room.Seats.Remove(seat);                   
+                    room.Seats.Remove(seat);
                 }
                 roomsLogic.UpdateList(room);
 
@@ -140,12 +133,12 @@ public class ReservationsLogic
     public static void ReservationOverview()
     {
         var ReservationsFromJson = ReservationAccess.LoadAll();
-        Console.ForegroundColor = ConsoleColor.Magenta;
+        // Console.ForegroundColor = ConsoleColor.Yellow;
         Console.WriteLine(@"==================================================
 |                                                 |
-|                  Reservations                   |
+|                  ".BrightCyan() + @"Reservations".BrightWhite() + @"                   |
 |                                                 |
-==================================================");
+==================================================".BrightCyan());
         foreach (ReservationModel reservation in ReservationsFromJson)
         {
 
@@ -165,9 +158,9 @@ public class ReservationsLogic
   Email: {Email}
   Ticket Amount: {TicketAmount}
   Seats: {selectedSeats}
-  Total Money Amount: {TotalAmount}
+  Total Money Amount: {Math.Round(TotalAmount, 2)}
 
-==================================================";
+" + @"==================================================".BrightCyan();
             Console.WriteLine(Overview);
             Console.ResetColor();
 

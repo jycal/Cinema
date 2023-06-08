@@ -1,11 +1,8 @@
 using System.Text.Json;
 
-
-static class RoomAccess
+public static class RoomAccess
 {
-
-    static string path = System.IO.Path.GetFullPath(System.IO.Path.Combine(Environment.CurrentDirectory, @"DataSources/rooms.json"));
-
+    public static string path = System.IO.Path.GetFullPath(System.IO.Path.Combine(Environment.CurrentDirectory, @"DataSources/rooms.json"));
 
     public static List<RoomModel> LoadAll()
     {
@@ -13,15 +10,10 @@ static class RoomAccess
         return JsonSerializer.Deserialize<List<RoomModel>>(json)!;
     }
 
-
     public static void WriteAll(List<RoomModel> room)
     {
         var options = new JsonSerializerOptions { WriteIndented = true };
         string json = JsonSerializer.Serialize(room, options);
         File.WriteAllText(path, json);
     }
-
-
-
-
 }

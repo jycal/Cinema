@@ -1,20 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Net.Http;
-using System.Net;
-using System.IO;
-using System.Text;
-using Newtonsoft.Json;
-
 public class FilmsLogic
 {
     private string CurrentMovieOverview = @"============================================
 |                                          |
-|                 Movies                   |
+|                 ".BrightYellow() + @"Advanced Reservation Menu".BrightWhite() + @"                   |
 |                                          |
-============================================";
+============================================".BrightYellow();
     private List<FilmModel> _films;
 
     //Static properties are shared across all instances of the class
@@ -175,7 +165,7 @@ public class FilmsLogic
         removeOldies();
 
         var MoviesFromJson = FilmsAccess.LoadAll();
-        Console.ForegroundColor = ConsoleColor.Yellow;
+        // Console.ForegroundColor = ConsoleColor.Yellow;
         Console.WriteLine(CurrentMovieOverview);
         foreach (FilmModel item in MoviesFromJson)
         {
@@ -207,7 +197,7 @@ public class FilmsLogic
   Genre: {Genre}
   Rated: {Age}
 
-============================================";
+" + @"============================================".BrightYellow();
             Console.WriteLine(Overview);
         }
         Console.ResetColor();
@@ -218,7 +208,7 @@ public class FilmsLogic
         removeOldies();
 
         var MoviesFromJson = FilmsAccess.LoadAll();
-        Console.ForegroundColor = ConsoleColor.Yellow;
+        // Console.ForegroundColor = ConsoleColor.Yellow;
         Console.WriteLine(CurrentMovieOverview);
         foreach (FilmModel item in MoviesFromJson)
         {
@@ -255,7 +245,7 @@ public class FilmsLogic
   Genre: {Genre}
   Rated: {Age}
 
-============================================";
+" + @"============================================".BrightYellow();
             Console.WriteLine(Overview);
         }
         Console.ResetColor();
@@ -266,7 +256,7 @@ public class FilmsLogic
         removeOldies();
 
         var MoviesFromJson = FilmsAccess.LoadAll();
-        Console.ForegroundColor = ConsoleColor.Magenta;
+        // Console.ForegroundColor = ConsoleColor.Magenta;
         Console.WriteLine(CurrentMovieOverview);
         foreach (FilmModel item in MoviesFromJson)
         {
@@ -305,7 +295,7 @@ public class FilmsLogic
   Genre: {Genre}
   Rated: {Age}
 
-============================================";
+" + @"============================================".BrightYellow();
                 Console.WriteLine(Overview);
             }
         }
@@ -319,7 +309,7 @@ public class FilmsLogic
         removeOldies();
 
         var MoviesFromJson = FilmsAccess.LoadAll();
-        Console.ForegroundColor = ConsoleColor.Magenta;
+        // Console.ForegroundColor = ConsoleColor.Magenta;
         Console.WriteLine(CurrentMovieOverview);
         foreach (FilmModel item in MoviesFromJson)
         {
@@ -364,7 +354,7 @@ public class FilmsLogic
   Genre: {Genre}
   Rated: {Age}
 
-============================================";
+" + @"============================================".BrightYellow();
                     Console.WriteLine(Overview);
                 }
             }
@@ -377,7 +367,7 @@ public class FilmsLogic
         removeOldies();
 
         var MoviesFromJson = FilmsAccess.LoadAll();
-        Console.ForegroundColor = ConsoleColor.Magenta;
+        // Console.ForegroundColor = ConsoleColor.Magenta;
         Console.WriteLine(CurrentMovieOverview);
         var descListOb = MoviesFromJson.OrderBy(x => x.Title);
         // Console.WriteLine(descListOb);
@@ -416,19 +406,9 @@ public class FilmsLogic
   Genre: {Genre}
   Rated: {Age}
 
-============================================";
+" + @"============================================".BrightYellow();
             Console.WriteLine(Overview);
         }
         Console.ResetColor();
     }
-
-    // HttpClient is intended to be instantiated once per application, rather than per-use. See Remarks.
-    // public readonly HttpClient client = new HttpClient();
-
-    // public void Task()
-    // {
-    //     WebClient client = new WebClient();
-    //     String downloadedString = client.DownloadString("https://www.imdb.com/title/tt6718170/?ref_=hm_fanfav_tt_i_1_pd_fp1");
-    //     System.Console.WriteLine(downloadedString);
-    // }
 }

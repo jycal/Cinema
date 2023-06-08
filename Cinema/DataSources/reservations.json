@@ -1,29 +1,29 @@
 [
   {
     "id": 1,
-    "reservationCode": "8E3O4IA",
+    "reservationCode": "5KCBVTP",
     "fullName": "meme",
     "email": "meganpieters3@gmail.com",
-    "movie": "65",
+    "movie": "Dungeons \u0026 Dragons: Honor Among Thieves",
     "ticketAmount": 1,
-    "snackAmount": 36.720000000000006,
-    "ticketTotal": 13,
+    "snackAmount": 7.5,
+    "ticketTotal": 10,
     "roomNumber": 1,
     "seats": [
       [
         4,
-        3
+        2
       ]
     ],
     "seatsInfo": [
       {
-        "Item1": 1,
+        "Item1": 8,
         "Item2": 1,
-        "Item3": "2023-06-01T15:00:00",
-        "Item4": 51
+        "Item3": "2023-08-03T16:00:00",
+        "Item4": 50
       }
     ],
-    "totalAmount": 49.720000000000006,
-    "date": "2023-06-01T15:00:00"
+    "totalAmount": 17.5,
+    "date": "2023-08-03T16:00:00"
   }
 ]

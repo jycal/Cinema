@@ -1,6 +1,3 @@
-//This class is not static so later on we can use inheritance and interfaces
-using System;
-using System.IO;
 using System.Globalization;
 public class FoodsLogic
 {
@@ -20,7 +17,6 @@ public class FoodsLogic
     {
         _foods = FoodAccess.LoadAll();
     }
-
 
     public void UpdateList(FoodModel acc)
     {
@@ -173,7 +169,6 @@ public class FoodsLogic
                 Console.WriteLine("Press any key to continue...");
                 Console.ReadKey(true);
                 break;
-
         }
     }
 
@@ -181,16 +176,16 @@ public class FoodsLogic
     {
         Console.WriteLine(@"============================================
 |                                           |
-|                   Menu                    |
+|     ".BrightYellow() + @"Advanced Reservation Menu".BrightWhite() + @"                    |
 |                                           |
-============================================");
+============================================".BrightYellow());
 
         foreach (var food in _foods!)
         {
             Console.WriteLine($@"
  {food.Name}: {food.Cost}
 
-============================================");
+" + @"============================================".BrightYellow());
         }
         Console.WriteLine();
         Console.WriteLine("Press any key to continue...");
@@ -290,8 +285,6 @@ public class FoodsLogic
                 }
                 else
                 {
-
-
                     food.Quantity += quantity;
 
                     if (orderedFood != null)
@@ -306,9 +299,7 @@ public class FoodsLogic
                                 orderedFood.Remove(item);
                                 break;
                             }
-
                         }
-
                     }
 
                     SnacksTotal += food.Cost * quantity;
@@ -382,6 +373,3 @@ public class FoodsLogic
         return true;
     }
 }
-
-
-
