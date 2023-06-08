@@ -198,7 +198,7 @@ public class VisualOverview
 
         // Console.WriteLine("Please enter the room number\n");
         int number = film.Rooms[index];
-        RoomModel room = _roomsLogic.CheckEnter(number);
+        RoomModel room = _roomsLogic!.CheckEnter(number);
         if (room.Seats.Count() == room.MaxSeats)
         {
             Console.ForegroundColor = ConsoleColor.Red;
@@ -211,49 +211,49 @@ public class VisualOverview
         }
         if (room != null)
         {
-            // Ask the user for a number input
-            int numBoxesToSelect = 0;
-            do
-            {
-                Console.WriteLine("How many tickets would you like to order?");
-                string tickets = Console.ReadLine()!;
-                if (tickets.All(Char.IsLetter))
-                {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine($"Must enter a valid number\n");
-                    Console.ResetColor();
-                    Start(account);
-                }
-                if (CinemaMenus.IsNumber(tickets) == false)
-                {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine($"Must enter a valid number\n");
-                    Console.ResetColor();
-                    Start(account);
-                }
-                if (string.IsNullOrEmpty(tickets) || Convert.ToInt32(tickets) <= 0)
-                {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    System.Console.WriteLine($"\nMust enter a valid number\n");
-                    Console.ResetColor();
-                    continue;
-                }
-                else if (Convert.ToInt32(tickets) > 0)
-                {
-                    numBoxesToSelect = Convert.ToInt32(tickets);
-                }
-                if (numBoxesToSelect > room.MaxSeats)
-                {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine($"Can not order more tickets than seats available\n");
-                    Console.ResetColor();
-                    Start(account);
-                }
+            // // Ask the user for a number input
+            // int numBoxesToSelect = 0;
+            // do
+            // {
+            //     Console.WriteLine("How many tickets would you like to order?");
+            //     string tickets = Console.ReadLine()!;
+            //     if (tickets.All(Char.IsLetter))
+            //     {
+            //         Console.ForegroundColor = ConsoleColor.Red;
+            //         Console.WriteLine($"Must enter a valid number\n");
+            //         Console.ResetColor();
+            //         Start(account);
+            //     }
+            //     if (CinemaMenus.IsNumber(tickets) == false)
+            //     {
+            //         Console.ForegroundColor = ConsoleColor.Red;
+            //         Console.WriteLine($"Must enter a valid number\n");
+            //         Console.ResetColor();
+            //         Start(account);
+            //     }
+            //     if (string.IsNullOrEmpty(tickets) || Convert.ToInt32(tickets) <= 0)
+            //     {
+            //         Console.ForegroundColor = ConsoleColor.Red;
+            //         System.Console.WriteLine($"\nMust enter a valid number\n");
+            //         Console.ResetColor();
+            //         continue;
+            //     }
+            //     else if (Convert.ToInt32(tickets) > 0)
+            //     {
+            //         numBoxesToSelect = Convert.ToInt32(tickets);
+            //     }
+            //     if (numBoxesToSelect > room.MaxSeats)
+            //     {
+            //         Console.ForegroundColor = ConsoleColor.Red;
+            //         Console.WriteLine($"Can not order more tickets than seats available\n");
+            //         Console.ResetColor();
+            //         Start(account);
+            //     }
 
-            } while (numBoxesToSelect <= 0);
-            Console.Clear();
+            // } while (numBoxesToSelect <= 0);
+            // Console.Clear();
 
-            Run(room, film, chosenDate, numBoxesToSelect);
+            Run(room, film, chosenDate);
         }
         else
         {
@@ -261,7 +261,7 @@ public class VisualOverview
         }
     }
 
-    public static void Run(RoomModel room, FilmModel film, DateTime chosenDate, int numBoxesToSelect)
+    public static void Run(RoomModel room, FilmModel film, DateTime chosenDate)
     {
 
         // RoomModel room = _roomsLogic.CheckEnter(1);
@@ -294,8 +294,8 @@ public class VisualOverview
         // Print the initial box to the console
         PrintBox();
 
-        // Move the cursor or select/deselect a box when keys are pressed
-        while (boxesSelected < numBoxesToSelect)
+        bool exitLoop = false; // Flag to exit the loop
+        while (!exitLoop)
         {
             ConsoleKeyInfo keyInfo = Console.ReadKey(true);
             Console.CursorVisible = false;
@@ -362,6 +362,44 @@ public class VisualOverview
                         PrintBox();
                     }
                     break;
+                case ConsoleKey.Spacebar:
+                    // Exit the loop when space bar is pressed
+                    exitLoop = true;
+                    // seats aan seatlist toevoegen
+                    Console.WriteLine($"\nYou have selected {boxesSelected} seats:");
+                    foreach (int[] item in selectedBoxes)
+                    {
+                        Console.WriteLine($"- Row {item[0] + 1}, Seat {item[1] + 1}");
+                        selectedSeats.Add(item);
+                        // if (!rowList.Contains(seat[0]))
+                        // { rowList.Add(seat[0]); }
+                    }
+                    Console.WriteLine("Press ENTER to continue...");
+                    Console.ReadKey(true);
+                    // confirmation vragen
+                    string prompt = "Are you sure you want to reserve these seats?";
+                    string[] options = { "Yes", "No, try again", "Return to main menu" };
+                    Menu mainMenu = new Menu(prompt, options);
+                    int selectedIndex = mainMenu.Run();
+
+                    switch (selectedIndex)
+                    {
+                        case 0:
+                            Reserve(room, film, selectedSeats, chosenDate);
+                            break;
+                        case 1:
+                            Console.Clear();
+                            Console.WriteLine("Returning to the seat selection process. Press ENTER to continue".Orange());
+                            Console.ReadKey(true);
+                            Console.Clear();
+                            exitLoop = false;
+                            PrintBox();
+                            break;
+                        case 2:
+                            break;
+
+                    }
+                    break;
             }
         }
         void PrintBox()
@@ -377,7 +415,7 @@ public class VisualOverview
             Console.Write("▲: Disability Seat".DarkMagenta() + "\n");
             Console.Write("[]: Exit Doors".Green() + $"\n");
             Console.ForegroundColor = ConsoleColor.White;
-            Console.WriteLine($"\nUse arrow keys to navigate. Press ENTER to select a seat.\n");
+            Console.WriteLine($"\nUse arrow keys to navigate. Press ENTER to select a seat and press SPACE to confirm seat selection.\n");
             if (room.Id == 3)
             { Console.WriteLine("                                   |  Screen  |\n"); }
             else if (room.Id == 2)
@@ -485,35 +523,7 @@ public class VisualOverview
         // empty line for spacing
         Console.WriteLine();
 
-        // seats aan seatlist toevoegen
-        Console.WriteLine($"\nYou have selected {boxesSelected} seats:");
-        foreach (int[] seat in selectedBoxes)
-        {
-            Console.WriteLine($"- Row {seat[0] + 1}, Seat {seat[1] + 1}");
-            selectedSeats.Add(seat);
-            // if (!rowList.Contains(seat[0]))
-            // { rowList.Add(seat[0]); }
-        }
-        Console.WriteLine("Press enter to continue...");
-        Console.ReadKey(true);
-        // confirmation vragen
-        string prompt = "Are you sure you want to reserve these seats?";
-        string[] options = { "Yes", "No, try again", "Return to main menu" };
-        Menu mainMenu = new Menu(prompt, options);
-        int selectedIndex = mainMenu.Run();
 
-        switch (selectedIndex)
-        {
-            case 0:
-                Reserve(room, film, selectedSeats, chosenDate);
-                break;
-            case 1:
-                Start(_account);
-                break;
-            case 2:
-                break;
-
-        }
 
 
     }
@@ -570,7 +580,7 @@ public class VisualOverview
             } while (fullName == null);
 
             // payment 
-            Console.WriteLine("Press enter to continue...");
+            Console.WriteLine("Press ENTER to continue...");
             Console.ReadLine();
             Console.Clear();
             string prompt = "Do you want to proceed with the reservation?";
@@ -580,12 +590,12 @@ public class VisualOverview
             switch (selectedIndex)
             {
                 case 0:
-                    Console.WriteLine("\n--------------------------------");
-                    Console.WriteLine("         PAYMENT OPTIONS         ");
-                    Console.WriteLine("--------------------------------");
-                    Console.WriteLine("1. Paypal");
-                    Console.WriteLine("2. Ideal");
-                    Console.WriteLine("--------------------------------");
+                    Console.WriteLine("\n--------------------------------".BrightCyan());
+                    Console.WriteLine("         PAYMENT OPTIONS         ".BrightWhite());
+                    Console.WriteLine("--------------------------------".BrightCyan());
+                    Console.WriteLine("1. Paypal".BrightWhite());
+                    Console.WriteLine("2. Ideal".BrightWhite());
+                    Console.WriteLine("--------------------------------".BrightCyan());
                     SelectPayment();
                     Console.Clear();
 
@@ -652,13 +662,13 @@ public class VisualOverview
             switch (selectedIndex)
             {
                 case 0:
-                    System.Console.WriteLine(food);
-                    Console.WriteLine("\n--------------------------------");
-                    Console.WriteLine("         PAYMENT OPTIONS         ");
-                    Console.WriteLine("--------------------------------");
-                    Console.WriteLine("1. Paypal");
-                    Console.WriteLine("2. Ideal");
-                    Console.WriteLine("--------------------------------");
+                    // System.Console.WriteLine(food);
+                    Console.WriteLine("\n--------------------------------".BrightCyan());
+                    Console.WriteLine("         PAYMENT OPTIONS         ".BrightWhite());
+                    Console.WriteLine("--------------------------------".BrightCyan());
+                    Console.WriteLine("1. Paypal".BrightWhite());
+                    Console.WriteLine("2. Ideal".BrightWhite());
+                    Console.WriteLine("--------------------------------".BrightCyan());
                     SelectPayment();
                     Console.Clear();
 
