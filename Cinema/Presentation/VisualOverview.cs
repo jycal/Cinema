@@ -97,14 +97,16 @@ public class VisualOverview
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine($"No film found with that id\n");
                 Console.ResetColor();
-                Start(account);
+                Console.WriteLine("Press any key to go back to the menu");
+                Console.ReadKey();
+                Console.Clear();
+                return;
             }
             if (string.IsNullOrEmpty(id) || Convert.ToInt32(id) < 0)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine($"No film found with that id\n");
                 Console.ResetColor();
-                //Write some code to go back to the menu
                 Console.WriteLine("Press any key to go back to the menu");
                 Console.ReadKey();
                 Console.Clear();
@@ -119,7 +121,10 @@ public class VisualOverview
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine($"No film found with that id\n");
                 Console.ResetColor();
-                Start(account);
+                Console.WriteLine("Press any key to go back to the menu");
+                Console.ReadKey();
+                Console.Clear();
+                return;
             }
 
         } while (movieId <= 0);
