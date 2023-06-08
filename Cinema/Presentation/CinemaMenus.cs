@@ -1,3 +1,4 @@
+using System.Globalization;
 using System.Security;
 
 public static class CinemaMenus
@@ -1446,58 +1447,147 @@ View menu.
                 RunAdvancedFoodMenu();
                 break;
             case 2:
-                Console.WriteLine("Enter a snack name: ");
-                string? name = Console.ReadLine();
-                if (name == null)
-                {
-                    Console.WriteLine("Wrong input! Enter in the correct format...");
-                    name = Console.ReadLine();
-                }
-                Console.WriteLine("Enter a snack price: ");
-                double cost = Convert.ToDouble(Console.ReadLine());
-                if (cost == null)
-                {
-                    Console.WriteLine("Wrong input! Enter in the correct format...");
-                    cost = Convert.ToDouble(Console.ReadLine());
-                }
-                Console.WriteLine("Enter a snack quatity: ");
-                double quantity = Convert.ToDouble(Console.ReadLine());
-                if (quantity == null)
-                {
-                    Console.WriteLine("Wrong input! Enter in the correct format...");
-                    quantity = Convert.ToDouble(Console.ReadLine());
-                }
-                Console.WriteLine("Enter a age rating: ");
-                int age = Convert.ToInt32(Console.ReadLine());
-                if (age == null)
-                {
-                    Console.WriteLine("Wrong input! Enter in the correct format...");
-                    age = Convert.ToInt32(Console.ReadLine());
-                }
-                FoodModel food = new FoodModel(name!, cost, quantity, age);
-                _foodsLogic.AddFood(food);
-                // SetFoodPrice();
-                RunAdvancedFoodMenu();
-                break;
-            case 3:
-            string Name = " ";
-            do
-            {
-                Console.WriteLine("Enter a snack name: ");
-                Name += Console.ReadLine();
+    string name = string.Empty;
+    string cost = string.Empty;
+    string quantity = string.Empty;
+    string age = string.Empty;
+    
+    Console.WriteLine("Enter a snack name: ");
+    name = Console.ReadLine();
 
-            } while (string.IsNullOrEmpty(Name) == true);
-            Console.WriteLine("Enter a snack price: ");
-                double Cost = Convert.ToDouble(Console.ReadLine());
-                Console.WriteLine("Enter a snack quatity: ");
-                double Quantity = Convert.ToDouble(Console.ReadLine());
-                Console.WriteLine("Enter a age rating: ");
-                int Age = Convert.ToInt32(Console.ReadLine());
-                FoodModel Food = new FoodModel(Name!, Cost, Quantity, Age);
-                _foodsLogic.DeleteFood(Food);
-                // SetFoodPrice();
-                RunAdvancedFoodMenu();
-                break;
+    if (string.IsNullOrEmpty(name))
+    {
+        Console.WriteLine("Enter a snack name (last chance): ");
+        name = Console.ReadLine();
+        
+        if (string.IsNullOrEmpty(name))
+        {
+            RunAdvancedFoodMenu();
+        }
+    }
+    
+    Console.WriteLine("Enter a snack price: ");
+    cost = Console.ReadLine();
+
+    if (string.IsNullOrEmpty(cost) || !CinemaMenus.IsNumber(cost))
+    {
+        Console.WriteLine("Enter a snack price (last chance): ");
+        cost = Console.ReadLine();
+
+        if (string.IsNullOrEmpty(cost) || !CinemaMenus.IsNumber(cost))
+        {
+            Console.ReadKey(true);
+            RunAdvancedFoodMenu();
+        }
+    }
+    
+    Console.WriteLine("Enter a snack quantity: ");
+    quantity = Console.ReadLine();
+
+    if (string.IsNullOrEmpty(quantity) || !CinemaMenus.IsNumber(quantity))
+    {
+        Console.WriteLine("Enter a snack quantity (last chance): ");
+        quantity = Console.ReadLine();
+
+        if (string.IsNullOrEmpty(quantity) || !CinemaMenus.IsNumber(quantity))
+        {
+            Console.ReadKey(true);
+            RunAdvancedFoodMenu();
+        }
+    }
+    
+    Console.WriteLine("Enter an age rating: ");
+    age = Console.ReadLine();
+
+    if (string.IsNullOrEmpty(age) || !CinemaMenus.IsNumber(age))
+    {
+        Console.WriteLine("Enter an age rating (last chance): ");
+        age = Console.ReadLine();
+
+        if (string.IsNullOrEmpty(age) || !CinemaMenus.IsNumber(age))
+        {
+            Console.ReadKey(true);
+            RunAdvancedFoodMenu();
+        }
+    }
+    
+    FoodModel food = new FoodModel(name, double.Parse(cost, CultureInfo.InvariantCulture), double.Parse(quantity, CultureInfo.InvariantCulture), Convert.ToInt32(age));
+    _foodsLogic.AddFood(food);
+    // SetFoodPrice();
+    RunAdvancedFoodMenu();
+    break;
+
+            case 3:
+    string Name = string.Empty;
+    string Cost = string.Empty;
+    string Quantity = string.Empty;
+    string Age = string.Empty;
+    
+    Console.WriteLine("Enter a snack name: ");
+    Name = Console.ReadLine();
+
+    if (string.IsNullOrEmpty(Name))
+    {
+        Console.WriteLine("Enter a snack name (last chance): ");
+        Name = Console.ReadLine();
+        
+        if (string.IsNullOrEmpty(Name))
+        {
+            RunAdvancedFoodMenu();
+        }
+    }
+    
+    Console.WriteLine("Enter a snack price: ");
+    Cost = Console.ReadLine();
+
+    if (string.IsNullOrEmpty(Cost) || !CinemaMenus.IsNumber(Cost))
+    {
+        Console.WriteLine("Enter a snack price (last chance): ");
+        Cost = Console.ReadLine();
+
+        if (string.IsNullOrEmpty(Cost) || !CinemaMenus.IsNumber(Cost))
+        {
+            Console.ReadKey(true);
+            RunAdvancedFoodMenu();
+        }
+    }
+    
+    Console.WriteLine("Enter a snack quantity: ");
+    Quantity = Console.ReadLine();
+
+    if (string.IsNullOrEmpty(Quantity) || !CinemaMenus.IsNumber(Quantity))
+    {
+        Console.WriteLine("Enter a snack quantity (last chance): ");
+        Quantity = Console.ReadLine();
+
+        if (string.IsNullOrEmpty(Quantity) || !CinemaMenus.IsNumber(Quantity))
+        {
+            Console.ReadKey(true);
+            RunAdvancedFoodMenu();
+        }
+    }
+    
+    Console.WriteLine("Enter an age rating: ");
+    Age = Console.ReadLine();
+
+    if (string.IsNullOrEmpty(Age) || !CinemaMenus.IsNumber(Age))
+    {
+        Console.WriteLine("Enter an age rating (last chance): ");
+        Age = Console.ReadLine();
+
+        if (string.IsNullOrEmpty(Age) || !CinemaMenus.IsNumber(Age))
+        {
+            Console.ReadKey(true);
+            RunAdvancedFoodMenu();
+        }
+    }
+    
+    FoodModel Food = new FoodModel(Name, double.Parse(Cost, CultureInfo.InvariantCulture), double.Parse(Quantity, CultureInfo.InvariantCulture), Convert.ToInt32(Age));
+    _foodsLogic.DeleteFood(Food);
+    // SetFoodPrice();
+    RunAdvancedFoodMenu();
+    break;
+
             case 4:
                 RunAdvancedMenu();
                 break;

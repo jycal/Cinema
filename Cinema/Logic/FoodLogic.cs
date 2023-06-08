@@ -142,9 +142,9 @@ public class FoodsLogic
                             Console.ReadKey(true);
                             ChangePrice();
                         }
-                        System.Console.WriteLine(newPrice);
+                        // System.Console.WriteLine(newPrice);
                         double Price = double.Parse(newPrice, CultureInfo.InvariantCulture);
-                        System.Console.WriteLine(Price);
+                        // System.Console.WriteLine(Price);
                         Console.ReadKey(true);
                         FoodModel food = new FoodModel(answer, Price, 0, 0);
                         Console.ForegroundColor = ConsoleColor.Green;
