@@ -214,7 +214,8 @@ Welcome to Starlight Cinema. What would you like to do?
             email = Email;
             // EmailAttempts += 1;
         }
-        if (_accountsLogic.GetByMail(email) != null)
+        AccountModel retrievedAcc = _accountsLogic.GetByMail(email.ToLower());
+        if (retrievedAcc != null)
         {
             Console.ForegroundColor = ConsoleColor.Red;
             System.Console.WriteLine("email already exists try again");
@@ -295,7 +296,7 @@ Welcome to Starlight Cinema. What would you like to do?
             }
         }
         List<int> tickets = new List<int>();
-        AccountModel account = new AccountModel(id, 1, email, password, firstName, tickets);
+        AccountModel account = new AccountModel(id, 1, email.ToLower(), password, firstName, tickets);
         _accountsLogic.UpdateList(account);
         MailConformation mail = new(email);
         mail.SendRegistrationConformation();
