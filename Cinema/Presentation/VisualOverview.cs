@@ -199,6 +199,16 @@ public class VisualOverview
         // Console.WriteLine("Please enter the room number\n");
         int number = film.Rooms[index];
         RoomModel room = _roomsLogic.CheckEnter(number);
+        if (room.Seats.Count() == room.MaxSeats)
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine($"Movie fully booked full\n");
+            Console.ResetColor();
+            Console.WriteLine("Press any key to go back to the menu");
+            Console.ReadKey();
+            Console.Clear();
+            Start(account);
+        }
         if (room != null)
         {
             // Ask the user for a number input
