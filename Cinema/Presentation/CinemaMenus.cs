@@ -103,21 +103,28 @@ Welcome to Starlight Cinema. What would you like to do?
 ============================================
 ".BrightCyan());
         int tries = 3;
+        int tryagain = 3;
         bool logIn = false;
         Console.Write("Enter email and password, you have 3 tries to get the right password".Orange());
         System.Console.WriteLine();
         while (tries > 0)
         {
             string email = "";
-            while (true)
+            while (true && tryagain > 0)
             {
                 Console.Write("Please enter your email address: ");
                 string mail = Console.ReadLine()!;
                 if (string.IsNullOrEmpty(mail) || _accountsLogic.GetByMail(mail) == null)
                 {
+                    tryagain--;
                     Console.ForegroundColor = ConsoleColor.Red;
                     System.Console.WriteLine($"\nWrong email adress. Please try again..\n");
                     Console.ResetColor();
+                }
+                if (tryagain <= 0)
+                {
+                    Console.WriteLine("No more tries!");
+                    RunMainMenu();
                 }
                 else
                 {
@@ -396,7 +403,7 @@ Welcome to Starlight Cinema. What would you like to do?
                     break;
                 case 4:
                     DisplayContactInfo();
-                    RunMainMenu();
+                    RunMenusMenu();
                     break;
                 case 5:
                     if (_account == null)
@@ -737,12 +744,14 @@ Welcome to Starlight Cinema. What would you like to do?
     private static void CancelTicket()
     {
         string reservationCode = "";
-        while (true)
+        int tries = 3;
+        while (true && tries > 0)
         {
             Console.WriteLine("What is your reservation code?");
             string? code = Console.ReadLine();
             if (string.IsNullOrEmpty(code))
             {
+                tries--;
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Description cannot be empty!");
                 Console.ResetColor();
@@ -754,7 +763,14 @@ Welcome to Starlight Cinema. What would you like to do?
                 reservationCode = code;
                 break;
             }
+            if (tries <= 0)
+            {
+                Console.WriteLine("No more tries!");
+                RunTicketMenu();
+
+            }
         }
+
 
         // var guestCheck = _guestLogic.GetByCode(reservationCode!);
         string prompt = "Are you sure you want to delete the reservation?";
