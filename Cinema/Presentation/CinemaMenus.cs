@@ -64,7 +64,9 @@ Welcome to Starlight Cinema. What would you like to do?
 
     private static void ExitCinema()
     {
-        Console.WriteLine("Thank you for visiting Starlight Cinema. We hope to see you again soon!");
+        System.Console.WriteLine();
+        Console.WriteLine("Thank you for visiting Starlight Cinema. We hope to see you again soon!".BrightCyan());
+        System.Console.WriteLine();
         Console.WriteLine("Press any key to exit...");
         Console.ReadKey(true);
         Console.Clear();
@@ -672,8 +674,10 @@ Welcome to Starlight Cinema. What would you like to do?
         if (_account == null)
         {
             Console.ForegroundColor = ConsoleColor.Red;
+            System.Console.WriteLine();
             Console.WriteLine("You are not logged in!");
             Console.ResetColor();
+            System.Console.WriteLine();
             Console.WriteLine("Press any key to continue...");
             Console.ReadKey(true);
             return;

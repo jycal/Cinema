@@ -95,6 +95,7 @@ public class VisualOverview
             if (CinemaMenus.IsNumber(id) == false)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
+                System.Console.WriteLine();
                 Console.WriteLine($"No film found with that id\n");
                 Console.ResetColor();
                 Start(account);
@@ -102,6 +103,7 @@ public class VisualOverview
             if (string.IsNullOrEmpty(id) || Convert.ToInt32(id) < 0)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
+                System.Console.WriteLine();
                 Console.WriteLine($"No film found with that id\n");
                 Console.ResetColor();
                 //Write some code to go back to the menu
@@ -117,6 +119,7 @@ public class VisualOverview
             if (CinemaMenus._filmsLogic.GetById(movieId) == null)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
+                System.Console.WriteLine();
                 Console.WriteLine($"No film found with that id\n");
                 Console.ResetColor();
                 Start(account);
