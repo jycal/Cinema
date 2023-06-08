@@ -12,9 +12,9 @@ public class FilmsLogic
 {
     private string CurrentMovieOverview = @"============================================
 |                                          |
-|                 Movies                   |
+|                 ".BrightYellow() + @"Advanced Reservation Menu".BrightWhite() + @"                   |
 |                                          |
-============================================";
+============================================".BrightYellow();
     private List<FilmModel> _films;
 
     //Static properties are shared across all instances of the class
@@ -175,7 +175,7 @@ public class FilmsLogic
         removeOldies();
 
         var MoviesFromJson = FilmsAccess.LoadAll();
-        Console.ForegroundColor = ConsoleColor.Yellow;
+        // Console.ForegroundColor = ConsoleColor.Yellow;
         Console.WriteLine(CurrentMovieOverview);
         foreach (FilmModel item in MoviesFromJson)
         {
@@ -207,7 +207,7 @@ public class FilmsLogic
   Genre: {Genre}
   Rated: {Age}
 
-============================================";
+" + @"============================================".BrightYellow();
             Console.WriteLine(Overview);
         }
         Console.ResetColor();
@@ -218,7 +218,7 @@ public class FilmsLogic
         removeOldies();
 
         var MoviesFromJson = FilmsAccess.LoadAll();
-        Console.ForegroundColor = ConsoleColor.Yellow;
+        // Console.ForegroundColor = ConsoleColor.Yellow;
         Console.WriteLine(CurrentMovieOverview);
         foreach (FilmModel item in MoviesFromJson)
         {
@@ -255,7 +255,7 @@ public class FilmsLogic
   Genre: {Genre}
   Rated: {Age}
 
-============================================";
+" + @"============================================".BrightYellow();
             Console.WriteLine(Overview);
         }
         Console.ResetColor();
@@ -266,7 +266,7 @@ public class FilmsLogic
         removeOldies();
 
         var MoviesFromJson = FilmsAccess.LoadAll();
-        Console.ForegroundColor = ConsoleColor.Magenta;
+        // Console.ForegroundColor = ConsoleColor.Magenta;
         Console.WriteLine(CurrentMovieOverview);
         foreach (FilmModel item in MoviesFromJson)
         {
@@ -305,7 +305,7 @@ public class FilmsLogic
   Genre: {Genre}
   Rated: {Age}
 
-============================================";
+" + @"============================================".BrightYellow();
                 Console.WriteLine(Overview);
             }
         }
@@ -319,7 +319,7 @@ public class FilmsLogic
         removeOldies();
 
         var MoviesFromJson = FilmsAccess.LoadAll();
-        Console.ForegroundColor = ConsoleColor.Magenta;
+        // Console.ForegroundColor = ConsoleColor.Magenta;
         Console.WriteLine(CurrentMovieOverview);
         foreach (FilmModel item in MoviesFromJson)
         {
@@ -364,7 +364,7 @@ public class FilmsLogic
   Genre: {Genre}
   Rated: {Age}
 
-============================================";
+" + @"============================================".BrightYellow();
                     Console.WriteLine(Overview);
                 }
             }
@@ -377,7 +377,7 @@ public class FilmsLogic
         removeOldies();
 
         var MoviesFromJson = FilmsAccess.LoadAll();
-        Console.ForegroundColor = ConsoleColor.Magenta;
+        // Console.ForegroundColor = ConsoleColor.Magenta;
         Console.WriteLine(CurrentMovieOverview);
         var descListOb = MoviesFromJson.OrderBy(x => x.Title);
         // Console.WriteLine(descListOb);
@@ -416,7 +416,7 @@ public class FilmsLogic
   Genre: {Genre}
   Rated: {Age}
 
-============================================";
+" + @"============================================".BrightYellow();
             Console.WriteLine(Overview);
         }
         Console.ResetColor();

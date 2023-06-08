@@ -181,16 +181,16 @@ public class FoodsLogic
     {
         Console.WriteLine(@"============================================
 |                                           |
-|                   Menu                    |
+|     ".BrightYellow() + @"Advanced Reservation Menu".BrightWhite() + @"                    |
 |                                           |
-============================================");
+============================================".BrightYellow());
 
         foreach (var food in _foods!)
         {
             Console.WriteLine($@"
  {food.Name}: {food.Cost}
 
-============================================");
+" + @"============================================".BrightYellow());
         }
         Console.WriteLine();
         Console.WriteLine("Press any key to continue...");

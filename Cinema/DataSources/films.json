@@ -1,12 +1,8 @@
 [
   {
     "id": 0,
-    "dates": [
-      "2023-06-02T12:00:00"
-    ],
-    "rooms": [
-      1
-    ],
+    "dates": [],
+    "rooms": [],
     "title": "John Wick 4",
     "description": "John Wick (Keanu Reeves) takes on his most deadly opponents yet in the fourth installment of the John Wick franchise. The price on John Wick\u0027s head is getting higher and higher, and his fight against the international assassin guild The High Table is developing into a global battle. To regain his freedom, he must face a new enemy with powerful alliances around the world and forces that turn old friends into enemies.",
     "duration": 169,
@@ -20,12 +16,8 @@
   },
   {
     "id": 1,
-    "dates": [
-      "2023-06-02T15:00:00"
-    ],
-    "rooms": [
-      2
-    ],
+    "dates": [],
+    "rooms": [],
     "title": "65",
     "description": "After a catastrophic crash on an unknown planet, pilot Mills (Adam Driver) soon finds out he crashed on Earth, but 65 million years ago. Mills and Koa (Ariana Greenblatt), the only other survivor, have only one chance at rescue.",
     "duration": 93,
@@ -54,12 +46,8 @@
   },
   {
     "id": 3,
-    "dates": [
-      "2023-06-02T16:00:00"
-    ],
-    "rooms": [
-      1
-    ],
+    "dates": [],
+    "rooms": [],
     "title": "Creed III",
     "description": "Metro Goldwyn Mayer Pictures arrives with Creed III, making Michael B. Jordan\u0027s directorial debut and returning in the role of Adonis Creed in the third film of the hit franchise.",
     "duration": 117,
@@ -72,12 +60,8 @@
   },
   {
     "id": 4,
-    "dates": [
-      "2023-06-02T19:00:00"
-    ],
-    "rooms": [
-      3
-    ],
+    "dates": [],
+    "rooms": [],
     "title": "The Super Mario Bros. Movie (OV)",
     "description": "Illumination and Nintendo, two world-renowned names in the entertainment industry, are joining forces for the first time for THE SUPER MARIO BROS. MOVIE, a new theatrical film about one of pop culture\u0027s most famous plumbers.",
     "duration": 93,
@@ -91,14 +75,8 @@
   },
   {
     "id": 5,
-    "dates": [
-      "2023-06-03T20:00:00",
-      "2023-06-04T12:00:00"
-    ],
-    "rooms": [
-      2,
-      3
-    ],
+    "dates": [],
+    "rooms": [],
     "title": "All Inclusive",
     "description": "In this comedy, the relationship between Jacco (Tibor Luk\u00E1cs) and Sylvie (Jennifer Hoffman) is severely tested when Sylvie announces she wants to take a break during a vacation to a resort.",
     "duration": 115,
@@ -111,11 +89,9 @@
   {
     "id": 6,
     "dates": [
-      "2023-06-07T12:00:00",
       "2023-06-09T14:00:00"
     ],
     "rooms": [
-      2,
       3
     ],
     "title": "Scream VI",

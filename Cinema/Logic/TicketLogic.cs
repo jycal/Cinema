@@ -121,7 +121,7 @@ public class TicketLogic
     {
         Console.WriteLine(@"============================================
 |                                          |
-|                  Seats                   |
+|                  ".BrightYellow() + @"Seats".BrightWhite() + @"                   |
 |                                          |
 ============================================");
 
@@ -131,7 +131,7 @@ public class TicketLogic
  Name: {item.Name}
  Cost: {item.Cost}
 
-============================================");
+" + @"============================================ ".BrightYellow());
         }
     }
 }

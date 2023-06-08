@@ -782,5 +782,34 @@ public static class ConsoleExtensions
     {
         return $"\u001b[90m{str}\u001b[0m";
     }
+    public static string LightBlue(this string str)
+    {
+        return $"\u001b[36m{str}\u001b[0m";
+    }
+    public static string LightRed(this string str)
+    {
+        return "\u001b[91m" + str + "\u001b[0m";
+    }
+
+    public static string LightGreen(this string str)
+    {
+        return "\u001b[92m" + str + "\u001b[0m";
+    }
+    public static string BrightYellow(this string str)
+    {
+        return $"\u001b[33;1m{str}\u001b[0m";
+    }
+    public static string BrightCyan(this string str)
+    {
+        return $"\u001b[36;1m{str}\u001b[0m";
+    }
+    public static string Turquoise(this string str)
+    {
+        return $"\u001b[46;30m{str}\u001b[0m";
+    }
+    public static string BrightWhite(this string str)
+    {
+        return $"\u001b[97;1m{str}\u001b[0m";
+    }
 
 }
