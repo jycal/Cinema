@@ -1477,6 +1477,7 @@ Welcome to Starlight Cinema. What would you like to do?
 
                     if (string.IsNullOrEmpty(cost) || !CinemaMenus.IsNumber(cost))
                     {
+                        Console.WriteLine("Press any key to continue...");
                         Console.ReadKey(true);
                         RunAdvancedFoodMenu();
                     }
@@ -1492,6 +1493,7 @@ Welcome to Starlight Cinema. What would you like to do?
 
                     if (string.IsNullOrEmpty(quantity) || !CinemaMenus.IsNumber(quantity))
                     {
+                        Console.WriteLine("Press any key to continue...");
                         Console.ReadKey(true);
                         RunAdvancedFoodMenu();
                     }
@@ -1507,6 +1509,7 @@ Welcome to Starlight Cinema. What would you like to do?
 
                     if (string.IsNullOrEmpty(age) || !CinemaMenus.IsNumber(age))
                     {
+                        Console.WriteLine("Press any key to continue...");
                         Console.ReadKey(true);
                         RunAdvancedFoodMenu();
                     }
@@ -1548,6 +1551,7 @@ Welcome to Starlight Cinema. What would you like to do?
 
                     if (string.IsNullOrEmpty(Cost) || !CinemaMenus.IsNumber(Cost))
                     {
+                        Console.WriteLine("Press any key to continue...");
                         Console.ReadKey(true);
                         RunAdvancedFoodMenu();
                     }
@@ -1563,6 +1567,7 @@ Welcome to Starlight Cinema. What would you like to do?
 
                     if (string.IsNullOrEmpty(Quantity) || !CinemaMenus.IsNumber(Quantity))
                     {
+                        Console.WriteLine("Press any key to continue...");
                         Console.ReadKey(true);
                         RunAdvancedFoodMenu();
                     }
@@ -1578,6 +1583,7 @@ Welcome to Starlight Cinema. What would you like to do?
 
                     if (string.IsNullOrEmpty(Age) || !CinemaMenus.IsNumber(Age))
                     {
+                        Console.WriteLine("Press any key to continue...");
                         Console.ReadKey(true);
                         RunAdvancedFoodMenu();
                     }
