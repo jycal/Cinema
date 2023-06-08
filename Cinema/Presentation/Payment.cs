@@ -12,6 +12,29 @@ public static class Payment
             Console.WriteLine("To go through with the payment, please enter 6 digits of your bank number:");
             Console.WriteLine("To return to the main menu, enter '0'.");
             bank = Console.ReadLine()!;
+            if (bank! == "0")
+            {
+                string prompt = "\nAre you sure you want to cancel your payment?:";
+                string[] options = { "Yes", "No, continue with the payment", "Return to main menu" };
+                Menu movieMenu = new Menu(prompt, options);
+                int selectedIndex = movieMenu.Run();
+
+                switch (selectedIndex)
+                {
+                    case 0:
+                        CinemaMenus._filmsLogic.MovieOverview();
+                        VisualOverview vis = new VisualOverview();
+                        VisualOverview.Start(CinemaMenus._account);
+                        CinemaMenus.Start();
+                        break;
+                    case 1:
+                        VisualOverview.SelectPayment();
+                        break;
+                    case 2:
+                        CinemaMenus.RunMenusMenu();
+                        break;
+                }
+            }
             if (bank!.Length == 6)
             {
                 if (int.TryParse(bank, out int bankNumber))
@@ -51,6 +74,29 @@ public static class Payment
             Console.WriteLine("Please enter your bank number (format: NL-000-000):\n");
             Console.WriteLine("To return to the main menu, enter '0'.");
             bank = Console.ReadLine()!;
+            if (bank! == "0")
+            {
+                string prompt = "\nAre you sure you want to cancel your payment?:";
+                string[] options = { "Yes", "No, continue with the payment", "Return to main menu" };
+                Menu movieMenu = new Menu(prompt, options);
+                int selectedIndex = movieMenu.Run();
+
+                switch (selectedIndex)
+                {
+                    case 0:
+                        CinemaMenus._filmsLogic.MovieOverview();
+                        VisualOverview vis = new VisualOverview();
+                        VisualOverview.Start(CinemaMenus._account);
+                        CinemaMenus.Start();
+                        break;
+                    case 1:
+                        VisualOverview.SelectPayment();
+                        break;
+                    case 2:
+                        CinemaMenus.RunMenusMenu();
+                        break;
+                }
+            }
             if (bank!.Length == 8)
             {
                 // foreach (char c in bank)

@@ -307,7 +307,7 @@ Welcome to Starlight Cinema. What would you like to do?
         Console.ReadKey(true);
     }
 
-    private static void RunMenusMenu()
+    public static void RunMenusMenu()
     {
         string prompt = @"============================================
 |                                          |
@@ -495,12 +495,10 @@ Welcome to Starlight Cinema. What would you like to do?
 
     private static void OrderSeatConfirm()
     {
-
         string prompt = "\nDo you want to order seats?";
         string[] options = { "Yes", "No, return to movie menu", "Return to main menu" };
         Menu movieMenu = new Menu(prompt, options);
         int selectedIndex = movieMenu.Run();
-
 
         switch (selectedIndex)
         {
