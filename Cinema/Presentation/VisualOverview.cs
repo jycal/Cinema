@@ -363,41 +363,63 @@ public class VisualOverview
                     }
                     break;
                 case ConsoleKey.Spacebar:
-                    // Exit the loop when space bar is pressed
-                    exitLoop = true;
-                    // seats aan seatlist toevoegen
-                    Console.WriteLine($"\nYou have selected {boxesSelected} seats:");
-                    foreach (int[] item in selectedBoxes)
+                    // 0 check
+                    if (selectedBoxes.Count() == 0)
                     {
-                        Console.WriteLine($"- Row {item[0] + 1}, Seat {item[1] + 1}");
-                        selectedSeats.Add(item);
-                        // if (!rowList.Contains(seat[0]))
-                        // { rowList.Add(seat[0]); }
+                        System.Console.WriteLine();
+                        string prompt1 = $"No seats selected".Red() + $"\n" + $"\nWould you like to return to the main menu or continue?";
+                        string[] options1 = { "Yes, return to menu", "No, try again" };
+                        Menu mainMenu1 = new Menu(prompt1, options1);
+                        int selectedIndex1 = mainMenu1.Run();
+
+                        switch (selectedIndex1)
+                        {
+                            case 0:
+                                CinemaMenus.RunMenusMenu();
+                                break;
+                            case 1:
+                                Console.Clear();
+                                PrintBox();
+                                break;
+                        }
                     }
-                    Console.WriteLine("Press ENTER to continue...");
-                    Console.ReadKey(true);
-                    // confirmation vragen
-                    string prompt = "Are you sure you want to reserve these seats?";
-                    string[] options = { "Yes", "No, try again", "Return to main menu" };
-                    Menu mainMenu = new Menu(prompt, options);
-                    int selectedIndex = mainMenu.Run();
-
-                    switch (selectedIndex)
+                    else
                     {
-                        case 0:
-                            Reserve(room, film, selectedSeats, chosenDate);
-                            break;
-                        case 1:
-                            Console.Clear();
-                            Console.WriteLine("Returning to the seat selection process. Press ENTER to continue".Orange());
-                            Console.ReadKey(true);
-                            Console.Clear();
-                            exitLoop = false;
-                            PrintBox();
-                            break;
-                        case 2:
-                            break;
+                        exitLoop = true;
+                        // seats aan seatlist toevoegen
+                        Console.WriteLine($"\nYou have selected {boxesSelected} seats:");
+                        foreach (int[] item in selectedBoxes)
+                        {
+                            Console.WriteLine($"- Row {item[0] + 1}, Seat {item[1] + 1}");
+                            selectedSeats.Add(item);
+                            // if (!rowList.Contains(seat[0]))
+                            // { rowList.Add(seat[0]); }
+                        }
+                        Console.WriteLine("Press ENTER to continue...");
+                        Console.ReadKey(true);
+                        // confirmation vragen
+                        string prompt = "Are you sure you want to reserve these seats?";
+                        string[] options = { "Yes", "No, try again", "Return to main menu" };
+                        Menu mainMenu = new Menu(prompt, options);
+                        int selectedIndex = mainMenu.Run();
 
+                        switch (selectedIndex)
+                        {
+                            case 0:
+                                Reserve(room, film, selectedSeats, chosenDate);
+                                break;
+                            case 1:
+                                Console.Clear();
+                                Console.WriteLine("Returning to the seat selection process. Press ENTER to continue".Orange());
+                                Console.ReadKey(true);
+                                Console.Clear();
+                                exitLoop = false;
+                                PrintBox();
+                                break;
+                            case 2:
+                                break;
+
+                        }
                     }
                     break;
             }

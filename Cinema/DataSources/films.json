@@ -88,12 +88,8 @@
   },
   {
     "id": 6,
-    "dates": [
-      "2023-06-09T14:00:00"
-    ],
-    "rooms": [
-      3
-    ],
+    "dates": [],
+    "rooms": [],
     "title": "Scream VI",
     "description": "After the latest Ghostface murders, the four survivors leave Woodsboro behind and begin a new chapter.",
     "duration": 115,
@@ -175,7 +171,7 @@
     "imageURL": "https://21818cdde6.imgdist.com/public/_thumbs/Integrators/BeeProAgency/981647_966306/Afbeelding2vat.jpg_thumb.png?hash=1682510761536"
   },
   {
-    "id": 13,
+    "id": 11,
     "dates": [
       "2023-12-08T14:00:00"
     ],

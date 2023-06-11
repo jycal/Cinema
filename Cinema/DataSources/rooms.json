@@ -6,7 +6,20 @@
     "roomWidth": 12,
     "roomNumber": 1,
     "maxPeople": 150,
-    "seats": [],
+    "seats": [
+      {
+        "Item1": 12,
+        "Item2": 1,
+        "Item3": "2023-11-08T14:00:00",
+        "Item4": 25
+      },
+      {
+        "Item1": 12,
+        "Item2": 1,
+        "Item3": "2023-11-08T14:00:00",
+        "Item4": 26
+      }
+    ],
     "vipSeats": [
       65,
       66,
@@ -83,7 +96,20 @@
     "roomWidth": 18,
     "roomNumber": 2,
     "maxPeople": 300,
-    "seats": [],
+    "seats": [
+      {
+        "Item1": 13,
+        "Item2": 2,
+        "Item3": "2023-12-08T14:00:00",
+        "Item4": 5
+      },
+      {
+        "Item1": 13,
+        "Item2": 2,
+        "Item3": "2023-12-08T14:00:00",
+        "Item4": 6
+      }
+    ],
     "vipSeats": [
       116,
       117,

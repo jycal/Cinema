@@ -1,1 +1,76 @@
-[]
+[
+  {
+    "id": 1,
+    "reservationCode": "0BYG3PU",
+    "fullName": "Thomas",
+    "email": "t.molendijk@outlook.com",
+    "movie": "Cocaine Bear",
+    "ticketAmount": 2,
+    "snackAmount": 39.95,
+    "ticketTotal": 20,
+    "roomNumber": 2,
+    "seats": [
+      [
+        0,
+        5
+      ],
+      [
+        0,
+        6
+      ]
+    ],
+    "seatsInfo": [
+      {
+        "Item1": 13,
+        "Item2": 2,
+        "Item3": "2023-12-08T14:00:00",
+        "Item4": 5
+      },
+      {
+        "Item1": 13,
+        "Item2": 2,
+        "Item3": "2023-12-08T14:00:00",
+        "Item4": 6
+      }
+    ],
+    "totalAmount": 59.95,
+    "date": "2023-12-08T14:00:00"
+  },
+  {
+    "id": 2,
+    "reservationCode": "T66OOMK",
+    "fullName": "Thomas",
+    "email": "t.molendijk@outlook.com",
+    "movie": "Magic Mike\u0027s Last Dance",
+    "ticketAmount": 2,
+    "snackAmount": 0,
+    "ticketTotal": 20,
+    "roomNumber": 1,
+    "seats": [
+      [
+        2,
+        1
+      ],
+      [
+        2,
+        2
+      ]
+    ],
+    "seatsInfo": [
+      {
+        "Item1": 12,
+        "Item2": 1,
+        "Item3": "2023-11-08T14:00:00",
+        "Item4": 25
+      },
+      {
+        "Item1": 12,
+        "Item2": 1,
+        "Item3": "2023-11-08T14:00:00",
+        "Item4": 26
+      }
+    ],
+    "totalAmount": 20,
+    "date": "2023-11-08T14:00:00"
+  }
+]
