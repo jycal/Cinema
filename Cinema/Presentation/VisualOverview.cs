@@ -406,12 +406,22 @@ public class VisualOverview
                         switch (selectedIndex)
                         {
                             case 0:
+                                foreach (var item in selectedSeats)
+                                {
+                                    System.Console.WriteLine("SS" + item);
+                                }
+                                foreach (var item in selectedBoxes)
+                                {
+                                    System.Console.WriteLine("SB" + item);
+                                }
+                                Console.ReadKey(true);
                                 Reserve(room, film, selectedSeats, chosenDate);
                                 break;
                             case 1:
                                 Console.Clear();
                                 Console.WriteLine("Returning to the seat selection process. Press ENTER to continue".Orange());
                                 Console.ReadKey(true);
+                                selectedSeats.Clear();
                                 Console.Clear();
                                 exitLoop = false;
                                 PrintBox();
@@ -730,7 +740,10 @@ public class VisualOverview
                     _accountsLogic!.UpdateList(_account);
                     break;
                 case 1:
-                    Console.WriteLine("Reservation cancelled.");
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine("Reservation has been cancelled.");
+                    Console.ResetColor();
+                    System.Console.WriteLine();
                     Console.WriteLine("Press any key to continue...");
                     Console.ReadKey(true);
                     return;
