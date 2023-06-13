@@ -729,6 +729,8 @@ public class VisualOverview
                     //total amount krijgen
                     double totalAmount = ticketTotal + food;
 
+                    int temp_id = _reservationsLogic._reservations!.Count > 0 ? _reservationsLogic._reservations.Max(x => x.Id) + 1 : 1;
+
                     ReservationModel reservation = new(1, reservationCode, _account.FullName, _account.EmailAddress, title, seatList.Count, food, ticketTotal, room.Id, seatList, seatsInfo, totalAmount, chosenDate);
                     _reservationsLogic!.UpdateList(reservation);
                     bool account = true;
@@ -736,7 +738,7 @@ public class VisualOverview
                     System.Console.Write("Sending conformation email please wait...".Orange() + $"\n");
                     MailConformation mailConformation = new MailConformation(_account.EmailAddress, account);
                     mailConformation.SendMailConformation();
-                    _account.TicketList.Add(film.Id);
+                    _account.TicketList.Add(temp_id);
                     _accountsLogic!.UpdateList(_account);
                     break;
                 case 1:
