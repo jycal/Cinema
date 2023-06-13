@@ -192,42 +192,46 @@ public class FoodsLogic
         Console.ReadKey(true);
     }
 
-    public double BuyFood()
+   public double BuyFood()
+{
+    int counter = 0;
+    List<FoodModel> orderedFood = new List<FoodModel>();
+    Console.Clear();
+    string[] options = _foods!.Select(f => $"{f.Name} - {f.Cost:c}").ToArray(); // Added price to the options
+    string prompt = $"Please select a food item to order (press enter to finish):\nUse your arrow keys (upper and lower) to navigate.\n";
+
+    Menu mainMenu = new Menu(prompt, options);
+    bool continueOrdering = true;
+
+    while (continueOrdering)
     {
-        List<FoodModel> orderedFood = new List<FoodModel>();
-        Console.Clear();
-        string[] options = _foods!.Select(f => $"{f.Name} - {f.Cost:c}").ToArray(); // Added price to the options
-        string prompt = $"Please select a food item to order (press enter to finish):\nUse your arrow keys(upper and lower) to navigate.\n";
-
-        Menu mainMenu = new Menu(prompt, options);
-        bool continueOrdering = true;
-
-        while (continueOrdering)
+        int selectedIndex = -1;
+        while (true)
         {
-            int selectedIndex = -1;
-            while (true)
+            selectedIndex = mainMenu.Run();
+            if (selectedIndex == -1)
             {
-                selectedIndex = mainMenu.Run();
-                if (selectedIndex == -1)
-                {
-                    // User cancelled the menu
-                    break;
-                }
-                else
-                {
-                    // User selected a food item
-                    break;
-                }
+                // User cancelled the menu
+                break;
             }
-
-            if (selectedIndex != -1)
+            else
             {
-                var food = GetByName(options[selectedIndex].Split('-')[0].Trim()); // Extract the selected food item name
-                Console.ForegroundColor = ConsoleColor.Yellow; // Set the text color to red
-                Console.WriteLine();
-                orderedFood.ForEach(x => System.Console.WriteLine($"You selected {x.Name} - ${x.Cost}."));
+                // User selected a food item
+                break;
+            }
+        }
+
+        if (selectedIndex != -1)
+        {
+            var food = GetByName(options[selectedIndex].Split('-')[0].Trim()); // Extract the selected food item name
+            Console.ForegroundColor = ConsoleColor.Yellow; // Set the text color to yellow
+            Console.WriteLine();
+            orderedFood.ForEach(x => System.Console.WriteLine($"You selected {x.Name} - ${x.Cost}."));
+
+            if (food.Quantity > 0)
+            {
                 Console.WriteLine($"You selected {food.Quantity} x {food.Name} - {food.Cost:c}."); // Display the selected snack with price
-                Console.ResetColor(); // Reset the text color
+
                 if (food.Age == 18)
                 {
                     Console.WriteLine();
@@ -235,127 +239,147 @@ public class FoodsLogic
                     Console.ResetColor();
                     Console.WriteLine();
                 }
-                Console.WriteLine($"\nPlease set the quantity (maximum 5, or 'D' to deselect):");
-                Console.WriteLine($"Use your arrow keys: left(decrease) and right(increase) to set the quantity.\n");
-                int quantity = 1;
-                ConsoleKeyInfo keyInfo;
-                do
+
+                Console.WriteLine($"\nPlease set the quantity (or 'D' to deselect):");
+                Console.WriteLine($"Use your arrow keys: left (decrease) and right (increase) to set the quantity.\n");
+            }
+            else
+            {
+                Console.WriteLine($"You selected {food.Name} - {food.Cost:c}."); // Display the selected snack with price
+                if (food.Age == 18)
                 {
-                    Console.SetCursorPosition(0, Console.CursorTop);
-                    Console.Write($"[{quantity}]");
-
-                    keyInfo = Console.ReadKey(true);
-                    if (keyInfo.Key == ConsoleKey.RightArrow)
-                    {
-                        if (quantity < 5)
-                        {
-                            quantity++;
-                        }
-                    }
-                    else if (keyInfo.Key == ConsoleKey.LeftArrow)
-                    {
-                        if (quantity > 1)
-                        {
-                            quantity--;
-                        }
-                    }
-                    else if (keyInfo.Key == ConsoleKey.Enter)
-                    {
-                        Console.WriteLine();
-                        break;
-                    }
-                    else if (keyInfo.Key == ConsoleKey.D)
-                    {
-                        // Console.WriteLine($"The whole quantity of {food.Name} will be removed.");
-                        quantity = -1; // Use negative value to indicate removal of the entire quantity
-                        break;
-                    }
-                } while (keyInfo.Key != ConsoleKey.Enter || (quantity > 5 || quantity < 1)); // Check for valid quantity range
-
-                if (quantity < 0)
-                {
-
-                    orderedFood.RemoveAll(f => f.Name == food.Name);
-                    SnacksTotal -= food.Cost * food.Quantity;
-                    Console.ForegroundColor = ConsoleColor.Green;
-                    Console.WriteLine($"\n{food.Name} removed from your order.");
-                    Console.ResetColor();
-                    Console.ReadKey(true);
                     Console.WriteLine();
+                    Console.Write("You have to show your ID at the cash register!!".Orange());
+                    Console.ResetColor();
+                    Console.WriteLine();
+                }
+                Console.WriteLine($"\nPlease set the quantity (or 'D' to deselect):");
+                Console.WriteLine($"Use your arrow keys: left (decrease) and right (increase) to set the quantity.\n");
+            }
+
+            int quantity = Convert.ToInt32(food.Quantity > 0 ? food.Quantity : 1); // Set the initial quantity to the previous value if it exists, otherwise default to 1
+            ConsoleKeyInfo keyInfo;
+            do
+            {
+                Console.SetCursorPosition(0, Console.CursorTop);
+                Console.Write($"[{quantity}]");
+
+                keyInfo = Console.ReadKey(true);
+                if (keyInfo.Key == ConsoleKey.RightArrow)
+                {
+                    quantity++;
+                }
+                else if (keyInfo.Key == ConsoleKey.LeftArrow)
+                {
+                    if (quantity > 1)
+                    {
+                        quantity--;
+                    }
+                }
+                else if (keyInfo.Key == ConsoleKey.Enter)
+                {
+                    Console.WriteLine();
+                    break;
+                }
+                else if (keyInfo.Key == ConsoleKey.D)
+                {
+                    food.Quantity = 0; // Use 0 to indicate removal of the entire quantity
+                    break;
+                }
+            } while (keyInfo.Key != ConsoleKey.Enter);
+
+            if (food.Quantity <= 0)
+            {
+                var existingFood = orderedFood.FirstOrDefault(f => f.Name == food.Name); // Check if the item already exists in the order
+                if (existingFood != null)
+                {
+                    bool removed = orderedFood.Remove(existingFood); // Remove the item from orderedFood
+                    if (removed)
+                    {
+                        SnacksTotal -= existingFood.Cost * existingFood.Quantity;
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.WriteLine($"\n{existingFood.Name} removed from your order.");
+                        Console.ResetColor();
+                        Console.ReadKey(true);
+                        Console.WriteLine();
+                    }
                 }
                 else
                 {
-                    food.Quantity += quantity;
-
-                    if (orderedFood != null)
-                    {
-                        foreach (var item in orderedFood)
-                        {
-                            if (item.Name == food.Name)
-                            {
-
-                                // System.Console.WriteLine("test" + SnacksTotal);
-                                // Console.ReadKey();
-                                orderedFood.Remove(item);
-                                break;
-                            }
-                        }
-                    }
-
-                    SnacksTotal += food.Cost * quantity;
-                    // System.Console.WriteLine(SnacksTotal);
-                    // Console.ReadKey();
-                    orderedFood!.Add(food);
-                    Console.ForegroundColor = ConsoleColor.Green;
-                    Console.WriteLine($"\n{quantity} {food.Name} added to your order.");
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.WriteLine($"\n{food.Name} is not currently in your order.");
                     Console.ResetColor();
-                    Console.WriteLine();
                     Console.ReadKey(true);
-                }
-
-                // Ask if the user wants to select/deselect another item
-                bool cf = conformation();
-                // Console.WriteLine("Do you want to select/deselect another item?");
-                // ConsoleKeyInfo continueKeyInfo = Console.ReadKey(true);
-                if (cf != true)
-                {
-                    continueOrdering = false;
+                    Console.WriteLine();
                 }
             }
             else
             {
-                // User cancelled the menu
-                break;
-            }
-        }
+                food.Quantity = quantity;
 
-        if (orderedFood.Count > 0)
-        {
-            Console.WriteLine();
-            Console.WriteLine("Your order:");
-            orderedFood = orderedFood.Distinct().ToList();
-            foreach (var food in orderedFood)
-            {
-                if (food.Quantity > 0)
+                var existingFood = orderedFood.FirstOrDefault(f => f.Name == food.Name); // Check if the item already exists in the order
+                if (existingFood != null)
                 {
-                    Console.ForegroundColor = ConsoleColor.Yellow;
-                    Console.WriteLine($"{food.Quantity} x {food.Name} = ${food.Cost * food.Quantity}");
-                    Console.ResetColor();
+                    SnacksTotal -= existingFood.Cost * existingFood.Quantity; // Subtract the cost of the existing quantity
+                    existingFood.Quantity = quantity; // Update the existing quantity
                 }
+                else
+                {
+                    SnacksTotal += food.Cost * quantity;
+                    orderedFood.Add(food);
+                }
+
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine($"\n{quantity} {food.Name} added to your order.");
+                Console.ResetColor();
+                Console.WriteLine();
+                counter = 0;
+                Console.ReadKey(true);
             }
-            Console.WriteLine($"Total cost: ${Math.Round(SnacksTotal, 2)}");
-            Console.WriteLine();
+
+            // Ask if the user wants to select/deselect another item
+            bool cf = conformation();
+            if (!cf)
+            {
+                food.Quantity = 0;
+                continueOrdering = false;
+            }
         }
         else
         {
-            Console.WriteLine("No items ordered.");
+            // User cancelled the menu
+            break;
         }
-
-        Console.WriteLine("Press any key to continue...");
-        Console.ReadKey(true);
-
-        return SnacksTotal;
     }
+
+    if (orderedFood.Count > 0)
+    {
+        Console.WriteLine();
+        Console.WriteLine("Your order:");
+        orderedFood = orderedFood.Distinct().ToList();
+        foreach (var food in orderedFood)
+        {
+            if (food.Quantity > 0)
+            {
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.WriteLine($"{food.Quantity} x {food.Name} = ${food.Cost * food.Quantity}");
+                Console.ResetColor();
+            }
+        }
+        Console.WriteLine($"Total cost: ${Math.Round(SnacksTotal, 2)}");
+        Console.WriteLine();
+    }
+    else
+    {
+        Console.WriteLine("No items ordered.");
+    }
+
+    Console.WriteLine("Press any key to continue...");
+    Console.ReadKey(true);
+
+    return SnacksTotal;
+}
+
     public static bool conformation()
     {
 
