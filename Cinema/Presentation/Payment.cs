@@ -102,9 +102,8 @@ public static class Payment
                 // foreach (char c in bank)
                 // {
                 //     switch (c)
-                if (bank[0] == 'N' && bank[1] == 'L' && char.IsDigit(bank[2]) && char.IsDigit(bank[3]) && char.IsDigit(bank[4]) && char.IsDigit(bank[5]) && char.IsDigit(bank[6]) && char.IsDigit(bank[7]))
+                if (char.ToUpper(bank[0]) == 'N' && char.ToUpper(bank[1]) == 'L' && char.IsDigit(bank[2]) && char.IsDigit(bank[3]) && char.IsDigit(bank[4]) && char.IsDigit(bank[5]) && char.IsDigit(bank[6]) && char.IsDigit(bank[7]))
                 {
-
                     isValid = true;
                 }
                 else
