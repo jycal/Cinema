@@ -72,5 +72,62 @@
     ],
     "totalAmount": 20,
     "date": "2023-11-08T14:00:00"
+  },
+  {
+    "id": 3,
+    "reservationCode": "LM9J1MY",
+    "fullName": "Megan pieters",
+    "email": "meganpieters3@gmail.com",
+    "movie": "Cocaine Bear",
+    "ticketAmount": 4,
+    "snackAmount": 0,
+    "ticketTotal": 52,
+    "roomNumber": 2,
+    "seats": [
+      [
+        5,
+        7
+      ],
+      [
+        5,
+        6
+      ],
+      [
+        5,
+        8
+      ],
+      [
+        5,
+        9
+      ]
+    ],
+    "seatsInfo": [
+      {
+        "Item1": 11,
+        "Item2": 2,
+        "Item3": "2023-12-08T14:00:00",
+        "Item4": 97
+      },
+      {
+        "Item1": 11,
+        "Item2": 2,
+        "Item3": "2023-12-08T14:00:00",
+        "Item4": 96
+      },
+      {
+        "Item1": 11,
+        "Item2": 2,
+        "Item3": "2023-12-08T14:00:00",
+        "Item4": 98
+      },
+      {
+        "Item1": 11,
+        "Item2": 2,
+        "Item3": "2023-12-08T14:00:00",
+        "Item4": 99
+      }
+    ],
+    "totalAmount": 52,
+    "date": "2023-12-08T14:00:00"
   }
 ]

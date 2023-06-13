@@ -63,7 +63,10 @@
     "emailAddress": "meganpieters3@gmail.com",
     "password": "Megan2003@",
     "fullName": "Megan pieters",
-    "ticketList": []
+    "ticketList": [
+      3,
+      4
+    ]
   },
   {
     "id": 9,

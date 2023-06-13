@@ -406,15 +406,15 @@ public class VisualOverview
                         switch (selectedIndex)
                         {
                             case 0:
-                                foreach (var item in selectedSeats)
-                                {
-                                    System.Console.WriteLine("SS" + item);
-                                }
-                                foreach (var item in selectedBoxes)
-                                {
-                                    System.Console.WriteLine("SB" + item);
-                                }
-                                Console.ReadKey(true);
+                                // foreach (var item in selectedSeats)
+                                // {
+                                //     System.Console.WriteLine("SS" + item);
+                                // }
+                                // foreach (var item in selectedBoxes)
+                                // {
+                                //     System.Console.WriteLine("SB" + item);
+                                // }
+                                // Console.ReadKey(true);
                                 Reserve(room, film, selectedSeats, chosenDate);
                                 break;
                             case 1:
@@ -572,11 +572,11 @@ public class VisualOverview
             Console.Clear();
             // System.Console.WriteLine(food);
             Console.WriteLine("Email address:");
-            Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine("-----------------------------");
-            Console.WriteLine("|  Email must contain a @   |");
-            Console.WriteLine("-----------------------------");
-            Console.ResetColor();
+            // Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine("-----------------------------".BrightYellow());
+            Console.WriteLine("|".BrightYellow() + "   Email must contain an @".BrightWhite() + "   |".BrightYellow());
+            Console.WriteLine("-----------------------------".BrightYellow());
+            // Console.ResetColor();
             string email = Console.ReadLine()!;
             // int EmailAttempts = 0;
 
@@ -729,14 +729,16 @@ public class VisualOverview
                     //total amount krijgen
                     double totalAmount = ticketTotal + food;
 
+                    int temp_id = _reservationsLogic._reservations!.Count > 0 ? _reservationsLogic._reservations.Max(x => x.Id) + 1 : 1;
+
                     ReservationModel reservation = new(1, reservationCode, _account.FullName, _account.EmailAddress, title, seatList.Count, food, ticketTotal, room.Id, seatList, seatsInfo, totalAmount, chosenDate);
-                    _reservationsLogic.UpdateList(reservation);
+                    _reservationsLogic!.UpdateList(reservation);
                     bool account = true;
                     Console.Clear();
                     System.Console.Write("Sending conformation email please wait...".Orange() + $"\n");
                     MailConformation mailConformation = new MailConformation(_account.EmailAddress, account);
                     mailConformation.SendMailConformation();
-                    _account.TicketList.Add(film.Id);
+                    _account.TicketList.Add(temp_id);
                     _accountsLogic!.UpdateList(_account);
                     break;
                 case 1:
