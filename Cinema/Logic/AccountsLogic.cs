@@ -122,16 +122,28 @@ public class AccountsLogic
 
     public bool EmailFormatCheck(string email)
     {
-        string specialchars = "@";
-        bool result = false;
-        foreach (char charspecial in specialchars)
+        string trimmedEmail = email.Trim();
+
+        if (trimmedEmail.Contains("@") && trimmedEmail.Contains("."))
         {
-            if (email.Contains(charspecial))
+            string[] partsAtSign = trimmedEmail.Split('@');
+            if (partsAtSign.Count() == 2)
             {
-                result = true;
+                if (partsAtSign[1].Contains("."))
+                {
+                    string[] partsDot = partsAtSign[1].Split(".");
+                    if (partsDot.Count() == 2)
+                    {
+                        if (partsDot[1] == "com" || partsDot[1] == "nl")
+                        {
+                            return true;
+                        }
+                    }
+                }
             }
         }
-        return result;
+
+        return false;
     }
     public SecureString HashedPass()
     {
