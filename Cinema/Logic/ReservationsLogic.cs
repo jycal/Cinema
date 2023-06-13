@@ -109,11 +109,22 @@ public class ReservationsLogic
                 }
                 roomsLogic.UpdateList(room);
 
-                RevenueModel rev = _revenueLogic.GetById(1);
-                rev.Money = rev.Money - reservation!.TotalAmount;
-                CinemaMenus._account.TicketList.Remove(reservation.Id);
-                CinemaMenus._accountsLogic.UpdateList(CinemaMenus._account);
-                _revenueLogic.UpdateList(rev);
+                
+                if (CinemaMenus._account != null)
+                {
+                    CinemaMenus._account.TicketList.Remove(reservation.Id);
+                    CinemaMenus._accountsLogic.UpdateList(CinemaMenus._account);
+                }
+                if (reservation.Date > DateTime.Now)
+                {   
+                    RevenueModel rev = _revenueLogic.GetById(1);
+                    rev.Money = rev.Money - reservation!.TotalAmount;
+                    _revenueLogic.UpdateList(rev);
+                }
+                else
+                {
+                    Console.WriteLine("The ticket has been expired. No refunds.");
+                }
                 _reservations.RemoveAt(index);
                 _reservations.ForEach((x) => { if (x.Id > reservation!.Id) x.Id = x.Id - 1; });
                 ReservationAccess.WriteAll(_reservations);

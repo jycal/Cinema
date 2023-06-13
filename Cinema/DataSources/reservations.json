@@ -129,32 +129,5 @@
     ],
     "totalAmount": 52,
     "date": "2023-12-08T14:00:00"
-  },
-  {
-    "id": 4,
-    "reservationCode": "4WEXYRA",
-    "fullName": "Megan pieters",
-    "email": "meganpieters3@gmail.com",
-    "movie": "Magic Mike\u0027s Last Dance",
-    "ticketAmount": 1,
-    "snackAmount": 0,
-    "ticketTotal": 10,
-    "roomNumber": 1,
-    "seats": [
-      [
-        5,
-        0
-      ]
-    ],
-    "seatsInfo": [
-      {
-        "Item1": 12,
-        "Item2": 1,
-        "Item3": "2023-11-08T14:00:00",
-        "Item4": 60
-      }
-    ],
-    "totalAmount": 10,
-    "date": "2023-11-08T14:00:00"
   }
 ]
