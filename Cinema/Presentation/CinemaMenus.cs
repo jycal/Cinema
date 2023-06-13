@@ -189,11 +189,11 @@ Welcome to Starlight Cinema. What would you like to do?
 ".BrightCyan());
         Console.ResetColor();
         Console.WriteLine("Email address:");
-        Console.ForegroundColor = ConsoleColor.Yellow;
-        Console.WriteLine("-----------------------------");
-        Console.WriteLine("|  Email must contain a @   |");
-        Console.WriteLine("-----------------------------");
-        Console.ResetColor();
+
+        Console.WriteLine("-----------------------------".BrightYellow());
+        Console.WriteLine("|".BrightYellow() + "   Email must contain an @".BrightWhite() + "   |".BrightYellow());
+        Console.WriteLine("-----------------------------".BrightYellow());
+        // Console.ResetColor();
         string email = Console.ReadLine()!;
         // int EmailAttempts = 0;
 
@@ -232,16 +232,16 @@ Welcome to Starlight Cinema. What would you like to do?
         // {
         //     Console.Clear();
         // }
-        Console.WriteLine("Please enter your password (You have 3 attempts):");
-        Console.ForegroundColor = ConsoleColor.Yellow;
-        Console.WriteLine("------------------------------------------------------------------------------------------");
-        Console.WriteLine(@"|   Must contain at least one special character(%!@#$%^&*()?/>.<,:;'\|}]{[_~`+=-         |");
-        Console.WriteLine("|   Must be longer than 6 characters                                                     |");
-        Console.WriteLine("|   Must contain at least one number                                                     |");
-        Console.WriteLine("|   One upper case                                                                       |");
-        Console.WriteLine("|   Atleast one lower case                                                               |");
-        Console.WriteLine("------------------------------------------------------------------------------------------");
-        Console.ResetColor();
+        Console.WriteLine($"\nPlease enter your password" + $"\n" + $"You have 3 attempts".Orange());
+        // Console.ForegroundColor = ConsoleColor.Yellow;
+        Console.WriteLine("------------------------------------------------------------------------------------------".BrightYellow());
+        Console.WriteLine(@"|".BrightYellow() + @"Must contain at least one special character(%!@#$%^&*()?/>.<,:;'\|}]{[_~`+=-        |".BrightYellow());
+        Console.WriteLine("|".BrightYellow() + @"Must be longer than 6 characters                                                     |".BrightYellow());
+        Console.WriteLine("|".BrightYellow() + @"Must contain at least one number                                                     |".BrightYellow());
+        Console.WriteLine("|".BrightYellow() + @"One upper case character                                                             |".BrightYellow());
+        Console.WriteLine("|".BrightYellow() + @"Atleast one lower case character                                                     |".BrightYellow());
+        Console.WriteLine("------------------------------------------------------------------------------------------".BrightYellow());
+        // Console.ResetColor();
 
         int passwordAttempts = 0;
         string password = string.Empty;
@@ -276,7 +276,7 @@ Welcome to Starlight Cinema. What would you like to do?
 
         Console.WriteLine();
 
-        Console.WriteLine("Please enter your fullname");
+        Console.WriteLine("Please enter your full name");
         string firstName = Console.ReadLine()!;
         Console.WriteLine("Please enter your phone number");
         string phoneNumber = Console.ReadLine()!;
