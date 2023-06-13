@@ -72,5 +72,16 @@
     "password": "asdfghj##nnNN112",
     "fullName": "ajkgdkajwga",
     "ticketList": []
+  },
+  {
+    "id": 8,
+    "type": 1,
+    "emailAddress": "t.molendijk@outlook.com",
+    "password": "ThomasM02!",
+    "fullName": "Thomas",
+    "ticketList": [
+      1,
+      2
+    ]
   }
 ]

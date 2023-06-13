@@ -307,7 +307,7 @@ Welcome to Starlight Cinema. What would you like to do?
         Console.ReadKey(true);
     }
 
-    private static void RunMenusMenu()
+    public static void RunMenusMenu()
     {
         string prompt = @"============================================
 |                                          |
@@ -398,7 +398,7 @@ Welcome to Starlight Cinema. What would you like to do?
                     break;
                 case 4:
                     DisplayContactInfo();
-                    RunMainMenu();
+                    RunMenusMenu();
                     break;
                 case 5:
                     if (_account == null)
@@ -495,12 +495,10 @@ Welcome to Starlight Cinema. What would you like to do?
 
     private static void OrderSeatConfirm()
     {
-
         string prompt = "\nDo you want to order seats?";
         string[] options = { "Yes", "No, return to movie menu", "Return to main menu" };
         Menu movieMenu = new Menu(prompt, options);
         int selectedIndex = movieMenu.Run();
-
 
         switch (selectedIndex)
         {
@@ -741,12 +739,14 @@ Welcome to Starlight Cinema. What would you like to do?
     private static void CancelTicket()
     {
         string reservationCode = "";
-        while (true)
+        int tries = 3;
+        while (true && tries > 0)
         {
             Console.WriteLine("What is your reservation code?");
             string? code = Console.ReadLine();
             if (string.IsNullOrEmpty(code))
             {
+                tries--;
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Description cannot be empty!");
                 Console.ResetColor();
@@ -758,7 +758,14 @@ Welcome to Starlight Cinema. What would you like to do?
                 reservationCode = code;
                 break;
             }
+            if (tries <= 0)
+            {
+                Console.WriteLine("No more tries!");
+                RunTicketMenu();
+
+            }
         }
+
 
         // var guestCheck = _guestLogic.GetByCode(reservationCode!);
         string prompt = "Are you sure you want to delete the reservation?";

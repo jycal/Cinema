@@ -321,7 +321,7 @@ public class FilmsLogic
                 // System.Console.WriteLine();
                 // System.Console.WriteLine("No movies found..".Red());
                 // System.Console.WriteLine();
-                break;
+                continue;
             }
 
             foreach (var genre in item.Genre)

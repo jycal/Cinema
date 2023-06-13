@@ -88,12 +88,8 @@
   },
   {
     "id": 6,
-    "dates": [
-      "2023-06-09T14:00:00"
-    ],
-    "rooms": [
-      3
-    ],
+    "dates": [],
+    "rooms": [],
     "title": "Scream VI",
     "description": "After the latest Ghostface murders, the four survivors leave Woodsboro behind and begin a new chapter.",
     "duration": 115,
@@ -107,12 +103,10 @@
   {
     "id": 7,
     "dates": [
-      "2023-06-21T14:00:00",
-      "2023-06-11T16:00:00"
+      "2023-06-21T14:00:00"
     ],
     "rooms": [
-      1,
-      2
+      1
     ],
     "title": "Mummies(NL)",
     "description": "Mummies is een grappige en avontuurlijke Warner Bros. Pictures-animatiefilm voor het hele gezin. De film volgt de avonturen van drie Egyptische mummies die wonen in een ondergrondse geheime stad in het oude Egypte.",
@@ -175,7 +169,7 @@
     "imageURL": "https://21818cdde6.imgdist.com/public/_thumbs/Integrators/BeeProAgency/981647_966306/Afbeelding2vat.jpg_thumb.png?hash=1682510761536"
   },
   {
-    "id": 13,
+    "id": 11,
     "dates": [
       "2023-12-08T14:00:00"
     ],

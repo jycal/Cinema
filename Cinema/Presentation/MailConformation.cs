@@ -77,7 +77,7 @@ public class MailConformation
 
             client.Send(email);
             Console.ForegroundColor = ConsoleColor.Green;
-            System.Console.WriteLine($"\nEmail has been send\n");
+            System.Console.WriteLine($"\nEmail has been sent\n");
             Console.ResetColor();
 
         }
@@ -120,7 +120,7 @@ public class MailConformation
 
             client.Send(email);
             Console.ForegroundColor = ConsoleColor.Green;
-            System.Console.WriteLine($"\nEmail has been send\n");
+            System.Console.WriteLine($"\nEmail has been sent\n");
             Console.ResetColor();
 
         }
