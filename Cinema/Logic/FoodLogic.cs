@@ -239,7 +239,7 @@ public class FoodsLogic
                 Console.WriteLine($"\nPlease set the quantity (or 'D' to deselect):".BrightWhite());
                 Console.WriteLine($"Use your arrow keys: left (decrease) and right (increase) to set the quantity.\n".BrightWhite());
 
-                double quantity = food.Quantity > 0 ? food.Quantity : 1;
+                double quantity = 1; // Start quantity at 1 every time
                 ConsoleKeyInfo keyInfo;
                 do
                 {
@@ -276,6 +276,7 @@ public class FoodsLogic
                     if (existingFood != null)
                     {
                         SnacksTotal -= existingFood.Cost * existingFood.Quantity; // Subtract the cost of the existing quantity
+                        existingFood.Quantity = 0; // Update the existing quantity to 0
                         orderedFood.Remove(existingFood); // Remove the item from orderedFood
                         Console.ForegroundColor = ConsoleColor.Green;
                         Console.WriteLine($"\n{existingFood.Name} removed from your order.");
@@ -294,10 +295,19 @@ public class FoodsLogic
                 }
                 else
                 {
-                    food.Quantity = quantity;
-                    SnacksTotal += food.Cost * quantity;
-                    orderedFood.Add(food);
+                    var existingFood = orderedFood.FirstOrDefault(f => f.Name == food.Name); // Check if the item already exists in the order
+                    if (existingFood != null)
+                    {
 
+                        existingFood.Quantity += quantity; // Update the existing quantity by adding the new quantity
+                        SnacksTotal += food.Cost * quantity;
+                    }
+                    else
+                    {
+                        food.Quantity = quantity;
+                        SnacksTotal += food.Cost * quantity;
+                        orderedFood.Add(food);
+                    }
 
                     Console.ForegroundColor = ConsoleColor.Green;
                     Console.WriteLine($"\n{quantity} {food.Name} added to your order.");
