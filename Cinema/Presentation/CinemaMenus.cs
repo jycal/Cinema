@@ -104,6 +104,7 @@ Welcome to Starlight Cinema. What would you like to do?
 |                                          |
 ============================================
 ".BrightCyan());
+Console.WriteLine("Press 0 to go back to the menu.".Orange());
         int tries = 3;
         bool logIn = false;
         Console.Write("Enter email and password, you have 3 tries to get the right password".Orange());
@@ -115,6 +116,11 @@ Welcome to Starlight Cinema. What would you like to do?
             {
                 Console.Write("Please enter your email address: ");
                 string mail = Console.ReadLine()!;
+                if (mail == "0")
+                {
+                    // User entered 0, return to the menu
+                    return;
+                }
                 if (string.IsNullOrEmpty(mail) || _accountsLogic.GetByMail(mail) == null)
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
@@ -130,6 +136,11 @@ Welcome to Starlight Cinema. What would you like to do?
             string password = string.Empty;
             SecureString pass = _accountsLogic.HashedPass();
             password = new System.Net.NetworkCredential(string.Empty, pass).Password;
+            if (password == "0")
+            {
+                // User entered 0, return to the menu
+                return;
+            }
             AccountModel correctEmail = _accountsLogic.GetByMail(email);
 
             if (correctEmail != null)
@@ -179,100 +190,108 @@ Welcome to Starlight Cinema. What would you like to do?
     }
 
     private static void Register()
-    {
-        Console.ForegroundColor = ConsoleColor.Yellow;
-        Console.WriteLine(@"============================================
+{
+    Console.ForegroundColor = ConsoleColor.Yellow;
+    Console.WriteLine(@"============================================
 |                                          |
 |                ".BrightCyan() + @"Register".BrightWhite() + @"                  |
 |                                          |
 ============================================
 ".BrightCyan());
+
+    Console.WriteLine("Press 0 to go back to the menu.".Orange());
+    Console.ResetColor();
+
+    Console.WriteLine("Email address:");
+    string email = Console.ReadLine()!;
+
+    if (email == "0")
+    {
+        // User entered 0, return to the menu
+        return;
+    }
+
+    while (_accountsLogic.EmailFormatCheck(email) == false)
+    {
+        Console.ForegroundColor = ConsoleColor.Red;
+        Console.WriteLine("Wrong format! Please enter Email in the correct format...");
         Console.ResetColor();
-        Console.WriteLine("Email address:");
+        Console.Write("Email address: ");
+        string Email = Console.ReadLine()!;
 
-        Console.WriteLine("-----------------------------".BrightYellow());
-        Console.WriteLine("|".BrightYellow() + "   Email must contain an @".BrightWhite() + "   |".BrightYellow());
-        Console.WriteLine("-----------------------------".BrightYellow());
-        // Console.ResetColor();
-        string email = Console.ReadLine()!;
-        // int EmailAttempts = 0;
-
-
-        while (_accountsLogic.EmailFormatCheck(email) == false)
+        if (Email == "0")
         {
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("Wrong format! Please enter Email in the correct format...");
-            Console.ResetColor();
-            Console.Write("Email address: ");
-            string Email = Console.ReadLine()!;
-            if (_accountsLogic.GetByMail(email) != null)
-            {
-                Console.ForegroundColor = ConsoleColor.Red;
-                System.Console.WriteLine("email already exists try again");
-                Console.ResetColor();
-                System.Console.WriteLine("Press any key to continue");
-                Console.ReadKey(true);
-                Register();
-            }
-            email = Email;
-            // EmailAttempts += 1;
+            // User entered 0, return to the menu
+            return;
         }
-        AccountModel retrievedAcc = _accountsLogic.GetByMail(email.ToLower());
-        if (retrievedAcc != null)
+
+        if (_accountsLogic.GetByMail(email) != null)
         {
             Console.ForegroundColor = ConsoleColor.Red;
             System.Console.WriteLine("email already exists try again");
             Console.ResetColor();
             System.Console.WriteLine("Press any key to continue");
             Console.ReadKey(true);
-            Console.Clear();
             Register();
+            return;
         }
-        // if (EmailAttempts > 3)
-        // {
-        //     Console.Clear();
-        // }
-        Console.WriteLine($"\nPlease enter your password" + $"\n" + $"You have 3 attempts".Orange());
-        // Console.ForegroundColor = ConsoleColor.Yellow;
-        Console.WriteLine("------------------------------------------------------------------------------------------".BrightYellow());
-        Console.WriteLine(@"|".BrightYellow() + @"Must contain at least one special character(%!@#$%^&*()?/>.<,:;'\|}]{[_~`+=-        |".BrightYellow());
-        Console.WriteLine("|".BrightYellow() + @"Must be longer than 6 characters                                                     |".BrightYellow());
-        Console.WriteLine("|".BrightYellow() + @"Must contain at least one number                                                     |".BrightYellow());
-        Console.WriteLine("|".BrightYellow() + @"One upper case character                                                             |".BrightYellow());
-        Console.WriteLine("|".BrightYellow() + @"Atleast one lower case character                                                     |".BrightYellow());
-        Console.WriteLine("------------------------------------------------------------------------------------------".BrightYellow());
-        // Console.ResetColor();
 
-        int passwordAttempts = 0;
-        string password = string.Empty;
+        email = Email;
+    }
 
-        while (passwordAttempts < 3)
+    AccountModel retrievedAcc = _accountsLogic.GetByMail(email.ToLower());
+
+    if (retrievedAcc != null)
+    {
+        Console.ForegroundColor = ConsoleColor.Red;
+        System.Console.WriteLine("email already exists try again");
+        Console.ResetColor();
+        System.Console.WriteLine("Press any key to continue");
+        Console.ReadKey(true);
+        Console.Clear();
+        Register();
+        return;
+    }
+
+    // Console.WriteLine("\nPlease enter your password");
+    // Console.WriteLine("Press 0 to go back to the menu.");
+    int passwordAttempts = 0;
+    string password = string.Empty;
+
+    while (passwordAttempts < 3)
+    {
+        SecureString pass = _accountsLogic.HashedPass();
+        password = new System.Net.NetworkCredential(string.Empty, pass).Password;
+
+        if (password == "0")
         {
-            SecureString pass = _accountsLogic.HashedPass();
-            password = new System.Net.NetworkCredential(string.Empty, pass).Password;
-
-            if (_accountsLogic.PasswordFormatCheck(password))
-            {
-                break;
-            }
-
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine($"\nWrong format! Please enter the password in the correct format. You will be send back to the menu if you don't get the format right!");
-            Console.ResetColor();
-            passwordAttempts++;
+            // User entered 0, return to the menu
+            return;
         }
 
-        if (passwordAttempts >= 3)
+        if (_accountsLogic.PasswordFormatCheck(password))
         {
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("No attempts left.");
-            Console.ResetColor();
-            Console.WriteLine("You will be send back to the menu.");
-            System.Console.WriteLine("Press any key to continue");
-            Console.ReadKey(true);
-            Console.Clear();
-            RunMainMenu();
+            break;
         }
+
+        Console.ForegroundColor = ConsoleColor.Red;
+        Console.WriteLine($"\nWrong format! Please enter the password in the correct format. You will be sent back to the menu if you don't get the format right!");
+        Console.ResetColor();
+        passwordAttempts++;
+    }
+
+    if (passwordAttempts >= 3)
+    {
+        Console.ForegroundColor = ConsoleColor.Red;
+        Console.WriteLine("No attempts left.");
+        Console.ResetColor();
+        Console.WriteLine("You will be sent back to the menu.");
+        System.Console.WriteLine("Press any key to continue");
+        Console.ReadKey(true);
+        Console.Clear();
+        RunMainMenu();
+        return;
+    }
 
         Console.WriteLine();
 
@@ -740,10 +759,16 @@ Welcome to Starlight Cinema. What would you like to do?
     {
         string reservationCode = "";
         int tries = 3;
+        Console.WriteLine("Press 0 to go back to the menu.".Orange());
         while (true && tries > 0)
         {
             Console.WriteLine("What is your reservation code?");
             string? code = Console.ReadLine();
+            if (code == "0")
+            {
+                // User entered 0, return to the menu
+                return;
+            }
             if (string.IsNullOrEmpty(code))
             {
                 tries--;
