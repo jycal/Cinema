@@ -185,11 +185,18 @@ public class VisualOverview
                 Console.ForegroundColor = ConsoleColor.Red;
                 System.Console.WriteLine("Please enter a valid date");
                 Console.ResetColor();
-                continue;
+                Start(account);
             }
-            else if (Convert.ToInt32(dateChoice) > 0)
+            if (!(Convert.ToInt32(dateChoice) < 0) && Convert.ToInt32(dateChoice) > count)
             {
                 dateSelection = Convert.ToInt32(dateChoice);
+            }
+            else
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                System.Console.WriteLine("Please enter a valid date");
+                Console.ResetColor();
+                Start(account);
             }
         } while (dateSelection <= 0);
 
