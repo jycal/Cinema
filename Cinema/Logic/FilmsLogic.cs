@@ -175,7 +175,7 @@ public class FilmsLogic
             string Rooms = "";
             foreach (var room in item.Rooms)
             {
-                Rooms += $"{dateNumber}.";
+                Rooms += $"(Date: {dateNumber} - Room: {room}) ";
                 dateNumber++;
             }
             string Title = item.Title;
@@ -223,7 +223,7 @@ public class FilmsLogic
             string Rooms = "";
             foreach (var room in item.Rooms)
             {
-                Rooms += $"{dateNumber}. Date: {room} ";
+                Rooms += $"(Date: {dateNumber} - Room: {room}) ";
                 dateNumber++;
             }
             string Title = item.Title;
@@ -276,7 +276,7 @@ public class FilmsLogic
                 string Rooms = "";
                 foreach (var room in item.Rooms)
                 {
-                    Rooms += $"{dateNumber}. Date: {room} ";
+                    Rooms += $"(Date {dateNumber}. Room: {room}) ";
                     dateNumber++;
                 }
                 string Title = item.Title;
@@ -338,7 +338,7 @@ public class FilmsLogic
                     string Rooms = "";
                     foreach (var room in item.Rooms)
                     {
-                        Rooms += $"{dateNumber}. Date: {room} ";
+                        Rooms += $"(Date: {dateNumber} - Room: {room}) ";
                         dateNumber++;
                     }
                     string Title = item.Title;
@@ -390,7 +390,7 @@ public class FilmsLogic
             string Rooms = "";
             foreach (var room in item.Rooms)
             {
-                Rooms += $"{dateNumber}. Date: {room} ";
+                Rooms += $"(Date: {dateNumber} - Room: {room}) ";
                 dateNumber++;
             }
             string Title = item.Title;
