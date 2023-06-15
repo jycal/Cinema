@@ -104,6 +104,7 @@ Welcome to Starlight Cinema. What would you like to do?
 |                                          |
 ============================================
 ".BrightCyan());
+        Console.WriteLine("Press 0 to go back to the menu.".Orange());
         int tries = 3;
         bool logIn = false;
         Console.Write("Enter email and password, you have 3 tries to get the right password".Orange());
@@ -115,6 +116,11 @@ Welcome to Starlight Cinema. What would you like to do?
             {
                 Console.Write("Please enter your email address: ");
                 string mail = Console.ReadLine()!;
+                if (mail == "0")
+                {
+                    // User entered 0, return to the menu
+                    return;
+                }
                 if (string.IsNullOrEmpty(mail) || _accountsLogic.GetByMail(mail) == null)
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
@@ -130,6 +136,11 @@ Welcome to Starlight Cinema. What would you like to do?
             string password = string.Empty;
             SecureString pass = _accountsLogic.HashedPass();
             password = new System.Net.NetworkCredential(string.Empty, pass).Password;
+            if (password == "0")
+            {
+                // User entered 0, return to the menu
+                return;
+            }
             AccountModel correctEmail = _accountsLogic.GetByMail(email);
 
             if (correctEmail != null)
@@ -187,16 +198,18 @@ Welcome to Starlight Cinema. What would you like to do?
 |                                          |
 ============================================
 ".BrightCyan());
+
+        Console.WriteLine("Press 0 to go back to the menu.".Orange());
         Console.ResetColor();
+
         Console.WriteLine("Email address:");
-
-        Console.WriteLine("-----------------------------".BrightYellow());
-        Console.WriteLine("|".BrightYellow() + "   Email must contain an @".BrightWhite() + "   |".BrightYellow());
-        Console.WriteLine("-----------------------------".BrightYellow());
-        // Console.ResetColor();
         string email = Console.ReadLine()!;
-        // int EmailAttempts = 0;
 
+        if (email == "0")
+        {
+            // User entered 0, return to the menu
+            return;
+        }
 
         while (_accountsLogic.EmailFormatCheck(email) == false)
         {
@@ -205,6 +218,13 @@ Welcome to Starlight Cinema. What would you like to do?
             Console.ResetColor();
             Console.Write("Email address: ");
             string Email = Console.ReadLine()!;
+
+            if (Email == "0")
+            {
+                // User entered 0, return to the menu
+                return;
+            }
+
             if (_accountsLogic.GetByMail(email) != null)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
@@ -213,11 +233,14 @@ Welcome to Starlight Cinema. What would you like to do?
                 System.Console.WriteLine("Press any key to continue");
                 Console.ReadKey(true);
                 Register();
+                return;
             }
+
             email = Email;
-            // EmailAttempts += 1;
         }
+
         AccountModel retrievedAcc = _accountsLogic.GetByMail(email.ToLower());
+
         if (retrievedAcc != null)
         {
             Console.ForegroundColor = ConsoleColor.Red;
@@ -227,22 +250,19 @@ Welcome to Starlight Cinema. What would you like to do?
             Console.ReadKey(true);
             Console.Clear();
             Register();
+            return;
         }
-        // if (EmailAttempts > 3)
-        // {
-        //     Console.Clear();
-        // }
-        Console.WriteLine($"\nPlease enter your password" + $"\n" + $"You have 3 attempts".Orange());
-        // Console.ForegroundColor = ConsoleColor.Yellow;
-        Console.WriteLine("------------------------------------------------------------------------------------------".BrightYellow());
-        Console.WriteLine(@"|".BrightYellow() + @"Must contain at least one special character(%!@#$%^&*()?/>.<,:;'\|}]{[_~`+=-        |".BrightYellow());
-        Console.WriteLine("|".BrightYellow() + @"Must be longer than 6 characters                                                     |".BrightYellow());
-        Console.WriteLine("|".BrightYellow() + @"Must contain at least one number                                                     |".BrightYellow());
-        Console.WriteLine("|".BrightYellow() + @"One upper case character                                                             |".BrightYellow());
-        Console.WriteLine("|".BrightYellow() + @"Atleast one lower case character                                                     |".BrightYellow());
-        Console.WriteLine("------------------------------------------------------------------------------------------".BrightYellow());
-        // Console.ResetColor();
 
+        Console.WriteLine("Please enter your password (You have 3 attempts):");
+        Console.ForegroundColor = ConsoleColor.Yellow;
+        Console.WriteLine("------------------------------------------------------------------------------------------");
+        Console.WriteLine(@"|   Must contain at least one special character(%!@#$%^&*()?/>.<,:;'\|}]{[_~`+=-         |");
+        Console.WriteLine("|   Must be longer than 6 characters                                                     |");
+        Console.WriteLine("|   Must contain at least one number                                                     |");
+        Console.WriteLine("|   One upper case                                                                       |");
+        Console.WriteLine("|   Atleast one lower case                                                               |");
+        Console.WriteLine("------------------------------------------------------------------------------------------");
+        Console.ResetColor();
         int passwordAttempts = 0;
         string password = string.Empty;
 
@@ -251,13 +271,19 @@ Welcome to Starlight Cinema. What would you like to do?
             SecureString pass = _accountsLogic.HashedPass();
             password = new System.Net.NetworkCredential(string.Empty, pass).Password;
 
+            if (password == "0")
+            {
+                // User entered 0, return to the menu
+                return;
+            }
+
             if (_accountsLogic.PasswordFormatCheck(password))
             {
                 break;
             }
 
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine($"\nWrong format! Please enter the password in the correct format. You will be send back to the menu if you don't get the format right!");
+            Console.WriteLine($"\nWrong format! Please enter the password in the correct format. You will be sent back to the menu if you don't get the format right!");
             Console.ResetColor();
             passwordAttempts++;
         }
@@ -267,11 +293,12 @@ Welcome to Starlight Cinema. What would you like to do?
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("No attempts left.");
             Console.ResetColor();
-            Console.WriteLine("You will be send back to the menu.");
+            Console.WriteLine("You will be sent back to the menu.");
             System.Console.WriteLine("Press any key to continue");
             Console.ReadKey(true);
             Console.Clear();
             RunMainMenu();
+            return;
         }
 
         Console.WriteLine();
@@ -740,10 +767,16 @@ Welcome to Starlight Cinema. What would you like to do?
     {
         string reservationCode = "";
         int tries = 3;
+        Console.WriteLine("Press 0 to go back to the menu.".Orange());
         while (true && tries > 0)
         {
             Console.WriteLine("What is your reservation code?");
             string? code = Console.ReadLine();
+            if (code == "0")
+            {
+                // User entered 0, return to the menu
+                return;
+            }
             if (string.IsNullOrEmpty(code))
             {
                 tries--;
@@ -1465,12 +1498,12 @@ Welcome to Starlight Cinema. What would you like to do?
                 string age = string.Empty;
 
                 Console.WriteLine("Enter a snack name: ");
-                name = Console.ReadLine();
+                name = Console.ReadLine()!;
 
                 if (string.IsNullOrEmpty(name))
                 {
                     Console.WriteLine("Enter a snack name (last chance): ");
-                    name = Console.ReadLine();
+                    name = Console.ReadLine()!;
 
                     if (string.IsNullOrEmpty(name))
                     {
@@ -1479,12 +1512,12 @@ Welcome to Starlight Cinema. What would you like to do?
                 }
 
                 Console.WriteLine("Enter a snack price: ");
-                cost = Console.ReadLine();
+                cost = Console.ReadLine()!;
 
                 if (string.IsNullOrEmpty(cost) || !CinemaMenus.IsNumber(cost))
                 {
                     Console.WriteLine("Enter a snack price (last chance): ");
-                    cost = Console.ReadLine();
+                    cost = Console.ReadLine()!;
 
                     if (string.IsNullOrEmpty(cost) || !CinemaMenus.IsNumber(cost))
                     {
@@ -1495,12 +1528,12 @@ Welcome to Starlight Cinema. What would you like to do?
                 }
 
                 Console.WriteLine("Enter a snack quantity: ");
-                quantity = Console.ReadLine();
+                quantity = Console.ReadLine()!;
 
                 if (string.IsNullOrEmpty(quantity) || !CinemaMenus.IsNumber(quantity))
                 {
                     Console.WriteLine("Enter a snack quantity (last chance): ");
-                    quantity = Console.ReadLine();
+                    quantity = Console.ReadLine()!;
 
                     if (string.IsNullOrEmpty(quantity) || !CinemaMenus.IsNumber(quantity))
                     {
@@ -1511,12 +1544,12 @@ Welcome to Starlight Cinema. What would you like to do?
                 }
 
                 Console.WriteLine("Enter an age rating: ");
-                age = Console.ReadLine();
+                age = Console.ReadLine()!;
 
                 if (string.IsNullOrEmpty(age) || !CinemaMenus.IsNumber(age))
                 {
                     Console.WriteLine("Enter an age rating (last chance): ");
-                    age = Console.ReadLine();
+                    age = Console.ReadLine()!;
 
                     if (string.IsNullOrEmpty(age) || !CinemaMenus.IsNumber(age))
                     {
@@ -1539,12 +1572,12 @@ Welcome to Starlight Cinema. What would you like to do?
                 string Age = string.Empty;
 
                 Console.WriteLine("Enter a snack name: ");
-                Name = Console.ReadLine();
+                Name = Console.ReadLine()!;
 
                 if (string.IsNullOrEmpty(Name))
                 {
                     Console.WriteLine("Enter a snack name (last chance): ");
-                    Name = Console.ReadLine();
+                    Name = Console.ReadLine()!;
 
                     if (string.IsNullOrEmpty(Name))
                     {
@@ -1553,12 +1586,12 @@ Welcome to Starlight Cinema. What would you like to do?
                 }
 
                 Console.WriteLine("Enter a snack price: ");
-                Cost = Console.ReadLine();
+                Cost = Console.ReadLine()!;
 
                 if (string.IsNullOrEmpty(Cost) || !CinemaMenus.IsNumber(Cost))
                 {
                     Console.WriteLine("Enter a snack price (last chance): ");
-                    Cost = Console.ReadLine();
+                    Cost = Console.ReadLine()!;
 
                     if (string.IsNullOrEmpty(Cost) || !CinemaMenus.IsNumber(Cost))
                     {
@@ -1569,12 +1602,12 @@ Welcome to Starlight Cinema. What would you like to do?
                 }
 
                 Console.WriteLine("Enter a snack quantity: ");
-                Quantity = Console.ReadLine();
+                Quantity = Console.ReadLine()!;
 
                 if (string.IsNullOrEmpty(Quantity) || !CinemaMenus.IsNumber(Quantity))
                 {
                     Console.WriteLine("Enter a snack quantity (last chance): ");
-                    Quantity = Console.ReadLine();
+                    Quantity = Console.ReadLine()!;
 
                     if (string.IsNullOrEmpty(Quantity) || !CinemaMenus.IsNumber(Quantity))
                     {
@@ -1585,12 +1618,12 @@ Welcome to Starlight Cinema. What would you like to do?
                 }
 
                 Console.WriteLine("Enter an age rating: ");
-                Age = Console.ReadLine();
+                Age = Console.ReadLine()!;
 
                 if (string.IsNullOrEmpty(Age) || !CinemaMenus.IsNumber(Age))
                 {
                     Console.WriteLine("Enter an age rating (last chance): ");
-                    Age = Console.ReadLine();
+                    Age = Console.ReadLine()!;
 
                     if (string.IsNullOrEmpty(Age) || !CinemaMenus.IsNumber(Age))
                     {
