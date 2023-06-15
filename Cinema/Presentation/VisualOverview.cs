@@ -187,7 +187,7 @@ public class VisualOverview
                 Console.ResetColor();
                 Start(account);
             }
-            if (!(Convert.ToInt32(dateChoice) < 0) && Convert.ToInt32(dateChoice) > count)
+            if (!(Convert.ToInt32(dateChoice) < 0) && !(Convert.ToInt32(dateChoice) > count - 1))
             {
                 dateSelection = Convert.ToInt32(dateChoice);
             }
