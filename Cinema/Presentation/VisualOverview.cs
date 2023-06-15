@@ -84,6 +84,7 @@ public class VisualOverview
 
     public static void Start(AccountModel account)
     {
+        bool worked = false;
         _account = account;
         Console.WriteLine("Welcome to the movie rooms page");
 
@@ -164,62 +165,93 @@ public class VisualOverview
         System.Console.WriteLine();
         Console.WriteLine("Please choose the date you want to see the movie:\n");
         string dateChoice = Console.ReadLine()!;
-        if (dateChoice.All(Char.IsLetter))
-        {
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine($"Please enter a valid date\n");
-            Console.ResetColor();
-            Start(account);
-        }
-        else if (CinemaMenus.IsNumber(dateChoice) == false)
-        {
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine($"Please enter a valid date\n");
-            Console.ResetColor();
-            Start(account);
-        }
-        else if (string.IsNullOrEmpty(dateChoice) || Convert.ToInt32(dateChoice) <= 0 || Convert.ToInt32(dateChoice) > count)
+        // if (dateChoice.All(Char.IsLetter))
+        // {
+        //     Console.ForegroundColor = ConsoleColor.Red;
+        //     Console.WriteLine($"Please enter a valid date\n");
+        //     Console.ResetColor();
+        //     Start(account);
+        // }
+        // else if (CinemaMenus.IsNumber(dateChoice) == false)
+        // {
+        //     Console.ForegroundColor = ConsoleColor.Red;
+        //     Console.WriteLine($"Please enter a valid date\n");
+        //     Console.ResetColor();
+        //     Start(account);
+        // }
+        // else if (string.IsNullOrEmpty(dateChoice) || Convert.ToInt32(dateChoice) <= 0 || Convert.ToInt32(dateChoice) > count)
+        // {
+        //     Console.ForegroundColor = ConsoleColor.Red;
+        //     System.Console.WriteLine("Please enter a valid date");
+        //     Console.ResetColor();
+        //     Start(account);
+        // }
+        // else if (!(Convert.ToInt32(dateChoice) < 0) && !(Convert.ToInt32(dateChoice) > count - 1))
+        // {
+        //     dateSelection = Convert.ToInt32(dateChoice);
+        // }
+        // else
+        // {
+        //     Console.ForegroundColor = ConsoleColor.Red;
+        //     System.Console.WriteLine("Please enter a valid date");
+        //     Console.ResetColor();
+        // }
+        if (string.IsNullOrEmpty(dateChoice))
         {
             Console.ForegroundColor = ConsoleColor.Red;
             System.Console.WriteLine("Please enter a valid date");
             Console.ResetColor();
             Start(account);
         }
-        else if (!(Convert.ToInt32(dateChoice) < 0) && !(Convert.ToInt32(dateChoice) > count - 1))
+        else if (CinemaMenus.IsNumber(dateChoice))
         {
+            if (Convert.ToInt32(dateChoice) > 0 && Convert.ToInt32(dateChoice) <= count)
+            {
             dateSelection = Convert.ToInt32(dateChoice);
+            worked = true;
+            }
+            else
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                System.Console.WriteLine("Please enter a valid date");
+                Console.ResetColor();
+                Start(account);
+            }
         }
         else
         {
             Console.ForegroundColor = ConsoleColor.Red;
             System.Console.WriteLine("Please enter a valid date");
             Console.ResetColor();
-        }
-
-
-        chosenDate = film.Dates[dateSelection - 1];
-        index = dateSelection - 1;
-
-        // Console.WriteLine("Please enter the room number\n");
-        int number = film.Rooms[index];
-        RoomModel room = _roomsLogic!.CheckEnter(number);
-        if (room.Seats.Count() == room.MaxSeats)
-        {
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine($"Movie fully booked full\n");
-            Console.ResetColor();
-            Console.WriteLine("Press any key to go back to the menu");
-            Console.ReadKey();
-            Console.Clear();
             Start(account);
         }
-        if (room != null)
+
+        if (worked)
         {
-            Run(room, film, chosenDate);
-        }
-        else
-        {
-            Console.WriteLine("No room found with that hall");
+            chosenDate = film.Dates[dateSelection - 1];
+            index = dateSelection - 1;
+
+            // Console.WriteLine("Please enter the room number\n");
+            int number = film.Rooms[index];
+            RoomModel room = _roomsLogic!.CheckEnter(number);
+            if (room.Seats.Count() == room.MaxSeats)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine($"Movie fully booked full\n");
+                Console.ResetColor();
+                Console.WriteLine("Press any key to go back to the menu");
+                Console.ReadKey();
+                Console.Clear();
+                Start(account);
+            }
+            if (room != null)
+            {
+                Run(room, film, chosenDate);
+            }
+            else
+            {
+                Console.WriteLine("No room found with that hall");
+            }
         }
     }
 
