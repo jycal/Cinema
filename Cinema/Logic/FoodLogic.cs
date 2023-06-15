@@ -1,4 +1,6 @@
 using System.Globalization;
+using System.Text;
+
 public class FoodsLogic
 {
     public List<FoodModel>? _foods;
@@ -189,6 +191,7 @@ public class FoodsLogic
 
     public double BuyFood()
     {
+        Console.OutputEncoding = Encoding.Default;
         List<FoodModel> orderedFood = new List<FoodModel>();
         Console.Clear();
         string[] options = _foods!.Select(f => $"{f.Name} - {f.Cost:c}").ToArray(); // Voeg price toe aan options
