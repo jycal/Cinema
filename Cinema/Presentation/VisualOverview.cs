@@ -173,21 +173,21 @@ public class VisualOverview
                 Console.ResetColor();
                 Start(account);
             }
-            if (CinemaMenus.IsNumber(dateChoice) == false)
+            else if (CinemaMenus.IsNumber(dateChoice) == false)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine($"Please enter a valid date\n");
                 Console.ResetColor();
                 Start(account);
             }
-            if (string.IsNullOrEmpty(dateChoice) || Convert.ToInt32(dateChoice) <= 0 || Convert.ToInt32(dateChoice) > count)
+            else if (string.IsNullOrEmpty(dateChoice) || Convert.ToInt32(dateChoice) <= 0 || Convert.ToInt32(dateChoice) > count)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
                 System.Console.WriteLine("Please enter a valid date");
                 Console.ResetColor();
                 Start(account);
             }
-            if (!(Convert.ToInt32(dateChoice) < 0) && !(Convert.ToInt32(dateChoice) > count - 1))
+            else if (!(Convert.ToInt32(dateChoice) < 0) && !(Convert.ToInt32(dateChoice) > count - 1))
             {
                 dateSelection = Convert.ToInt32(dateChoice);
             }
