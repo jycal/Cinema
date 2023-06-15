@@ -161,44 +161,41 @@ public class VisualOverview
         }
 
         int dateSelection = 0;
-        do
+        System.Console.WriteLine();
+        Console.WriteLine("Please choose the date you want to see the movie:\n");
+        string dateChoice = Console.ReadLine()!;
+        if (dateChoice.All(Char.IsLetter))
         {
-            System.Console.WriteLine();
-            Console.WriteLine("Please choose the date you want to see the movie:\n");
-            string dateChoice = Console.ReadLine()!;
-            if (dateChoice.All(Char.IsLetter))
-            {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine($"Please enter a valid date\n");
-                Console.ResetColor();
-                Start(account);
-            }
-            else if (CinemaMenus.IsNumber(dateChoice) == false)
-            {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine($"Please enter a valid date\n");
-                Console.ResetColor();
-                Start(account);
-            }
-            else if (string.IsNullOrEmpty(dateChoice) || Convert.ToInt32(dateChoice) <= 0 || Convert.ToInt32(dateChoice) > count)
-            {
-                Console.ForegroundColor = ConsoleColor.Red;
-                System.Console.WriteLine("Please enter a valid date");
-                Console.ResetColor();
-                Start(account);
-            }
-            else if (!(Convert.ToInt32(dateChoice) < 0) && !(Convert.ToInt32(dateChoice) > count - 1))
-            {
-                dateSelection = Convert.ToInt32(dateChoice);
-            }
-            else
-            {
-                Console.ForegroundColor = ConsoleColor.Red;
-                System.Console.WriteLine("Please enter a valid date");
-                Console.ResetColor();
-                Start(account);
-            }
-        } while (dateSelection <= 0);
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine($"Please enter a valid date\n");
+            Console.ResetColor();
+            Start(account);
+        }
+        else if (CinemaMenus.IsNumber(dateChoice) == false)
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine($"Please enter a valid date\n");
+            Console.ResetColor();
+            Start(account);
+        }
+        else if (string.IsNullOrEmpty(dateChoice) || Convert.ToInt32(dateChoice) <= 0 || Convert.ToInt32(dateChoice) > count)
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            System.Console.WriteLine("Please enter a valid date");
+            Console.ResetColor();
+            Start(account);
+        }
+        else if (!(Convert.ToInt32(dateChoice) < 0) && !(Convert.ToInt32(dateChoice) > count - 1))
+        {
+            dateSelection = Convert.ToInt32(dateChoice);
+        }
+        else
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            System.Console.WriteLine("Please enter a valid date");
+            Console.ResetColor();
+        }
+
 
         chosenDate = film.Dates[dateSelection - 1];
         index = dateSelection - 1;
@@ -324,7 +321,7 @@ public class VisualOverview
                     }
                     break;
                 case ConsoleKey.Spacebar: // end selecting
-                    // 0 check
+                                          // 0 check
                     if (selectedBoxes.Count() == 0)
                     {
                         System.Console.WriteLine();
