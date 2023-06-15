@@ -40,7 +40,7 @@ public class AccountsLogic
 
     public AccountModel GetByMail(string email)
     {
-        return _accounts!.Find(i => i.EmailAddress == email)!;
+        return _accounts!.Find(i => i.EmailAddress == email.ToLower())!;
     }
 
     public AccountModel CheckLogin(int type, string email, string password)
