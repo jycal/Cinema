@@ -104,6 +104,7 @@ Welcome to Starlight Cinema. What would you like to do?
 |                                          |
 ============================================
 ".BrightCyan());
+Console.WriteLine("Press 0 to go back to the menu.".Orange());
         int tries = 3;
         bool logIn = false;
         Console.Write("Enter email and password, you have 3 tries to get the right password".Orange());
@@ -115,6 +116,11 @@ Welcome to Starlight Cinema. What would you like to do?
             {
                 Console.Write("Please enter your email address: ");
                 string mail = Console.ReadLine()!;
+                if (mail == "0")
+                {
+                    // User entered 0, return to the menu
+                    return;
+                }
                 if (string.IsNullOrEmpty(mail) || _accountsLogic.GetByMail(mail) == null)
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
@@ -130,6 +136,11 @@ Welcome to Starlight Cinema. What would you like to do?
             string password = string.Empty;
             SecureString pass = _accountsLogic.HashedPass();
             password = new System.Net.NetworkCredential(string.Empty, pass).Password;
+            if (password == "0")
+            {
+                // User entered 0, return to the menu
+                return;
+            }
             AccountModel correctEmail = _accountsLogic.GetByMail(email);
 
             if (correctEmail != null)
@@ -748,10 +759,16 @@ Welcome to Starlight Cinema. What would you like to do?
     {
         string reservationCode = "";
         int tries = 3;
+        Console.WriteLine("Press 0 to go back to the menu.".Orange());
         while (true && tries > 0)
         {
             Console.WriteLine("What is your reservation code?");
             string? code = Console.ReadLine();
+            if (code == "0")
+            {
+                // User entered 0, return to the menu
+                return;
+            }
             if (string.IsNullOrEmpty(code))
             {
                 tries--;
