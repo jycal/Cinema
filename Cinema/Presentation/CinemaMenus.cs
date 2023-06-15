@@ -1465,12 +1465,12 @@ Welcome to Starlight Cinema. What would you like to do?
                 string age = string.Empty;
 
                 Console.WriteLine("Enter a snack name: ");
-                name = Console.ReadLine();
+                name = Console.ReadLine()!;
 
                 if (string.IsNullOrEmpty(name))
                 {
                     Console.WriteLine("Enter a snack name (last chance): ");
-                    name = Console.ReadLine();
+                    name = Console.ReadLine()!;
 
                     if (string.IsNullOrEmpty(name))
                     {
@@ -1479,12 +1479,12 @@ Welcome to Starlight Cinema. What would you like to do?
                 }
 
                 Console.WriteLine("Enter a snack price: ");
-                cost = Console.ReadLine();
+                cost = Console.ReadLine()!;
 
                 if (string.IsNullOrEmpty(cost) || !CinemaMenus.IsNumber(cost))
                 {
                     Console.WriteLine("Enter a snack price (last chance): ");
-                    cost = Console.ReadLine();
+                    cost = Console.ReadLine()!;
 
                     if (string.IsNullOrEmpty(cost) || !CinemaMenus.IsNumber(cost))
                     {
@@ -1495,12 +1495,12 @@ Welcome to Starlight Cinema. What would you like to do?
                 }
 
                 Console.WriteLine("Enter a snack quantity: ");
-                quantity = Console.ReadLine();
+                quantity = Console.ReadLine()!;
 
                 if (string.IsNullOrEmpty(quantity) || !CinemaMenus.IsNumber(quantity))
                 {
                     Console.WriteLine("Enter a snack quantity (last chance): ");
-                    quantity = Console.ReadLine();
+                    quantity = Console.ReadLine()!;
 
                     if (string.IsNullOrEmpty(quantity) || !CinemaMenus.IsNumber(quantity))
                     {
@@ -1511,12 +1511,12 @@ Welcome to Starlight Cinema. What would you like to do?
                 }
 
                 Console.WriteLine("Enter an age rating: ");
-                age = Console.ReadLine();
+                age = Console.ReadLine()!;
 
                 if (string.IsNullOrEmpty(age) || !CinemaMenus.IsNumber(age))
                 {
                     Console.WriteLine("Enter an age rating (last chance): ");
-                    age = Console.ReadLine();
+                    age = Console.ReadLine()!;
 
                     if (string.IsNullOrEmpty(age) || !CinemaMenus.IsNumber(age))
                     {
@@ -1539,12 +1539,12 @@ Welcome to Starlight Cinema. What would you like to do?
                 string Age = string.Empty;
 
                 Console.WriteLine("Enter a snack name: ");
-                Name = Console.ReadLine();
+                Name = Console.ReadLine()!;
 
                 if (string.IsNullOrEmpty(Name))
                 {
                     Console.WriteLine("Enter a snack name (last chance): ");
-                    Name = Console.ReadLine();
+                    Name = Console.ReadLine()!;
 
                     if (string.IsNullOrEmpty(Name))
                     {
@@ -1553,12 +1553,12 @@ Welcome to Starlight Cinema. What would you like to do?
                 }
 
                 Console.WriteLine("Enter a snack price: ");
-                Cost = Console.ReadLine();
+                Cost = Console.ReadLine()!;
 
                 if (string.IsNullOrEmpty(Cost) || !CinemaMenus.IsNumber(Cost))
                 {
                     Console.WriteLine("Enter a snack price (last chance): ");
-                    Cost = Console.ReadLine();
+                    Cost = Console.ReadLine()!;
 
                     if (string.IsNullOrEmpty(Cost) || !CinemaMenus.IsNumber(Cost))
                     {
@@ -1569,12 +1569,12 @@ Welcome to Starlight Cinema. What would you like to do?
                 }
 
                 Console.WriteLine("Enter a snack quantity: ");
-                Quantity = Console.ReadLine();
+                Quantity = Console.ReadLine()!;
 
                 if (string.IsNullOrEmpty(Quantity) || !CinemaMenus.IsNumber(Quantity))
                 {
                     Console.WriteLine("Enter a snack quantity (last chance): ");
-                    Quantity = Console.ReadLine();
+                    Quantity = Console.ReadLine()!;
 
                     if (string.IsNullOrEmpty(Quantity) || !CinemaMenus.IsNumber(Quantity))
                     {
@@ -1585,12 +1585,12 @@ Welcome to Starlight Cinema. What would you like to do?
                 }
 
                 Console.WriteLine("Enter an age rating: ");
-                Age = Console.ReadLine();
+                Age = Console.ReadLine()!;
 
                 if (string.IsNullOrEmpty(Age) || !CinemaMenus.IsNumber(Age))
                 {
                     Console.WriteLine("Enter an age rating (last chance): ");
-                    Age = Console.ReadLine();
+                    Age = Console.ReadLine()!;
 
                     if (string.IsNullOrEmpty(Age) || !CinemaMenus.IsNumber(Age))
                     {
