@@ -20,17 +20,14 @@ public class FoodsLogic
 
     public void UpdateList(FoodModel acc)
     {
-        //Find if there is already an model with the same id
         int index = _foods!.FindIndex(s => s.Name == acc.Name);
 
         if (index != -1)
         {
-            //update existing model
             _foods[index] = acc;
         }
         else
         {
-            //add new model
             _foods.Add(acc);
         }
         FoodAccess.WriteAll(_foods);
@@ -44,7 +41,6 @@ public class FoodsLogic
 
     public bool DeleteFood(FoodModel acc)
     {
-        //Find if there is already an model with the same id
         string name = acc.Name;
         var food = _foods!.Find(r => r.Name == name);
         if (food == null)
@@ -55,7 +51,6 @@ public class FoodsLogic
 
         if (index != -1)
         {
-            //update existing model
             // _films[index] = film;
             _foods!.RemoveAt(index);
             // _foods!.ForEach((x) => { if (x.Id > film!.Id) x.Id = x.Id - 1; });
@@ -196,7 +191,7 @@ public class FoodsLogic
     {
         List<FoodModel> orderedFood = new List<FoodModel>();
         Console.Clear();
-        string[] options = _foods!.Select(f => $"{f.Name} - {f.Cost:c}").ToArray(); // Added price to the options
+        string[] options = _foods!.Select(f => $"{f.Name} - {f.Cost:c}").ToArray(); // Voeg price toe aan options
         string prompt = $"Please select a food item to order (press enter to finish):\nUse your arrow keys (upper and lower) to navigate.\n";
 
         Menu mainMenu = new Menu(prompt, options);
@@ -210,23 +205,23 @@ public class FoodsLogic
                 selectedIndex = mainMenu.Run();
                 if (selectedIndex == -1)
                 {
-                    // User cancelled the menu
+                    // Gebruiker cancelt menu
                     break;
                 }
                 else
                 {
-                    // User selected a food item
+                    // Gebruiker selecteerd een food item
                     break;
                 }
             }
 
             if (selectedIndex != -1)
             {
-                var food = GetByName(options[selectedIndex].Split('-')[0].Trim()); // Extract the selected food item name
-                Console.ForegroundColor = ConsoleColor.Yellow; // Set the text color to yellow
+                var food = GetByName(options[selectedIndex].Split('-')[0].Trim()); // Haal de geselcteerde food item naam eruit
+                Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.WriteLine();
                 orderedFood.ForEach(x => System.Console.WriteLine($"You selected {x.Name} x {x.Quantity} - ${x.Cost}."));
-                Console.WriteLine($"You have currently selected {food.Name} - {food.Cost:c}.".BrightYellow()); // Display the selected snack with price
+                Console.WriteLine($"You have currently selected {food.Name} - {food.Cost:c}.".BrightYellow()); // Display geselcteerde snack met prijs
                 Console.ResetColor();
                 if (food.Age == 18)
                 {
@@ -239,7 +234,7 @@ public class FoodsLogic
                 Console.WriteLine($"\nPlease set the quantity (or 'D' to deselect):".BrightWhite());
                 Console.WriteLine($"Use your arrow keys: left (decrease) and right (increase) to set the quantity.\n".BrightWhite());
 
-                double quantity = food.Quantity > 0 ? food.Quantity : 1;
+                double quantity = 1; // quantity begint altijd met 1
                 ConsoleKeyInfo keyInfo;
                 do
                 {
@@ -265,18 +260,19 @@ public class FoodsLogic
                     }
                     else if (keyInfo.Key == ConsoleKey.D)
                     {
-                        quantity = 0; // Set quantity to 0 to indicate deselection
+                        quantity = 0; // set quantity tot 0 om het te deselecteren
                         break;
                     }
                 } while (keyInfo.Key != ConsoleKey.Enter);
 
                 if (quantity <= 0)
                 {
-                    var existingFood = orderedFood.FirstOrDefault(f => f.Name == food.Name); // Check if the item already exists in the order
+                    var existingFood = orderedFood.FirstOrDefault(f => f.Name == food.Name); // Check of item al bestaat
                     if (existingFood != null)
                     {
-                        SnacksTotal -= existingFood.Cost * existingFood.Quantity; // Subtract the cost of the existing quantity
-                        orderedFood.Remove(existingFood); // Remove the item from orderedFood
+                        SnacksTotal -= existingFood.Cost * existingFood.Quantity; // Min de kosten van de bestaande quantity
+                        existingFood.Quantity = 0; // Update de bestaande quantity met 0
+                        orderedFood.Remove(existingFood); // Verwijder item van orderedFood
                         Console.ForegroundColor = ConsoleColor.Green;
                         Console.WriteLine($"\n{existingFood.Name} removed from your order.");
                         Console.ResetColor();
@@ -294,10 +290,19 @@ public class FoodsLogic
                 }
                 else
                 {
-                    food.Quantity = quantity;
-                    SnacksTotal += food.Cost * quantity;
-                    orderedFood.Add(food);
+                    var existingFood = orderedFood.FirstOrDefault(f => f.Name == food.Name); // Check of item al bestaat
+                    if (existingFood != null)
+                    {
 
+                        existingFood.Quantity += quantity; // Update de bestaande quantity met de nieuwe
+                        SnacksTotal += food.Cost * quantity;
+                    }
+                    else
+                    {
+                        food.Quantity = quantity;
+                        SnacksTotal += food.Cost * quantity;
+                        orderedFood.Add(food);
+                    }
 
                     Console.ForegroundColor = ConsoleColor.Green;
                     Console.WriteLine($"\n{quantity} {food.Name} added to your order.");
@@ -306,7 +311,7 @@ public class FoodsLogic
                     Console.ReadKey(true);
                 }
 
-                // Ask if the user wants to select/deselect another item
+                // Vraag of gebruiker wilt selecteren of deselecteren
                 bool cf = conformation();
                 if (!cf)
                 {
@@ -315,7 +320,7 @@ public class FoodsLogic
             }
             else
             {
-                // User cancelled the menu
+                // Gebruiker cancelt zijn bestelling
                 break;
             }
         }
